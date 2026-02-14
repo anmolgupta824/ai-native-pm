@@ -14,8 +14,8 @@ const tiers = [
       'QUICKSTART guide',
       'Community access',
     ],
-    cta: 'Download Free',
-    href: '#signup',
+    cta: 'Get Started — No Signup',
+    href: 'https://github.com/anmolgupta824/ai-native-pm',
     highlighted: false,
   },
   {

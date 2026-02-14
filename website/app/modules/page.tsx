@@ -17,7 +17,7 @@ const modules = [
       'Export to Markdown & Notion',
       'Example PRDs from SaaS, marketplace, and mobile',
     ],
-    href: '#signup',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-1-prd',
     timeline: 'Available now',
     promise: 'Generate your first production-ready PRD in 30 minutes',
   },
@@ -36,7 +36,7 @@ const modules = [
       'Rollback plan builder',
       'Communication plan templates',
     ],
-    href: '#signup',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-2-rollout',
     timeline: 'Coming Week 3-4',
     promise: 'Plan your next launch in 1 hour, not 1 week',
   },
@@ -167,6 +167,8 @@ export default function ModulesPage() {
                       </ul>
                       <a
                         href={mod.href}
+                        target={mod.price === 'Free' ? '_blank' : undefined}
+                        rel={mod.price === 'Free' ? 'noopener noreferrer' : undefined}
                         className={`mt-6 block text-center text-sm font-semibold py-2.5 rounded-lg transition-colors ${
                           mod.price === 'Free'
                             ? 'bg-brand-600 text-white hover:bg-brand-700'
@@ -174,7 +176,7 @@ export default function ModulesPage() {
                         }`}
                       >
                         {mod.price === 'Free'
-                          ? 'Download Free'
+                          ? 'Get Started — No Signup'
                           : `Get Module - ${mod.price}`}
                       </a>
                     </div>

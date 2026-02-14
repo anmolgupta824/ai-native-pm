@@ -39,7 +39,9 @@ export default function RootLayout({
                 Pricing
               </a>
               <a
-                href="#signup"
+                href="https://github.com/anmolgupta824/ai-native-pm"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 px-4 py-2 rounded-lg transition-colors"
               >
                 Get Started Free
@@ -55,7 +57,7 @@ export default function RootLayout({
             </p>
             <div className="flex gap-6">
               <a
-                href="https://github.com"
+                href="https://github.com/anmolgupta824/ai-native-pm"
                 className="text-sm text-gray-500 hover:text-gray-700"
               >
                 GitHub

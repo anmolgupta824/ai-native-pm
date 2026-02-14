@@ -15,23 +15,23 @@ export default function EmailCapture() {
   }
 
   return (
-    <section id="signup" className="section-padding bg-gray-50">
+    <section id="newsletter" className="section-padding bg-gray-50">
       <div className="container-max text-center">
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-          Get the Free PRD Generator
+          Stay in the Loop
         </h2>
         <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">
-          Join the newsletter and get instant access to Module 1. Generate your
-          first production-ready PRD in 30 minutes.
+          Get notified when new modules launch, plus weekly PM + AI tips.
+          The free modules are already available &mdash; no signup required.
         </p>
 
         {submitted ? (
           <div className="mt-8 bg-green-50 border border-green-200 rounded-xl p-6 max-w-md mx-auto">
             <p className="text-green-800 font-semibold">
-              Check your email for the download link!
+              You&apos;re on the list!
             </p>
             <p className="text-green-600 text-sm mt-1">
-              You&apos;ll also get updates when new modules launch.
+              You&apos;ll get updates when new modules and content drop.
             </p>
           </div>
         ) : (
@@ -51,13 +51,13 @@ export default function EmailCapture() {
               type="submit"
               className="px-6 py-3 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors shadow-lg shadow-brand-600/25 text-sm whitespace-nowrap"
             >
-              Get Free Access
+              Subscribe
             </button>
           </form>
         )}
 
         <p className="mt-4 text-xs text-gray-400">
-          No spam, ever. Unsubscribe anytime.
+          No spam, ever. Unsubscribe anytime. Free modules need zero signup.
         </p>
       </div>
     </section>

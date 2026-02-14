@@ -75,13 +75,15 @@ export default function ModuleCard({
 
       <a
         href={href}
+        target={price === 'Free' ? '_blank' : undefined}
+        rel={price === 'Free' ? 'noopener noreferrer' : undefined}
         className={`block text-center text-sm font-semibold py-2.5 rounded-lg transition-colors ${
           price === 'Free'
             ? 'bg-brand-600 text-white hover:bg-brand-700'
             : 'border border-brand-600 text-brand-600 hover:bg-brand-50'
         }`}
       >
-        {price === 'Free' ? 'Download Free' : `Get Module - ${price}`}
+        {price === 'Free' ? 'Get Started — No Signup' : `Get Module - ${price}`}
       </a>
     </div>
   )

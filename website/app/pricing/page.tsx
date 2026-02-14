@@ -29,6 +29,10 @@ export default function PricingPage() {
           <div className="space-y-6">
             {[
               {
+                q: 'Do I need to sign up or give my email?',
+                a: 'No. The free modules are fully open on GitHub — no signup, no email, no paywall. Just clone the repo and start. The newsletter is optional if you want updates when new modules launch.',
+              },
+              {
                 q: 'Do I need coding experience?',
                 a: 'No! The free modules require zero coding knowledge. Module 4 (Vibe Coding) teaches you the basics from scratch. Module 3 has step-by-step setup guides.',
               },

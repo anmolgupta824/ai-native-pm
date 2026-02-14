@@ -17,7 +17,7 @@ const modules = [
       'Export to Markdown & Notion',
       'QUICKSTART: 0 to first PRD in 30 min',
     ],
-    href: '#signup',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-1-prd',
   },
   {
     number: 2,
@@ -33,7 +33,7 @@ const modules = [
       'Timeline with dependencies',
       'Rollback plan templates',
     ],
-    href: '#signup',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-2-rollout',
   },
   {
     number: 3,
