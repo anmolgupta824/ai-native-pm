@@ -1,0 +1,19 @@
+{
+  "name": "prd-generator-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that helps Product Managers generate production-ready PRDs through an interactive questionnaire",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}
