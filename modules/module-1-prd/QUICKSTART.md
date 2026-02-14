@@ -25,48 +25,57 @@ Before you start, make sure you have:
 
 ---
 
-## Step 1: Clone & Install (5 minutes)
+## Step 1: Download the Module (2 minutes)
 
-Open your terminal and run these commands one at a time:
+Pick **one** of these three options — they all do the same thing:
+
+### Option A: Ask Claude to do it for you (Easiest)
+
+Open Claude Code in the folder where you want the module, and paste this:
+
+```
+Download the PRD Generator module from GitHub. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-1-prd/mcp-server and run npm install && npm run build.
+```
+
+Claude will clone the repo, install dependencies, and build the server for you. Skip to Step 2.
+
+### Option B: Git clone (Terminal)
 
 ```bash
-# Clone the repository (downloads the code to your computer)
 git clone https://github.com/anmolgupta824/ai-native-pm.git
-
-# Navigate into the module folder
 cd ai-native-pm/modules/module-1-prd/mcp-server
-
-# Install dependencies (downloads required libraries)
 npm install
-
-# Build the server (compiles the code)
 npm run build
 ```
 
-**What just happened?** You downloaded the PRD Generator code and prepared it to run. The `dist/` folder now contains the compiled server.
+### Option C: Download from GitHub (No terminal needed)
 
-## Step 2: Add to Claude Code (2 minutes)
+1. Go to [github.com/anmolgupta824/ai-native-pm](https://github.com/anmolgupta824/ai-native-pm)
+2. Click the green **"Code"** button → **"Download ZIP"**
+3. Unzip the folder and place it wherever you want to run Claude Code
+4. Open Claude Code in the `modules/module-1-prd/mcp-server` folder and say:
+   ```
+   Run npm install && npm run build
+   ```
 
-Tell Claude Code about the PRD Generator by adding it as an MCP server.
+---
 
-Open your Claude Code settings and add this MCP server configuration:
+## Step 2: Connect to Claude Code (1 minute)
 
-```json
-{
-  "mcpServers": {
-    "prd-generator": {
-      "command": "node",
-      "args": ["/FULL/PATH/TO/ai-native-pm/modules/module-1-prd/mcp-server/dist/index.js"]
-    }
-  }
-}
+Open Claude Code in the module folder and paste this single command:
+
+```
+Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
-**Important:** Replace `/FULL/PATH/TO/` with the actual path on your computer.
+Claude will:
+1. Find the correct path to `dist/index.js`
+2. Add it to your MCP configuration
+3. Restart so the PRD Generator is connected
 
-**How to find your path:** In your terminal, navigate to the `mcp-server` folder and run `pwd`. Copy the output and use it in the config above.
+That's it — one prompt, fully configured.
 
-Restart Claude Code to pick up the new server.
+---
 
 ## Step 3: Generate Your First PRD (20 minutes)
 
@@ -123,7 +132,7 @@ Run `npm install` in the `mcp-server/` directory.
 Update Node.js to version 18 or higher: [nodejs.org](https://nodejs.org)
 
 ### "command not found: git"
-Install Git from [git-scm.com](https://git-scm.com/downloads), then retry.
+Install Git from [git-scm.com](https://git-scm.com/downloads), or use Option C (Download ZIP) instead.
 
 ### "command not found: claude"
 Claude Code isn't installed. Follow [Module 0](../module-0-claude-basics/EXPLAINER.md) to install it.
@@ -140,8 +149,8 @@ Open an issue on GitHub or join the community discussion.
 
 | Step | Time | What You Do |
 |------|------|-------------|
-| Install | 5 min | Clone, npm install, build |
-| Configure | 2 min | Add MCP server to Claude Code |
+| Download | 2 min | Clone or download from GitHub |
+| Connect | 1 min | One prompt to Claude does it all |
 | Generate | 20 min | Answer questions, review output |
 | Export | 3 min | Copy to your team's tool |
-| **Total** | **30 min** | **Production-ready PRD** |
+| **Total** | **~26 min** | **Production-ready PRD** |
