@@ -4,6 +4,22 @@ import EmailCapture from '@/components/EmailCapture'
 
 const modules = [
   {
+    number: 0,
+    title: 'Claude Code Basics',
+    description:
+      'New to Claude Code? Start here. Install, learn the terminal basics, and have your first AI conversation in 20 minutes.',
+    price: 'Free',
+    tag: 'Start Here',
+    features: [
+      'What Claude Code is (and isn\'t)',
+      'Install on Mac, Windows, or Linux',
+      'Terminal basics — 5 commands only',
+      'Your first AI conversation',
+      'Key concepts: @-mentions, tools, MCP',
+    ],
+    href: '/modules/0-claude-basics',
+  },
+  {
     number: 1,
     title: 'PRD Generator',
     description:
@@ -17,7 +33,7 @@ const modules = [
       'Export to Markdown & Notion',
       'QUICKSTART: 0 to first PRD in 30 min',
     ],
-    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-1-prd',
+    href: '/modules/1-prd-generator',
   },
   {
     number: 2,
@@ -33,7 +49,7 @@ const modules = [
       'Timeline with dependencies',
       'Rollback plan templates',
     ],
-    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-2-rollout',
+    href: '/modules/2-rollout-planner',
   },
   {
     number: 3,
@@ -49,7 +65,7 @@ const modules = [
       'Meeting follow-up bot',
       'Pays for itself in Week 1',
     ],
-    href: '/pricing',
+    href: '/modules/3-mcp-automation',
     highlighted: true,
   },
   {
@@ -66,7 +82,7 @@ const modules = [
       'Feature flag dashboard',
       'Deploy to production URL',
     ],
-    href: '/pricing',
+    href: '/modules/4-vibe-coding',
   },
 ]
 
@@ -101,7 +117,7 @@ export default function Home() {
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Four Modules. Immediate Impact.
+              Five Modules. Immediate Impact.
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
               Each module gives you a working AI workflow you can use on your
@@ -109,7 +125,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {modules.map((mod) => (
               <ModuleCard key={mod.number} {...mod} />
             ))}
@@ -166,10 +182,11 @@ export default function Home() {
                 1
               </div>
               <h3 className="mt-4 font-semibold text-gray-900">
-                Pick a Module
+                Start with Module 0
               </h3>
               <p className="mt-2 text-sm text-gray-600">
-                Start with a free module or jump straight to the paid workflows.
+                Install Claude Code and learn the basics in 20 minutes. No
+                technical experience required.
               </p>
             </div>
             <div>
@@ -177,11 +194,11 @@ export default function Home() {
                 2
               </div>
               <h3 className="mt-4 font-semibold text-gray-900">
-                Follow the QUICKSTART
+                Pick a Module
               </h3>
               <p className="mt-2 text-sm text-gray-600">
-                Each module has a step-by-step guide. You&apos;ll be productive
-                in 30 minutes.
+                Each module teaches a real PM workflow. Follow the lesson, then
+                use the tools on your own projects.
               </p>
             </div>
             <div>

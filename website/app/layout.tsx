@@ -39,9 +39,7 @@ export default function RootLayout({
                 Pricing
               </a>
               <a
-                href="https://github.com/anmolgupta824/ai-native-pm"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/modules/0-claude-basics"
                 className="text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 px-4 py-2 rounded-lg transition-colors"
               >
                 Get Started Free

@@ -1,20 +1,21 @@
 # PM AI Upskilling Program - Progress Tracker
-Last Updated: 2026-02-14
+Last Updated: 2026-02-15
 
-## Overall Progress: 38%
+## Overall Progress: 52%
 
 ```
-Website:     [########..] 85%  (Deployed: No)
-Module 1:    [########..] 80%  (Launched: No)
-Module 2:    [..........] 0%   (Launched: No)
-Module 3:    [..........] 0%   (Launched: No)
-Module 4:    [..........] 0%   (Launched: No)
+Website:     [#########.] 90%  (Deployed: Yes)
+Module 0:    [##########] 100% (Launched: Yes)
+Module 1:    [#########.] 90%  (Launched: Yes)
+Module 2:    [###.......] 30%  (Launched: No)
+Module 3:    [#.........] 10%  (Launched: No)
+Module 4:    [#.........] 10%  (Launched: No)
 Marketing:   [###.......] 30%  (Posts: 0/10)
 --------------------------------------------
-Overall:     [####......] 38%
+Overall:     [#####.....] 52%
 ```
 
-## Current Week: Week 1 (Feb 14, 2026)
+## Current Week: Week 1 (Feb 14-15, 2026)
 
 ### This Week's Goals:
 - [x] Complete project folder structure
@@ -23,10 +24,38 @@ Overall:     [####......] 38%
 - [x] Build Module 1 MCP server
 - [x] Create PRD templates
 - [x] Write Module 1 documentation
-- [ ] Deploy website to Vercel
-- [ ] Test Module 1 with real PRD
+- [x] Deploy website to Vercel
+- [x] Test Module 1 end-to-end (29/29 tests pass)
+- [x] Create explainer notes for all modules
+- [x] Remove email gate from free modules
+- [x] Create private repo for paid content
+- [x] Build Module 0: Claude Code Basics
+- [x] Create website explainer pages for all modules
+- [x] Update QUICKSTART guides for beginners
+- [ ] First beta tester
 
-### Today's Accomplishments (Day 1):
+### Day 2 Accomplishments (Feb 15):
+- Created Module 0: Claude Code Basics (EXPLAINER.md, QUICKSTART.md, README.md)
+  - Installation guide for Mac/Windows/Linux
+  - Terminal basics (5 commands)
+  - First conversation walkthrough
+  - Key concepts: @-mentions, tools, MCP, project memory
+- Built 5 website explainer pages (modules 0-4)
+  - Card-based, single-column design (distinct from ccforpms.com)
+  - Full content for free modules (0, 1, 2)
+  - Preview + purchase CTA for paid modules (3, 4)
+  - Prev/next navigation between all modules
+- Updated all module links to point to website (not GitHub)
+  - Hero CTA → /modules/0-claude-basics
+  - Nav CTA → /modules/0-claude-basics
+  - Module cards → internal explainer pages
+  - GitHub kept as secondary download option
+- Updated Module 1 QUICKSTART with beginner-friendly setup
+  - Added "Step 0: New to Claude Code?" with link to Module 0
+  - Added terminal explanation for beginners
+  - Added troubleshooting for common beginner errors
+
+### Day 1 Accomplishments (Feb 14):
 - Created complete project folder structure
 - Built Next.js 14 website with Tailwind CSS
   - Landing page: Hero, module cards, email capture, social proof, how-it-works
@@ -42,45 +71,60 @@ Overall:     [####......] 38%
 - Wrote QUICKSTART.md (0 to first PRD in 30 min)
 - Created example PRD (In-App Notifications Center)
 - Set up marketing scaffolding (brand voice, visual identity, content calendar)
-- Initialized git repository
+- Deployed website to Vercel
+- Created public GitHub repo (anmolgupta824/ai-native-pm)
+- Created private GitHub repo (anmolgupta824/ai-native-pm-paid)
+- Tested Module 1 end-to-end (29/29 assertions pass)
+- Created explainer notes for all 4 modules
+- Removed email gate from free modules
+- Separated free/paid content between repos
 
 ### Blockers:
 None currently
 
-### Tomorrow's Plan:
-1. Deploy website to Vercel
-2. Test Module 1 MCP server end-to-end with a real PRD
-3. Polish any rough edges found during testing
-4. Start Module 2 scaffolding
+### Next Steps:
+1. Polish Module 0 and test the full beginner flow
+2. Start building Module 2 MCP server
+3. Recruit first beta testers
+4. First LinkedIn post
 
 ## Project Metrics
-- Total Files: 25+
-- Website Pages: 3 (landing, pricing, modules)
+- Total Files: 40+
+- Website Pages: 8 (landing, pricing, modules listing, 5 explainer pages)
 - MCP Tools: 5
 - PRD Templates: 3
-- Days Active: 1
-- Next Milestone: Website deployed to production
+- Modules: 5 (0-4)
+- Days Active: 2
+- Git Commits: 5+
+- Next Milestone: Module 2 MCP server
 
 ## Milestones
 - [x] Project structure created (Feb 14, 2026)
 - [x] Website deployable (Feb 14, 2026) - builds successfully
 - [x] Module 1 MCP server functional (Feb 14, 2026) - compiles and runs
 - [x] Module 1 documentation complete (Feb 14, 2026)
-- [ ] Website live on Vercel (Target: Day 2)
-- [ ] Module 1 tested end-to-end (Target: Day 2)
+- [x] Website live on Vercel (Feb 14, 2026)
+- [x] Module 1 tested end-to-end (Feb 14, 2026) - 29/29 pass
+- [x] Module 0 created (Feb 15, 2026)
+- [x] Website explainer pages for all modules (Feb 15, 2026)
 - [ ] First beta tester (Target: Week 2)
-- [ ] Module 2 complete (Target: Week 3-4)
+- [ ] Module 2 MCP server complete (Target: Week 3-4)
 - [ ] Public launch (Target: Week 3)
 
+## Repos
+- Public: https://github.com/anmolgupta824/ai-native-pm
+- Private: https://github.com/anmolgupta824/ai-native-pm-paid
+- Website: https://website-blue-six-38.vercel.app
+
 ## Risks & Issues
-- Website not yet deployed (low risk - builds clean, just needs `vercel deploy`)
-- MCP server not yet tested end-to-end with Claude Code (medium risk - should test Day 2)
 - No beta testers recruited yet (plan to start Week 2)
+- Module 2 MCP server not yet built (planned for Week 3-4)
 
 ## Notes & Learnings
 - Day 1: Massive progress - website + Module 1 MCP server + docs + marketing scaffolding all done
+- Day 2: Module 0 + website explainer pages + beginner-friendly QUICKSTART updates
 - Brand: "The AI-Native PM" (working name, easy to change later)
 - Colors: Clean white + blue (Stripe aesthetic)
 - Email: Substack integration
-- Website builds successfully with `next build` - all 3 pages compile
-- MCP server compiles with `tsc` - no errors
+- Design: Card-based single-column (distinct from ccforpms.com docs-style layout)
+- Website explainer pages are primary content delivery; GitHub is secondary

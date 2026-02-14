@@ -3,6 +3,25 @@ import EmailCapture from '@/components/EmailCapture'
 
 const modules = [
   {
+    number: 0,
+    title: 'Claude Code Basics',
+    description:
+      'New to Claude Code? Start here. Install Claude Code, learn the 5 terminal commands you need, and have your first AI conversation — all in 20 minutes.',
+    price: 'Free',
+    tag: 'Start Here',
+    features: [
+      'What Claude Code is (vs ChatGPT, vs Claude.ai)',
+      'Install on Mac, Windows, or Linux',
+      'Terminal basics — only 5 commands',
+      'Your first AI conversation walkthrough',
+      'Key concepts: @-mentions, tools, MCP servers',
+      'Troubleshooting common setup issues',
+    ],
+    href: '/modules/0-claude-basics',
+    timeline: 'Available now',
+    promise: 'Get up and running with Claude Code in 20 minutes',
+  },
+  {
     number: 1,
     title: 'PRD Generator',
     description:
@@ -17,7 +36,7 @@ const modules = [
       'Export to Markdown & Notion',
       'Example PRDs from SaaS, marketplace, and mobile',
     ],
-    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-1-prd',
+    href: '/modules/1-prd-generator',
     timeline: 'Available now',
     promise: 'Generate your first production-ready PRD in 30 minutes',
   },
@@ -36,7 +55,7 @@ const modules = [
       'Rollback plan builder',
       'Communication plan templates',
     ],
-    href: 'https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-2-rollout',
+    href: '/modules/2-rollout-planner',
     timeline: 'Coming Week 3-4',
     promise: 'Plan your next launch in 1 hour, not 1 week',
   },
@@ -55,7 +74,7 @@ const modules = [
       'MCP installation wizard',
       'Error debugging assistant',
     ],
-    href: '/pricing',
+    href: '/modules/3-mcp-automation',
     highlighted: true,
     timeline: 'Coming Week 5-7',
     promise: 'Automate 5+ hours of weekly busy work. Pays for itself in Week 1.',
@@ -75,7 +94,7 @@ const modules = [
       'Deploy to production URL',
       'Coding 101 for PMs primer',
     ],
-    href: '/pricing',
+    href: '/modules/4-vibe-coding',
     timeline: 'Coming Week 8-9',
     promise: 'Ship your first working prototype this weekend',
   },
@@ -92,7 +111,7 @@ export default function ModulesPage() {
             </h1>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
               Each module gives you a working AI workflow you can use on your
-              real projects. Start free, upgrade when you&apos;re ready.
+              real projects. Start with Module 0, then work through the rest.
             </p>
           </div>
 
@@ -167,8 +186,6 @@ export default function ModulesPage() {
                       </ul>
                       <a
                         href={mod.href}
-                        target={mod.price === 'Free' ? '_blank' : undefined}
-                        rel={mod.price === 'Free' ? 'noopener noreferrer' : undefined}
                         className={`mt-6 block text-center text-sm font-semibold py-2.5 rounded-lg transition-colors ${
                           mod.price === 'Free'
                             ? 'bg-brand-600 text-white hover:bg-brand-700'
@@ -176,8 +193,8 @@ export default function ModulesPage() {
                         }`}
                       >
                         {mod.price === 'Free'
-                          ? 'Get Started — No Signup'
-                          : `Get Module - ${mod.price}`}
+                          ? 'Start Learning'
+                          : `Preview Module — ${mod.price}`}
                       </a>
                     </div>
                   </div>
