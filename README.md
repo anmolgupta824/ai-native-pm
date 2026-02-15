@@ -7,11 +7,12 @@ A practical upskilling program that teaches Product Managers to use Claude Code 
 ## Modules
 
 ### Free
+- **Module 0: Claude Code Basics** - Get comfortable with Claude Code
 - **Module 1: PRD Generator** - Generate production-ready PRDs in 30 minutes
 - **Module 2: Rollout Plan Generator** - Plan your next launch in 1 hour, not 1 week
+- **Module 3: MCP Integrations Course** - Automate Google Workspace workflows
 
 ### Paid
-- **Module 3: MCP Google Workspace Automation** ($39) - Automate 5+ hours of weekly busy work
 - **Module 4: Vibe Code Real Projects** ($29) - Ship your first prototype this weekend
 
 ## Quick Start
@@ -24,22 +25,70 @@ A practical upskilling program that teaches Product Managers to use Claude Code 
 
 ```
 pm-ai-brand/
-├── website/          # Personal brand site (Next.js + Tailwind)
-├── modules/          # Learning modules (GitHub repos)
+├── website/          # Next.js 14 + Tailwind site (Vercel auto-deploys)
+├── modules/
+│   ├── module-0-claude-basics/
 │   ├── module-1-prd/
 │   ├── module-2-rollout/
-│   ├── module-3-mcp/
+│   ├── module-3-mcp-course/
 │   └── module-4-vibe-coding/
-├── marketing/        # Brand content
-└── docs/             # Documentation
+├── marketing/        # Brand voice, LinkedIn, email content
+├── docs/             # Build log and dev notes
+├── PROGRESS.md       # Project progress tracker
+└── .tracker-state.json
 ```
 
 ## Tech Stack
 
-- **Website:** Next.js 14, Tailwind CSS, shadcn/ui
+- **Website:** Next.js 14, Tailwind CSS
 - **Modules:** TypeScript MCP servers
-- **Hosting:** Vercel
+- **Hosting:** Vercel (auto-deploys from this repo)
 - **Newsletter:** Substack
+
+## Git & Deployment
+
+### Repos
+
+| Repo | Visibility | What's in it |
+|---|---|---|
+| `pm-ai-brand-project` | **Private** | Everything — website, all modules, marketing, docs. Primary working repo. |
+| `ai-native-pm` | **Public** | Free modules only (0, 1, 2, 3) + README. Open-source for customers. |
+
+### Remotes
+
+```
+origin  → pm-ai-brand-project (private)   ← default push target
+public  → ai-native-pm (public)           ← free modules only
+```
+
+### Day-to-Day Workflow
+
+```bash
+# Website changes, paid module, marketing, docs → push to private only
+git add -A && git commit -m "your message"
+git push                          # → private repo → Vercel auto-deploys if website/ changed
+
+# Free module changes (0, 1, 2, 3) → push to BOTH repos
+git add -A && git commit -m "your message"
+git push                          # → private repo
+git push public main              # → public repo (free modules only)
+```
+
+### What goes where
+
+| Change type | `git push` (private) | `git push public main` |
+|---|---|---|
+| Website code | ✅ → Vercel auto-deploys | ❌ Never |
+| Free module (0, 1, 2, 3) | ✅ | ✅ |
+| Paid module (4) | ✅ | ❌ Never |
+| Marketing, docs, progress | ✅ | ❌ Never |
+
+### Vercel Deployment
+
+- Connected to `pm-ai-brand-project` (private repo)
+- Root directory: `website/`
+- Auto-deploys on every push to `main`
+- No manual `npx vercel --prod` needed anymore
 
 ## License
 
