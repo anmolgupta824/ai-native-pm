@@ -39,6 +39,12 @@ export default function RootLayout({
                 Pricing
               </a>
               <a
+                href="/about"
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                About
+              </a>
+              <a
                 href="/modules/0-claude-basics"
                 className="text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 px-4 py-2 rounded-lg transition-colors"
               >
@@ -61,7 +67,13 @@ export default function RootLayout({
                 GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="/about"
+                className="text-sm text-gray-500 hover:text-gray-700"
+              >
+                About
+              </a>
+              <a
+                href="https://www.linkedin.com/in/anmol-gupta-21875a89/"
                 className="text-sm text-gray-500 hover:text-gray-700"
               >
                 LinkedIn
