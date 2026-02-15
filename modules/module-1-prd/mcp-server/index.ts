@@ -336,6 +336,27 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ["template", "productDescription"],
       },
     },
+    {
+      name: "review_prd",
+      description:
+        "Review a PRD from the perspective of an Engineering Lead, Design Lead, or QA Lead. Each reviewer analyzes the PRD through their professional lens and provides strengths, concerns, and actionable suggestions. Use perspective 'all' to get reviews from all three perspectives at once.",
+      inputSchema: {
+        type: "object" as const,
+        properties: {
+          prd_content: {
+            type: "string",
+            description: "The full PRD content to review",
+          },
+          perspective: {
+            type: "string",
+            enum: ["engineer", "designer", "qa", "all"],
+            description:
+              "Which reviewer perspective: 'engineer' (technical feasibility, scalability), 'designer' (UX, accessibility, consistency), 'qa' (testability, acceptance criteria, regression risk), or 'all' for a combined multi-perspective review",
+          },
+        },
+        required: ["prd_content", "perspective"],
+      },
+    },
   ],
 }));
 
@@ -507,6 +528,66 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       };
     }
 
+    case "review_prd": {
+      const prdContent = args?.prd_content as string;
+      const perspective = args?.perspective as string;
+
+      if (perspective === "all") {
+        const reviews = ["engineer", "designer", "qa"].map((p) =>
+          reviewPRD(prdContent, p)
+        );
+
+        // Build consensus summary
+        const allConcerns = reviews.flatMap((r) => r.concerns);
+        const allSuggestions = reviews.flatMap((r) => r.suggestions);
+        const uniqueSuggestions = [...new Set(allSuggestions)];
+
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                {
+                  message:
+                    "Multi-perspective PRD review complete. Present each reviewer's feedback separately, then the consensus.",
+                  reviews,
+                  consensusSummary: {
+                    totalConcerns: allConcerns.length,
+                    sharedThemes:
+                      allConcerns.length > 6
+                        ? "Multiple perspectives flagged significant gaps — this PRD needs substantial revision."
+                        : allConcerns.length > 3
+                          ? "Several cross-functional concerns identified. Address these before moving forward."
+                          : "Minor gaps identified. This PRD is in good shape overall.",
+                    prioritySuggestions: uniqueSuggestions.slice(0, 5),
+                  },
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
+      }
+
+      const review = reviewPRD(prdContent, perspective);
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                message: `PRD review from ${review.role} perspective. Present the feedback constructively.`,
+                review,
+              },
+              null,
+              2
+            ),
+          },
+        ],
+      };
+    }
+
     default:
       return {
         content: [
@@ -555,6 +636,244 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
     ],
   };
 });
+
+// ── Reviewer Personas ───────────────────────────────────────────
+
+interface ReviewerPersona {
+  perspective: string;
+  role: string;
+  focusAreas: string[];
+  critiqueFramework: Record<string, string[]>;
+}
+
+const REVIEWER_PERSONAS: Record<string, ReviewerPersona> = {
+  engineer: {
+    perspective: "engineer",
+    role: "Engineering Lead",
+    focusAreas: [
+      "Technical feasibility",
+      "API design",
+      "Scalability",
+      "Edge cases",
+      "Dependencies",
+      "Performance",
+    ],
+    critiqueFramework: {
+      feasibility: [
+        "Is this technically achievable with the current stack?",
+        "Are there hidden technical complexities not addressed?",
+        "What infrastructure changes would be needed?",
+      ],
+      scalability: [
+        "How does this perform at 10x current load?",
+        "Are there database query concerns with growing data?",
+        "Will this require horizontal or vertical scaling?",
+      ],
+      dependencies: [
+        "What external services does this depend on?",
+        "Are there version compatibility risks?",
+        "What happens if a dependency goes down?",
+      ],
+      edgeCases: [
+        "What race conditions could occur?",
+        "How are concurrent modifications handled?",
+        "What about data migration for existing users?",
+      ],
+      security: [
+        "Are there authentication or authorization gaps?",
+        "Is sensitive data properly handled?",
+        "Are inputs validated and sanitized?",
+      ],
+      timeline: [
+        "Is the engineering estimate realistic?",
+        "What technical debt will this create?",
+        "Are there prerequisites that need to be built first?",
+      ],
+    },
+  },
+  designer: {
+    perspective: "designer",
+    role: "Design Lead",
+    focusAreas: [
+      "User experience",
+      "Accessibility",
+      "Interaction flows",
+      "Visual consistency",
+      "User research gaps",
+      "Information architecture",
+    ],
+    critiqueFramework: {
+      userExperience: [
+        "Is the user flow intuitive for first-time users?",
+        "Are there unnecessary steps that could be eliminated?",
+        "What's the cognitive load for the user?",
+      ],
+      accessibility: [
+        "Does this meet WCAG 2.1 AA standards?",
+        "How does this work with screen readers?",
+        "Are there color contrast issues for low-vision users?",
+      ],
+      consistency: [
+        "Does this match existing design patterns in the product?",
+        "Are interaction patterns consistent with user expectations?",
+        "Does the terminology match the rest of the product?",
+      ],
+      research: [
+        "What user research supports this design direction?",
+        "Have the core assumptions been validated with users?",
+        "What usability testing is planned?",
+      ],
+      edgeCases: [
+        "What does the empty state look like?",
+        "How are error states communicated to the user?",
+        "What happens with very long text or unusual data?",
+      ],
+      mobileCross: [
+        "How does this adapt across screen sizes?",
+        "Are touch targets large enough for mobile?",
+        "What's the experience on slow connections?",
+      ],
+    },
+  },
+  qa: {
+    perspective: "qa",
+    role: "QA Lead",
+    focusAreas: [
+      "Testability",
+      "Acceptance criteria clarity",
+      "Edge cases",
+      "Regression risk",
+      "Test strategy",
+      "Data integrity",
+    ],
+    critiqueFramework: {
+      acceptanceCriteria: [
+        "Are acceptance criteria specific and measurable?",
+        "Is the expected behavior for each scenario documented?",
+        "Are boundary values defined?",
+      ],
+      testability: [
+        "Can each requirement be independently tested?",
+        "Are there features that would be difficult to automate testing for?",
+        "What test data would be needed?",
+      ],
+      edgeCases: [
+        "What happens at boundary values (empty, max length, zero)?",
+        "How does the system behave with invalid input?",
+        "What concurrent access scenarios need testing?",
+      ],
+      regression: [
+        "What existing features might be affected?",
+        "Are there integration points that could break?",
+        "What backward compatibility concerns exist?",
+      ],
+      dataIntegrity: [
+        "How is data consistency maintained during failures?",
+        "Are there migration risks for existing data?",
+        "What happens if the process is interrupted midway?",
+      ],
+      environments: [
+        "Are there environment-specific behaviors to test?",
+        "What browser/device combinations need coverage?",
+        "Are there timezone or locale-specific considerations?",
+      ],
+    },
+  },
+};
+
+interface ReviewResult {
+  perspective: string;
+  role: string;
+  strengths: string[];
+  concerns: string[];
+  suggestions: string[];
+  overallAssessment: string;
+}
+
+function reviewPRD(prdContent: string, perspective: string): ReviewResult {
+  const persona = REVIEWER_PERSONAS[perspective];
+  if (!persona) {
+    return {
+      perspective,
+      role: "Unknown",
+      strengths: [],
+      concerns: ["Unknown reviewer perspective"],
+      suggestions: ["Use 'engineer', 'designer', or 'qa'"],
+      overallAssessment: "Invalid perspective",
+    };
+  }
+
+  const content = prdContent.toLowerCase();
+  const strengths: string[] = [];
+  const concerns: string[] = [];
+  const suggestions: string[] = [];
+
+  // Analyze based on the persona's critique framework
+  for (const [category, questions] of Object.entries(
+    persona.critiqueFramework
+  )) {
+    // Check if the PRD addresses this category
+    const categoryPatterns: Record<string, RegExp[]> = {
+      feasibility: [/technical|architecture|stack|infrastructure/i],
+      scalability: [/scale|performance|load|capacity|throughput/i],
+      dependencies: [/depend|external|third.?party|integration/i],
+      edgeCases: [/edge case|error|failure|fallback|boundary/i],
+      security: [/security|auth|permission|encrypt|sensitive/i],
+      timeline: [/timeline|estimate|milestone|sprint|deadline/i],
+      userExperience: [/user flow|interaction|experience|journey|usability/i],
+      accessibility: [/accessib|wcag|screen reader|aria|a11y/i],
+      consistency: [/consistent|pattern|design system|component/i],
+      research: [/research|user test|interview|survey|validation/i],
+      mobileCross: [/mobile|responsive|cross.?browser|device/i],
+      acceptanceCriteria: [/acceptance|criteria|given|when|then|expected/i],
+      testability: [/test|automat|coverage|scenario/i],
+      regression: [/regression|backward|compatib|existing feature/i],
+      dataIntegrity: [/data integrity|migration|consistency|rollback/i],
+      environments: [/environment|browser|device|timezone|locale/i],
+    };
+
+    const patterns = categoryPatterns[category] || [];
+    const addressed = patterns.some((p) => p.test(content));
+
+    if (addressed) {
+      strengths.push(
+        `${category}: PRD addresses ${persona.role.toLowerCase()} concerns about ${category}`
+      );
+    } else {
+      concerns.push(
+        `${category}: Not addressed from a ${persona.role.toLowerCase()} perspective`
+      );
+      // Add the first question from the framework as a suggestion
+      suggestions.push(questions[0]);
+    }
+  }
+
+  // Generate overall assessment based on ratio of strengths to concerns
+  const ratio = strengths.length / (strengths.length + concerns.length);
+  let overallAssessment: string;
+  if (ratio >= 0.8) {
+    overallAssessment = `Strong PRD from a ${persona.role} perspective. Minor gaps to address, but well-thought-out overall.`;
+  } else if (ratio >= 0.5) {
+    overallAssessment = `Solid foundation, but several ${persona.role.toLowerCase()} concerns need attention before this is ready for implementation.`;
+  } else {
+    overallAssessment = `This PRD needs significant work from a ${persona.role.toLowerCase()} perspective. Key areas are missing that would cause issues during ${
+      perspective === "engineer"
+        ? "development"
+        : perspective === "designer"
+          ? "design review"
+          : "testing"
+    }.`;
+  }
+
+  return {
+    perspective: persona.perspective,
+    role: persona.role,
+    strengths,
+    concerns,
+    suggestions,
+    overallAssessment,
+  };
+}
 
 // ── Edge case generator ────────────────────────────────────────
 

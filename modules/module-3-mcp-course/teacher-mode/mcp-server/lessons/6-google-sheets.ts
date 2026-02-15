@@ -136,11 +136,23 @@ mkdir -p google-sheets-mcp-server/src
 cd google-sheets-mcp-server
 \`\`\`
 
-Use the same package.json and tsconfig.json from Lesson 5, and copy the auth.ts file (updating the scopes to include \`https://www.googleapis.com/auth/spreadsheets\`).
+Use the same package.json and tsconfig.json from Lesson 5, and copy the auth.ts file. Update the scopes to include \`https://www.googleapis.com/auth/spreadsheets\`.
+
+**Important:** Make sure your auth.ts uses the \`import.meta.url\` pattern to find \`credentials.json\` — do NOT use \`process.cwd()\`. The correct pattern (from Lesson 5):
+
+\`\`\`typescript
+import { fileURLToPath } from "url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SERVER_DIR = path.resolve(__dirname, ".."); // go up from build/ to project root
+const TOKEN_PATH = path.join(SERVER_DIR, "token.json");
+const CREDENTIALS_PATH = path.join(SERVER_DIR, "credentials.json");
+\`\`\`
+
+This ensures the server finds your credentials regardless of which folder Claude Code is running from. Put your \`credentials.json\` in the project root (next to \`package.json\`).
 
 Check your editor — you should see the new directory appear.`,
       checkQuestion: "Can you find the spreadsheet ID for one of your own Google Sheets? Open any spreadsheet and look at the URL.",
-      teacherNotes: "Have them actually open a real spreadsheet and find the ID. This makes the next steps concrete — they will use this real spreadsheet when testing. Remind them to open their editor alongside Claude Code if they haven't already.",
+      teacherNotes: "Have them actually open a real spreadsheet and find the ID. This makes the next steps concrete — they will use this real spreadsheet when testing. If they are reusing auth.ts from Lesson 5, make sure it has the import.meta.url fix — the old process.cwd() version will break when Claude Code launches the server.",
     },
     {
       id: "tool-list-sheets",
@@ -440,7 +452,11 @@ Check your editor — you should see \`build/index.js\` appear.`,
       title: "Build, Test, and Real PM Workflows",
       content: `## Step 9: Configure and Test
 
-Configure in Claude Code:
+Ask Claude Code to add the server:
+
+> "Add an MCP server called 'google-sheets' that runs node with the full absolute path to google-sheets-mcp-server/build/index.js. Then restart to pick it up."
+
+Or manually add to your MCP configuration:
 
 \`\`\`json
 {
@@ -452,6 +468,8 @@ Configure in Claude Code:
   }
 }
 \`\`\`
+
+**Use the full absolute path** — relative paths do not work. The MCP config persists in \`~/.claude/\`, so you only add it once.
 
 Restart Claude Code, then test:
 

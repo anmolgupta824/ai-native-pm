@@ -1,156 +1,192 @@
-# QUICKSTART: Your First PRD in 30 Minutes
+# PRD Generator — Quick Start
 
-This guide takes you from zero to a production-ready PRD in 30 minutes.
-
-## Step 0: New to Claude Code?
-
-If you've never used Claude Code before, start with **[Module 0: Claude Code Basics](../module-0-claude-basics/EXPLAINER.md)** first. It takes 20 minutes and covers:
-- What Claude Code is (and how it's different from ChatGPT)
-- How to install it on Mac, Windows, or Linux
-- The 5 terminal commands you need (and nothing more)
-- Your first AI conversation
-
-Already have Claude Code installed? Skip to Step 1.
-
----
+Get up and running in under 10 minutes.
 
 ## Prerequisites
 
-Before you start, make sure you have:
-
-- [ ] **Claude Code** installed and working — run `claude --version` to check
-- [ ] **Node.js 18+** installed ([download](https://nodejs.org)) — run `node --version` to check
-
-**What's a terminal?** It's the text-based app where you type commands. On Mac: press `Cmd + Space`, type "Terminal", hit Enter. On Windows: press `Win + X`, select "Terminal". See [Module 0](../module-0-claude-basics/EXPLAINER.md) for a full walkthrough.
+- [ ] Claude Code installed ([Install guide](../module-0-claude-basics/))
+- [ ] Node.js 18+ installed (`node --version` to check)
 
 ---
 
-## Step 1: Download the Module (2 minutes)
+## Choose Your Path
 
-Pick **one** of these three options — they all do the same thing:
+| Path | Who it's for | Time to first result |
+|------|-------------|---------------------|
+| **A: Learn PRD Generation (Teacher Mode)** | New to AI-assisted PRDs | ~10 min to first lesson |
+| **B: Use PRD Tools (Usage Mode)** | Already familiar with PRDs | ~5 min to first PRD |
 
-### Option A: Ask Claude to do it for you (Easiest)
+---
 
-Open Claude Code in the folder where you want the module, and paste this:
+## Path A: Learn PRD Generation (Teacher Mode)
+
+Start here if you want to learn the 4 core techniques for AI-assisted PRD writing.
+
+### Step 1: Download the Module (~2 min)
+
+Pick one of three options:
+
+#### Option A: Ask Claude to do it (Easiest)
+
+Open Claude Code and paste:
 
 ```
-Download the PRD Generator module from GitHub. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-1-prd/mcp-server and run npm install && npm run build.
+Download the PRD Generator Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-1-prd/teacher-mode/mcp-server and run npm install && npm run build.
 ```
 
-Claude will clone the repo, install dependencies, and build the server for you. Skip to Step 2.
+#### Option B: Git clone (Terminal)
 
-### Option B: Git clone (Terminal)
+```bash
+git clone https://github.com/anmolgupta824/ai-native-pm.git
+cd ai-native-pm/modules/module-1-prd/teacher-mode/mcp-server
+npm install
+npm run build
+```
+
+#### Option C: Download ZIP (No terminal needed)
+
+1. Go to [github.com/anmolgupta824/ai-native-pm](https://github.com/anmolgupta824/ai-native-pm)
+2. Click the green **"Code"** button → **"Download ZIP"**
+3. Unzip and navigate to `modules/module-1-prd/teacher-mode/mcp-server`
+4. Open Claude Code there and say: *"Run npm install && npm run build"*
+
+### Step 2: Connect to Claude Code (~1 min)
+
+Open Claude Code in the module folder and paste:
+
+```
+Add the PRD Teacher as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
+```
+
+### Step 3: Start Your First Lesson (~10 min)
+
+Open Claude Code and say:
+
+```
+I want to learn how to write better PRDs with AI. Start me on Lesson 1.
+```
+
+The Teacher Mode will guide you through 6 lessons covering context loading, Socratic questioning, PRD generation, validation, multi-perspective review, and edge case analysis.
+
+### Teacher Mode Commands
+
+| What to say | What happens |
+|-------------|--------------|
+| "Start Lesson 1" | Begin the Welcome lesson |
+| "Continue" | Get the next section of the current lesson |
+| "Start Lesson 4" | Jump to Generating & Validating PRDs |
+| "Resume my course" | Pick up where you left off after restarting |
+| "Explain what Socratic questioning is" | Get a PM-friendly explanation |
+| "Give me an exercise for Lesson 3" | Hands-on practice |
+| "Quiz me on Lesson 2" | Test your knowledge |
+| "Show my progress" | See completed lessons with section-level detail |
+
+---
+
+## Path B: Jump Straight to Using PRD Tools (Usage Mode)
+
+Already know what you want? Skip the lessons and start generating PRDs immediately.
+
+### Step 1: Download & Build (~3 min)
+
+#### Option A: Ask Claude (Easiest)
+
+```
+Download the PRD Generator tools. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-1-prd/mcp-server and run npm install && npx tsc.
+```
+
+#### Option B: Git clone
 
 ```bash
 git clone https://github.com/anmolgupta824/ai-native-pm.git
 cd ai-native-pm/modules/module-1-prd/mcp-server
 npm install
-npm run build
+npx tsc
 ```
 
-### Option C: Download from GitHub (No terminal needed)
-
-1. Go to [github.com/anmolgupta824/ai-native-pm](https://github.com/anmolgupta824/ai-native-pm)
-2. Click the green **"Code"** button → **"Download ZIP"**
-3. Unzip the folder and place it wherever you want to run Claude Code
-4. Open Claude Code in the `modules/module-1-prd/mcp-server` folder and say:
-   ```
-   Run npm install && npm run build
-   ```
-
----
-
-## Step 2: Connect to Claude Code (1 minute)
-
-Open Claude Code in the module folder and paste this single command:
+### Step 2: Connect to Claude Code (~1 min)
 
 ```
 Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
-Claude will:
-1. Find the correct path to `dist/index.js`
-2. Add it to your MCP configuration
-3. Restart so the PRD Generator is connected
+### Step 3: Start Using It
 
-That's it — one prompt, fully configured.
+Try these prompts in Claude Code:
 
----
+```
+@product-strategy.md @user-research.md
+I need to write a PRD for a new notifications center. Ask me questions first.
+```
 
-## Step 3: Generate Your First PRD (20 minutes)
+```
+Generate a PRD for a feature that lets users export dashboards as PDF.
+Use the feature-launch template.
+```
 
-Open Claude Code and say:
+```
+Validate this PRD and tell me what's missing.
+```
 
-> "I need to write a PRD. Can you help me?"
+```
+Review this PRD from an engineering perspective. Then from a design perspective.
+```
 
-The PRD Generator agent will:
+### Available PRD Tools
 
-1. **Show you the available templates** (feature launch, API integration, redesign)
-2. **Ask you 10 questions** about your project, one at a time
-3. **Generate a structured PRD** from your answers
-4. **Validate the PRD** and suggest improvements
-5. **Suggest edge cases** you might have missed
-
-### Tips for Great PRDs
-
-- **Be specific with metrics.** "Improve conversion" is vague. "Increase checkout completion from 45% to 60%" is actionable.
-- **Don't skip edge cases.** The generator will suggest some, but add your own too.
-- **Include a rollback plan.** Even simple features need one.
-- **Name your stakeholders.** "Engineering" is too broad. "Backend team, led by [Name]" is better.
-
-## Step 4: Use Your PRD (3 minutes)
-
-Your PRD is generated as Markdown. You can:
-
-- **Copy to Notion** - Paste directly, formatting is preserved
-- **Save as .md** - Commit to your repo alongside the code
-- **Export to Confluence** - Paste into a new page
-- **Share in Google Docs** - Use a Markdown-to-Docs converter
-
----
-
-## What's Next?
-
-Now that you've generated your first PRD:
-
-1. **Try a different template** - Generate an API integration or redesign PRD
-2. **Validate an existing PRD** - Paste any PRD into Claude Code and ask: "Validate this PRD using the PRD generator"
-3. **Customize templates** - Edit the templates in `templates/` to match your team's format
-4. **Check out Module 2** - [Rollout Plan Generator](../module-2-rollout/) (also free)
-
----
-
-## Troubleshooting
-
-### "MCP server not found"
-Make sure the path in your Claude Code config points to the correct `dist/index.js` file. Run `npm run build` if the `dist/` folder is missing.
-
-### "Cannot find module"
-Run `npm install` in the `mcp-server/` directory.
-
-### "Node version too old"
-Update Node.js to version 18 or higher: [nodejs.org](https://nodejs.org)
-
-### "command not found: git"
-Install Git from [git-scm.com](https://git-scm.com/downloads), or use Option C (Download ZIP) instead.
-
-### "command not found: claude"
-Claude Code isn't installed. Follow [Module 0](../module-0-claude-basics/EXPLAINER.md) to install it.
-
-### PRD feels incomplete
-Use the `validate_prd` tool to get a completeness score and specific suggestions. Most first PRDs score 60-70% - iterate based on the feedback.
-
-### Still stuck?
-Open an issue on GitHub or join the community discussion.
+| Tool | What it does |
+|------|-------------|
+| `generate_prd` | Generate a complete PRD from context |
+| `validate_prd` | Score and grade a PRD for completeness |
+| `suggest_edge_cases` | Surface edge cases for a feature |
+| `get_template` | Get a PRD template (feature-launch, api-integration, redesign) |
+| `list_templates` | See all available templates |
+| `review_prd` | Get feedback from Engineer, Designer, and QA perspectives |
 
 ---
 
 ## Time Breakdown
 
-| Step | Time | What You Do |
-|------|------|-------------|
-| Download | 2 min | Clone or download from GitHub |
-| Connect | 1 min | One prompt to Claude does it all |
-| Generate | 20 min | Answer questions, review output |
-| Export | 3 min | Copy to your team's tool |
-| **Total** | **~26 min** | **Production-ready PRD** |
+| Path | Step | Time |
+|------|------|------|
+| **Teacher** | Download & install | 2 min |
+| **Teacher** | Connect to Claude Code | 1 min |
+| **Teacher** | Lesson 1 | 10 min |
+| **Teacher** | Full course (6 lessons) | 2-3 hrs |
+| **Usage** | Download, build, connect | 5 min |
+
+---
+
+## Resuming After Closing Claude Code
+
+Your progress is automatically saved. When you come back:
+
+1. **Open Claude Code** in the same project folder
+2. **Say:** `Resume my PRD course`
+3. The Teacher will tell you exactly where you left off
+
+> **Note:** The MCP server config persists — you don't need to re-add it each time.
+
+---
+
+## Troubleshooting
+
+**Server not connecting after restart?**
+Re-add it:
+```
+Reconnect the PRD Teacher server. The server file is at ./dist/index.js in the teacher-mode/mcp-server directory. Add it to my Claude Code MCP config and restart.
+```
+
+**Build failed?**
+Make sure you're in the correct directory and have Node.js 18+:
+```bash
+node --version  # Should be 18+
+npm install
+npm run build   # or npx tsc for usage mode
+```
+
+**PRD feels incomplete?**
+Use the `validate_prd` tool to get a completeness score. Most first PRDs score 60-70% — iterate based on the feedback.
+
+**Still stuck?**
+Open an issue on GitHub or join the community discussion.

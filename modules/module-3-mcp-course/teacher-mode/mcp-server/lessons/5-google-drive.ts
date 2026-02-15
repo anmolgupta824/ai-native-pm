@@ -175,17 +175,31 @@ import { google } from "googleapis";
 import * as fs from "fs";
 import * as path from "path";
 import * as http from "http";
-import { URL } from "url";
+import { URL, fileURLToPath } from "url";
 
 const SCOPES = [
   "https://www.googleapis.com/auth/drive",
   "https://www.googleapis.com/auth/documents",
 ];
 
-const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
+// Resolve paths relative to the SERVER's directory, not the working directory.
+// This is critical: when Claude Code runs this server, process.cwd() points to
+// Claude Code's folder, NOT this server's folder. Using import.meta.url ensures
+// credentials.json and token.json are always found in the right place.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SERVER_DIR = path.resolve(__dirname, ".."); // go up from build/ to project root
+const TOKEN_PATH = path.join(SERVER_DIR, "token.json");
+const CREDENTIALS_PATH = path.join(SERVER_DIR, "credentials.json");
 
 export async function getAuthClient() {
+  if (!fs.existsSync(CREDENTIALS_PATH)) {
+    throw new Error(
+      \`credentials.json not found at \${CREDENTIALS_PATH}. \\n\` +
+      \`Make sure you downloaded the OAuth credentials JSON from Google Cloud Console \\n\` +
+      \`and saved it as "credentials.json" in the project root: \${SERVER_DIR}\`
+    );
+  }
+
   const credentials = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, "utf-8"));
   const { client_id, client_secret } = credentials.installed || credentials.web;
 
@@ -257,10 +271,12 @@ if (isMainModule) {
 \`\`\`
 
 **What this does:**
-1. Reads your OAuth credentials from \`credentials.json\`
+1. Reads your OAuth credentials from \`credentials.json\` in the server's project directory
 2. If a saved token exists, uses it (you are already logged in)
 3. If no token exists, generates an auth URL, opens a local server, waits for you to approve access, then saves the token
 4. Can be run directly (\`npm run auth\`) to complete the first-time authentication
+
+**Important detail:** Notice the \`import.meta.url\` trick at the top. We use it to find the server's own directory instead of \`process.cwd()\`. This is critical because when Claude Code launches the MCP server, the working directory is Claude Code's folder — not your server's folder. Without this fix, the server would look for \`credentials.json\` in the wrong place and fail silently.
 
 ### First-Time Setup
 
@@ -271,8 +287,10 @@ npm run build
 npm run auth
 \`\`\`
 
-This opens a URL in your browser. Log in with your Google account, approve access, and the token is saved. You only need to do this once.`,
-      teacherNotes: "Explain each part of auth.ts thoroughly. The auth flow only runs once — after that, the refresh token handles everything.",
+This opens a URL in your browser. Log in with your Google account, approve access, and the token is saved. You only need to do this once.
+
+**Make sure \`credentials.json\` is in the project root** (the \`google-drive-mcp-server/\` folder, next to \`package.json\`). That is where the auth helper looks for it.`,
+      teacherNotes: "IMPORTANT: Explain the import.meta.url pattern. This is a common gotcha — process.cwd() in an MCP server points to Claude Code's directory, not the server's directory. The student's credentials.json must be in the server's project root (next to package.json), not in their working folder. If they get 'credentials.json not found', check the path in the error message.",
       checkQuestion: "After building and running npm run auth, did you see 'Authorization successful!' in your browser?",
     },
     {
@@ -673,6 +691,12 @@ This opens your browser. Log in with your Google account, approve Drive access, 
 
 ### Configure Claude Code
 
+Ask Claude Code to add the server for you:
+
+> "Add an MCP server called 'google-drive' that runs node with the full absolute path to google-drive-mcp-server/build/index.js. Then restart to pick it up."
+
+Or manually add to your MCP configuration:
+
 \`\`\`json
 {
   "mcpServers": {
@@ -684,7 +708,10 @@ This opens your browser. Log in with your Google account, approve Drive access, 
 }
 \`\`\`
 
-Note: The Google Drive server reads credentials from files (\`credentials.json\` and \`token.json\`) in its directory, so you do not need to pass environment variables. Make sure the working directory is correct, or update the auth helper to use absolute paths.
+**Important notes:**
+- Use the **full absolute path** — relative paths do not work in MCP configs
+- The server reads \`credentials.json\` and \`token.json\` from its own project directory (next to \`package.json\`), not from your working folder. You do not need to pass environment variables.
+- The MCP config persists in \`~/.claude/\` — you only need to add it once. After restarting Claude Code, the server will reconnect automatically.
 
 ---
 
