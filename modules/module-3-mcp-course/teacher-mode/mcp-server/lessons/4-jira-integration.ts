@@ -1,4 +1,4 @@
-import { LessonContent } from "./1-welcome";
+import { LessonContent } from "../index.js";
 
 const lesson: LessonContent = {
   number: 4,
@@ -10,7 +10,11 @@ const lesson: LessonContent = {
     "Understand Jira's REST API structure and JQL (Jira Query Language)",
     "Connect the server to Claude Code and test it with real prompts",
   ],
-  content: `# Build a Jira Integration
+  sections: [
+    {
+      id: "what-we-are-building",
+      title: "What We Are Building",
+      content: `# Build a Jira Integration
 
 ## What We Are Building
 
@@ -23,9 +27,14 @@ In this lesson, you will build a fully functional Jira MCP server with four tool
 
 By the end, you will be able to say things like "Create a bug ticket in the MOBILE project for the crash on the settings page" and Claude will do it.
 
----
-
-## Step 1: Get Your Jira API Token
+This is your first hands-on build. Everything from Lessons 1-3 comes together here — the three-box architecture, tool definitions, REST APIs, and authentication.`,
+      teacherNotes: "This is where the course gets real. The student is about to build their first MCP server. Set the tone: 'This is where theory becomes practice. By the end of this lesson, you will have a working Jira integration.' Suggest they open Cursor, VS Code, or their preferred editor alongside Claude Code so they can see the file structure being created. Example: 'Tip: Open a second window with Cursor or VS Code pointed at this folder. You will be able to see each file as we create it.'",
+      checkQuestion: "Which of these four tools are you most excited to try with your own Jira instance?",
+    },
+    {
+      id: "get-api-token",
+      title: "Get Your Jira API Token",
+      content: `## Step 1: Get Your Jira API Token
 
 Before you write any code, you need API credentials so your MCP server can authenticate with Jira.
 
@@ -49,18 +58,22 @@ You need three pieces of information:
 
 Save these somewhere safe — you will use them in a few minutes.
 
----
+**Remember from Lesson 2:** This is Basic Authentication. Your email and API token get combined and encoded in Base64, then sent with every request. The MCP server handles this automatically.`,
+      checkQuestion: "Do you have your three credentials ready? (Base URL, email, and API token) If not, take a moment to get them now.",
+      teacherNotes: "This is a practical step. Give them time to actually go get their token. If they do not have a Jira account, they can create a free one at atlassian.com. If they want to skip this and come back later, that is fine too — they can still read through the code.",
+    },
+    {
+      id: "project-setup",
+      title: "Set Up the Project",
+      content: `## Step 2: Set Up the Project
 
-## Step 2: Set Up the Project
+We will build this right here in your current project folder so you can see every file as it is created.
 
-Let us create the project structure. Open Claude Code and ask it to help you, or follow these steps:
+Open Claude Code and ask it to help you set up the project:
 
-### Create the Directory and Files
+> "Create a new directory called jira-mcp-server with src/ inside it. Create package.json and tsconfig.json for an MCP server project, then run npm install."
 
-\`\`\`bash
-mkdir -p jira-mcp-server/src
-cd jira-mcp-server
-\`\`\`
+Or if you prefer to understand each file, here is what goes into them:
 
 ### package.json
 
@@ -102,17 +115,25 @@ cd jira-mcp-server
 }
 \`\`\`
 
-### Install Dependencies
+Then install dependencies:
 
 \`\`\`bash
+cd jira-mcp-server
 npm install
 \`\`\`
 
----
+You should now see a \`node_modules/\` directory and a \`package-lock.json\` file. Check your editor — you can see the project taking shape.`,
+      teacherNotes: "Remind the student to check their editor window to see the files being created. This builds confidence that things are working. Say something like: 'Check your editor — you should see the jira-mcp-server folder with package.json and tsconfig.json inside it.'",
+      checkQuestion: "Can you see the jira-mcp-server directory in your editor? Do you see package.json and node_modules/ inside it?",
+    },
+    {
+      id: "server-boilerplate",
+      title: "Server Boilerplate",
+      content: `## Step 3: Build the Server — Boilerplate
 
-## Step 3: Build the Server — Boilerplate
+Now we create \`src/index.ts\` — the main server file. We will start with the boilerplate and add tools one at a time.
 
-Create \`src/index.ts\` and start with the boilerplate:
+This code goes in \`jira-mcp-server/src/index.ts\`:
 
 \`\`\`typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -149,7 +170,6 @@ async function jiraFetch(path: string, options: RequestInit = {}): Promise<any> 
     throw new Error(\`Jira API error (\${response.status}): \${errorText}\`);
   }
 
-  // Some responses (like 204) have no body
   const text = await response.text();
   return text ? JSON.parse(text) : null;
 }
@@ -164,14 +184,21 @@ const server = new McpServer({
 Let us break down what is happening here:
 
 1. **Environment variables** — We read Jira credentials from environment variables, not hardcoded in the code. This is a security best practice.
-2. **jiraFetch helper** — This function handles all the repetitive parts of calling the Jira API: constructing the URL, adding authentication, setting headers, handling errors. Every tool will use this helper.
-3. **Error handling** — If the API returns an error, we throw with the status code and error message so Claude can report what went wrong.
+2. **jiraFetch helper** — This function handles all the repetitive parts of calling the Jira API: constructing the URL, adding authentication, setting headers, and handling errors. Every tool will use this helper.
+3. **Server creation** — The same \`new McpServer()\` pattern you saw in Lesson 3.
 
----
-
-## Step 4: Add Tool 1 — List Projects
+Notice the Base64 encoding: \`Buffer.from(\`email:token\`).toString("base64")\`. This is the Basic Authentication from Lesson 2 in action.`,
+      checkQuestion: "Looking at the jiraFetch helper — what happens if the Jira API returns a 401 status code? (Hint: look at the error handling)",
+      teacherNotes: "The answer: it throws an error with the status code and error text, which Claude will see and report to the user. This is a good teaching moment about error handling in MCP servers — you want errors to be descriptive so Claude can help the user debug.",
+    },
+    {
+      id: "tool-list-projects",
+      title: "Tool 1: List Projects",
+      content: `## Step 4: Add Tool 1 — List Projects
 
 This tool lists all Jira projects you have access to. It is the simplest tool and a good way to test your connection.
+
+Add this below the server creation code in \`src/index.ts\`:
 
 \`\`\`typescript
 server.tool(
@@ -205,13 +232,20 @@ server.tool(
 - Extracts the key, name, type, and lead from each project
 - Returns the list as formatted JSON
 
-**When Claude will use it:** When you say things like "What Jira projects do I have?" or "List my projects" or "Show me all projects."
+**When Claude will use it:** When you say things like "What Jira projects do I have?" or "List my projects."
 
----
-
-## Step 5: Add Tool 2 — Get Issue Details
+Notice the pattern: define the tool name, write a clear description, specify inputs (none in this case), and write a handler that calls the API and returns results. This same pattern repeats for every tool.`,
+      checkQuestion: "This tool takes no input parameters (the empty `{}` object). Why doesn't it need any inputs?",
+      teacherNotes: "The answer: because listing all projects does not require any filtering — you just want everything. The next tools will require inputs like issue keys and project keys.",
+    },
+    {
+      id: "tool-get-issue",
+      title: "Tool 2: Get Issue Details",
+      content: `## Step 5: Add Tool 2 — Get Issue Details
 
 This tool retrieves full details for a specific issue by its key (like PROJ-123).
+
+Add this below the list projects tool in \`src/index.ts\`:
 
 \`\`\`typescript
 server.tool(
@@ -257,11 +291,18 @@ server.tool(
 
 **When Claude will use it:** When you say "Tell me about PROJ-123" or "What is the status of the login bug ticket?"
 
----
-
-## Step 6: Add Tool 3 — Create Issue
+Notice that we are extracting only the fields that are useful. The Jira API returns a massive response with dozens of fields — we pick out the ones that matter for a PM.`,
+      checkQuestion: "The tool extracts specific fields like summary, status, and assignee. Why don't we just return the raw API response?",
+      teacherNotes: "The answer: the raw Jira response is huge and full of internal metadata Claude doesn't need. By extracting just the useful fields, we keep the response clean and focused. This is a key pattern in MCP development — act as a translator, not a passthrough.",
+    },
+    {
+      id: "tool-create-issue",
+      title: "Tool 3: Create Issue",
+      content: `## Step 6: Add Tool 3 — Create Issue
 
 This is the tool that will save you the most time. Instead of opening Jira, finding the right project, filling out the form, and clicking create — you just tell Claude what you want.
+
+Add this below the get issue tool in \`src/index.ts\`:
 
 \`\`\`typescript
 server.tool(
@@ -291,7 +332,6 @@ server.tool(
       .describe("Atlassian account ID of the assignee (optional)"),
   },
   async ({ projectKey, summary, issueType, description, priority, labels, assignee }) => {
-    // Build the Jira-formatted description (Atlassian Document Format)
     const descriptionADF = description
       ? {
           type: "doc",
@@ -299,12 +339,7 @@ server.tool(
           content: [
             {
               type: "paragraph",
-              content: [
-                {
-                  type: "text",
-                  text: description,
-                },
-              ],
+              content: [{ type: "text", text: description }],
             },
           ],
         }
@@ -347,21 +382,22 @@ server.tool(
 );
 \`\`\`
 
-**What this does:**
-- Takes project key, summary, issue type, and optional fields
-- Formats the description in Atlassian Document Format (ADF) — Jira's required format
-- Sends a \`POST /rest/api/3/issue\` request
-- Returns the created issue key and a direct link to it
+**Important: Atlassian Document Format (ADF)**
 
-**Important note about ADF:** Jira's v3 API requires descriptions in Atlassian Document Format, not plain text. This is the most common gotcha when working with the Jira API. The ADF structure looks verbose, but it follows a consistent pattern.
+Notice the \`descriptionADF\` variable. Jira's v3 API requires descriptions in a special format called Atlassian Document Format — not plain text. This is the most common gotcha when working with the Jira API.
 
-**When Claude will use it:** When you say "Create a bug for the login crash" or "Make a story for adding dark mode to settings."
-
----
-
-## Step 7: Add Tool 4 — Search Issues with JQL
+The ADF structure looks verbose, but it follows a consistent pattern: a \`doc\` contains \`paragraph\` blocks, which contain \`text\` nodes. Our server handles this conversion automatically so you never have to think about it.`,
+      checkQuestion: "This tool has required AND optional parameters. What is the difference between z.string() and z.string().optional()?",
+      teacherNotes: "The answer: z.string() means Claude MUST provide this parameter (like projectKey and summary). z.string().optional() means Claude CAN provide it but does not have to (like description and priority). This maps to the 'required' vs 'nice-to-have' distinction PMs already understand from PRDs.",
+    },
+    {
+      id: "tool-search-jql",
+      title: "Tool 4: Search with JQL",
+      content: `## Step 7: Add Tool 4 — Search Issues with JQL
 
 JQL (Jira Query Language) is Jira's search language. It lets you find issues using powerful filters. This tool gives Claude the ability to search for anything.
+
+Add this below the create issue tool in \`src/index.ts\`:
 
 \`\`\`typescript
 server.tool(
@@ -403,11 +439,7 @@ server.tool(
         {
           type: "text" as const,
           text: JSON.stringify(
-            {
-              total: data.total,
-              returned: issues.length,
-              issues,
-            },
+            { total: data.total, returned: issues.length, issues },
             null,
             2
           ),
@@ -417,11 +449,6 @@ server.tool(
   }
 );
 \`\`\`
-
-**What this does:**
-- Takes a JQL query and optional result limit
-- Calls \`GET /rest/api/3/search?jql=...\`
-- Returns matching issues with key fields
 
 ### JQL Quick Reference for PMs
 
@@ -437,13 +464,16 @@ JQL looks intimidating at first, but it follows simple patterns:
 | Created this week | \`created >= startOfWeek()\` |
 | Combine filters | \`project = PROJ AND priority = Highest AND status = "In Progress"\` |
 
-Claude is great at writing JQL. You can say "Find all the P0 bugs assigned to the mobile team that were created this month" and Claude will construct the JQL for you.
+The best part: you do not need to memorize JQL. Just tell Claude what you want in plain English — "Find all the P0 bugs assigned to the mobile team created this month" — and Claude will construct the JQL for you.`,
+      checkQuestion: "If you wanted to find all Story-type issues in the MOBILE project that are currently in progress, what would the JQL look like?",
+      teacherNotes: "The answer: project = MOBILE AND issuetype = Story AND status = 'In Progress'. Encourage them to try writing JQL — it is like SQL but simpler. And remind them that Claude is great at writing JQL from natural language.",
+    },
+    {
+      id: "connect-and-configure",
+      title: "Connect and Configure",
+      content: `## Step 8: Connect to Claude Code
 
----
-
-## Step 8: Connect to the Transport and Start
-
-Add the final piece to the bottom of your index.ts:
+First, add the transport and start the server. Add this at the bottom of \`src/index.ts\`:
 
 \`\`\`typescript
 // --- Start the server ---
@@ -451,25 +481,21 @@ const transport = new StdioServerTransport();
 await server.connect(transport);
 \`\`\`
 
----
-
-## Step 9: Build and Configure
-
 ### Build the Server
 
 \`\`\`bash
 npm run build
 \`\`\`
 
-This compiles your TypeScript to JavaScript in the \`build/\` directory.
+This compiles your TypeScript to JavaScript in the \`build/\` directory. Open your editor and check — you should see a \`build/index.js\` file.
 
 ### Configure Claude Code
 
 Add your server to Claude Code's MCP configuration. You can do this by asking Claude Code:
 
-> "Add an MCP server called 'jira' that runs node /path/to/jira-mcp-server/build/index.js with environment variables JIRA_BASE_URL, JIRA_EMAIL, and JIRA_API_TOKEN."
+> "Add an MCP server called 'jira' that runs node with the full path to jira-mcp-server/build/index.js. Set environment variables JIRA_BASE_URL, JIRA_EMAIL, and JIRA_API_TOKEN with my credentials."
 
-Or manually edit your Claude Code configuration file:
+Or manually, your MCP configuration will look like:
 
 \`\`\`json
 {
@@ -489,11 +515,16 @@ Or manually edit your Claude Code configuration file:
 
 ### Restart Claude Code
 
-After adding the configuration, restart Claude Code so it picks up the new MCP server. When it starts, it will automatically discover your four tools.
+**Important:** After adding the configuration, you need to restart Claude Code. Type \`/exit\` or press Ctrl+C, then relaunch with \`claude\`. When it starts, it will automatically discover your four Jira tools.
 
----
-
-## Step 10: Test It
+**Note:** The MCP server config persists in your Claude Code settings (\`~/.claude/\`). You only need to add it once — it will be there every time you open Claude Code.`,
+      teacherNotes: "This is a critical step where things can go wrong. Common issues: wrong path in the config, forgetting to build first, environment variables not set. Be patient and help them debug. Remind them about absolute paths — relative paths do not work in MCP configs.",
+      checkQuestion: "Did the build succeed? Do you see build/index.js in your editor?",
+    },
+    {
+      id: "test-and-gotchas",
+      title: "Test It and Common Gotchas",
+      content: `## Step 9: Test It
 
 Try these prompts in Claude Code:
 
@@ -506,10 +537,8 @@ Try these prompts in Claude Code:
 If something does not work, check:
 - Are your environment variables correct?
 - Did you run \`npm run build\` after making changes?
-- Is the path in your Claude Code configuration correct?
+- Is the path in your Claude Code configuration an absolute path?
 - Check the error message — a 401 means bad credentials, a 404 means wrong URL or issue key
-
----
 
 ## Common Gotchas
 
@@ -525,20 +554,16 @@ Jira Cloud uses account IDs (like \`5b10a2844c20165700ede21g\`) instead of usern
 ### 4. JQL Special Characters
 If your values contain spaces, wrap them in quotes: \`status = "In Progress"\` not \`status = In Progress\`.
 
----
-
 ## What You Built
 
-You now have a working Jira MCP server with four tools. Claude can:
-- List all your projects
-- Look up any issue by key
-- Create new issues with full details
-- Search using any JQL query
+You now have a working Jira MCP server with four tools. Claude can list your projects, look up any issue, create new issues with full details, and search using any JQL query.
 
 This is a real, production-quality integration. The same pattern — helper function, tool definitions, error handling — applies to every MCP server you will build.
 
-In the next lesson, we will build a Google Drive integration using the same approach.
-`,
+In the next lesson, we will build a Google Drive integration using the same approach.`,
+      teacherNotes: "Celebrate their achievement! This is a major milestone — they just built a real MCP server. Say something like: 'You just built a working Jira integration from scratch. That is a skill most PMs do not have.' Then transition to the next lesson.",
+    },
+  ],
   exercise: {
     title: "Build and Test Your Jira MCP Server",
     description:

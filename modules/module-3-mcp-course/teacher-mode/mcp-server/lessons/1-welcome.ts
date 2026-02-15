@@ -1,24 +1,4 @@
-export interface LessonContent {
-  number: number;
-  title: string;
-  duration: string;
-  objectives: string[];
-  content: string;
-  exercise: {
-    title: string;
-    description: string;
-    steps: string[];
-    validation: string;
-  };
-  quiz: {
-    questions: Array<{
-      question: string;
-      options: string[];
-      correctIndex: number;
-      explanation: string;
-    }>;
-  };
-}
+import { LessonContent } from "../index.js";
 
 const lesson: LessonContent = {
   number: 1,
@@ -30,7 +10,11 @@ const lesson: LessonContent = {
     "Know what you will build by the end of this course",
     "Confirm your environment is ready (Claude Code installed and working)",
   ],
-  content: `# Welcome to MCP: The Model Context Protocol
+  sections: [
+    {
+      id: "what-is-mcp",
+      title: "What is MCP?",
+      content: `# Welcome to MCP: The Model Context Protocol
 
 ## What is MCP?
 
@@ -38,7 +22,13 @@ MCP stands for **Model Context Protocol**. It is an open standard created by Ant
 
 Think of it this way: without MCP, Claude is like a brilliant colleague who is locked in a room with no phone and no internet. You can talk to them, and they can think deeply, but they cannot look anything up or take action in the real world. MCP gives Claude a phone, a computer, and access to your tools.
 
-### Before MCP
+With MCP, Claude goes from being a conversational assistant to being a workflow automation engine that can actually do things in the tools you use every day.`,
+      checkQuestion: "Before we go on — can you think of a task you do every week that involves copying data between two or more tools?",
+    },
+    {
+      id: "before-after-mcp",
+      title: "Before and After MCP",
+      content: `## Before MCP
 
 Without MCP, your workflow as a PM looks like this:
 
@@ -48,7 +38,9 @@ Without MCP, your workflow as a PM looks like this:
 4. Alt-tab between all three for 45 minutes
 5. Paste it into Slack
 
-### After MCP
+This is the "copy-paste tax" that PMs pay every single week. It is tedious, error-prone, and it does not require any of your actual PM skills.
+
+## After MCP
 
 With MCP, you tell Claude:
 
@@ -56,9 +48,13 @@ With MCP, you tell Claude:
 
 Claude does all of it. Not by screen-scraping or pretending to click buttons — but by actually calling the APIs of each tool through dedicated MCP servers you have set up.
 
----
-
-## Why Should PMs Care About MCP?
+The difference is not incremental. It is a fundamentally different way of working.`,
+      teacherNotes: "This is the 'aha moment'. Ask the student to imagine their own version of this workflow. Ask: 'What is your version of this before/after? What multi-tool workflow eats the most time in your week?'",
+    },
+    {
+      id: "why-pms-care",
+      title: "Why PMs Should Care About MCP",
+      content: `## Why Should PMs Care About MCP?
 
 You might be thinking: "I'm a Product Manager, not an engineer. Why do I need to learn this?"
 
@@ -72,11 +68,13 @@ Here is the honest answer: **the PMs who learn to build MCP integrations will ha
 
 4. **Stand out in your career.** AI-native PMs who can set up their own automations are extremely valuable. This is a concrete, demonstrable skill.
 
-The best part? You do not need to be a software engineer. MCP servers are small, focused programs. They are typically 100-200 lines of TypeScript. By the end of this course, you will be able to write them from scratch.
-
----
-
-## What You Will Build in This Course
+The best part? You do not need to be a software engineer. MCP servers are small, focused programs. They are typically 100-200 lines of TypeScript. By the end of this course, you will be able to write them from scratch.`,
+      checkQuestion: "Which of these four benefits resonates most with your current role?",
+    },
+    {
+      id: "what-you-will-build",
+      title: "What You Will Build in This Course",
+      content: `## What You Will Build in This Course
 
 Over the next 8 lessons, you will build real, working integrations:
 
@@ -91,11 +89,13 @@ Over the next 8 lessons, you will build real, working integrations:
 | 7 | Custom MCP Server | Build an MCP server for ANY API you choose |
 | 8 | Figma MCP Server | Read designs, export frames, get comments |
 
-By the end, you will have a full toolkit of MCP servers that Claude can use to help you with your actual day-to-day work.
-
----
-
-## Prerequisites
+By the end, you will have a full toolkit of MCP servers that Claude can use to help you with your actual day-to-day work.`,
+      teacherNotes: "Keep this brief — don't overwhelm. Just give them a sense of the journey. Do not deep-dive into any single lesson here. The goal is to show the arc, not the details.",
+    },
+    {
+      id: "prerequisites",
+      title: "Prerequisites",
+      content: `## Prerequisites
 
 Before we continue, make sure you have the following:
 
@@ -125,11 +125,13 @@ Throughout the course, you will need:
 - A **Google** account (for Drive and Sheets) — Lessons 5-6
 - A **Figma** account (free tier works fine) — Lesson 8
 
-You do not need all of these right now. We will set them up as we get to each lesson.
-
----
-
-## How This Course Works
+You do not need all of these right now. We will set them up as we get to each lesson.`,
+      checkQuestion: "Do you have Claude Code installed? If not, let me know and I'll help you get set up.",
+    },
+    {
+      id: "how-course-works",
+      title: "How This Course Works",
+      content: `## How This Course Works
 
 Each lesson follows the same structure:
 
@@ -139,22 +141,20 @@ Each lesson follows the same structure:
 
 The exercises are the most important part. MCP is a hands-on skill. Reading about it is useful, but building with it is where the learning happens.
 
----
-
 ## A Note on "Coding"
 
 You will write TypeScript in this course. If that sounds intimidating, here is a secret: **Claude will help you write most of the code.** Your job is to understand what the code does, why each piece is there, and how to modify it for your needs.
 
 Think of it like writing a PRD. You do not need to implement the feature yourself, but you need to understand the system well enough to describe what you want and review what gets built. Same thing here — you need to understand MCP well enough to direct Claude and troubleshoot when something does not work.
 
----
-
 ## Let's Get Started
 
 In the next lesson, we will cover REST APIs — the foundation that all MCP integrations are built on. Understanding APIs is the single most important concept for everything that follows.
 
-For now, complete the exercise below to confirm your environment is set up correctly.
-`,
+For now, complete the exercise below to confirm your environment is set up correctly.`,
+      teacherNotes: "Reassure them that Claude will help write most of the code. Their job is to understand, not memorize syntax. Emphasize the PRD analogy — they already have the skill of understanding systems without implementing them.",
+    },
+  ],
   exercise: {
     title: "Verify Your MCP Environment",
     description:

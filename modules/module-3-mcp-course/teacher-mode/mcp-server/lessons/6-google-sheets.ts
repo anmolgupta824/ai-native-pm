@@ -1,4 +1,4 @@
-import { LessonContent } from "./1-welcome";
+import { LessonContent } from "../index.js";
 
 const lesson: LessonContent = {
   number: 6,
@@ -10,7 +10,11 @@ const lesson: LessonContent = {
     "Build an MCP server with four Google Sheets tools",
     "Use Claude to read sprint data and write summaries to Sheets",
   ],
-  content: `# Connect to Google Sheets
+  sections: [
+    {
+      id: "what-we-are-building",
+      title: "What We Are Building",
+      content: `# Connect to Google Sheets
 
 ## What We Are Building
 
@@ -23,9 +27,14 @@ In this lesson, you will build a Google Sheets MCP server with four tools:
 
 Sheets is where PMs live. Sprint trackers, roadmaps, capacity plans, OKR trackers, feature prioritization matrices — they all live in Sheets. Being able to read and write Sheets data through Claude is one of the highest-value MCP skills.
 
----
-
-## Step 1: Enable the Sheets API
+This lesson builds on what you set up in Lesson 5 (Google Drive). If you already have your Google Cloud project and OAuth credentials, you are ready to go.`,
+      checkQuestion: "What is your most-used Google Sheet right now? Sprint tracker? Roadmap? OKR tracker?",
+      teacherNotes: "Sheets is the integration most PMs get excited about because they spend so much time in spreadsheets. Build on that energy. If they did Lesson 5 already, reassure them that much of the setup is reused.",
+    },
+    {
+      id: "enable-sheets-api",
+      title: "Enable the Sheets API",
+      content: `## Step 1: Enable the Sheets API
 
 If you already set up Google Cloud in Lesson 5 (Google Drive), you just need to enable one more API:
 
@@ -43,9 +52,14 @@ const SCOPES = [
 ];
 \`\`\`
 
----
-
-## Step 2: Understanding A1 Notation
+This scope gives your server both read and write access to Sheets.`,
+      checkQuestion: "Is the Google Sheets API enabled in your Google Cloud project?",
+      teacherNotes: "Quick step if they already did Lesson 5. If they skipped Lesson 5, they will need to go back and do the OAuth setup first. Help them figure out where they are.",
+    },
+    {
+      id: "a1-notation",
+      title: "Understanding A1 Notation",
+      content: `## Step 2: Understanding A1 Notation
 
 Before we build the server, you need to understand how Sheets references work. If you have ever typed a formula in Google Sheets or Excel, you already know the basics.
 
@@ -82,12 +96,6 @@ If your spreadsheet has multiple tabs (sheets), specify which one:
 - \`Sprint 23!A1:F50\` = range A1:F50 in the tab named "Sprint 23"
 - \`Capacity!A:A\` = the entire column A in the "Capacity" tab
 
-### Entire Rows and Columns
-
-- \`A:A\` = the entire column A
-- \`1:1\` = the entire row 1
-- \`A:D\` = columns A through D (all rows)
-
 ### Quick Reference
 
 | Notation | What It Selects |
@@ -98,11 +106,14 @@ If your spreadsheet has multiple tabs (sheets), specify which one:
 | \`A1:D10\` | A rectangular area |
 | \`Sheet1!A1:D10\` | Area in a specific sheet tab |
 | \`A:A\` | Entire column |
-| \`1:1\` | Entire row |
-
----
-
-## Step 3: Finding Your Spreadsheet ID
+| \`1:1\` | Entire row |`,
+      checkQuestion: "If your sprint tracker has data in columns A through F, rows 1 through 25, and the tab is called 'Sprint 24' — what is the A1 notation for the entire data range?",
+      teacherNotes: "The answer: Sprint 24!A1:F25. This should feel familiar to anyone who has used formulas in Sheets. If the student is comfortable with this, move quickly. If not, let them ask questions — A1 notation is essential for the rest of the lesson.",
+    },
+    {
+      id: "spreadsheet-id",
+      title: "Finding Your Spreadsheet ID",
+      content: `## Step 3: Finding Your Spreadsheet ID
 
 Every Google Sheet has a unique ID in its URL:
 
@@ -112,13 +123,13 @@ https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2u
                                               This is the spreadsheet ID
 \`\`\`
 
-You will need this ID when calling the Sheets API. Claude can also find it by listing Drive files and looking for spreadsheets.
+You will need this ID when calling the Sheets API. Claude can also find it by listing Drive files and looking for spreadsheets (if you built the Google Drive server in Lesson 5).
 
----
+## Step 4: Set Up the Project
 
-## Step 4: Build the Server
+We will build this right here in your current project folder. You can either create a standalone Sheets server or extend your Google Drive server — they can share the same OAuth credentials.
 
-Create your project (or extend the Google Drive server — they can share the same OAuth credentials):
+For a standalone server, create the project structure:
 
 \`\`\`bash
 mkdir -p google-sheets-mcp-server/src
@@ -127,7 +138,16 @@ cd google-sheets-mcp-server
 
 Use the same package.json and tsconfig.json from Lesson 5, and copy the auth.ts file (updating the scopes to include \`https://www.googleapis.com/auth/spreadsheets\`).
 
-### src/index.ts — Server Setup
+Check your editor — you should see the new directory appear.`,
+      checkQuestion: "Can you find the spreadsheet ID for one of your own Google Sheets? Open any spreadsheet and look at the URL.",
+      teacherNotes: "Have them actually open a real spreadsheet and find the ID. This makes the next steps concrete — they will use this real spreadsheet when testing. Remind them to open their editor alongside Claude Code if they haven't already.",
+    },
+    {
+      id: "tool-list-sheets",
+      title: "Tool 1: List Sheet Tabs",
+      content: `## Step 5: Build the Server and List Sheet Tabs
+
+Start \`src/index.ts\` with the server setup and the first tool:
 
 \`\`\`typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -145,13 +165,8 @@ const server = new McpServer({
   name: "google-sheets-mcp-server",
   version: "1.0.0",
 });
-\`\`\`
 
----
-
-## Step 5: Add Tool 1 — List Sheet Tabs
-
-\`\`\`typescript
+// --- Tool 1: List Sheet Tabs ---
 server.tool(
   "sheets_list_sheets",
   "List all sheet tabs in a Google Spreadsheet. Returns the name, ID, row count, and column count for each tab.",
@@ -202,9 +217,14 @@ server.tool(
 
 **When Claude will use it:** "What sheets are in my sprint tracker?" or "Show me the tabs in this spreadsheet."
 
----
-
-## Step 6: Add Tool 2 — Read Range
+Notice the \`fields: "sheets.properties"\` parameter — this tells the API to only return sheet properties, not the actual cell data. This is a performance optimization.`,
+      checkQuestion: "Why might a spreadsheet have multiple sheet tabs? Can you think of a PM use case with multiple tabs?",
+      teacherNotes: "Common PM examples: a sprint tracker with one tab per sprint, an OKR sheet with tabs for Q1/Q2/Q3/Q4, or a roadmap with tabs for each product area. This tool helps Claude navigate multi-tab spreadsheets.",
+    },
+    {
+      id: "tool-read-range",
+      title: "Tool 2: Read Range",
+      content: `## Step 6: Add Tool 2 — Read Range
 
 This is the most important Sheets tool. It reads data from a specified range.
 
@@ -231,7 +251,6 @@ server.tool(
 
     const values = response.data.values || [];
 
-    // If there is data, create a structured version with headers
     let structured = null;
     if (values.length > 1) {
       const headers = values[0];
@@ -268,18 +287,22 @@ server.tool(
 );
 \`\`\`
 
-**What this does:**
-- Reads data from the specified range
-- Returns both raw data (2D array) and structured data (array of objects with headers as keys)
-- Uses \`FORMATTED_VALUE\` to return values as they appear in the sheet (with formatting applied)
+**Why this tool returns both rawData and structuredData:**
 
-**Why structured data matters:** Raw data comes back as arrays like \`[["Alice", "Eng", "8"], ["Bob", "Design", "5"]]\`. The structured version converts this to \`[{"Name": "Alice", "Team": "Eng", "Points": "8"}, ...]\`, which is much easier for Claude to work with.
+Raw data comes back as arrays: \`[["Alice", "Eng", "8"], ["Bob", "Design", "5"]]\`
 
-**When Claude will use it:** "Read the sprint capacity data from Sheet1," "What are the OKR scores in the Q1 tab?"
+The structured version converts this to objects using the header row as keys: \`[{"Name": "Alice", "Team": "Eng", "Points": "8"}, ...]\`
 
----
+The structured format is much easier for Claude to reason about. When you ask "Who has the most story points?", Claude can look at the \`Points\` field directly instead of figuring out that column C holds the points.
 
-## Step 7: Add Tool 3 — Write Range
+**FORMATTED_VALUE** means values come back as they appear in the sheet — with number formatting, dates formatted, etc. This is usually what you want.`,
+      checkQuestion: "If you read a range and the first row is ['Name', 'Team', 'Score'] and the second row is ['Alice', 'Eng', '95'], what would the structuredData for that second row look like?",
+      teacherNotes: "The answer: {Name: 'Alice', Team: 'Eng', Score: '95'}. Make sure they understand this transformation — it is a key pattern they will reuse. Headers become keys, and each row becomes an object.",
+    },
+    {
+      id: "tool-write-and-create",
+      title: "Tools 3 & 4: Write Range and Create Sheet",
+      content: `## Step 7: Add Tool 3 — Write Range
 
 \`\`\`typescript
 server.tool(
@@ -305,9 +328,7 @@ server.tool(
       spreadsheetId,
       range,
       valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values,
-      },
+      requestBody: { values },
     });
 
     return {
@@ -332,20 +353,11 @@ server.tool(
 );
 \`\`\`
 
-**What this does:**
-- Writes a 2D array of data to the specified range
-- Uses \`USER_ENTERED\` value input option, which means formulas and date formats will be interpreted (just like typing into a cell)
-- Returns confirmation of what was updated
-
 **Important: USER_ENTERED vs RAW**
 - \`USER_ENTERED\` — Values are parsed as if a user typed them. \`=SUM(A1:A5)\` becomes a formula, \`1/2/2026\` becomes a date.
-- \`RAW\` — Values are stored exactly as provided. \`=SUM(A1:A5)\` is stored as the literal text "=SUM(A1:A5)".
+- \`RAW\` — Values are stored exactly as provided. \`=SUM(A1:A5)\` is stored as literal text.
 
 For most PM use cases, \`USER_ENTERED\` is what you want.
-
-**When Claude will use it:** "Add a summary row at the bottom of the sprint tracker," "Write these OKR scores to the Q1 sheet."
-
----
 
 ## Step 8: Add Tool 4 — Create a New Sheet Tab
 
@@ -411,32 +423,22 @@ server.tool(
     };
   }
 );
-\`\`\`
 
-**What this does:**
-- Creates a new tab in an existing spreadsheet
-- Optionally sets the grid dimensions
-- Returns the new tab's metadata
-
-**When Claude will use it:** "Create a new tab called 'Sprint 24' in the sprint tracker," "Add a 'Summary' sheet to the capacity planning spreadsheet."
-
----
-
-## Step 9: Start the Server
-
-\`\`\`typescript
 // --- Start the server ---
 const transport = new StdioServerTransport();
 await server.connect(transport);
 \`\`\`
 
----
+Now build it: \`npm run build\`
 
-## Step 10: Build and Configure
-
-\`\`\`bash
-npm run build
-\`\`\`
+Check your editor — you should see \`build/index.js\` appear.`,
+      checkQuestion: "If you wanted Claude to add a formula that sums column C, what value would you pass to the write tool?",
+      teacherNotes: "The answer: '=SUM(C2:C10)' (or whatever the range is). Because we use USER_ENTERED, it will be interpreted as a formula, not stored as text. This is a powerful capability — Claude can create sheets with working formulas.",
+    },
+    {
+      id: "build-and-workflow",
+      title: "Build, Test, and Real PM Workflows",
+      content: `## Step 9: Configure and Test
 
 Configure in Claude Code:
 
@@ -451,13 +453,16 @@ Configure in Claude Code:
 }
 \`\`\`
 
----
+Restart Claude Code, then test:
+
+1. **"List the sheet tabs in spreadsheet [your-id]"** — tests sheets_list_sheets
+2. **"Read Sheet1!A1:D10 from spreadsheet [your-id]"** — tests sheets_read_range
+3. **"Write a summary row..."** — tests sheets_write_range
+4. **"Create a new tab called 'Summary'"** — tests sheets_create_sheet
 
 ## Real PM Workflow: Sprint Capacity Analysis
 
-Here is a powerful workflow that combines Sheets with your other MCP servers.
-
-Imagine you have a sprint capacity spreadsheet like this:
+Here is a powerful workflow that combines Sheets with your other MCP servers. Imagine you have a sprint capacity spreadsheet:
 
 \`\`\`
     A          B          C           D          E
@@ -468,49 +473,21 @@ Imagine you have a sprint capacity spreadsheet like this:
 5  Dave       Eng        8           7          1
 \`\`\`
 
-Try this prompt:
+Try this prompt: "Read the sprint capacity data from my Sprint Tracker. Summarize who is over capacity, who has available bandwidth, and what the total team capacity looks like. Then write a summary row at the bottom."
 
-> "Read the sprint capacity data from my Sprint Tracker spreadsheet (tab 'Sprint 24', range A1:E10). Summarize who is over capacity, who has available bandwidth, and what the total team capacity looks like. Then write a summary row at the bottom."
-
-Claude will:
-1. Call \`sheets_read_range\` to read the data
-2. Analyze the numbers (Bob is over capacity!)
-3. Call \`sheets_write_range\` to add a summary row
-4. Give you a natural language summary
-
-Or combine with Jira:
-
-> "Read the sprint capacity from the Sheets tracker, then search Jira for all unassigned issues in the current sprint. Suggest which team members should pick up the unassigned work based on their available capacity."
-
----
+Or combine with Jira: "Read the sprint capacity from the Sheets tracker, then search Jira for all unassigned issues in the current sprint. Suggest which team members should pick up the unassigned work based on their available capacity."
 
 ## Common Gotchas
 
-### 1. Sheet Tab Names with Spaces
-If your sheet tab name has spaces, it still works in A1 notation: \`'Sprint 24'!A1:D10\`. The Sheets API handles this correctly.
+1. **Sheet tab names with spaces** — Still work in A1 notation: \`'Sprint 24'!A1:D10\`
+2. **Empty cells** — Empty cells at the end of a row are omitted from the response. Handle rows of different lengths.
+3. **Data types** — \`FORMATTED_VALUE\` returns everything as strings. Use \`UNFORMATTED_VALUE\` if you need actual numbers.
+4. **Rate limits** — Google Sheets API has rate limits. If you hit a 429 error, wait and retry.
 
-### 2. Empty Cells
-Empty cells at the end of a row are not included in the response. If row 3 has data in columns A and B but C and D are empty, the API returns \`["Alice", "Eng"]\` not \`["Alice", "Eng", "", ""]\`. Your code should handle rows of different lengths.
-
-### 3. Data Types
-The API returns everything as strings by default with \`FORMATTED_VALUE\`. The number 42 comes back as \`"42"\`. If you need actual numbers, use \`UNFORMATTED_VALUE\` as the valueRenderOption.
-
-### 4. Rate Limits
-Google Sheets API has rate limits. If you are reading and writing rapidly, you may hit a 429 error. Add error handling for rate limits and retry after a short delay.
-
----
-
-## Summary
-
-You now have a Google Sheets MCP server. The key concepts:
-
-1. **A1 notation** is how you reference cells and ranges (e.g., \`Sheet1!A1:D10\`)
-2. **Spreadsheet ID** is in the URL and identifies which spreadsheet to access
-3. **Read and write** operations are the core of Sheets automation
-4. **USER_ENTERED** input mode interprets values like a user would type them
-5. **Structured data** (converting arrays to objects with headers) makes API responses much more useful for Claude
-6. **Combining Sheets with Jira and Drive** creates powerful PM workflows
-`,
+You now have a Google Sheets MCP server. Combined with Jira (Lesson 4) and Google Drive (Lesson 5), you have a powerful automation toolkit for the most common PM tools.`,
+      teacherNotes: "Celebrate! They now have three working integrations. The sprint capacity workflow is a great demo — encourage them to try it with their real data. Transition to the next lesson: 'In Lesson 7, you will learn how to build an MCP server for any API, not just the ones we have covered.'",
+    },
+  ],
   exercise: {
     title: "Read and Write Sprint Data in Google Sheets",
     description:

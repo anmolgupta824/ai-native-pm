@@ -147,6 +147,30 @@ npm run build
 
 ---
 
+## Resuming After Restart
+
+### "I closed Claude Code and lost my progress"
+
+**Not anymore!** Your progress is saved automatically to a file called `progress-state.json` in the MCP server directory.
+
+**Fix:**
+1. Open Claude Code in the same project folder
+2. Say: *"Resume my MCP course"*
+3. The Teacher will show you exactly where you left off
+
+### "MCP server not connecting after restart"
+
+**Cause:** The MCP server config should persist in your Claude Code settings, but sometimes it doesn't carry over.
+
+**Fix:**
+```
+Add the MCP Teacher as an MCP server. The server file is at ./dist/index.js in the teacher-mode/mcp-server directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart.
+```
+
+> **Tip:** The MCP server config is stored in `~/.claude/` and persists across sessions. You should only need to re-add it if you cleared your Claude Code settings.
+
+---
+
 ## Still Stuck?
 
 Try these steps:

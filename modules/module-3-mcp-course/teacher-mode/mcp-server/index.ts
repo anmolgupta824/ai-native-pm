@@ -9,10 +9,12 @@
  * Figma, and any custom API.
  *
  * Tools:
- *   start_lesson   — Begin a specific lesson (1-8)
+ *   start_lesson    — Begin a specific lesson (returns first section only)
+ *   continue_lesson — Get the next section of the current lesson
+ *   resume_course   — Resume after restarting Claude Code
  *   explain_concept — Deep-dive explanation of any MCP concept
  *   get_exercise    — Get a hands-on exercise for a lesson
- *   check_progress  — See which lessons are completed
+ *   check_progress  — See which lessons are completed (section-level detail)
  *   quiz            — Test knowledge with quiz questions
  */
 
@@ -22,6 +24,8 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import * as fs from "fs";
+import * as path from "path";
 
 import lesson1 from "./lessons/1-welcome.js";
 import lesson2 from "./lessons/2-rest-api-primer.js";
@@ -34,12 +38,20 @@ import lesson8 from "./lessons/8-figma.js";
 
 // ── Types ─────────────────────────────────────────────────────────────────
 
+export interface Section {
+  id: string;
+  title: string;
+  content: string;
+  teacherNotes?: string;
+  checkQuestion?: string;
+}
+
 export interface LessonContent {
   number: number;
   title: string;
   duration: string;
   objectives: string[];
-  content: string;
+  sections: Section[];
   exercise: {
     title: string;
     description: string;
@@ -69,7 +81,7 @@ const LESSONS: Record<number, LessonContent> = {
   8: lesson8,
 };
 
-// ── Progress Tracking (in-memory for this session) ────────────────────────
+// ── Progress Tracking with Disk Persistence ──────────────────────────────
 
 interface ProgressEntry {
   started: boolean;
@@ -77,18 +89,50 @@ interface ProgressEntry {
   startedAt: string | null;
   completedAt: string | null;
   quizScore: number | null;
+  currentSection: number;
+  totalSections: number;
 }
 
-const progress: Record<number, ProgressEntry> = {};
-for (let i = 1; i <= 8; i++) {
-  progress[i] = {
-    started: false,
-    completed: false,
-    startedAt: null,
-    completedAt: null,
-    quizScore: null,
-  };
+const PROGRESS_FILE = path.join(
+  path.dirname(new URL(import.meta.url).pathname),
+  "progress-state.json"
+);
+
+function loadProgress(): Record<number, ProgressEntry> {
+  try {
+    if (fs.existsSync(PROGRESS_FILE)) {
+      const data = fs.readFileSync(PROGRESS_FILE, "utf-8");
+      return JSON.parse(data);
+    }
+  } catch {
+    console.error("Could not load progress file, starting fresh.");
+  }
+
+  // Default progress
+  const defaultProgress: Record<number, ProgressEntry> = {};
+  for (let i = 1; i <= 8; i++) {
+    defaultProgress[i] = {
+      started: false,
+      completed: false,
+      startedAt: null,
+      completedAt: null,
+      quizScore: null,
+      currentSection: 0,
+      totalSections: LESSONS[i]?.sections.length || 0,
+    };
+  }
+  return defaultProgress;
 }
+
+function saveProgress(): void {
+  try {
+    fs.writeFileSync(PROGRESS_FILE, JSON.stringify(progress, null, 2));
+  } catch {
+    console.error("Could not save progress file.");
+  }
+}
+
+const progress = loadProgress();
 
 // ── Concept Explanations ──────────────────────────────────────────────────
 
@@ -126,13 +170,6 @@ Think of tools like buttons on a remote control:
 - \`sheets_read_range\` — Reads data from Google Sheets
 - \`drive_create_doc\` — Creates a new Google Doc
 
-### How Claude uses tools:
-1. Claude sees the list of available tools (like reading a menu)
-2. Based on your request, it picks the right tool
-3. It fills in the required parameters
-4. It calls the tool and gets back a result
-5. It uses the result to respond to you
-
 ### Tool definition has 3 parts:
 - **Name** — what Claude calls it (e.g. \`jira_create_issue\`)
 - **Description** — what it does (Claude reads this to decide when to use it)
@@ -143,11 +180,6 @@ Think of tools like buttons on a remote control:
 A **Resource** is data that Claude can read from an MCP server — like a file or document.
 
 If Tools are actions (verbs), Resources are data (nouns).
-
-### Example Resources:
-- \`prd://templates/feature-launch\` — A PRD template
-- \`config://settings\` — Server configuration
-- \`docs://api-reference\` — API documentation
 
 ### When to use Resources vs Tools:
 - **Resource**: Static or semi-static data Claude needs to read
@@ -168,33 +200,26 @@ A **Transport** is how Claude and the MCP server communicate — the "phone line
 ### Why this matters:
 - \`console.log()\` goes to stdout → Claude reads it as MCP messages
 - \`console.error()\` goes to stderr → safe for your debug logs
-- **Never use console.log() for debugging** in an MCP server!
-
-### Other transports (advanced):
-- **HTTP/SSE**: For remote MCP servers (server runs on a different machine)
-- You won't need these for this course`,
+- **Never use console.log() for debugging** in an MCP server!`,
 
   oauth: `## What is OAuth?
 
 **OAuth** is how apps get permission to access your data without knowing your password.
 
 ### The Valet Key Analogy:
-When you valet park, you give the valet a special key that can only start the car — it can't open the trunk or glove box. OAuth works the same way:
+When you valet park, you give the valet a special key that can only start the car — it can't open the trunk. OAuth works the same way:
 1. Your app asks Google: "Can I read this user's Sheets?"
 2. Google asks YOU: "Do you want to allow this?"
 3. You click "Allow"
 4. Google gives the app a special token (the valet key)
-5. The app uses that token to read your Sheets — nothing else
+5. The app uses that token — nothing else
 
 ### Key terms:
-- **Client ID**: Your app's identity (like a business card)
-- **Client Secret**: Your app's password (keep this private!)
+- **Client ID**: Your app's identity
+- **Client Secret**: Your app's password (keep private!)
 - **Access Token**: The valet key (expires after ~1 hour)
 - **Refresh Token**: A way to get a new access token without asking the user again
-- **Scope**: What permissions the token grants (read files? create files? both?)
-
-### For PMs:
-OAuth is why Google shows you those "Allow access?" popups. It's the most secure way to connect Claude to your Google Workspace.`,
+- **Scope**: What permissions the token grants`,
 
   "api-key": `## What is an API Key?
 
@@ -203,7 +228,7 @@ An **API Key** is a simple password that identifies your app to a service.
 ### How it works:
 1. You go to the service's settings (e.g., Jira, Figma)
 2. You create an API key/token
-3. You include it in every request you make
+3. You include it in every request
 4. The service checks the key and lets you in
 
 ### API Key vs OAuth:
@@ -213,8 +238,7 @@ An **API Key** is a simple password that identifies your app to a service.
 ### Where each is used:
 - **Jira**: API key (Basic auth with email + token)
 - **Figma**: API key (Personal Access Token)
-- **Google**: OAuth (more secure, required by Google)
-- **Slack**: Both (API key for bots, OAuth for user actions)
+- **Google**: OAuth (required by Google)
 
 ### Security tip:
 Never put API keys in your code! Use environment variables instead.`,
@@ -222,19 +246,6 @@ Never put API keys in your code! Use environment variables instead.`,
   json: `## What is JSON?
 
 **JSON (JavaScript Object Notation)** is the format APIs use to send and receive data.
-
-### It looks like this:
-\`\`\`json
-{
-  "name": "Sprint Planning",
-  "status": "In Progress",
-  "assignee": {
-    "name": "Sarah",
-    "email": "sarah@company.com"
-  },
-  "tags": ["Q1", "priority"]
-}
-\`\`\`
 
 ### The basics:
 - **Objects**: Curly braces \`{}\` with key-value pairs
@@ -251,26 +262,21 @@ JSON is how Jira sends you ticket data, how Google Sheets returns spreadsheet va
 
 **JQL (Jira Query Language)** is how you search for issues in Jira programmatically.
 
-### Basic syntax:
-\`field operator value\`
-
 ### Common queries:
 - \`project = "MYPROJ"\` — All issues in a project
 - \`assignee = currentUser()\` — My issues
 - \`status = "In Progress"\` — All in-progress items
 - \`sprint in openSprints()\` — Current sprint items
-- \`created >= -7d\` — Created in the last 7 days
 - \`type = Bug AND priority = High\` — High-priority bugs
 
-### Combining with AND/OR:
-\`project = "MYPROJ" AND status = "In Progress" AND assignee = currentUser()\`
-
-### Ordering:
-\`project = "MYPROJ" ORDER BY priority DESC, created ASC\`
-
 ### For PMs:
-JQL is incredibly powerful for automation. You can query "all bugs from last sprint" or "all stories without estimates" and Claude will use this to build reports, summaries, and action items.`,
+JQL is incredibly powerful for automation. You can query "all bugs from last sprint" or "all stories without estimates" and Claude will use this to build reports and action items.`,
 };
+
+// ── Branding ──────────────────────────────────────────────────────────────
+
+const BRANDING = "Course by Anmol Gupta — https://www.linkedin.com/in/anmol-gupta-21875a89/";
+const BRANDING_LESSONS = [3, 6, 8]; // Show branding after these lessons
 
 // ── Server Setup ──────────────────────────────────────────────────────────
 
@@ -286,7 +292,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "start_lesson",
       description:
-        "Start an interactive MCP lesson. Returns the full lesson content including objectives, explanations, code examples, and what you'll build. Lessons build on each other — start with Lesson 1 if you're new to MCP.",
+        "Start an MCP lesson. Returns ONLY the lesson intro (title, objectives, duration) and the FIRST section. Present the content warmly and conversationally, then ask if the student is ready to continue. Do NOT dump all sections at once.",
       inputSchema: {
         type: "object" as const,
         properties: {
@@ -302,9 +308,35 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
+      name: "continue_lesson",
+      description:
+        "Get the next section of the current lesson. Present ONE section at a time, conversationally. If there is a checkQuestion, ask it and wait for the student's response before continuing. When all sections are done, guide the student to the exercise and then the quiz.",
+      inputSchema: {
+        type: "object" as const,
+        properties: {
+          lesson_number: {
+            type: "number",
+            description: "The lesson number to continue (1-8)",
+            minimum: 1,
+            maximum: 8,
+          },
+        },
+        required: ["lesson_number"],
+      },
+    },
+    {
+      name: "resume_course",
+      description:
+        "Resume the MCP course after restarting Claude Code. Shows exactly where you left off (lesson and section) and lets you continue from there. Use this when you come back to the course after closing Claude Code.",
+      inputSchema: {
+        type: "object" as const,
+        properties: {},
+      },
+    },
+    {
       name: "explain_concept",
       description:
-        "Get a detailed, PM-friendly explanation of any MCP or API concept. Great for when you encounter a term you don't understand.",
+        "Get a detailed, PM-friendly explanation of any MCP or API concept. After explaining, guide the student back to their current lesson if they are in the middle of one.",
       inputSchema: {
         type: "object" as const,
         properties: {
@@ -320,7 +352,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "get_exercise",
       description:
-        "Get a hands-on exercise for a specific lesson. Each exercise has step-by-step instructions and validation criteria so you know when you've completed it successfully.",
+        "Get a hands-on exercise for a specific lesson. Guide the student through the steps ONE at a time, waiting for them to complete each step before presenting the next.",
       inputSchema: {
         type: "object" as const,
         properties: {
@@ -337,7 +369,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "check_progress",
       description:
-        "See your learning progress — which lessons you've started, completed, and quiz scores. Helps you track where you are in the course.",
+        "See your learning progress with section-level detail — which lessons you've started, how far you are in each, and quiz scores.",
       inputSchema: {
         type: "object" as const,
         properties: {},
@@ -346,7 +378,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "quiz",
       description:
-        "Take a quiz to test your understanding of a lesson. Returns multiple-choice questions with explanations for each answer. Great for reinforcing what you've learned.",
+        "Take a quiz to test your understanding of a lesson. Present ONE question at a time, wait for the student's answer, check it, then present the next question. Do NOT show all questions at once.",
       inputSchema: {
         type: "object" as const,
         properties: {
@@ -397,14 +429,19 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // Mark as started
+      // Mark as started, set to first section
       progress[lessonNum].started = true;
       progress[lessonNum].startedAt =
         progress[lessonNum].startedAt || new Date().toISOString();
+      progress[lessonNum].currentSection = 1;
+      progress[lessonNum].totalSections = lesson.sections.length;
+      saveProgress();
 
       const completedCount = Object.values(progress).filter(
         (p) => p.completed
       ).length;
+
+      const firstSection = lesson.sections[0];
 
       return {
         content: [
@@ -418,21 +455,247 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                   title: lesson.title,
                   duration: lesson.duration,
                   objectives: lesson.objectives,
-                  content: lesson.content,
                 },
-                progress: {
-                  currentLesson: lessonNum,
-                  completedLessons: completedCount,
+                section: {
+                  sectionNumber: 1,
+                  totalSections: lesson.sections.length,
+                  id: firstSection.id,
+                  title: firstSection.title,
+                  content: firstSection.content,
+                  teacherNotes: firstSection.teacherNotes,
+                  checkQuestion: firstSection.checkQuestion,
+                },
+                progressTracker: `Lesson ${lessonNum} of 8 | Section 1 of ${lesson.sections.length} | Course: ${completedCount}/8 complete`,
+                teachingGuidance: {
+                  tone: "Be conversational and encouraging. Present the content naturally, not as raw data.",
+                  pacing: "Present ONLY this first section. Do not skip ahead or dump more content.",
+                  interaction: firstSection.checkQuestion
+                    ? "After presenting the section, ask the check question and wait for a response."
+                    : "After presenting the section, ask if the student is ready to continue.",
+                  continuePrompt: "When the student is ready, use continue_lesson to get the next section.",
+                },
+              },
+              null,
+              2
+            ),
+          },
+        ],
+      };
+    }
+
+    // ── continue_lesson ─────────────────────────────────────────────────
+    case "continue_lesson": {
+      const lessonNum = args?.lesson_number as number;
+      const lesson = LESSONS[lessonNum];
+
+      if (!lesson) {
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                { message: `Lesson ${lessonNum} not found. Available lessons are 1-8.` },
+                null,
+                2
+              ),
+            },
+          ],
+          isError: true,
+        };
+      }
+
+      const entry = progress[lessonNum];
+      if (!entry.started) {
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                {
+                  message: `Lesson ${lessonNum} hasn't been started yet. Use start_lesson first.`,
+                  action: "start_lesson",
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
+      }
+
+      const nextSectionIndex = entry.currentSection; // 0-indexed into sections array
+      const completedCount = Object.values(progress).filter(
+        (p) => p.completed
+      ).length;
+
+      // All sections done — guide to exercise
+      if (nextSectionIndex >= lesson.sections.length) {
+        const showBranding = BRANDING_LESSONS.includes(lessonNum);
+
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                {
+                  message: `You've completed all ${lesson.sections.length} sections of Lesson ${lessonNum}: ${lesson.title}!`,
+                  nextSteps: [
+                    `Try the hands-on exercise: use get_exercise with lesson_number ${lessonNum}`,
+                    `Test your knowledge: use quiz with lesson_number ${lessonNum}`,
+                    lessonNum < 8
+                      ? `Then move to Lesson ${lessonNum + 1}: ${LESSONS[lessonNum + 1]?.title}`
+                      : "This was the final lesson! Take the quiz to complete the course.",
+                  ],
+                  progressTracker: `Lesson ${lessonNum} of 8 | All sections complete | Course: ${completedCount}/8 complete`,
+                  ...(showBranding ? { branding: BRANDING } : {}),
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
+      }
+
+      // Return the next section
+      const section = lesson.sections[nextSectionIndex];
+      entry.currentSection = nextSectionIndex + 1;
+      saveProgress();
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                message: `Lesson ${lessonNum}, Section ${nextSectionIndex + 1} of ${lesson.sections.length}`,
+                section: {
+                  sectionNumber: nextSectionIndex + 1,
+                  totalSections: lesson.sections.length,
+                  id: section.id,
+                  title: section.title,
+                  content: section.content,
+                  teacherNotes: section.teacherNotes,
+                  checkQuestion: section.checkQuestion,
+                },
+                progressTracker: `Lesson ${lessonNum} of 8 | Section ${nextSectionIndex + 1} of ${lesson.sections.length} | Course: ${completedCount}/8 complete`,
+                teachingGuidance: {
+                  pacing: "Present ONLY this section. Do not skip ahead.",
+                  interaction: section.checkQuestion
+                    ? "After presenting the section, ask the check question and wait for a response."
+                    : "After presenting the section, ask if the student is ready to continue.",
+                  continuePrompt: nextSectionIndex + 1 < lesson.sections.length
+                    ? "When ready, use continue_lesson to get the next section."
+                    : "This is the last section! Guide the student to the exercise next.",
+                },
+              },
+              null,
+              2
+            ),
+          },
+        ],
+      };
+    }
+
+    // ── resume_course ───────────────────────────────────────────────────
+    case "resume_course": {
+      const completedCount = Object.values(progress).filter(
+        (p) => p.completed
+      ).length;
+      const startedCount = Object.values(progress).filter(
+        (p) => p.started
+      ).length;
+
+      // Find the most recent in-progress lesson
+      let currentLesson: number | null = null;
+      let currentSectionNum = 0;
+      let totalSectionsNum = 0;
+
+      for (let i = 8; i >= 1; i--) {
+        if (progress[i].started && !progress[i].completed) {
+          currentLesson = i;
+          currentSectionNum = progress[i].currentSection;
+          totalSectionsNum = progress[i].totalSections;
+          break;
+        }
+      }
+
+      // If nothing in progress, find the next unstarted lesson
+      if (currentLesson === null) {
+        for (let i = 1; i <= 8; i++) {
+          if (!progress[i].started) {
+            currentLesson = i;
+            break;
+          }
+        }
+      }
+
+      const lessonProgress = Object.entries(progress).map(([num, p]) => ({
+        lesson: parseInt(num),
+        title: LESSONS[parseInt(num)]?.title || "Unknown",
+        status: p.completed
+          ? "Completed"
+          : p.started
+            ? `In Progress (Section ${p.currentSection} of ${p.totalSections})`
+            : "Not Started",
+        quizScore:
+          p.quizScore !== null ? `${p.quizScore}%` : "Not taken",
+      }));
+
+      if (completedCount === 8) {
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                {
+                  message: "Welcome back! You've completed the entire MCP Integrations Course!",
+                  summary: {
+                    completed: completedCount,
+                    totalLessons: 8,
+                    percentComplete: 100,
+                  },
+                  lessons: lessonProgress,
+                  nextSteps: [
+                    "Try building your own MCP server for a tool you use at work",
+                    "Check out the usage-mode templates for production-ready servers",
+                    "Review any lesson with start_lesson if you want a refresher",
+                  ],
+                  branding: BRANDING,
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
+      }
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                message: currentLesson && progress[currentLesson]?.started
+                  ? `Welcome back! You were on Lesson ${currentLesson}: ${LESSONS[currentLesson]?.title}, Section ${currentSectionNum} of ${totalSectionsNum}. Say "continue" to pick up where you left off.`
+                  : `Welcome back! You're ready to start Lesson ${currentLesson || 1}: ${LESSONS[currentLesson || 1]?.title}. Say "start lesson ${currentLesson || 1}" to begin.`,
+                currentLesson: currentLesson || 1,
+                currentSection: currentSectionNum,
+                totalSections: totalSectionsNum,
+                summary: {
+                  completed: completedCount,
+                  inProgress: startedCount - completedCount,
+                  notStarted: 8 - startedCount,
                   totalLessons: 8,
+                  percentComplete: Math.round((completedCount / 8) * 100),
                 },
-                nextSteps: [
-                  "Read through the lesson content above",
-                  `Try the exercise: use get_exercise with lesson_number ${lessonNum}`,
-                  `Test your knowledge: use quiz with lesson_number ${lessonNum}`,
-                  lessonNum < 8
-                    ? `When ready, move to Lesson ${lessonNum + 1}: ${LESSONS[lessonNum + 1]?.title}`
-                    : "You've reached the final lesson! Complete the quiz to finish the course.",
-                ],
+                lessons: lessonProgress,
+                teachingGuidance: {
+                  action: currentLesson && progress[currentLesson]?.started
+                    ? `Use continue_lesson with lesson_number ${currentLesson} to resume.`
+                    : `Use start_lesson with lesson_number ${currentLesson || 1} to begin.`,
+                },
               },
               null,
               2
@@ -476,6 +739,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         }
       }
 
+      // Find current lesson for "return to lesson" guidance
+      let currentLessonNum: number | null = null;
+      for (let i = 8; i >= 1; i--) {
+        if (progress[i].started && !progress[i].completed) {
+          currentLessonNum = i;
+          break;
+        }
+      }
+
       if (!explanation) {
         return {
           content: [
@@ -487,6 +759,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                   availableConcepts: Object.keys(CONCEPTS),
                   suggestion:
                     "Ask Claude directly about this concept — Claude can explain any MCP or API topic even without this tool.",
+                  ...(currentLessonNum
+                    ? {
+                        returnToLesson: {
+                          message: `When you're ready, continue with Lesson ${currentLessonNum}: ${LESSONS[currentLessonNum]?.title}`,
+                          action: `Use continue_lesson with lesson_number ${currentLessonNum}`,
+                        },
+                      }
+                    : {}),
                 },
                 null,
                 2
@@ -504,10 +784,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
               {
                 message: `Explanation: ${concept}`,
                 explanation,
-                nextSteps: [
-                  "Ask about related concepts if anything is unclear",
-                  "Try a hands-on exercise to see this in practice",
-                ],
+                ...(currentLessonNum
+                  ? {
+                      returnToLesson: {
+                        message: `When you're ready, continue with Lesson ${currentLessonNum}: ${LESSONS[currentLessonNum]?.title} (Section ${progress[currentLessonNum].currentSection} of ${progress[currentLessonNum].totalSections})`,
+                        action: `Use continue_lesson with lesson_number ${currentLessonNum}`,
+                      },
+                    }
+                  : {}),
               },
               null,
               2
@@ -528,9 +812,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: "text" as const,
               text: JSON.stringify(
-                {
-                  message: `Lesson ${lessonNum} not found. Available lessons are 1-8.`,
-                },
+                { message: `Lesson ${lessonNum} not found. Available lessons are 1-8.` },
                 null,
                 2
               ),
@@ -553,10 +835,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                   steps: lesson.exercise.steps,
                   validation: lesson.exercise.validation,
                 },
+                teachingGuidance: {
+                  pacing: "Guide the student through the steps ONE at a time. Wait for them to complete each step before presenting the next.",
+                  tone: "Be encouraging. Celebrate small wins.",
+                },
                 nextSteps: [
-                  "Follow the steps above to complete the exercise",
-                  "If you get stuck, use explain_concept to understand any terms",
-                  `When done, take the quiz with: quiz lesson_number ${lessonNum}`,
+                  `When done, take the quiz: use quiz with lesson_number ${lessonNum}`,
                 ],
               },
               null,
@@ -574,10 +858,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         title: LESSONS[parseInt(num)]?.title || "Unknown",
         duration: LESSONS[parseInt(num)]?.duration || "Unknown",
         status: p.completed
-          ? "✅ Completed"
+          ? "Completed"
           : p.started
-            ? "📖 In Progress"
-            : "⬜ Not Started",
+            ? `In Progress (Section ${p.currentSection} of ${p.totalSections})`
+            : "Not Started",
         quizScore:
           p.quizScore !== null ? `${p.quizScore}%` : "Not taken",
       }));
@@ -607,13 +891,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                 nextSteps:
                   completedCount === 8
                     ? [
-                        "🎉 Congratulations! You've completed the entire course!",
+                        "Congratulations! You've completed the entire course!",
                         "Try building your own MCP server for a tool you use at work",
                         "Check out the usage-mode templates for production-ready servers",
                       ]
                     : [
-                        `Continue with Lesson ${startedCount > 0 ? Math.max(...Object.entries(progress).filter(([, p]) => p.started).map(([n]) => parseInt(n))) : 1}`,
-                        "Use start_lesson to begin any lesson",
+                        `Continue with your current lesson`,
+                        "Use resume_course to pick up where you left off",
                       ],
               },
               null,
@@ -635,9 +919,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: "text" as const,
               text: JSON.stringify(
-                {
-                  message: `Lesson ${lessonNum} not found. Available lessons are 1-8.`,
-                },
+                { message: `Lesson ${lessonNum} not found. Available lessons are 1-8.` },
                 null,
                 2
               ),
@@ -650,10 +932,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       // Mark lesson as completed when quiz is taken
       progress[lessonNum].completed = true;
       progress[lessonNum].completedAt = new Date().toISOString();
+      saveProgress();
 
       const completedCount = Object.values(progress).filter(
         (p) => p.completed
       ).length;
+
+      const showBranding = BRANDING_LESSONS.includes(lessonNum);
 
       return {
         content: [
@@ -662,12 +947,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             text: JSON.stringify(
               {
                 message: `Quiz: Lesson ${lessonNum} — ${lesson.title}`,
-                instructions:
-                  "Answer each question below. Claude will check your answers and explain the correct ones.",
+                teachingGuidance: {
+                  pacing: "Present ONE question at a time. Wait for the student's answer, then reveal if they were correct with the explanation. Then present the next question.",
+                  tone: "Be encouraging whether they get it right or wrong. The explanation is the learning moment.",
+                },
                 questions: lesson.quiz.questions.map((q, i) => ({
                   questionNumber: i + 1,
                   question: q.question,
-                  options: q.options.map((opt, j) => `${String.fromCharCode(65 + j)}. ${opt}`),
+                  options: q.options.map(
+                    (opt, j) => `${String.fromCharCode(65 + j)}. ${opt}`
+                  ),
                   correctAnswer: `${String.fromCharCode(65 + q.correctIndex)}. ${q.options[q.correctIndex]}`,
                   explanation: q.explanation,
                 })),
@@ -684,10 +973,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                         "Use check_progress to see your overall progress",
                       ]
                     : [
-                        "🎉 You've completed all lessons!",
-                        "Check out the usage-mode templates to build real integrations",
+                        "You've completed all lessons!",
                         "Use check_progress to see your final progress",
                       ],
+                ...(showBranding ? { branding: BRANDING } : {}),
               },
               null,
               2
@@ -708,6 +997,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                 message: `Unknown tool: ${name}`,
                 availableTools: [
                   "start_lesson",
+                  "continue_lesson",
+                  "resume_course",
                   "explain_concept",
                   "get_exercise",
                   "check_progress",

@@ -77,11 +77,26 @@ The Teacher Mode will guide you through 8 lessons covering MCP fundamentals, RES
 | What to say | What happens |
 |-------------|--------------|
 | "Start Lesson 1" | Begin the Welcome lesson |
+| "Continue" | Get the next section of the current lesson |
 | "Start Lesson 4" | Jump to Jira integration |
+| "Resume my course" | Pick up where you left off after restarting |
 | "Explain what OAuth is" | Get a PM-friendly explanation |
 | "Give me an exercise for Lesson 3" | Hands-on practice |
 | "Quiz me on Lesson 2" | Test your knowledge |
-| "Show my progress" | See completed lessons |
+| "Show my progress" | See completed lessons with section-level detail |
+
+### Tip: Open an Editor Alongside Claude Code
+
+For the best experience, open **Cursor**, **VS Code**, or your preferred editor pointed at the same project folder. This way you can see the file structure being created as you build MCP servers in Lessons 4-8.
+
+```
+# Terminal 1: Claude Code
+claude
+
+# Terminal 2 (or editor): See your files
+code .    # VS Code
+cursor .  # Cursor
+```
 
 ---
 
@@ -169,6 +184,24 @@ Move PROJ-456 to In Progress
 | **Teacher** | Lesson 1 | 10 min |
 | **Teacher** | Full course (8 lessons) | 4-5 hrs |
 | **Usage** | Download, build, connect | 5 min |
+
+---
+
+## Resuming After Closing Claude Code
+
+Your progress is automatically saved. When you close Claude Code and come back later:
+
+1. **Open Claude Code** in the same project folder
+2. **Say:** `Resume my MCP course`
+3. The Teacher will tell you exactly where you left off and let you continue
+
+> **Note:** The MCP server config persists in your Claude Code settings — you don't need to re-add it each time. Just open Claude Code and start talking.
+
+If the server doesn't reconnect automatically, paste this prompt:
+
+```
+Reconnect the MCP Teacher server. The server file is at ./dist/index.js in the teacher-mode/mcp-server directory. Add it to my Claude Code MCP config and restart.
+```
 
 ---
 

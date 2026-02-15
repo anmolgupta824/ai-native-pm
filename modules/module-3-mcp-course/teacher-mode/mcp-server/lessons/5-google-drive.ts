@@ -1,4 +1,4 @@
-import { LessonContent } from "./1-welcome";
+import { LessonContent } from "../index.js";
 
 const lesson: LessonContent = {
   number: 5,
@@ -10,24 +10,26 @@ const lesson: LessonContent = {
     "Build an MCP server with four Google Drive tools",
     "Use Claude to create, list, read, and share Google Docs",
   ],
-  content: `# Connect to Google Drive
-
-## What We Are Building
-
-In this lesson, you will build a Google Drive MCP server with four tools:
+  sections: [
+    {
+      id: "what-we-are-building",
+      title: "What We Are Building",
+      content: `In this lesson, you will build a Google Drive MCP server with four tools:
 
 1. **drive_list_files** — List files in your Drive or in a specific folder
 2. **drive_create_doc** — Create a new Google Doc with content
 3. **drive_read_file** — Read the contents of a file
 4. **drive_share_file** — Share a file with someone
 
-The real PM value: you will be able to say "Create a status report doc from this week's sprint data" and Claude will create it directly in your Google Drive.
+The real PM value: you will be able to say "Create a status report doc from this week's sprint data" and Claude will create it directly in your Google Drive. No more opening Docs, formatting headers, copy-pasting data from Jira. One prompt, one document, done.
 
----
-
-## Step 1: Set Up Google Cloud Console
-
-Google APIs require a bit more setup than Jira. You need to create a Google Cloud project, enable the Drive API, and create credentials. It sounds like a lot, but you only do this once.
+Google Drive is a foundational tool for PMs. Status reports, PRDs, meeting notes, retrospective docs — they all live in Drive. By connecting Claude to Drive, you unlock the ability to generate and organize documents as part of automated workflows.`,
+      teacherNotes: "Remind the student that Google requires more setup than Jira, but they only do it once.",
+    },
+    {
+      id: "google-cloud-setup",
+      title: "Set Up Google Cloud Console",
+      content: `Google APIs require a bit more setup than Jira. You need to create a Google Cloud project, enable the Drive API, and create credentials. It sounds like a lot, but you only do this once.
 
 ### Create a Google Cloud Project
 
@@ -58,13 +60,14 @@ Google APIs require a bit more setup than Jira. You need to create a Google Clou
 7. Click **"Create"**
 8. **Download the JSON file** — this contains your client ID and client secret
 
-Save this file as \`credentials.json\` in your project directory. You will need it for authentication.
-
----
-
-## Step 2: Understanding OAuth2 (Simply)
-
-### Why Is Google More Complex Than Jira?
+Save this file as \`credentials.json\` in your project directory. You will need it for authentication.`,
+      teacherNotes: "This is the most tedious part. Walk through each step patiently. If they get stuck on the OAuth consent screen, help them through it.",
+      checkQuestion: "Have you downloaded the credentials.json file? You'll need it in the next step.",
+    },
+    {
+      id: "understanding-oauth",
+      title: "Understanding OAuth2 (Simply)",
+      content: `### Why Is Google More Complex Than Jira?
 
 Jira uses Basic authentication — you get an API token and include it in every request. Simple.
 
@@ -94,11 +97,14 @@ This is more secure because:
 
 In practice, your server will:
 1. First time: Open a browser, you log in, you approve access, server saves the refresh token
-2. Every time after: Use the refresh token to get a new access token automatically
-
----
-
-## Step 3: Set Up the Project
+2. Every time after: Use the refresh token to get a new access token automatically`,
+      teacherNotes: "Use the valet key analogy from the concept explanations. Make OAuth feel less intimidating.",
+      checkQuestion: "What's the difference between an access token and a refresh token?",
+    },
+    {
+      id: "project-setup",
+      title: "Set Up the Project",
+      content: `Create the project directory inside your current working folder:
 
 \`\`\`bash
 mkdir -p google-drive-mcp-server/src
@@ -155,13 +161,14 @@ Install dependencies:
 
 \`\`\`bash
 npm install
-\`\`\`
-
----
-
-## Step 4: Create the Auth Helper
-
-Before building the main server, you need a way to authenticate with Google. Create \`src/auth.ts\`:
+\`\`\``,
+      teacherNotes: "IMPORTANT: Build in the current project folder. Say: 'We'll create a google-drive-mcp-server folder right here. Tip: Open Cursor or VS Code pointed at this folder to see each file as we create it.'",
+      checkQuestion: "Have you run npm install? The googleapis package should now be in node_modules.",
+    },
+    {
+      id: "auth-helper",
+      title: "Create the Auth Helper",
+      content: `Before building the main server, you need a way to authenticate with Google. Create \`src/auth.ts\`:
 
 \`\`\`typescript
 import { google } from "googleapis";
@@ -264,13 +271,14 @@ npm run build
 npm run auth
 \`\`\`
 
-This opens a URL in your browser. Log in with your Google account, approve access, and the token is saved. You only need to do this once.
-
----
-
-## Step 5: Build the MCP Server
-
-Now create \`src/index.ts\`:
+This opens a URL in your browser. Log in with your Google account, approve access, and the token is saved. You only need to do this once.`,
+      teacherNotes: "Explain each part of auth.ts thoroughly. The auth flow only runs once — after that, the refresh token handles everything.",
+      checkQuestion: "After building and running npm run auth, did you see 'Authorization successful!' in your browser?",
+    },
+    {
+      id: "tool-list-files",
+      title: "Tool 1 — List Files",
+      content: `Now create \`src/index.ts\`. Start with the server setup and the first tool:
 
 \`\`\`typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -291,9 +299,7 @@ const server = new McpServer({
 });
 \`\`\`
 
----
-
-## Step 6: Add Tool 1 — List Files
+Now add the first tool — listing files:
 
 \`\`\`typescript
 server.tool(
@@ -310,7 +316,7 @@ server.tool(
       .string()
       .optional()
       .describe(
-        "Search query to filter files. Example: \"name contains 'sprint'\" or \"mimeType = 'application/vnd.google-apps.document'\""
+        "Search query to filter files. Example: \\"name contains 'sprint'\\" or \\"mimeType = 'application/vnd.google-apps.document'\\""
       ),
     maxResults: z
       .number()
@@ -386,9 +392,13 @@ function formatFileSize(bytes: number): string {
 
 **When Claude will use it:** "Show me my recent Drive files," "List docs in the Sprint Planning folder," "Find all spreadsheets with 'roadmap' in the name."
 
----
-
-## Step 7: Add Tool 2 — Create a Google Doc
+Notice the two helper functions: \`simplifyMimeType\` converts long MIME type strings like \`application/vnd.google-apps.document\` into human-readable names like "Google Doc". \`formatFileSize\` converts raw byte counts into "1.2 MB" format. These small touches make the output much more readable for both Claude and the user.`,
+      teacherNotes: "Point out the helper functions — simplifying MIME types makes the output much more readable for Claude.",
+    },
+    {
+      id: "tool-create-doc",
+      title: "Tool 2 — Create a Google Doc",
+      content: `This tool creates a new Google Doc with content. It is a 3-step process: create the document, add content, then optionally move it to a folder.
 
 \`\`\`typescript
 server.tool(
@@ -472,17 +482,20 @@ server.tool(
 );
 \`\`\`
 
-**What this does:**
-1. Creates a new Google Doc via the Docs API
-2. Inserts the provided text content
-3. Optionally moves it to a specific folder
-4. Returns the document ID and a direct link
+**Why does this need TWO APIs?**
 
-**The PM use case:** "Create a status report doc titled 'Sprint 23 Summary' with the following content..." and Claude creates it directly in your Drive.
+This is a key concept: the **Drive API** manages files (create, move, share, delete), while the **Docs API** manages document content (insert text, format text). To create a Google Doc with content, you use both:
 
----
+1. The **Docs API** creates the document and inserts text (\`docs.documents.create\`, \`docs.documents.batchUpdate\`)
+2. The **Drive API** moves it to a folder (\`drive.files.update\`)
 
-## Step 8: Add Tool 3 — Read a File
+**The PM use case:** "Create a status report doc titled 'Sprint 23 Summary' with the following content..." and Claude creates it directly in your Drive.`,
+      checkQuestion: "Why does creating a Google Doc require TWO APIs (Drive + Docs)?",
+    },
+    {
+      id: "tool-read-file",
+      title: "Tool 3 — Read a File",
+      content: `This tool reads the text content of a Google Doc or other text-based file.
 
 \`\`\`typescript
 server.tool(
@@ -561,11 +574,15 @@ server.tool(
 - If that fails, downloads the file content directly (works for plain text files)
 - Returns the full text content
 
-**When Claude will use it:** "Read the PRD doc," "What does the requirements document say about the login feature?"
+Notice the **try/catch pattern**: the tool tries the Docs API first (for Google Docs), and if that throws an error (because the file is not a Doc), it falls back to downloading the raw file content via the Drive API. This is a common defensive coding pattern — try the most specific approach first, fall back to the general approach.
 
----
-
-## Step 9: Add Tool 4 — Share a File
+**When Claude will use it:** "Read the PRD doc," "What does the requirements document say about the login feature?"`,
+      teacherNotes: "Explain the try/catch pattern — try as a Google Doc first, fall back to raw file download.",
+    },
+    {
+      id: "tool-share-file",
+      title: "Tool 4 — Share a File",
+      content: `The final tool lets Claude share files with team members.
 
 \`\`\`typescript
 server.tool(
@@ -621,26 +638,24 @@ server.tool(
 
 **What this does:**
 - Shares a file with a specific person by email
-- Supports three access levels: reader, commenter, writer
+- Supports three access levels: **reader** (view only), **commenter** (can add comments), **writer** (can edit)
 - Optionally sends a notification email with a custom message
 
 **When Claude will use it:** "Share the sprint doc with sarah@company.com with edit access."
 
----
-
-## Step 10: Start the Server
-
-Add the transport and start the server:
+The three access levels map to what you see in the Google Drive sharing dialog. Reader means view-only. Commenter means they can leave comments but not change the content. Writer means full edit access.`,
+      checkQuestion: "What are the three access levels you can grant when sharing a file?",
+    },
+    {
+      id: "build-and-workflow",
+      title: "Build, Auth, Configure, and Your First Workflow",
+      content: `Add the transport code at the bottom of \`src/index.ts\` to start the server:
 
 \`\`\`typescript
 // --- Start the server ---
 const transport = new StdioServerTransport();
 await server.connect(transport);
 \`\`\`
-
----
-
-## Step 11: Build, Auth, and Configure
 
 ### Build
 
@@ -687,9 +702,7 @@ Claude will:
 
 This is the kind of workflow that takes a PM 30-60 minutes every sprint. With MCP, it takes 10 seconds.
 
----
-
-## Summary
+### Summary
 
 You now have a Google Drive MCP server with four tools. The key things to remember:
 
@@ -697,8 +710,10 @@ You now have a Google Drive MCP server with four tools. The key things to rememb
 2. **The googleapis library** handles most of the complexity (token refresh, API calls)
 3. **File IDs** are the key identifier — every file in Drive has a unique ID
 4. **The Docs API** is separate from the Drive API — Drive manages files, Docs manages document content
-5. **Combining MCP servers** is where the real power is — Jira + Drive together enables workflows that were not possible before
-`,
+5. **Combining MCP servers** is where the real power is — Jira + Drive together enables workflows that were not possible before`,
+      teacherNotes: "The Status Report Generator workflow is the payoff. Show how Jira + Drive together enable workflows that were impossible before.",
+    },
+  ],
   exercise: {
     title: "Build and Test Your Google Drive MCP Server",
     description:

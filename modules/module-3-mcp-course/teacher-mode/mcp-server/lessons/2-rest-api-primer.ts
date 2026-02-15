@@ -1,4 +1,4 @@
-import { LessonContent } from "./1-welcome";
+import { LessonContent } from "../index.js";
 
 const lesson: LessonContent = {
   number: 2,
@@ -12,17 +12,23 @@ const lesson: LessonContent = {
     "Know the basics of authentication (API keys, tokens)",
     "Read and write basic JSON data structures",
   ],
-  content: `# REST APIs for PMs
+  sections: [
+    {
+      id: "why-apis-matter",
+      title: "Why This Lesson Matters",
+      content: `# REST APIs for PMs
 
 ## Why This Lesson Matters
 
 Every MCP server you build in this course will talk to a REST API. Jira has an API. Google Drive has an API. Sheets, Figma, Slack — they all have APIs. If you understand how APIs work, every MCP integration will feel familiar. If you skip this lesson, the rest of the course will feel like magic you cannot debug.
 
-This is the foundation. Take your time with it.
-
----
-
-## What Is an API?
+This is the foundation. Take your time with it.`,
+      teacherNotes: "Emphasize this is THE foundation. If they get this, everything else clicks. Do not let the student rush through this lesson even if they think they already know APIs.",
+    },
+    {
+      id: "what-is-an-api",
+      title: "What Is an API?",
+      content: `## What Is an API?
 
 API stands for **Application Programming Interface**. That is a mouthful, so let us use an analogy.
 
@@ -43,11 +49,13 @@ In software terms:
 
 ### Why "REST"?
 
-REST stands for **Representational State Transfer**. You do not need to memorize this. Just know that REST is a set of conventions for how APIs should be designed. Almost every modern API you will encounter follows REST conventions. When someone says "REST API," they mean "an API that follows standard web conventions."
-
----
-
-## HTTP Methods: The Four Verbs
+REST stands for **Representational State Transfer**. You do not need to memorize this. Just know that REST is a set of conventions for how APIs should be designed. Almost every modern API you will encounter follows REST conventions. When someone says "REST API," they mean "an API that follows standard web conventions."`,
+      checkQuestion: "Using the restaurant analogy — who is the 'waiter' when Claude talks to Jira?",
+    },
+    {
+      id: "http-methods",
+      title: "HTTP Methods: The Four Verbs",
+      content: `## HTTP Methods: The Four Verbs
 
 Every API request uses an HTTP method — a verb that tells the API what you want to do. There are four main ones:
 
@@ -119,11 +127,13 @@ DELETE requests **remove** resources. This is permanent (usually). Think of it a
 | GET | Read | No | No |
 | POST | Create | Yes | Yes |
 | PUT | Update | Yes | Yes |
-| DELETE | Remove | Yes | No |
-
----
-
-## URLs and Endpoints
+| DELETE | Remove | Yes | No |`,
+      checkQuestion: "If you wanted to create a new Jira ticket, which HTTP method would you use?",
+    },
+    {
+      id: "urls-and-endpoints",
+      title: "URLs and Endpoints",
+      content: `## URLs and Endpoints
 
 Every API request goes to a specific URL, called an **endpoint**. Let us break one down:
 
@@ -160,11 +170,13 @@ GET /rest/api/3/search?jql=project=PROJ&maxResults=50
                             query parameters
 \`\`\`
 
-Multiple parameters are separated by \`&\`. Think of these as filters you apply to a search.
-
----
-
-## Request and Response
+Multiple parameters are separated by \`&\`. Think of these as filters you apply to a search.`,
+      teacherNotes: "Draw attention to the URL anatomy diagram. Ask the student to identify the parts. Say: 'Look at a Jira URL in your browser right now — can you spot the base URL and the resource ID?'",
+    },
+    {
+      id: "request-and-response",
+      title: "Request and Response",
+      content: `## Request and Response
 
 ### The Request
 
@@ -216,11 +228,13 @@ Status codes tell you what happened. You do not need to memorize all of them, bu
 | **429** | Too Many Requests | You are sending requests too fast. Slow down (rate limiting). |
 | **500** | Internal Server Error | Something broke on their end. Not your fault. Try again later. |
 
-**The simple rule:** 2xx means success, 4xx means you did something wrong, 5xx means their server has a problem.
-
----
-
-## Authentication
+**The simple rule:** 2xx means success, 4xx means you did something wrong, 5xx means their server has a problem.`,
+      checkQuestion: "You make an API call and get a 401 response. What's likely wrong?",
+    },
+    {
+      id: "authentication",
+      title: "Authentication",
+      content: `## Authentication
 
 APIs need to know who you are. There are several common authentication methods:
 
@@ -261,11 +275,13 @@ Headers:
 
 No matter which method, authentication always works the same way: you include credentials in the **headers** of your request, and the API checks them before processing your request.
 
-In your MCP servers, you will store these credentials as environment variables (never hardcode them in your code) and include them in every request.
-
----
-
-## JSON: The Language of APIs
+In your MCP servers, you will store these credentials as environment variables (never hardcode them in your code) and include them in every request.`,
+      teacherNotes: "Emphasize: credentials always go in headers, and NEVER hardcode them in code. Ask: 'Why would it be dangerous to put your API key directly in the source code?'",
+    },
+    {
+      id: "json-basics",
+      title: "JSON: The Language of APIs",
+      content: `## JSON: The Language of APIs
 
 Almost every API sends and receives data in **JSON** format (JavaScript Object Notation). JSON is simple — it is just a way to structure data using two basic building blocks:
 
@@ -325,11 +341,13 @@ To access the assignee's name in this structure, you would navigate: \`issue.fie
 When you work with APIs, you will spend a lot of time reading JSON responses. The key is to look at the structure:
 - Curly braces \`{}\` mean an object (a single thing with properties)
 - Square brackets \`[]\` mean an array (a list of things)
-- Follow the nesting to find the data you need
-
----
-
-## Real Example: The Jira API
+- Follow the nesting to find the data you need`,
+      checkQuestion: "In the nested JSON example, how would you access the assignee's email address?",
+    },
+    {
+      id: "real-example-jira",
+      title: "Real Example: The Jira API",
+      content: `## Real Example: The Jira API
 
 Let us put this all together with a real example. Here is how you would interact with the Jira API:
 
@@ -400,8 +418,6 @@ Response:
 
 The API created the issue and returned its key (\`PROJ-124\`) so you know it worked.
 
----
-
 ## Summary
 
 Here is what you need to remember:
@@ -413,8 +429,10 @@ Here is what you need to remember:
 5. **Authentication** goes in headers — API keys, Basic auth, or Bearer tokens
 6. **JSON** is the data format — objects use \`{}\`, arrays use \`[]\`
 
-In the next lesson, we will see how MCP servers use all of these concepts to let Claude interact with your tools.
-`,
+In the next lesson, we will see how MCP servers use all of these concepts to let Claude interact with your tools.`,
+      teacherNotes: "Walk through this slowly. Point out how every concept from the lesson appears in this real example. Say: 'Notice the method (GET/POST), the URL structure, the headers with auth, the JSON body, and the JSON response. Every concept we covered shows up here.'",
+    },
+  ],
   exercise: {
     title: "Make Your First API Request",
     description:
