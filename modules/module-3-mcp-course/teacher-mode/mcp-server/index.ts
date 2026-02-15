@@ -98,6 +98,13 @@ const PROGRESS_FILE = path.join(
   "progress-state.json"
 );
 
+// CLAUDE.md lives at the project root so Claude Code reads it on startup
+const PROJECT_ROOT = path.resolve(
+  path.dirname(new URL(import.meta.url).pathname),
+  "../../../../.."
+);
+const CLAUDE_MD_FILE = path.join(PROJECT_ROOT, "CLAUDE.md");
+
 function loadProgress(): Record<number, ProgressEntry> {
   try {
     if (fs.existsSync(PROGRESS_FILE)) {
@@ -129,6 +136,74 @@ function saveProgress(): void {
     fs.writeFileSync(PROGRESS_FILE, JSON.stringify(progress, null, 2));
   } catch {
     console.error("Could not save progress file.");
+  }
+  // Also update CLAUDE.md for cross-session resume
+  saveProgressToCLAUDE();
+}
+
+function saveProgressToCLAUDE(): void {
+  try {
+    const completedCount = Object.values(progress).filter((p) => p.completed).length;
+    const startedCount = Object.values(progress).filter((p) => p.started).length;
+
+    // Find current in-progress lesson
+    let currentLesson: number | null = null;
+    for (let i = 8; i >= 1; i--) {
+      if (progress[i].started && !progress[i].completed) {
+        currentLesson = i;
+        break;
+      }
+    }
+
+    // Build the MCP course progress section
+    const lessonLines = Object.entries(progress).map(([num, p]) => {
+      const lesson = LESSONS[parseInt(num)];
+      const status = p.completed
+        ? "✅ Completed"
+        : p.started
+          ? `🔄 In Progress (Section ${p.currentSection}/${p.totalSections})`
+          : "⬜ Not Started";
+      const quiz = p.quizScore !== null ? ` | Quiz: ${p.quizScore}%` : "";
+      return `- Lesson ${num}: ${lesson?.title || "Unknown"} — ${status}${quiz}`;
+    });
+
+    const mcpSection = `## Module 3: MCP Automation Course — Teaching Mode Progress
+
+**Overall:** ${completedCount}/8 lessons complete (${Math.round((completedCount / 8) * 100)}%)
+${currentLesson ? `**Current:** Lesson ${currentLesson} (${LESSONS[currentLesson]?.title}) — Section ${progress[currentLesson].currentSection}/${progress[currentLesson].totalSections}` : completedCount === 8 ? "**Status:** Course complete!" : `**Next:** Lesson ${Object.keys(progress).find((k) => !progress[parseInt(k)].started) || 1}`}
+
+${lessonLines.join("\n")}
+
+**Resume command:** "I want to continue the MCP course" or use resume_course tool`;
+
+    // Read existing CLAUDE.md and update/insert the Module 3 section
+    let existingContent = "";
+    try {
+      if (fs.existsSync(CLAUDE_MD_FILE)) {
+        existingContent = fs.readFileSync(CLAUDE_MD_FILE, "utf-8");
+      }
+    } catch {}
+
+    // Replace existing Module 3 section or append
+    const sectionStart = "## Module 3: MCP Automation Course — Teaching Mode Progress";
+    const sectionEnd = /\n## (?!Module 3: MCP)/; // Next ## heading that isn't Module 3
+
+    if (existingContent.includes(sectionStart)) {
+      // Replace existing section
+      const startIdx = existingContent.indexOf(sectionStart);
+      const afterStart = existingContent.substring(startIdx + sectionStart.length);
+      const endMatch = afterStart.match(sectionEnd);
+      const endIdx = endMatch ? startIdx + sectionStart.length + (endMatch.index || afterStart.length) : existingContent.length;
+      existingContent = existingContent.substring(0, startIdx) + mcpSection + "\n\n" + existingContent.substring(endIdx);
+    } else if (existingContent.trim()) {
+      existingContent = existingContent.trimEnd() + "\n\n" + mcpSection + "\n";
+    } else {
+      existingContent = `# AI-Native PM — Course Progress\n\nThis file tracks your learning progress across all modules. Claude reads this on startup to resume where you left off.\n\n${mcpSection}\n`;
+    }
+
+    fs.writeFileSync(CLAUDE_MD_FILE, existingContent);
+  } catch {
+    console.error("Could not update CLAUDE.md with progress.");
   }
 }
 
@@ -327,7 +402,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "resume_course",
       description:
-        "Resume the MCP course after restarting Claude Code. Shows exactly where you left off (lesson and section) and lets you continue from there. Use this when you come back to the course after closing Claude Code.",
+        "Start or resume teaching mode for the MCP Automation course. When called, it explicitly enters teaching mode, shows course progress, and gives the student the option to continue where they left off or switch to a different lesson. Always use this first when a student says they want to learn, study, or start teaching mode.",
       inputSchema: {
         type: "object" as const,
         properties: {},
@@ -467,12 +542,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                 },
                 progressTracker: `Lesson ${lessonNum} of 8 | Section 1 of ${lesson.sections.length} | Course: ${completedCount}/8 complete`,
                 teachingGuidance: {
-                  tone: "Be conversational and encouraging. Present the content naturally, not as raw data.",
-                  pacing: "Present ONLY this first section. Do not skip ahead or dump more content.",
+                  tone: "IMPORTANT: Be conversational and brief. Paraphrase the content in your own words — do NOT dump the raw markdown. Keep your response SHORT (under 150 words). Think of this as a friendly conversation, not a lecture.",
+                  pacing: "Present ONLY this first section. Do NOT skip ahead. Do NOT include content from other sections.",
                   interaction: firstSection.checkQuestion
-                    ? "After presenting the section, ask the check question and wait for a response."
-                    : "After presenting the section, ask if the student is ready to continue.",
+                    ? "End your response with the check question. Then STOP and wait for the student to reply."
+                    : "End by asking if the student is ready to continue. Then STOP and wait.",
                   continuePrompt: "When the student is ready, use continue_lesson to get the next section.",
+                  formatting: "Do NOT reproduce the raw content verbatim. Paraphrase it conversationally. Use short paragraphs. No walls of text.",
                 },
               },
               null,
@@ -580,13 +656,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                 },
                 progressTracker: `Lesson ${lessonNum} of 8 | Section ${nextSectionIndex + 1} of ${lesson.sections.length} | Course: ${completedCount}/8 complete`,
                 teachingGuidance: {
-                  pacing: "Present ONLY this section. Do not skip ahead.",
+                  tone: "IMPORTANT: Be conversational and brief. Paraphrase the content in your own words — do NOT dump the raw markdown. Keep your response SHORT (under 150 words). No walls of text.",
+                  pacing: "Present ONLY this section. Do NOT skip ahead. Do NOT include content from other sections.",
                   interaction: section.checkQuestion
-                    ? "After presenting the section, ask the check question and wait for a response."
-                    : "After presenting the section, ask if the student is ready to continue.",
+                    ? "End your response with the check question. Then STOP and wait for the student to reply."
+                    : "End by asking if the student is ready to continue. Then STOP and wait.",
                   continuePrompt: nextSectionIndex + 1 < lesson.sections.length
                     ? "When ready, use continue_lesson to get the next section."
                     : "This is the last section! Guide the student to the exercise next.",
+                  formatting: "Do NOT reproduce the raw content verbatim. Paraphrase it conversationally. Use short paragraphs.",
                 },
               },
               null,
@@ -633,11 +711,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const lessonProgress = Object.entries(progress).map(([num, p]) => ({
         lesson: parseInt(num),
         title: LESSONS[parseInt(num)]?.title || "Unknown",
+        duration: LESSONS[parseInt(num)]?.duration || "Unknown",
         status: p.completed
-          ? "Completed"
+          ? "✅ Completed"
           : p.started
-            ? `In Progress (Section ${p.currentSection} of ${p.totalSections})`
-            : "Not Started",
+            ? `🔄 In Progress (Section ${p.currentSection} of ${p.totalSections})`
+            : "⬜ Not Started",
         quizScore:
           p.quizScore !== null ? `${p.quizScore}%` : "Not taken",
       }));
@@ -649,17 +728,23 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
               type: "text" as const,
               text: JSON.stringify(
                 {
-                  message: "Welcome back! You've completed the entire MCP Integrations Course!",
+                  message: "🎓 Welcome to Teaching Mode — MCP Automation Course",
+                  mode: "TEACHING MODE ACTIVE",
+                  courseStatus: "COMPLETE",
                   summary: {
                     completed: completedCount,
                     totalLessons: 8,
                     percentComplete: 100,
                   },
-                  lessons: lessonProgress,
-                  nextSteps: [
-                    "Try building your own MCP server for a tool you use at work",
-                    "Check out the usage-mode templates for production-ready servers",
-                    "Review any lesson with start_lesson if you want a refresher",
+                  curriculum: lessonProgress,
+                  teachingGuidance: {
+                    presentation: "IMPORTANT: Present this as an explicit 'Teaching Mode' welcome. Show the full curriculum with status. Congratulate the student on completing the course. Offer options: (A) Review any lesson, (B) Switch to another module's course (Module 1: PRD Generation, Module 4: AI Image Generation). Ask which they'd like to do.",
+                    tone: "Celebratory but brief. This is a menu, not a lecture.",
+                  },
+                  options: [
+                    "Review any lesson by number (1-8)",
+                    "Switch to Module 1: PRD Generation Course",
+                    "Switch to Module 4: AI Image Generation Course",
                   ],
                   branding: BRANDING,
                 },
@@ -677,24 +762,46 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             type: "text" as const,
             text: JSON.stringify(
               {
-                message: currentLesson && progress[currentLesson]?.started
-                  ? `Welcome back! You were on Lesson ${currentLesson}: ${LESSONS[currentLesson]?.title}, Section ${currentSectionNum} of ${totalSectionsNum}. Say "continue" to pick up where you left off.`
-                  : `Welcome back! You're ready to start Lesson ${currentLesson || 1}: ${LESSONS[currentLesson || 1]?.title}. Say "start lesson ${currentLesson || 1}" to begin.`,
-                currentLesson: currentLesson || 1,
-                currentSection: currentSectionNum,
-                totalSections: totalSectionsNum,
-                summary: {
+                message: "🎓 Welcome to Teaching Mode — MCP Automation Course",
+                mode: "TEACHING MODE ACTIVE",
+                courseInfo: {
+                  name: "MCP Automation for PMs",
+                  totalLessons: 8,
+                  description: "Learn to build MCP integrations with Jira, Google Drive, Google Sheets, Figma, and any custom API.",
+                },
+                progress: {
                   completed: completedCount,
                   inProgress: startedCount - completedCount,
                   notStarted: 8 - startedCount,
-                  totalLessons: 8,
                   percentComplete: Math.round((completedCount / 8) * 100),
                 },
-                lessons: lessonProgress,
+                currentPosition: currentLesson && progress[currentLesson]?.started
+                  ? {
+                      lesson: currentLesson,
+                      title: LESSONS[currentLesson]?.title,
+                      section: `${currentSectionNum} of ${totalSectionsNum}`,
+                      action: "continue",
+                    }
+                  : {
+                      lesson: currentLesson || 1,
+                      title: LESSONS[currentLesson || 1]?.title,
+                      action: "start",
+                    },
+                curriculum: lessonProgress,
                 teachingGuidance: {
+                  presentation: `IMPORTANT: Present this as an explicit 'Teaching Mode' welcome screen. Show the student their progress and the full curriculum with status emojis. Then offer these options clearly:
+
+${currentLesson && progress[currentLesson]?.started
+  ? `(A) **Continue where you left off** — Lesson ${currentLesson}: ${LESSONS[currentLesson]?.title}, Section ${currentSectionNum}/${totalSectionsNum} ← RECOMMENDED`
+  : `(A) **Start next lesson** — Lesson ${currentLesson || 1}: ${LESSONS[currentLesson || 1]?.title} ← RECOMMENDED`}
+(B) **Jump to a different lesson** — pick any lesson 1-8
+(C) **Switch curriculum** — Module 1 (PRD Generation) or Module 4 (AI Image Generation)
+
+Ask which option they'd like. Keep it brief and friendly. This is a menu, not a lecture.`,
+                  tone: "Warm, brief, and structured. Show the curriculum as a clean list. End with the options above.",
                   action: currentLesson && progress[currentLesson]?.started
-                    ? `Use continue_lesson with lesson_number ${currentLesson} to resume.`
-                    : `Use start_lesson with lesson_number ${currentLesson || 1} to begin.`,
+                    ? `Default action: use continue_lesson with lesson_number ${currentLesson}`
+                    : `Default action: use start_lesson with lesson_number ${currentLesson || 1}`,
                 },
               },
               null,

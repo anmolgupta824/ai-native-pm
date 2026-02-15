@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
 /**
- * PRD Generator Teacher Mode Server
+ * AI Image Generation Teacher Mode Server
  *
- * An interactive MCP server that teaches Product Managers how to write
- * production-ready PRDs using AI as a thinking partner. 6 lessons covering
- * context loading, Socratic questioning, PRD generation, validation,
- * multi-perspective review, and edge case analysis.
+ * An interactive MCP server that teaches Product Managers how to generate
+ * images with DALL-E for mockups, presentations, and marketing assets.
+ * 6 lessons covering setup, prompt fundamentals, product mockups,
+ * presentation visuals, social media assets, and advanced techniques.
  *
  * Tools:
  *   start_lesson    — Begin a specific lesson (returns first section only)
  *   continue_lesson — Get the next section of the current lesson
  *   resume_course   — Resume after restarting Claude Code
- *   explain_concept — Deep-dive explanation of any PRD concept
+ *   explain_concept — Deep-dive explanation of any image generation concept
  *   get_exercise    — Get a hands-on exercise for a lesson
  *   check_progress  — See which lessons are completed (section-level detail)
  *   quiz            — Test knowledge with quiz questions
@@ -28,11 +28,11 @@ import * as fs from "fs";
 import * as path from "path";
 
 import lesson1 from "./lessons/1-welcome.js";
-import lesson2 from "./lessons/2-context-questioning.js";
-import lesson3 from "./lessons/3-prd-structure.js";
-import lesson4 from "./lessons/4-generating-validating.js";
-import lesson5 from "./lessons/5-multi-perspective-review.js";
-import lesson6 from "./lessons/6-edge-cases-polish.js";
+import lesson2 from "./lessons/2-prompt-fundamentals.js";
+import lesson3 from "./lessons/3-product-mockups.js";
+import lesson4 from "./lessons/4-presentation-visuals.js";
+import lesson5 from "./lessons/5-social-media-assets.js";
+import lesson6 from "./lessons/6-advanced-techniques.js";
 
 // ── Types ─────────────────────────────────────────────────────────────────
 
@@ -134,124 +134,115 @@ const progress = loadProgress();
 // ── Concept Explanations ──────────────────────────────────────────────────
 
 const CONCEPTS: Record<string, string> = {
-  prd: `## What is a PRD?
+  "dall-e": `## What is DALL-E?
 
-A **PRD (Product Requirements Document)** is the single source of truth for what you're building, why, and how you'll know it worked.
+**DALL-E** is OpenAI's image generation AI model. It creates images from text descriptions (prompts).
 
-A good PRD aligns engineering, design, QA, and leadership on scope, requirements, and success criteria BEFORE development begins.
+### Key facts:
+- **DALL-E 3** is the current version (used by this module)
+- Creates images in three sizes: 1024x1024, 1792x1024, 1024x1792
+- Costs ~$0.04 per standard image, ~$0.08 per HD image
+- Accessed via the OpenAI API with an API key
 
-### Sections of a PRD:
-- **Overview** — The elevator pitch
-- **Problem Statement** — Why this matters, with evidence
-- **Goals & Success Metrics** — How you'll measure success
-- **User Stories** — Who benefits and how
-- **Requirements** — What to build
-- **Edge Cases** — What could go wrong
-- **Risks & Mitigations** — What could derail this
-- **Launch Plan** — How to ship it safely`,
+### For PMs:
+DALL-E is useful when you need visuals faster than your design team can deliver — mockups for PRDs, graphics for presentations, assets for social media.`,
 
-  "socratic-questioning": `## Socratic Questioning for PRDs
+  "prompt-engineering": `## Prompt Engineering for Images
 
-Socratic questioning is a technique where you ask probing questions to deepen understanding and surface assumptions.
+Image prompts work differently from text prompts. The four components of a great image prompt:
 
-### The Five Categories:
-1. **Problem Clarity** — "Who exactly is affected? How do you know?"
-2. **Solution Validation** — "What alternatives did you consider?"
-3. **Success Criteria** — "How will you know this worked?"
-4. **Constraints** — "What can't change? What dependencies exist?"
-5. **Strategic Fit** — "How does this connect to company OKRs?"
+### 1. Subject — What to generate
+"A mobile app dashboard", "A team collaboration scene"
 
-### Why it works:
-If you can't answer a question clearly in conversation, you can't write it clearly in a PRD. The struggle is the signal.`,
+### 2. Style — Visual treatment
+"Flat design", "Realistic", "Minimal illustration", "Corporate infographic"
 
-  "success-metrics": `## Writing Good Success Metrics
+### 3. Composition — Layout and framing
+"Centered", "Split-view", "Top-down", "Wide landscape format"
 
-A good success metric is **specific, measurable, and falsifiable**.
-
-### Bad metrics:
-- "Improve user experience"
-- "Increase engagement"
-- "Make it faster"
-
-### Good metrics:
-- "Increase 24-hour notification read rate from 45% to 80%"
-- "Reduce checkout abandonment from 67% to 50% within 3 months"
-- "Decrease average page load time from 3.2s to under 1.5s"
+### 4. Details — Specific elements
+"Showing 3 metric cards", "Blue and gray color palette", "White background"
 
 ### The formula:
-[What metric] from [baseline] to [target] within [timeframe]
+[Subject] + [Style] + [Composition] + [Details] = Great image`,
 
-If you don't know the baseline, that's your first task — measure it before you set a target.`,
+  "image-styles": `## Image Styles for PM Work
 
-  "edge-cases": `## Edge Cases in PRDs
+### Flat Design
+Clean, minimal, no shadows or gradients. Great for mockups and icons.
 
-Edge cases are scenarios that happen at the boundaries of normal behavior. They're the "what ifs" that engineers find during implementation — finding them first earns trust.
+### Infographic Style
+Data-focused, clean charts and diagrams. Great for presentations.
 
-### Categories:
-- **User edge cases** — Empty state, very long text, special characters
-- **System edge cases** — No internet, slow connection, expired session
-- **Data edge cases** — Concurrent edits, missing data, migration from old format
-- **Scale edge cases** — 10x traffic, large data sets, many concurrent users
+### Corporate Illustration
+Professional, polished, muted tones. Great for decks and reports.
 
-### Format in PRDs:
-**Edge case:** User's session expires during checkout.
-**Response:** Save cart to local storage, prompt re-auth, restore cart.`,
+### Bold / Social Media
+High contrast, vibrant colors, eye-catching. Great for LinkedIn and Instagram.
 
-  "review-perspectives": `## Multi-Perspective PRD Review
+### Concept Art
+Abstract, metaphorical, thought-provoking. Great for blog posts and thought leadership.`,
 
-Three perspectives that catch different issues:
+  "mockups": `## Product Mockups with AI
 
-### Engineering Lead
-Focuses on: technical feasibility, scalability, dependencies, security, timeline realism.
-Catches: "This won't scale," "There's a dependency you haven't considered."
+AI-generated mockups are not pixel-perfect UI designs. They are **communication tools** — visuals that help stakeholders understand what you are proposing.
 
-### Design Lead
-Focuses on: user experience, accessibility, consistency, user research.
-Catches: "The user flow has too many steps," "This doesn't meet accessibility standards."
+### Best for:
+- Quick concept visuals in PRDs
+- Stakeholder alignment before design begins
+- Exploring visual directions
 
-### QA Lead
-Focuses on: testability, acceptance criteria, edge cases, regression risk.
-Catches: "I can't test this requirement," "This will break existing feature X."`,
+### Not for:
+- Final production assets
+- Pixel-perfect UI specifications
+- Design handoff to engineers
 
-  "at-mentions": `## @-Mentions in Claude Code
+### Prompt pattern:
+"A [device] screen showing [feature] with [specific elements]. [Style] design, [color palette]."`,
 
-@-mentions let you reference files directly in your conversation with Claude. This gives Claude access to the full contents of those files.
+  "asset-packs": `## Asset Packs
 
-### Best practices:
-- Reference 3-5 relevant files (not your entire codebase)
-- Include: strategy docs, user research, architecture docs
-- Don't include: meeting notes, unrelated PRDs, entire codebases
+An asset pack is a coordinated set of 4 related images that share a consistent visual style.
 
-### Example:
-\`\`\`
-@product-strategy.md @user-research-q4.md @api-architecture.md
+### Types:
+- **Social campaign** — Announcement, feature highlight, testimonial, CTA
+- **Presentation set** — Title, problem, solution, results slides
+- **Icon set** — 4 matching icons for features or categories
+- **Feature highlights** — Main value, speed, collaboration, results
 
-I need to write a PRD for a new notifications center.
-\`\`\`
+### Why packs matter:
+Individual images generated one at a time often look inconsistent. Packs use shared style instructions for visual coherence.`,
 
-This gives Claude product-specific context for sharper questions and output.`,
+  "text-in-images": `## Text in AI-Generated Images
 
-  validation: `## PRD Validation
+DALL-E often renders text inaccurately — misspelled words, garbled letters, wrong fonts.
 
-The validate_prd tool checks your PRD for 10 critical elements:
-1. Problem statement
-2. Success metrics
-3. User stories
-4. Requirements
-5. Edge cases
-6. Timeline
-7. Risks
-8. Stakeholders
-9. Rollout plan
-10. Open questions
+### Best practice:
+1. Generate the image WITHOUT text
+2. Add text overlays manually in Canva, Figma, or any image editor
+3. Use placeholder text ("Lorem ipsum") in prompts if you need text areas
 
-### Grades:
-- **A (90-100%)** — Ready to share
-- **B (80-89%)** — Solid, minor polish needed
-- **C (60-79%)** — Missing critical sections
-- **D (<60%)** — Major gaps, go back to questioning
+### Exception:
+Single short words (1-3 characters) sometimes render correctly. But rely on manual text overlay for anything important.`,
 
-A Grade B is good enough to share. Don't chase perfection.`,
+  "api-key": `## OpenAI API Key Setup
+
+### Getting your key:
+1. Go to platform.openai.com/api-keys
+2. Create a new API key
+3. Copy the key (starts with "sk-")
+
+### Setting it up:
+Mac/Linux: \`export OPENAI_API_KEY="sk-your-key-here"\`
+Add to ~/.zshrc or ~/.bashrc to make permanent.
+
+### Costs:
+- Standard image: ~$0.04
+- HD image: ~$0.08
+- Typical session (10-20 images): $0.40-$1.60
+
+### Usage limits:
+Check at platform.openai.com/usage`,
 };
 
 // ── Branding ──────────────────────────────────────────────────────────────
@@ -262,7 +253,7 @@ const BRANDING_LESSONS = [3, 6];
 // ── Server Setup ──────────────────────────────────────────────────────────
 
 const server = new Server(
-  { name: "prd-teacher-mode", version: "1.0.0" },
+  { name: "image-gen-teacher-mode", version: "1.0.0" },
   { capabilities: { tools: {} } }
 );
 
@@ -273,13 +264,13 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "start_lesson",
       description:
-        "Start a PRD course lesson. Returns ONLY the lesson intro and the FIRST section. Present the content warmly and conversationally, then ask if the student is ready to continue. Do NOT dump all sections at once.",
+        "Start an Image Generation course lesson. Returns ONLY the lesson intro and the FIRST section. Present the content warmly and conversationally, then ask if the student is ready to continue. Do NOT dump all sections at once.",
       inputSchema: {
         type: "object" as const,
         properties: {
           lesson_number: {
             type: "number",
-            description: `Lesson number (1-${TOTAL_LESSONS}): 1=Welcome, 2=Context & Questioning, 3=PRD Structure, 4=Generating & Validating, 5=Multi-Perspective Review, 6=Edge Cases & Polish`,
+            description: `Lesson number (1-${TOTAL_LESSONS}): 1=Welcome & Setup, 2=Prompt Fundamentals, 3=Product Mockups, 4=Presentation Visuals, 5=Social Media Assets, 6=Advanced Techniques`,
             minimum: 1,
             maximum: TOTAL_LESSONS,
           },
@@ -307,7 +298,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "resume_course",
       description:
-        "Resume the PRD course after restarting Claude Code. Shows exactly where you left off and lets you continue.",
+        "Resume the Image Generation course after restarting Claude Code. Shows exactly where you left off and lets you continue.",
       inputSchema: {
         type: "object" as const,
         properties: {},
@@ -316,14 +307,14 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "explain_concept",
       description:
-        "Get a detailed, PM-friendly explanation of any PRD or product management concept. After explaining, guide the student back to their current lesson.",
+        "Get a detailed, PM-friendly explanation of any image generation concept. After explaining, guide the student back to their current lesson.",
       inputSchema: {
         type: "object" as const,
         properties: {
           concept: {
             type: "string",
             description:
-              'The concept to explain. Examples: "prd", "socratic-questioning", "success-metrics", "edge-cases", "review-perspectives", "at-mentions", "validation"',
+              'The concept to explain. Examples: "dall-e", "prompt-engineering", "image-styles", "mockups", "asset-packs", "text-in-images", "api-key"',
           },
         },
         required: ["concept"],
@@ -487,7 +478,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }));
 
       if (completedCount === TOTAL_LESSONS) {
-        return { content: [{ type: "text" as const, text: JSON.stringify({ message: "Welcome back! You've completed the entire PRD Generation Course!", summary: { completed: completedCount, totalLessons: TOTAL_LESSONS, percentComplete: 100 }, lessons: lessonProgress, branding: BRANDING }, null, 2) }] };
+        return { content: [{ type: "text" as const, text: JSON.stringify({ message: "Welcome back! You've completed the entire AI Image Generation Course!", summary: { completed: completedCount, totalLessons: TOTAL_LESSONS, percentComplete: 100 }, lessons: lessonProgress, branding: BRANDING }, null, 2) }] };
       }
 
       return {
@@ -546,7 +537,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const startedCount = Object.values(progress).filter((p) => p.started).length;
 
       return { content: [{ type: "text" as const, text: JSON.stringify({
-        message: "Your PRD Course Progress",
+        message: "Your Image Generation Course Progress",
         summary: { completed: completedCount, inProgress: startedCount - completedCount, notStarted: TOTAL_LESSONS - startedCount, totalLessons: TOTAL_LESSONS, percentComplete: Math.round((completedCount / TOTAL_LESSONS) * 100) },
         lessons: lessonProgress,
       }, null, 2) }] };
@@ -594,7 +585,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("PRD Teacher Mode server running — ready to teach!");
+  console.error("Image Generation Teacher Mode server running — ready to teach!");
 }
 
 main().catch(console.error);

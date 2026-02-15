@@ -108,11 +108,10 @@ export default function Module3Page() {
               { num: 1, title: 'Welcome to MCP', duration: '10 min', desc: 'What MCP is, why it matters for PMs, and what you\'ll build in this course.' },
               { num: 2, title: 'REST APIs for PMs', duration: '30-60 min', desc: 'HTTP methods, JSON, authentication — the API fundamentals you need before building integrations.' },
               { num: 3, title: 'How MCP Works', duration: '30 min', desc: 'MCP architecture, tools vs resources vs prompts, and the anatomy of an MCP server.' },
-              { num: 4, title: 'Jira Integration', duration: '45 min', desc: 'Build your first MCP server — connect Claude to Jira to create, read, search, and update issues.' },
-              { num: 5, title: 'Google Drive', duration: '45 min', desc: 'Connect Claude to Google Drive — create docs, read files, and automate document workflows.' },
-              { num: 6, title: 'Google Sheets', duration: '45 min', desc: 'Read and write spreadsheet data — pull team capacity, update tracking sheets, generate reports.' },
-              { num: 7, title: 'Custom Servers', duration: '90 min', desc: 'The master lesson — learn to build an MCP server for ANY REST API. Slack, Notion, Linear, anything.' },
-              { num: 8, title: 'Figma (Optional)', duration: '45 min', desc: 'Design-to-development automation — get Figma frames, create Jira tickets, export assets.' },
+              { num: 4, title: 'Google Drive', duration: '20 min', desc: 'Connect Claude to Google Drive — create docs, read files, and automate document workflows.' },
+              { num: 5, title: 'Google Sheets', duration: '20 min', desc: 'Read and write spreadsheet data — pull team capacity, update tracking sheets, generate reports.' },
+              { num: 6, title: 'Jira Integration', duration: '20 min', desc: 'Connect Claude to Jira to create, read, search, and update issues for sprint management.' },
+              { num: 7, title: 'Figma Integration', duration: '20 min', desc: 'Design-to-development automation — get Figma frames, read comments, export design specs.' },
             ].map((lesson) => (
               <div key={lesson.num} className="flex gap-4 bg-white border border-gray-200 rounded-xl p-5">
                 <div className="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
@@ -171,7 +170,7 @@ export default function Module3Page() {
           <h2 className="text-xl font-bold text-gray-900 mb-6">What&apos;s Included</h2>
           <div className="space-y-3">
             {[
-              '8 interactive lessons — from zero to building any MCP integration',
+              '7 interactive lessons — from zero to building any MCP integration',
               'Teacher Mode MCP server with exercises, quizzes, and progress tracking',
               'Production-ready Jira MCP template (more templates coming)',
               '3 real PM use case examples with full code',
@@ -193,7 +192,7 @@ export default function Module3Page() {
           <div className="bg-brand-600 rounded-2xl p-8 text-center text-white">
             <h2 className="text-2xl font-bold mb-2">Start Learning MCP</h2>
             <p className="text-4xl font-extrabold mb-4">Free</p>
-            <p className="text-brand-200 text-sm mb-6">8 lessons, hands-on exercises, production-ready templates.<br />From zero MCP knowledge to building real integrations.</p>
+            <p className="text-brand-200 text-sm mb-6">7 lessons, hands-on exercises, production-ready templates.<br />From zero MCP knowledge to building real integrations.</p>
             <a
               href="/modules/3-mcp-automation/get-started"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-colors"

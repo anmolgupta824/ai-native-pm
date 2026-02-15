@@ -14,161 +14,107 @@ const lesson: LessonContent = {
     {
       id: "what-is-mcp",
       title: "What is MCP?",
-      content: `# Welcome to MCP: The Model Context Protocol
+      content: `MCP stands for **Model Context Protocol**. It is an open standard created by Anthropic that lets Claude talk directly to external tools — Jira, Google Drive, Slack, Figma, and more.
 
-## What is MCP?
-
-MCP stands for **Model Context Protocol**. It is an open standard created by Anthropic that lets Claude talk directly to external tools and services — things like Jira, Google Drive, Slack, Figma, and any other software with an API.
-
-Think of it this way: without MCP, Claude is like a brilliant colleague who is locked in a room with no phone and no internet. You can talk to them, and they can think deeply, but they cannot look anything up or take action in the real world. MCP gives Claude a phone, a computer, and access to your tools.
-
-With MCP, Claude goes from being a conversational assistant to being a workflow automation engine that can actually do things in the tools you use every day.`,
-      checkQuestion: "Before we go on — can you think of a task you do every week that involves copying data between two or more tools?",
+Without MCP, Claude is like a brilliant colleague locked in a room with no phone. With MCP, Claude gets a phone, a computer, and access to your tools.`,
+      checkQuestion: "Can you think of a task you do every week that involves copying data between two or more tools?",
     },
     {
-      id: "before-after-mcp",
-      title: "Before and After MCP",
-      content: `## Before MCP
+      id: "before-mcp",
+      title: "The Copy-Paste Tax",
+      content: `Without MCP, your PM workflow looks like this:
 
-Without MCP, your workflow as a PM looks like this:
-
-1. Open Jira, manually read through 15 tickets
-2. Open Google Sheets, copy sprint velocity numbers
-3. Open Google Docs, start typing a status report
+1. Open Jira, read through 15 tickets
+2. Open Sheets, copy sprint velocity numbers
+3. Open Docs, type a status report
 4. Alt-tab between all three for 45 minutes
-5. Paste it into Slack
+5. Paste into Slack
 
-This is the "copy-paste tax" that PMs pay every single week. It is tedious, error-prone, and it does not require any of your actual PM skills.
+This is the "copy-paste tax." It is tedious, error-prone, and requires none of your actual PM skills.`,
+      teacherNotes: "Ask the student what their version of this workflow looks like.",
+    },
+    {
+      id: "after-mcp",
+      title: "After MCP",
+      content: `With MCP, you tell Claude:
 
-## After MCP
+> "Pull the sprint tickets from Jira, read the velocity tracker in Sheets, and draft a status report in Docs."
 
-With MCP, you tell Claude:
-
-> "Pull the current sprint tickets from Jira, read the velocity tracker in Sheets, and draft a status report in Google Docs. Then send a summary to the #product-updates Slack channel."
-
-Claude does all of it. Not by screen-scraping or pretending to click buttons — but by actually calling the APIs of each tool through dedicated MCP servers you have set up.
-
-The difference is not incremental. It is a fundamentally different way of working.`,
-      teacherNotes: "This is the 'aha moment'. Ask the student to imagine their own version of this workflow. Ask: 'What is your version of this before/after? What multi-tool workflow eats the most time in your week?'",
+Claude does all of it — by calling the APIs of each tool through MCP servers you set up. The difference is not incremental. It is a fundamentally different way of working.`,
+      checkQuestion: "What multi-tool workflow eats the most time in your week?",
     },
     {
       id: "why-pms-care",
-      title: "Why PMs Should Care About MCP",
-      content: `## Why Should PMs Care About MCP?
+      title: "Why PMs Should Care",
+      content: `PMs who learn MCP get a superpower:
 
-You might be thinking: "I'm a Product Manager, not an engineer. Why do I need to learn this?"
+1. **Automate repetitive work** — status reports, sprint summaries, stakeholder updates
+2. **Get real-time answers** — "What are the open P0 bugs?" instead of Jira filter diving
+3. **Connect your tools** — Figma → Jira → Sheets → Docs in one conversation
+4. **Stand out in your career** — AI-native PMs are extremely valuable`,
+      checkQuestion: "Which of these four benefits resonates most with you?",
+    },
+    {
+      id: "no-engineering-needed",
+      title: "No Engineering Degree Required",
+      content: `MCP servers are small — typically 100-200 lines of TypeScript. And here is the secret: **Claude will help you write most of the code.**
 
-Here is the honest answer: **the PMs who learn to build MCP integrations will have a superpower that most PMs do not have.** You will be able to:
-
-1. **Automate repetitive work.** Status reports, sprint summaries, capacity planning, stakeholder updates — the tasks that eat 5-10 hours of your week.
-
-2. **Get real-time answers from your tools.** Instead of digging through Jira filters or scrolling through Sheets, just ask Claude: "What are the open P0 bugs?" or "What is our sprint burndown looking like?"
-
-3. **Create workflows that connect your tools.** Pull design specs from Figma, create Jira tickets, update the project tracker in Sheets, and draft the kickoff doc in Google Docs — all in one conversation.
-
-4. **Stand out in your career.** AI-native PMs who can set up their own automations are extremely valuable. This is a concrete, demonstrable skill.
-
-The best part? You do not need to be a software engineer. MCP servers are small, focused programs. They are typically 100-200 lines of TypeScript. By the end of this course, you will be able to write them from scratch.`,
-      checkQuestion: "Which of these four benefits resonates most with your current role?",
+Your job is to understand what the code does, not memorize syntax. Think of it like writing a PRD — you understand the system well enough to direct the work and review what gets built.`,
     },
     {
       id: "what-you-will-build",
-      title: "What You Will Build in This Course",
-      content: `## What You Will Build in This Course
+      title: "What You Will Build",
+      content: `Over 8 lessons, you will build real integrations:
 
-Over the next 8 lessons, you will build real, working integrations:
-
-| Lesson | What You Build | What It Does |
-|--------|---------------|--------------|
-| 1 | (This lesson) | Understand MCP and set up your environment |
-| 2 | REST API Knowledge | Learn how APIs work so the rest makes sense |
-| 3 | MCP Deep Dive | Understand MCP architecture inside and out |
-| 4 | Jira MCP Server | Search issues, create tickets, run JQL queries |
-| 5 | Google Drive MCP Server | List files, create docs, share documents |
-| 6 | Google Sheets MCP Server | Read and write spreadsheet data |
-| 7 | Custom MCP Server | Build an MCP server for ANY API you choose |
-| 8 | Figma MCP Server | Read designs, export frames, get comments |
-
-By the end, you will have a full toolkit of MCP servers that Claude can use to help you with your actual day-to-day work.`,
-      teacherNotes: "Keep this brief — don't overwhelm. Just give them a sense of the journey. Do not deep-dive into any single lesson here. The goal is to show the arc, not the details.",
+| Lesson | What You Build |
+|--------|---------------|
+| 1 | (This lesson) — MCP overview and setup |
+| 2 | REST API knowledge |
+| 3 | MCP architecture deep dive |
+| 4 | Jira MCP Server |
+| 5 | Google Drive MCP Server |
+| 6 | Google Sheets MCP Server |
+| 7 | Custom MCP Server (any API) |
+| 8 | Figma MCP Server |`,
+      teacherNotes: "Keep this brief. Just show the arc, don't deep-dive into individual lessons.",
     },
     {
       id: "prerequisites",
       title: "Prerequisites",
-      content: `## Prerequisites
+      content: `Make sure you have:
 
-Before we continue, make sure you have the following:
-
-### 1. Claude Code Installed
-
-Claude Code is the command-line interface for Claude. It is where you will interact with Claude and where your MCP servers will run.
-
-If you do not have it installed yet:
-- Visit the Anthropic documentation for Claude Code installation
-- Follow the instructions for your operating system (macOS, Linux, or Windows via WSL)
-- After installation, open your terminal and type \`claude\` to confirm it works
-
-### 2. Basic Terminal Familiarity
-
-You do not need to be a terminal expert. You should be comfortable with:
-- Opening a terminal window
-- Navigating between directories (\`cd\` command)
-- Running a command and reading the output
-- Creating a new directory (\`mkdir\` command)
-
-If you have ever used \`git\` commands or run \`npm install\`, you have enough terminal experience for this course.
-
-### 3. Accounts for the Tools We Will Integrate
-
-Throughout the course, you will need:
-- A **Jira** account (free tier works fine) — Lesson 4
-- A **Google** account (for Drive and Sheets) — Lessons 5-6
-- A **Figma** account (free tier works fine) — Lesson 8
-
-You do not need all of these right now. We will set them up as we get to each lesson.`,
-      checkQuestion: "Do you have Claude Code installed? If not, let me know and I'll help you get set up.",
+- **Claude Code installed** — type \`claude\` in your terminal to check. If not, visit Module 0.
+- **Basic terminal familiarity** — if you have used \`cd\` or \`git\`, you are ready.
+- **Tool accounts (later)** — Jira (Lesson 4), Google (Lessons 5-6), Figma (Lesson 8). We set these up as we go.`,
+      checkQuestion: "Do you have Claude Code installed? If not, let me know and I'll help.",
     },
     {
       id: "how-course-works",
       title: "How This Course Works",
-      content: `## How This Course Works
+      content: `Each lesson has three steps:
 
-Each lesson follows the same structure:
+1. **Learn** — read the lesson content (like now)
+2. **Exercise** — hands-on practice
+3. **Quiz** — confirm understanding
 
-1. **Learn** — Read through the lesson content (like you are doing now)
-2. **Exercise** — Complete a hands-on exercise to practice what you learned
-3. **Quiz** — Answer a few questions to confirm your understanding
-
-The exercises are the most important part. MCP is a hands-on skill. Reading about it is useful, but building with it is where the learning happens.
-
-## A Note on "Coding"
-
-You will write TypeScript in this course. If that sounds intimidating, here is a secret: **Claude will help you write most of the code.** Your job is to understand what the code does, why each piece is there, and how to modify it for your needs.
-
-Think of it like writing a PRD. You do not need to implement the feature yourself, but you need to understand the system well enough to describe what you want and review what gets built. Same thing here — you need to understand MCP well enough to direct Claude and troubleshoot when something does not work.
-
-## Let's Get Started
-
-In the next lesson, we will cover REST APIs — the foundation that all MCP integrations are built on. Understanding APIs is the single most important concept for everything that follows.
-
-For now, complete the exercise below to confirm your environment is set up correctly.`,
-      teacherNotes: "Reassure them that Claude will help write most of the code. Their job is to understand, not memorize syntax. Emphasize the PRD analogy — they already have the skill of understanding systems without implementing them.",
+The exercises are the most important part. MCP is a hands-on skill. Ready? Complete the exercise below, then we move to Lesson 2: REST APIs.`,
+      teacherNotes: "Reassure them that Claude helps write most code. Their job is to understand, not memorize.",
     },
   ],
   exercise: {
     title: "Verify Your MCP Environment",
     description:
-      "Open Claude Code and check what MCP servers are currently configured. This will confirm your environment is set up correctly and give you a first look at how MCP servers appear to Claude.",
+      "Open Claude Code and check what MCP servers are currently configured. This confirms your environment is ready.",
     steps: [
-      "Open your terminal application (Terminal on macOS, or your preferred terminal emulator)",
+      "Open your terminal application",
       'Launch Claude Code by typing: claude',
-      'Once Claude Code is running, type this prompt: "What MCP servers do I have installed? List them and describe what each one does."',
-      "Read the output carefully. If you have no MCP servers, that is perfectly fine — you will build them in this course. If you do have some, note what they are.",
-      "Try one more prompt: \"Explain what MCP is in one paragraph.\" Compare Claude's answer to what you learned in this lesson.",
-      "Exit Claude Code by typing /exit or pressing Ctrl+C",
+      'Type: "What MCP servers do I have installed? List them."',
+      "Read the output. No MCP servers? That is fine — you will build them in this course.",
+      'Try: "Explain what MCP is in one paragraph." Compare to what you learned.',
+      "Exit Claude Code with /exit or Ctrl+C",
     ],
     validation:
-      "You have successfully completed this exercise if: (1) Claude Code launched without errors, (2) you received a response about your MCP servers (even if the list is empty), and (3) Claude was able to explain MCP. If Claude Code did not launch, revisit the installation steps in the Prerequisites section.",
+      "You completed this exercise if: (1) Claude Code launched without errors, (2) you got a response about MCP servers (even if empty), and (3) Claude explained MCP.",
   },
   quiz: {
     questions: [
@@ -182,33 +128,33 @@ For now, complete the exercise below to confirm your environment is set up corre
         ],
         correctIndex: 1,
         explanation:
-          "MCP stands for Model Context Protocol. It is an open standard created by Anthropic that allows Claude to communicate with external tools and services through dedicated server processes.",
+          "MCP stands for Model Context Protocol. It is an open standard by Anthropic that lets Claude communicate with external tools through dedicated server processes.",
       },
       {
         question:
           "What is the primary benefit of MCP for Product Managers?",
         options: [
           "It replaces the need for a PM entirely",
-          "It allows Claude to directly access and interact with PM tools like Jira, Google Docs, and Sheets",
-          "It provides a visual drag-and-drop interface for building products",
-          "It automatically writes code for the engineering team",
+          "It lets Claude directly access PM tools like Jira, Google Docs, and Sheets",
+          "It provides a visual drag-and-drop interface",
+          "It automatically writes code for engineers",
         ],
         correctIndex: 1,
         explanation:
-          "MCP lets Claude connect to the tools PMs use every day — Jira, Google Drive, Sheets, Slack, Figma, and more. This means Claude can pull data, create documents, update tickets, and automate workflows that would normally take PMs hours of manual work.",
+          "MCP lets Claude connect to PM tools — Jira, Drive, Sheets, Slack, Figma. Claude can pull data, create docs, update tickets, and automate workflows.",
       },
       {
         question:
           "Do you need to be a software engineer to build MCP servers?",
         options: [
-          "Yes, you need a computer science degree",
-          "Yes, you need at least 5 years of programming experience",
-          "No, MCP servers are small and focused programs, and Claude can help you write the code",
-          "No, because MCP servers do not involve any code at all",
+          "Yes, you need a CS degree",
+          "Yes, you need 5+ years of experience",
+          "No, MCP servers are small programs and Claude helps write the code",
+          "No, because MCP servers don't involve code",
         ],
         correctIndex: 2,
         explanation:
-          "MCP servers are typically 100-200 lines of TypeScript, and Claude can help you write most of the code. Your job is to understand what the code does and how to configure it. MCP servers do involve code, but you do not need to be a professional developer to build them.",
+          "MCP servers are 100-200 lines of TypeScript and Claude helps write most of the code. Your job is to understand what it does, not memorize syntax.",
       },
     ],
   },

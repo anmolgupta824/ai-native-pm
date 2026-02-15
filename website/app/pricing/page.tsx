@@ -34,7 +34,7 @@ export default function PricingPage() {
               },
               {
                 q: 'Do I need coding experience?',
-                a: 'No! The free modules require zero coding knowledge. Module 3 (MCP Integrations Course) teaches you from scratch with 8 interactive lessons. Module 4 (Vibe Coding) has step-by-step project guides.',
+                a: 'No! The free modules require zero coding knowledge. Module 3 (MCP Integrations Course) teaches you from scratch with 7 interactive lessons. Module 4 (Vibe Coding) has step-by-step project guides.',
               },
               {
                 q: 'What is Claude Code?',

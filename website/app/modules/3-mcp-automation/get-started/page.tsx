@@ -2,14 +2,13 @@
 
 import { useState } from 'react'
 
-type Product = 'jira' | 'gdrive' | 'gsheets' | 'figma' | 'custom'
+type Product = 'jira' | 'gdrive' | 'gsheets' | 'figma'
 
 const products: { id: Product; label: string; ready: boolean }[] = [
   { id: 'jira', label: 'Jira', ready: true },
-  { id: 'gdrive', label: 'Google Drive', ready: false },
+  { id: 'gdrive', label: 'Google Drive', ready: true },
   { id: 'gsheets', label: 'Google Sheets', ready: false },
   { id: 'figma', label: 'Figma', ready: false },
-  { id: 'custom', label: 'Custom', ready: false },
 ]
 
 export default function Module3GetStarted() {
@@ -120,15 +119,15 @@ export default function Module3GetStarted() {
               <div className="border-l-4 border-brand-500 pl-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
-                  <h2 className="text-lg font-bold text-gray-900">Connect to Claude Code</h2>
-                  <span className="text-xs text-gray-400">1 min</span>
+                  <h2 className="text-lg font-bold text-gray-900">Open Claude Code in the Course Folder</h2>
+                  <span className="text-xs text-gray-400">30 sec</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder and paste this single prompt:</p>
+                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the course folder:</p>
                 <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
-                  Add the MCP Teacher as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command &quot;node&quot; and the full path to dist/index.js. Then restart to pick up the new server.
+                  cd ai-native-pm/modules/module-3-mcp-course &amp;&amp; claude
                 </div>
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                  <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will find the path, update your config, and restart.</p>
+                  <p className="text-sm text-green-800"><span className="font-semibold">No extra setup needed.</span> The CLAUDE.md file in this folder automatically configures Claude as your interactive teacher.</p>
                 </div>
               </div>
 
@@ -136,12 +135,16 @@ export default function Module3GetStarted() {
               <div className="border-l-4 border-brand-500 pl-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
-                  <h2 className="text-lg font-bold text-gray-900">Start Your First Lesson</h2>
+                  <h2 className="text-lg font-bold text-gray-900">Start the Course</h2>
                   <span className="text-xs text-gray-400">10 min</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code and say:</p>
+                <p className="text-sm text-gray-600 mb-3">Say one of these to get started:</p>
                 <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
-                  I want to learn MCP from scratch. Start me on Lesson 1.
+                  Start the course
+                </div>
+                <p className="text-sm text-gray-500 mt-2 mb-3">or</p>
+                <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
+                  I want to learn MCP from scratch
                 </div>
                 <p className="text-sm text-gray-600 mt-4 mb-3">The Teacher Mode will:</p>
                 <div className="space-y-2">
@@ -150,7 +153,7 @@ export default function Module3GetStarted() {
                     'Explain core concepts with real-world analogies',
                     'Give you hands-on exercises to practice',
                     'Quiz you to reinforce your understanding',
-                    'Track your progress across all 8 lessons',
+                    'Track your progress across all 7 lessons',
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <span className="w-5 h-5 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
@@ -166,17 +169,16 @@ export default function Module3GetStarted() {
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">4</span>
                   <h2 className="text-lg font-bold text-gray-900">Continue Through the Course</h2>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">Work through all 8 lessons at your own pace:</p>
+                <p className="text-sm text-gray-600 mb-4">Work through all 7 lessons at your own pace:</p>
                 <div className="space-y-2">
                   {[
                     { num: '1', title: 'Welcome to MCP', time: '10 min' },
                     { num: '2', title: 'REST APIs for PMs', time: '30-60 min' },
                     { num: '3', title: 'How MCP Works', time: '30 min' },
-                    { num: '4', title: 'Jira Integration', time: '45 min' },
-                    { num: '5', title: 'Google Drive', time: '45 min' },
-                    { num: '6', title: 'Google Sheets', time: '45 min' },
-                    { num: '7', title: 'Custom Servers', time: '90 min' },
-                    { num: '8', title: 'Figma (Optional)', time: '45 min' },
+                    { num: '4', title: 'Google Drive', time: '20 min' },
+                    { num: '5', title: 'Google Sheets', time: '20 min' },
+                    { num: '6', title: 'Jira Integration', time: '20 min' },
+                    { num: '7', title: 'Figma Integration', time: '20 min' },
                   ].map((lesson) => (
                     <div key={lesson.num} className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
                       <span className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0">{lesson.num}</span>
@@ -289,10 +291,10 @@ export default function Module3GetStarted() {
                       <span className="text-xs text-gray-400">1 min</span>
                     </div>
                     <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
-                      Add the Jira MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command &quot;node&quot; and the full path to dist/index.js. Then restart to pick up the new server.
+                      Add the Jira MCP server. The server file is at ./dist/index.js in the current directory. Add it to my project-level Claude Code MCP config (.mcp.json) with the command &quot;node&quot; and the full path to dist/index.js. Do not restart.
                     </div>
                     <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                      <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will update your config and restart.</p>
+                      <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will find the path and update your .mcp.json config. The server will be picked up automatically on your next Claude Code session — no restart needed.</p>
                     </div>
                   </div>
 
@@ -332,18 +334,33 @@ export default function Module3GetStarted() {
               {/* ===== GOOGLE DRIVE TAB ===== */}
               {product === 'gdrive' && (
                 <>
-                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-                    <h3 className="text-sm font-bold text-amber-800 mb-2">Template Coming Soon</h3>
-                    <p className="text-sm text-amber-700">
-                      The production-ready Google Drive template is under active development. In the meantime, you can set up your credentials now so you&apos;re ready when it launches, or{' '}
-                      <button onClick={() => setMode('teacher')} className="underline font-semibold">switch to Teacher Mode, Lesson 5</button>{' '}
-                      to learn how to build it yourself.
-                    </p>
+                  <div className="border-l-4 border-brand-500 pl-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">1</span>
+                      <h2 className="text-lg font-bold text-gray-900">Download &amp; Build the Google Drive Template</h2>
+                      <span className="text-xs text-gray-400">3 min</span>
+                    </div>
+                    <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 mb-4">
+                      <h3 className="text-sm font-bold text-brand-800 mb-2">Option A: Ask Claude (Easiest)</h3>
+                      <p className="text-sm text-brand-700 mb-3">Open Claude Code and paste:</p>
+                      <div className="bg-white rounded-lg p-4 font-mono text-sm text-gray-700 border border-brand-200">
+                        Download the Google Drive MCP template. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-3-mcp-course/usage-mode/templates/google-drive-mcp and run npm install &amp;&amp; npm run build.
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
+                      <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
+                      <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
+                        git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
+                        cd ai-native-pm/modules/module-3-mcp-course/usage-mode/templates/google-drive-mcp<br />
+                        npm install<br />
+                        npm run build
+                      </div>
+                    </div>
                   </div>
 
                   <div className="border-l-4 border-brand-500 pl-6">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">1</span>
+                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
                       <h2 className="text-lg font-bold text-gray-900">Set Up Google Cloud Credentials</h2>
                       <span className="text-xs text-gray-400">10 min</span>
                     </div>
@@ -356,19 +373,56 @@ export default function Module3GetStarted() {
                       <li>On the Scopes page, add: <code className="bg-gray-200 px-1 rounded text-xs">drive.file</code> and <code className="bg-gray-200 px-1 rounded text-xs">drive.readonly</code></li>
                       <li>Add yourself as a <strong>Test user</strong></li>
                       <li>Go to <strong>Credentials → Create Credentials → OAuth client ID</strong>, select <strong>Desktop app</strong></li>
-                      <li>Copy your <strong>Client ID</strong> and <strong>Client Secret</strong></li>
+                      <li>Download the credentials JSON and save it to <code className="bg-gray-200 px-1 rounded text-xs">~/.google-drive-credentials.json</code></li>
                     </ol>
-                    <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700 mt-4">
-                      export GOOGLE_CLIENT_ID=&quot;your-client-id-here&quot;<br />
-                      export GOOGLE_CLIENT_SECRET=&quot;your-client-secret-here&quot;
+                  </div>
+
+                  <div className="border-l-4 border-brand-500 pl-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
+                      <h2 className="text-lg font-bold text-gray-900">Authorize with Google</h2>
+                      <span className="text-xs text-gray-400">1 min</span>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-3">Run the authorization script from the template directory:</p>
+                    <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
+                      node dist/auth.js
+                    </div>
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                      <p className="text-sm text-blue-800">
+                        <span className="font-semibold">This opens a browser window</span> where you&apos;ll sign in with your Google account and grant access. The token will be saved locally for future sessions.
+                      </p>
                     </div>
                   </div>
 
                   <div className="border-l-4 border-brand-500 pl-6">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
-                      <h2 className="text-lg font-bold text-gray-900">Available Tools (When Template Launches)</h2>
+                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">4</span>
+                      <h2 className="text-lg font-bold text-gray-900">Connect to Claude Code</h2>
+                      <span className="text-xs text-gray-400">1 min</span>
                     </div>
+                    <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
+                      Add the Google Drive MCP server. The server file is at ./dist/index.js in the current directory. Add it to my project-level Claude Code MCP config (.mcp.json) with the command &quot;node&quot; and the full path to dist/index.js. Do not restart.
+                    </div>
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                      <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will find the path and update your .mcp.json config. The server will be picked up automatically on your next Claude Code session — no restart needed.</p>
+                    </div>
+                  </div>
+
+                  <div className="border-l-4 border-brand-500 pl-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">5</span>
+                      <h2 className="text-lg font-bold text-gray-900">Start Using It</h2>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-4">Try these prompts in Claude Code:</p>
+                    <div className="space-y-3">
+                      {['List my recent Google Drive files', 'Create a Google Doc called "Weekly Status Report" summarizing sprint progress', 'Read the contents of my Product Roadmap Q1 document', 'Pull sprint data from Jira and save a status report as a Google Doc'].map((prompt) => (
+                        <div key={prompt} className="bg-gray-100 rounded-lg p-3 font-mono text-sm text-gray-700">{prompt}</div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-l-4 border-brand-500 pl-6">
+                    <h2 className="text-lg font-bold text-gray-900 mb-4">Available Google Drive Tools</h2>
                     <div className="space-y-2">
                       {[
                         { tool: 'list_files', desc: 'List files in Google Drive, filter by name, type, or folder' },
@@ -383,24 +437,6 @@ export default function Module3GetStarted() {
                       ))}
                     </div>
                   </div>
-
-                  <div className="border-l-4 border-brand-500 pl-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
-                      <h2 className="text-lg font-bold text-gray-900">Example Prompts</h2>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-4">Once the template is available, you&apos;ll be able to say:</p>
-                    <div className="space-y-3">
-                      {[
-                        'List my recent Google Drive files',
-                        'Create a Google Doc called "Weekly Status Report" summarizing sprint progress',
-                        'Read the contents of my Product Roadmap Q1 document',
-                        'Pull sprint data from Jira and save a status report as a Google Doc',
-                      ].map((prompt) => (
-                        <div key={prompt} className="bg-gray-100 rounded-lg p-3 font-mono text-sm text-gray-700">{prompt}</div>
-                      ))}
-                    </div>
-                  </div>
                 </>
               )}
 
@@ -411,7 +447,7 @@ export default function Module3GetStarted() {
                     <h3 className="text-sm font-bold text-amber-800 mb-2">Template Coming Soon</h3>
                     <p className="text-sm text-amber-700">
                       The production-ready Google Sheets template is under active development. In the meantime, you can set up your credentials now, or{' '}
-                      <button onClick={() => setMode('teacher')} className="underline font-semibold">switch to Teacher Mode, Lesson 6</button>{' '}
+                      <button onClick={() => setMode('teacher')} className="underline font-semibold">switch to Teacher Mode, Lesson 5</button>{' '}
                       to learn how to build it yourself.
                     </p>
                   </div>
@@ -487,7 +523,7 @@ export default function Module3GetStarted() {
                     <h3 className="text-sm font-bold text-amber-800 mb-2">Template Coming Soon</h3>
                     <p className="text-sm text-amber-700">
                       The production-ready Figma template is under active development. In the meantime, you can set up your API token now, or{' '}
-                      <button onClick={() => setMode('teacher')} className="underline font-semibold">switch to Teacher Mode, Lesson 8</button>{' '}
+                      <button onClick={() => setMode('teacher')} className="underline font-semibold">switch to Teacher Mode, Lesson 7</button>{' '}
                       to learn how to build it yourself.
                     </p>
                   </div>
@@ -557,84 +593,11 @@ export default function Module3GetStarted() {
                 </>
               )}
 
-              {/* ===== CUSTOM MCP TAB ===== */}
-              {product === 'custom' && (
-                <>
-                  <div className="bg-brand-50 border border-brand-200 rounded-xl p-5">
-                    <h3 className="text-sm font-bold text-brand-800 mb-2">Build Your Own MCP Server</h3>
-                    <p className="text-sm text-brand-700">
-                      The custom template generator is coming soon. In the meantime,{' '}
-                      <button onClick={() => setMode('teacher')} className="underline font-semibold">Lesson 7 in Teacher Mode</button>{' '}
-                      teaches you the universal 6-step pattern for turning ANY REST API into an MCP server.
-                    </p>
-                  </div>
-
-                  <div className="border-l-4 border-brand-500 pl-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">1</span>
-                      <h2 className="text-lg font-bold text-gray-900">The Universal 6-Step Pattern</h2>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-4">Every MCP server follows this same framework, regardless of which API you&apos;re connecting:</p>
-                    <div className="space-y-3">
-                      {[
-                        { step: 'Understand the API', desc: 'Find the docs, base URL, auth method, and 4-6 useful endpoints' },
-                        { step: 'Get credentials', desc: 'API token, bot token, or OAuth — depends on the service' },
-                        { step: 'Create the project', desc: 'package.json, tsconfig.json, and src/index.ts with the MCP SDK' },
-                        { step: 'Define the tools', desc: 'Name each tool (verb_noun), write descriptions, define input schemas' },
-                        { step: 'Implement the tools', desc: 'Extract args, make the API call, format the response, return it' },
-                        { step: 'Register and test', desc: 'npm run build, add to Claude config, restart, test with natural language' },
-                      ].map((s, i) => (
-                        <div key={s.step} className="flex items-start gap-3 bg-gray-50 rounded-lg p-3">
-                          <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
-                          <div>
-                            <p className="text-sm font-semibold text-gray-900">{s.step}</p>
-                            <p className="text-sm text-gray-600">{s.desc}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="border-l-4 border-brand-500 pl-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
-                      <h2 className="text-lg font-bold text-gray-900">Popular APIs You Can Connect</h2>
-                    </div>
-                    <div className="space-y-2">
-                      {[
-                        { service: 'Slack', auth: 'Bot token', useCase: 'Channel summaries, automated updates' },
-                        { service: 'GitHub', auth: 'Personal token', useCase: 'Issue tracking, PR monitoring' },
-                        { service: 'Notion', auth: 'Integration token', useCase: 'Meeting notes, wiki updates' },
-                        { service: 'Asana', auth: 'Personal token', useCase: 'Task management, cross-project visibility' },
-                        { service: 'Linear', auth: 'API key', useCase: 'Sprint management, bug tracking' },
-                      ].map((s) => (
-                        <div key={s.service} className="flex items-center gap-4 bg-gray-50 rounded-lg p-3">
-                          <p className="text-sm font-semibold text-gray-900 w-16 flex-shrink-0">{s.service}</p>
-                          <span className="text-xs bg-gray-200 px-2 py-1 rounded text-gray-600 flex-shrink-0">{s.auth}</span>
-                          <p className="text-sm text-gray-600">{s.useCase}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="border-l-4 border-brand-500 pl-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
-                      <h2 className="text-lg font-bold text-gray-900">Scaffolding Prompt</h2>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-4">Paste this into Claude Code to scaffold a new MCP server for any service:</p>
-                    <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
-                      Create a new MCP server project for [SERVICE_NAME] in ~/mcp-servers/[service]-server with package.json, tsconfig.json, and src/index.ts. Use the @modelcontextprotocol/sdk package. Include 4-5 tools that would be most useful for a Product Manager. Build and test it.
-                    </div>
-                  </div>
-                </>
-              )}
-
               {/* Want to learn more — shared for all usage tabs */}
               <div className="bg-brand-50 border border-brand-200 rounded-xl p-6">
                 <h3 className="text-sm font-bold text-brand-800 mb-2">Want to learn how it works under the hood?</h3>
                 <p className="text-sm text-brand-700">
-                  Switch to the <button onClick={() => setMode('teacher')} className="underline font-semibold">Teacher Mode path</button> to take the full 8-lesson course. You&apos;ll learn to build MCP servers for any API, not just {product === 'jira' ? 'Jira' : product === 'gdrive' ? 'Google Drive' : product === 'gsheets' ? 'Google Sheets' : product === 'figma' ? 'Figma' : 'one service'}.
+                  Switch to the <button onClick={() => setMode('teacher')} className="underline font-semibold">Teacher Mode path</button> to take the full 7-lesson course. You&apos;ll learn to build MCP servers for Google Drive, Sheets, Jira, and Figma, not just {product === 'jira' ? 'Jira' : product === 'gdrive' ? 'Google Drive' : product === 'gsheets' ? 'Google Sheets' : 'Figma'}.
                 </p>
               </div>
             </>
@@ -652,14 +615,14 @@ export default function Module3GetStarted() {
                   { problem: '"Missing required environment variables"', fix: 'Set JIRA_BASE_URL, JIRA_EMAIL, and JIRA_API_TOKEN in your shell profile and reload with source ~/.zshrc.' },
                   { problem: '"Authentication failed (401)"', fix: 'Double-check your email and API token. API tokens are different from your Jira password.' },
                 ] : mode === 'usage' && (product === 'gdrive' || product === 'gsheets') ? [
-                  { problem: '"Error: invalid_client"', fix: 'Double-check your GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET. They should come from the OAuth credentials page.' },
+                  { problem: '"Error: invalid_client"', fix: 'Double-check your credentials JSON file. Make sure it was downloaded from the OAuth credentials page and saved to ~/.google-drive-credentials.json.' },
                   { problem: '"Error: access_denied"', fix: 'Make sure you added yourself as a test user in the OAuth consent screen settings.' },
                 ] : mode === 'usage' && product === 'figma' ? [
                   { problem: '"403 Forbidden"', fix: 'Your Figma token may not have access to that file. Make sure you generated the token from the same account that owns the file.' },
                   { problem: '"404 Not Found"', fix: 'Check the file key in your Figma URL — it\'s the part between /file/ and the next /. Example: figma.com/file/abc123XYZ/...' },
                 ] : mode === 'teacher' ? [
                   { problem: '"command not found: git"', fix: 'Use Option C (Download ZIP) instead, or install Git from git-scm.com.' },
-                  { problem: 'Lessons feel too fast', fix: 'Use the explain_concept tool to dive deeper into any topic. Ask Claude to explain in more detail.' },
+                  { problem: 'Lessons feel too fast', fix: 'Ask Claude to explain in more detail or dive deeper into any topic.' },
                 ] : []),
               ].map((t) => (
                 <div key={t.problem} className="border-l-4 border-amber-300 bg-white rounded-r-lg p-4 border border-gray-100">
@@ -688,12 +651,12 @@ export default function Module3GetStarted() {
                     { step: 'Connect', time: '1 min' },
                     { step: 'First Query', time: '30 sec' },
                   ]
-                : product === 'custom'
+                : product === 'gdrive'
                 ? [
-                    { step: 'Read API Docs', time: '15 min' },
-                    { step: 'Get Creds', time: '5 min' },
-                    { step: 'Build Server', time: '30 min' },
-                    { step: 'Test', time: '5 min' },
+                    { step: 'Download', time: '3 min' },
+                    { step: 'Credentials', time: '10 min' },
+                    { step: 'Authorize', time: '1 min' },
+                    { step: 'First Query', time: '30 sec' },
                   ]
                 : [
                     { step: 'Set Up Creds', time: '10 min' },

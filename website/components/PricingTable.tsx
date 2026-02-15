@@ -11,7 +11,7 @@ const tiers = [
       'Module 0: Claude Code Basics',
       'Module 1: PRD Generator',
       'Module 2: Rollout Plan Generator',
-      'Module 3: MCP Integrations Course (8 lessons)',
+      'Module 3: MCP Integrations Course (7 lessons)',
       'QUICKSTART guides',
       'Community access',
     ],

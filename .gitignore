@@ -2,6 +2,29 @@ node_modules/
 .next/
 .env
 .env.local
+.env.*
 dist/
 *.tsbuildinfo
 .vercel
+
+# Credentials and tokens — NEVER commit these
+*credentials*.json
+*client_secret*.json
+*token*.json
+*.pem
+*.key
+*.p12
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test folders (not part of the shipped product)
+/test/
+claude-pm-test/

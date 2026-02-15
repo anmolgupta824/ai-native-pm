@@ -1,0 +1,16 @@
+{
+  "currentLesson": 0,
+  "currentSection": 0,
+  "currentSectionName": "",
+  "completedLessons": [],
+  "startedAt": null,
+  "lastSessionAt": null,
+  "totalSections": {
+    "1": 7,
+    "2": 6,
+    "3": 6,
+    "4": 7,
+    "5": 6,
+    "6": 6
+  }
+}

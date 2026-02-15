@@ -79,18 +79,15 @@ export default function Module2GetStarted() {
                   <h3 className="text-sm font-bold text-brand-800 mb-2">Option A: Ask Claude to do it (Easiest)</h3>
                   <p className="text-sm text-brand-700 mb-3">Open Claude Code in the folder where you want the course, and paste:</p>
                   <div className="bg-white rounded-lg p-4 font-mono text-sm text-gray-700 border border-brand-200">
-                    Download the Rollout Planning Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-rollout/teacher-mode/mcp-server and run npm install &amp;&amp; npm run build.
+                    Download the Rollout Planning Course. Clone https://github.com/anmolgupta824/ai-native-pm.git
                   </div>
-                  <p className="text-xs text-brand-600 mt-2">Claude will clone, install, and build everything for you.</p>
+                  <p className="text-xs text-brand-600 mt-2">Claude will clone the repo for you.</p>
                 </div>
 
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
                   <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
                   <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
-                    git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
-                    cd ai-native-pm/modules/module-2-rollout/teacher-mode/mcp-server<br />
-                    npm install<br />
-                    npm run build
+                    git clone https://github.com/anmolgupta824/ai-native-pm.git
                   </div>
                 </div>
 
@@ -99,25 +96,24 @@ export default function Module2GetStarted() {
                   <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
                     <li>Go to <a href="https://github.com/anmolgupta824/ai-native-pm" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline">github.com/anmolgupta824/ai-native-pm</a></li>
                     <li>Click the green <strong>&quot;Code&quot;</strong> button → <strong>&quot;Download ZIP&quot;</strong></li>
-                    <li>Unzip and navigate to <code className="bg-gray-200 px-1 rounded text-xs">modules/module-2-rollout/teacher-mode/mcp-server</code></li>
-                    <li>Open Claude Code there and say: <em>&quot;Run npm install &amp;&amp; npm run build&quot;</em></li>
+                    <li>Unzip the downloaded file</li>
                   </ol>
                 </div>
               </div>
 
-              {/* Step 2: Connect */}
+              {/* Step 2: Open Claude Code */}
               <div className="border-l-4 border-brand-500 pl-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
-                  <h2 className="text-lg font-bold text-gray-900">Connect to Claude Code</h2>
+                  <h2 className="text-lg font-bold text-gray-900">Open Claude Code</h2>
                   <span className="text-xs text-gray-400">1 min</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder and paste this single prompt:</p>
+                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder:</p>
                 <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
-                  Add the Rollout Teacher as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command &quot;node&quot; and the full path to dist/index.js. Then restart to pick up the new server.
+                  cd ai-native-pm/modules/module-2-rollout &amp;&amp; claude
                 </div>
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                  <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will find the path, update your config, and restart.</p>
+                  <p className="text-sm text-green-800"><span className="font-semibold">No extra setup needed.</span> The CLAUDE.md file in this folder automatically configures Claude as your interactive teacher — no MCP server or config required.</p>
                 </div>
               </div>
 
@@ -128,9 +124,9 @@ export default function Module2GetStarted() {
                   <h2 className="text-lg font-bold text-gray-900">Start Your First Lesson</h2>
                   <span className="text-xs text-gray-400">15 min</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code and say:</p>
+                <p className="text-sm text-gray-600 mb-3">Once Claude Code is open, just say:</p>
                 <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
-                  I want to learn how to build better rollout plans. Start me on Lesson 1.
+                  Start the course
                 </div>
                 <p className="text-sm text-gray-600 mt-4 mb-3">The Teacher Mode will:</p>
                 <div className="space-y-2">
@@ -292,13 +288,14 @@ export default function Module2GetStarted() {
             <h2 className="text-lg font-bold text-gray-900 mb-4">Troubleshooting</h2>
             <div className="space-y-3">
               {[
-                { problem: '"MCP server not found"', fix: 'Make sure the path in your config points to the correct dist/index.js file. Run npm run build if dist/ is missing.' },
-                { problem: '"Cannot find module"', fix: 'Run npm install in the server directory.' },
                 { problem: '"command not found: claude"', fix: 'Claude Code isn\'t installed. Go to Module 0 to install it.' },
                 ...(mode === 'teacher' ? [
                   { problem: '"command not found: git"', fix: 'Use Option C (Download ZIP) instead, or install Git from git-scm.com.' },
-                  { problem: 'Lessons feel too fast', fix: 'Use the explain_concept tool to dive deeper into any topic. Ask Claude to explain in more detail.' },
+                  { problem: 'Claude doesn\'t seem to know the curriculum', fix: 'Make sure you opened Claude Code inside the modules/module-2-rollout folder. The CLAUDE.md file must be in your working directory.' },
+                  { problem: 'Lessons feel too fast', fix: 'Ask Claude to explain any topic in more detail or give you additional exercises.' },
                 ] : [
+                  { problem: '"MCP server not found"', fix: 'Make sure the path in your config points to the correct dist/index.js file. Run npm run build if dist/ is missing.' },
+                  { problem: '"Cannot find module"', fix: 'Run npm install in the server directory.' },
                   { problem: 'Risk assessment feels too generic', fix: '@-mention your PRD, architecture docs, and past incident reports. Specify product type, scale, and user base.' },
                   { problem: 'Timeline seems unrealistic', fix: 'Tell Claude about your team size, sprint cadence, and competing priorities.' },
                 ]),
