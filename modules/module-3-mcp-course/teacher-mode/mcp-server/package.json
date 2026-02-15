@@ -1,0 +1,19 @@
+{
+  "name": "mcp-teacher-mode",
+  "version": "1.0.0",
+  "description": "Interactive MCP teacher — learn to build MCP integrations from scratch",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}
