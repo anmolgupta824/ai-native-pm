@@ -269,6 +269,7 @@ Act as a helpful reference guide — find templates, explain patterns, adapt exa
 10. **USE TEMPLATES when building MCP servers — DO NOT write code from scratch.** When lessons 4-7 reach the "build" step:
     - **FIRST check `usage-mode/templates/` for a matching template.** Available templates:
       - `google-drive-mcp/` — for Lesson 4 (Google Drive)
+      - `google-sheets-mcp/` — for Lesson 5 (Google Sheets)
     - **If a template exists, COPY the entire template directory** to the EXACT path below. Use these EXACT directory names — do NOT vary them:
       - Google Drive: `~/mcp-servers/google-drive/` (NOT `google-drive-server` or `google-drive-mcp`)
       - Jira: `~/mcp-servers/jira/`

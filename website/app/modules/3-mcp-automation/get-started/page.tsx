@@ -268,13 +268,20 @@ export default function Module3GetStarted() {
                       <h2 className="text-lg font-bold text-gray-900">Set Your Jira Credentials</h2>
                       <span className="text-xs text-gray-400">1 min</span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-3">Add these to your shell profile (<code className="bg-gray-200 px-1 rounded text-xs">~/.zshrc</code> or <code className="bg-gray-200 px-1 rounded text-xs">~/.bashrc</code>):</p>
+                    <p className="text-sm text-gray-600 mb-3"><strong>Mac/Linux:</strong> Add these to your shell profile (<code className="bg-gray-200 px-1 rounded text-xs">~/.zshrc</code> or <code className="bg-gray-200 px-1 rounded text-xs">~/.bashrc</code>):</p>
                     <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
                       export JIRA_BASE_URL=&quot;https://yourcompany.atlassian.net&quot;<br />
                       export JIRA_EMAIL=&quot;you@company.com&quot;<br />
                       export JIRA_API_TOKEN=&quot;your-api-token-here&quot;
                     </div>
                     <p className="text-sm text-gray-600 mt-3">Then reload: <code className="bg-gray-200 px-1 rounded text-xs">source ~/.zshrc</code></p>
+                    <p className="text-sm text-gray-600 mt-3"><strong>Windows (PowerShell):</strong> Run these commands instead:</p>
+                    <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
+                      $env:JIRA_BASE_URL=&quot;https://yourcompany.atlassian.net&quot;<br />
+                      $env:JIRA_EMAIL=&quot;you@company.com&quot;<br />
+                      $env:JIRA_API_TOKEN=&quot;your-api-token-here&quot;
+                    </div>
+                    <p className="text-sm text-gray-600 mt-1">To make them permanent, use <strong>Settings → System → About → Advanced system settings → Environment Variables</strong>.</p>
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
                       <p className="text-sm text-blue-800">
                         <span className="font-semibold">Need a Jira API token?</span> Go to{' '}
@@ -373,7 +380,7 @@ export default function Module3GetStarted() {
                       <li>On the Scopes page, add: <code className="bg-gray-200 px-1 rounded text-xs">drive.file</code> and <code className="bg-gray-200 px-1 rounded text-xs">drive.readonly</code></li>
                       <li>Add yourself as a <strong>Test user</strong></li>
                       <li>Go to <strong>Credentials → Create Credentials → OAuth client ID</strong>, select <strong>Desktop app</strong></li>
-                      <li>Download the credentials JSON and save it to <code className="bg-gray-200 px-1 rounded text-xs">~/.google-drive-credentials.json</code></li>
+                      <li>Download the credentials JSON and save it to your home folder as <code className="bg-gray-200 px-1 rounded text-xs">.google-drive-credentials.json</code> (Mac/Linux: <code className="bg-gray-200 px-1 rounded text-xs">~/.google-drive-credentials.json</code> | Windows: <code className="bg-gray-200 px-1 rounded text-xs">C:\Users\YourName\.google-drive-credentials.json</code>)</li>
                     </ol>
                   </div>
 
@@ -612,10 +619,10 @@ export default function Module3GetStarted() {
                 { problem: '"Cannot find module"', fix: 'Run npm install in the server directory.' },
                 { problem: '"command not found: claude"', fix: 'Claude Code isn\'t installed. Go to Module 0 to install it.' },
                 ...(mode === 'usage' && product === 'jira' ? [
-                  { problem: '"Missing required environment variables"', fix: 'Set JIRA_BASE_URL, JIRA_EMAIL, and JIRA_API_TOKEN in your shell profile and reload with source ~/.zshrc.' },
+                  { problem: '"Missing required environment variables"', fix: 'Set JIRA_BASE_URL, JIRA_EMAIL, and JIRA_API_TOKEN. Mac/Linux: add to ~/.zshrc and reload with source ~/.zshrc. Windows: set via System Environment Variables or use $env: in PowerShell.' },
                   { problem: '"Authentication failed (401)"', fix: 'Double-check your email and API token. API tokens are different from your Jira password.' },
                 ] : mode === 'usage' && (product === 'gdrive' || product === 'gsheets') ? [
-                  { problem: '"Error: invalid_client"', fix: 'Double-check your credentials JSON file. Make sure it was downloaded from the OAuth credentials page and saved to ~/.google-drive-credentials.json.' },
+                  { problem: '"Error: invalid_client"', fix: 'Double-check your credentials JSON file. Make sure it was downloaded from the OAuth credentials page and saved to your home folder as .google-drive-credentials.json (Mac: ~/.google-drive-credentials.json, Windows: C:\\Users\\YourName\\.google-drive-credentials.json).' },
                   { problem: '"Error: access_denied"', fix: 'Make sure you added yourself as a test user in the OAuth consent screen settings.' },
                 ] : mode === 'usage' && product === 'figma' ? [
                   { problem: '"403 Forbidden"', fix: 'Your Figma token may not have access to that file. Make sure you generated the token from the same account that owns the file.' },
