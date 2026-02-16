@@ -128,14 +128,14 @@ export default function Module1GetStarted() {
                 <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
                   Start the course
                 </div>
-                <p className="text-sm text-gray-600 mt-4 mb-3">The Teacher Mode will:</p>
+                <p className="text-sm text-gray-600 mt-4 mb-3">The Teaching Mode will:</p>
                 <div className="space-y-2">
                   {[
-                    'Introduce what AI-assisted PRD writing is and why it matters',
-                    'Teach core techniques with real-world examples',
-                    'Give you hands-on exercises to practice',
-                    'Quiz you to reinforce your understanding',
-                    'Track your progress across all 6 lessons',
+                    'Ask about your product and feature to personalize the entire course',
+                    'Walk you through a PRD template questionnaire',
+                    'Generate your first PRD draft from your answers',
+                    'Deepen it with Socratic questioning and alternatives',
+                    'Validate, review from 9 stakeholder perspectives, and polish',
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <span className="w-5 h-5 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
@@ -151,15 +151,14 @@ export default function Module1GetStarted() {
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">4</span>
                   <h2 className="text-lg font-bold text-gray-900">Continue Through the Course</h2>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">Work through all 6 lessons at your own pace:</p>
+                <p className="text-sm text-gray-600 mb-4">Work through all 5 lessons at your own pace:</p>
                 <div className="space-y-2">
                   {[
-                    { num: '1', title: 'Welcome to PRD Generation', time: '15 min' },
-                    { num: '2', title: 'Context & Socratic Questioning', time: '20 min' },
-                    { num: '3', title: 'PRD Structure & Templates', time: '20 min' },
-                    { num: '4', title: 'Generating & Validating PRDs', time: '20 min' },
-                    { num: '5', title: 'Multi-Perspective Review', time: '20 min' },
-                    { num: '6', title: 'Edge Cases & Polish', time: '15 min' },
+                    { num: '1', title: 'Setup & First Draft', time: '20 min' },
+                    { num: '2', title: 'Deepen with Questions', time: '15 min' },
+                    { num: '3', title: 'Validate & Improve', time: '15 min' },
+                    { num: '4', title: 'Stakeholder Review', time: '15 min' },
+                    { num: '5', title: 'Polish & Export', time: '10 min' },
                   ].map((lesson) => (
                     <div key={lesson.num} className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
                       <span className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0">{lesson.num}</span>
@@ -241,17 +240,11 @@ export default function Module1GetStarted() {
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
                   <h2 className="text-lg font-bold text-gray-900">Start Using It</h2>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">Try these prompts in Claude Code:</p>
-                <div className="space-y-3">
-                  {[
-                    '@product-strategy.md @user-research.md\nI need to write a PRD for a new notifications center. Ask me questions first.',
-                    'Generate a PRD for a feature that lets users export dashboards as PDF. Use the feature-launch template.',
-                    'Validate this PRD and tell me what\'s missing.',
-                    'Review this PRD from an engineering perspective. Then from a design perspective.',
-                  ].map((prompt) => (
-                    <div key={prompt} className="bg-gray-100 rounded-lg p-3 font-mono text-sm text-gray-700 whitespace-pre-line">{prompt}</div>
-                  ))}
+                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the <code className="text-xs bg-gray-200 px-1.5 py-0.5 rounded">module-1-prd</code> directory and type:</p>
+                <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700 mb-4">
+                  Usage mode
                 </div>
+                <p className="text-sm text-gray-600 mb-4">You&apos;ll see all available tools and can start right away.</p>
               </div>
 
               {/* Available Tools */}
@@ -259,17 +252,39 @@ export default function Module1GetStarted() {
                 <h2 className="text-lg font-bold text-gray-900 mb-4">Available PRD Tools</h2>
                 <div className="space-y-2">
                   {[
-                    { tool: 'list_templates', desc: 'Browse available PRD templates (feature launch, API integration, redesign)' },
-                    { tool: 'get_template', desc: 'Get the interactive questionnaire for a specific template' },
-                    { tool: 'generate_prd', desc: 'Generate a complete PRD from your answers' },
-                    { tool: 'validate_prd', desc: 'Score your PRD for completeness (A-D grade)' },
-                    { tool: 'suggest_edge_cases', desc: 'Get edge cases specific to your PRD type and product' },
-                    { tool: 'review_prd', desc: 'Multi-perspective review from Engineer, Designer, and QA viewpoints' },
+                    { tool: 'list_templates', desc: 'Browse 4 PRD templates (Feature Launch, API Integration, Redesign, PRFAQ)' },
+                    { tool: 'get_questions', desc: 'Get the 10-question questionnaire for any template' },
+                    { tool: 'generate_prd', desc: 'Generate a full PRD from a template + your answers' },
+                    { tool: 'generate_prd_custom', desc: 'Generate a PRD with your own custom section headings' },
+                    { tool: 'validate_prd', desc: 'Score any PRD for completeness (A-D grade)' },
+                    { tool: 'validate_prd_file', desc: 'Score a PRD from a file path' },
+                    { tool: 'suggest_edge_cases', desc: 'Surface edge cases for your feature type' },
+                    { tool: 'review_prd', desc: 'Stakeholder feedback from 9 perspectives (backend_eng, frontend_eng, designer, qa, finance, legal, compliance, pm, marketing)' },
                   ].map((t) => (
                     <div key={t.tool} className="flex items-start gap-3 bg-gray-50 rounded-lg p-3">
                       <code className="text-xs bg-gray-200 px-2 py-1 rounded font-mono text-brand-700 flex-shrink-0">{t.tool}</code>
                       <p className="text-sm text-gray-600">{t.desc}</p>
                     </div>
+                  ))}
+                </div>
+
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-green-800"><span className="font-semibold">Already have a PRD?</span> Drag &amp; drop it into Claude Code, or point to a file in <code className="text-xs bg-green-100 px-1.5 py-0.5 rounded">output/</code>. You can validate it, review it from stakeholder perspectives, or suggest edge cases.</p>
+                </div>
+              </div>
+
+              {/* Example Prompts */}
+              <div className="border-l-4 border-brand-500 pl-6">
+                <h2 className="text-lg font-bold text-gray-900 mb-4">Example Prompts</h2>
+                <div className="space-y-3">
+                  {[
+                    'Generate a PRD for a feature that lets users export dashboards as PDF.\nUse the feature-launch template.',
+                    '@references/product-strategy.md @references/user-research.md\nI need to write a PRD for a new notifications center. Ask me questions first.',
+                    'Validate this PRD and tell me what\'s missing.',
+                    'Review this PRD from a backend_eng and designer perspective.',
+                    'I want to use my company\'s custom PRD format. Here are my sections: [list them]',
+                  ].map((prompt) => (
+                    <div key={prompt} className="bg-gray-100 rounded-lg p-3 font-mono text-sm text-gray-700 whitespace-pre-line">{prompt}</div>
                   ))}
                 </div>
               </div>
@@ -278,7 +293,7 @@ export default function Module1GetStarted() {
               <div className="bg-brand-50 border border-brand-200 rounded-xl p-6">
                 <h3 className="text-sm font-bold text-brand-800 mb-2">Want to learn the techniques behind the tools?</h3>
                 <p className="text-sm text-brand-700">
-                  Switch to the <button onClick={() => setMode('teacher')} className="underline font-semibold">Teacher Mode path</button> to take the full 6-lesson course. You&apos;ll learn Socratic questioning, context loading, multi-perspective review, and more.
+                  Switch to the <button onClick={() => setMode('teacher')} className="underline font-semibold">Teacher Mode path</button> to take the full 5-lesson course. You&apos;ll learn Socratic questioning, context loading, multi-perspective review, and more.
                 </p>
               </div>
             </>
@@ -316,15 +331,15 @@ export default function Module1GetStarted() {
               {(mode === 'teacher'
                 ? [
                     { step: 'Download', time: '2 min' },
-                    { step: 'Connect', time: '1 min' },
-                    { step: 'Lesson 1', time: '15 min' },
-                    { step: 'Full Course', time: '2-3 hrs' },
+                    { step: 'Open', time: '1 min' },
+                    { step: 'Lesson 1', time: '20 min' },
+                    { step: 'Full Course', time: '~75 min' },
                   ]
                 : [
                     { step: 'Download', time: '3 min' },
                     { step: 'Connect', time: '1 min' },
                     { step: 'First PRD', time: '20 min' },
-                    { step: 'Export', time: '3 min' },
+                    { step: 'Review', time: '5 min' },
                   ]
               ).map((s) => (
                 <div key={s.step} className="text-center">
