@@ -233,42 +233,40 @@ In Lesson 5, let students pick which reviewers are relevant to their PRD (3-4 ou
 
 ## Usage Mode
 
-If the user picks Usage Mode, gather context first:
+If the user picks Usage Mode, show this quick reference and let them drive. Do NOT ask setup questions or force a step-by-step flow. Just show what's available and respond to whatever they ask for.
 
-**Step 1: Ask for context**
-1. What company or product is this for?
-2. What feature or change do you want to write a PRD about?
+Show:
 
-**Step 2: Show available templates**
+```
+You're in Usage Mode — here's what you have:
 
-| Template | Best For |
-|----------|----------|
-| Feature Launch | New feature for an existing product |
-| API Integration | Third-party API or new API |
-| Product Redesign | Redesigning existing experiences |
-| PRFAQ | Amazon-style press release format |
-| Custom | Your own section headings |
+📋 Tools (use any time):
+  list_templates     — Browse 4 PRD templates (Feature Launch, API Integration, Redesign, PRFAQ)
+  get_questions      — Get the 10-question questionnaire for any template
+  generate_prd       — Generate a full PRD from a template + your answers
+  generate_prd_custom — Generate a PRD with your own custom section headings
+  validate_prd       — Score any PRD for completeness (A-D grade)
+  validate_prd_file  — Score a PRD from a file path
+  suggest_edge_cases — Surface edge cases for your feature type
+  review_prd         — Get feedback from 9 stakeholder perspectives (or pick specific ones)
 
-**Step 3: Walk them through the workflow**
+📁 Resources:
+  examples/    — 6 example PRDs to reference
+  templates/   — PRD template files
+  references/  — Sample docs for @-mention practice
+  output/      — Your saved PRD drafts
 
-Available tools:
-- `list_templates` -- Show available PRD template types
-- `get_questions` -- Get 10 questions for a specific template
-- `generate_prd` -- Generate a PRD from template + answers
-- `generate_prd_custom` -- Generate a PRD with custom section headings
-- `validate_prd` -- Score PRD completeness (pass full text, not file path)
-- `validate_prd_file` -- Score PRD from a file path (reads the file for you)
-- `suggest_edge_cases` -- List edge cases for a PRD type
-- `review_prd` -- Stakeholder review from 9 perspectives (backend_eng, frontend_eng, designer, qa, finance, legal, compliance, pm, marketing) or "all"
+💡 Already have a PRD? Drag & drop it into this chat, or point me to a file in output/.
+   I can validate it, review it from stakeholder perspectives, or suggest edge cases.
 
-Point them to:
-- `examples/` -- 6 example PRDs across all template types
-- `templates/` -- PRD templates (feature-launch, api-integration, redesign, prfaq)
-- `references/` -- Dummy reference docs for @-mention practice (product-strategy.md, user-research.md, api-architecture.md)
+Just tell me what you need. Examples:
+  "Generate a PRD for [your feature]. Use the feature-launch template."
+  "Validate this PRD and tell me what's missing."
+  "Review this PRD from a backend_eng and designer perspective."
+  "I want to use my company's custom PRD format."
+```
 
-Auto-save all generated PRDs to `output/`.
-
-Let users pick which reviewers to use (not forced to use all 9).
+Then wait for the user's request. Respond to exactly what they ask — don't add extra steps or questions unless genuinely needed to complete their request. Auto-save all generated PRDs to `output/`.
 
 ---
 

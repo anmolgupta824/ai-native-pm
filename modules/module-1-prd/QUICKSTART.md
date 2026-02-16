@@ -116,12 +116,41 @@ Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in
 
 ### Step 3: Start Using It
 
-Try these prompts in Claude Code:
+Open Claude Code in the `module-1-prd` directory and type:
 
 ```
-@references/product-strategy.md @references/user-research.md
-I need to write a PRD for a new notifications center. Ask me questions first.
+Usage mode
 ```
+
+You'll see all available tools and can start right away — just tell Claude what you need.
+
+Here's what you have:
+
+#### Tools
+
+| Tool | What it does |
+|------|-------------|
+| `list_templates` | Browse all templates (Feature Launch, API Integration, Redesign, PRFAQ) |
+| `get_questions` | Get the 10-question questionnaire for any template |
+| `generate_prd` | Generate a full PRD from a template + your answers |
+| `generate_prd_custom` | Generate a PRD with your own custom section headings |
+| `validate_prd` | Score any PRD for completeness (A-D grade) |
+| `validate_prd_file` | Score a PRD from a file path |
+| `suggest_edge_cases` | Surface edge cases for your feature type |
+| `review_prd` | Stakeholder feedback from 9 perspectives: backend_eng, frontend_eng, designer, qa, finance, legal, compliance, pm, marketing |
+
+#### Resources
+
+| Folder | What's inside |
+|--------|--------------|
+| `examples/` | 6 example PRDs (2 per template type) |
+| `templates/` | 4 PRD templates (feature-launch, api-integration, redesign, prfaq) |
+| `references/` | 3 sample docs for @-mention practice |
+| `output/` | Your saved PRD drafts |
+
+> **Already have a PRD?** Drag & drop it into Claude Code, or point to a file in `output/`. You can validate it, review it from stakeholder perspectives, or suggest edge cases.
+
+#### Example Prompts
 
 ```
 Generate a PRD for a feature that lets users export dashboards as PDF.
@@ -129,38 +158,21 @@ Use the feature-launch template.
 ```
 
 ```
+@references/product-strategy.md @references/user-research.md
+I need to write a PRD for a new notifications center. Ask me questions first.
+```
+
+```
 Validate this PRD and tell me what's missing.
 ```
 
 ```
-Review this PRD from a backend engineering perspective, then from design.
+Review this PRD from a backend_eng and designer perspective.
 ```
 
 ```
 I want to use my company's custom PRD format. Here are my sections: [list them]
 ```
-
-### Available PRD Tools
-
-| Tool | What it does |
-|------|-------------|
-| `list_templates` | See all templates (Feature Launch, API Integration, Redesign, PRFAQ) |
-| `get_questions` | Get a template's questionnaire |
-| `generate_prd` | Generate a PRD from a template + answers |
-| `generate_prd_custom` | Generate with your own custom section headings |
-| `validate_prd` | Score and grade (pass full PRD text) |
-| `validate_prd_file` | Score from a file path |
-| `suggest_edge_cases` | Surface edge cases for a feature |
-| `review_prd` | Feedback from 9 perspectives: backend_eng, frontend_eng, designer, qa, finance, legal, compliance, pm, marketing |
-
-### Resources
-
-| Folder | What's inside |
-|--------|--------------|
-| `examples/` | 6 example PRDs (2 per template type) |
-| `templates/` | 4 PRD templates (feature-launch, api-integration, redesign, prfaq) |
-| `references/` | 3 dummy reference docs for @-mention practice |
-| `output/` | Auto-saved PRD drafts |
 
 ---
 
