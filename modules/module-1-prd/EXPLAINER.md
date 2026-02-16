@@ -1,6 +1,6 @@
 # Module 1: Write a Production-Ready PRD with AI
 
-**Time:** 45–60 minutes | **Prerequisites:** Claude Code installed | **Cost:** Free
+**Time:** ~90 minutes | **Prerequisites:** Claude Code installed | **Cost:** Free
 
 > AI is most valuable when it helps you think better, not when it does all the thinking for you. This module teaches you to use Claude Code as a thinking partner — not a content generator.
 
@@ -17,7 +17,8 @@ This module flips the process. Instead of writing then reviewing, you'll **think
 - How to use @-mentions to give Claude full project context
 - The Socratic questioning technique for sharper problem statements
 - How to generate multiple strategic approaches before committing
-- How to get multi-perspective feedback (engineer, exec, user researcher)
+- How to get multi-perspective feedback from 9 stakeholder reviewers
+- The PRFAQ technique — Amazon-style "working backwards" from a press release
 
 ---
 
@@ -93,24 +94,39 @@ scalability, and time-to-ship.
 
 ### Technique 4: Multi-Perspective Feedback
 
-Before sharing your PRD with stakeholders, get feedback from multiple perspectives. Claude can role-play different reviewers:
+Before sharing your PRD with stakeholders, get feedback from multiple perspectives. The PRD Generator includes 9 simulated reviewers:
 
-| Perspective | What They Focus On | Sample Prompt |
-|-------------|-------------------|---------------|
-| **Engineering Lead** | Feasibility, technical debt, scalability, timeline realism | "Review this PRD as a senior engineer. What's underestimated?" |
-| **VP Product / Exec** | Strategic alignment, ROI, opportunity cost | "Review this as a VP. Is this the highest-impact thing to build?" |
-| **User Researcher** | User needs, usability gaps, accessibility | "Review this as a UX researcher. What user needs are we missing?" |
-| **QA Lead** | Edge cases, error states, testability | "Review this as QA. What test scenarios are missing?" |
+| Perspective | What They Focus On |
+|-------------|-------------------|
+| **Backend Engineer** (`backend_eng`) | APIs, database, services, caching, scalability |
+| **Frontend Engineer** (`frontend_eng`) | UI states, state management, performance, browser compat |
+| **Design Lead** (`designer`) | UX flows, accessibility, visual consistency, user research |
+| **QA Lead** (`qa`) | Testability, acceptance criteria, edge cases, regression |
+| **Finance Lead** (`finance`) | ROI, cost modeling, revenue impact, unit economics |
+| **Legal Counsel** (`legal`) | Privacy, compliance, liability, IP, data governance |
+| **Compliance Officer** (`compliance`) | Regulatory, SOC2, audit readiness, access controls |
+| **Senior PM** (`pm`) | Strategy alignment, scope, prioritization, competitive |
+| **Marketing Lead** (`marketing`) | Positioning, messaging, launch comms, growth impact |
+
+You don't need all 9 for every PRD. Pick the 3-4 most relevant, or use "all" for a comprehensive review.
 
 ```
-Here's my PRD draft. Review it from three perspectives:
-
-1. As a senior backend engineer — flag technical risks
-2. As VP Product — challenge the strategic rationale
-3. As a user researcher — identify gaps in user understanding
-
-Be specific and critical. I'd rather fix problems now than in review.
+Review this PRD from a backend_eng and designer perspective.
+Then run it through finance and pm.
 ```
+
+### Technique 5: PRFAQ — Working Backwards
+
+The PRFAQ (Press Release / FAQ) technique, popularized by Amazon, starts with the end state: a press release announcing your feature as if it's already launched. Then you work backwards to fill in the details.
+
+| Section | Purpose |
+|---------|---------|
+| Headline + Subheadline | Forces a crisp value proposition |
+| Press Release Body | The complete story in 3-4 paragraphs |
+| Customer Quote | Makes you think from the user's perspective |
+| Internal FAQ | Surfaces leadership concerns proactively |
+
+The PRD Generator includes a PRFAQ template alongside the standard Feature Launch, API Integration, and Redesign templates.
 
 ---
 
@@ -202,7 +218,7 @@ Help me think through this before we start writing.
 
 **Problem: Stakeholders want a different format**
 - *Cause:* Your team uses a custom PRD template
-- *Fix:* Edit the templates in `templates/` to match your team's format. The MCP server will generate PRDs using your structure. You can also paste the generated PRD into your team's template manually.
+- *Fix:* Use the `generate_prd_custom` tool — pass your own section headings and the server will generate a PRD in your format. You can also edit the templates in `templates/` or paste the generated PRD into your team's template manually.
 
 **Problem: I don't know how to answer some questions**
 - *Cause:* You need more research before writing the PRD
@@ -214,7 +230,7 @@ Help me think through this before we start writing.
 
 Now that you can generate production-ready PRDs:
 
-- **Try all 3 templates** — Feature launch, API integration, and redesign each surface different thinking
+- **Try all 4 templates** — Feature launch, API integration, redesign, and PRFAQ each surface different thinking
 - **Validate an existing PRD** — Paste one of your old PRDs and see how it scores
 - **Move to Module 2** — [Rollout Plan Generator](../module-2-rollout/) uses the same AI-partnership approach for launch planning
 
@@ -224,8 +240,11 @@ Now that you can generate production-ready PRDs:
 
 | Tool | What It Does | When to Use |
 |------|-------------|-------------|
-| `list_templates` | Shows 3 PRD template types | Start here to pick the right template |
+| `list_templates` | Shows 4 PRD template types | Start here to pick the right template |
 | `get_questions` | Returns 10 questions for your template | After picking a template |
 | `generate_prd` | Creates full PRD from your answers | After answering questions |
+| `generate_prd_custom` | Creates PRD with your own section headings | When using a custom company format |
 | `validate_prd` | Scores PRD completeness (A–D) | After generation, and before sharing |
+| `validate_prd_file` | Scores PRD from a file path | When PRD is saved as a file |
 | `suggest_edge_cases` | Lists edge cases for your PRD type | During or after PRD generation |
+| `review_prd` | Stakeholder review from 9 perspectives | Before sharing with real stakeholders |

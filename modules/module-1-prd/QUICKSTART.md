@@ -13,14 +13,14 @@ Get up and running in under 10 minutes.
 
 | Path | Who it's for | Time to first result |
 |------|-------------|---------------------|
-| **A: Learn PRD Generation (Teacher Mode)** | New to AI-assisted PRDs | ~10 min to first lesson |
+| **A: Learn PRD Generation (Teaching Mode)** | New to AI-assisted PRDs | ~10 min to first PRD draft |
 | **B: Use PRD Tools (Usage Mode)** | Already familiar with PRDs | ~5 min to first PRD |
 
 ---
 
-## Path A: Learn PRD Generation (Teacher Mode)
+## Path A: Learn PRD Generation (Teaching Mode)
 
-Start here if you want to learn the 4 core techniques for AI-assisted PRD writing.
+Start here to build a complete PRD from scratch over 6 lessons.
 
 ### Step 1: Download the Module (~2 min)
 
@@ -31,54 +31,58 @@ Pick one of three options:
 Open Claude Code and paste:
 
 ```
-Download the PRD Generator Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-1-prd/teacher-mode/mcp-server and run npm install && npm run build.
+Download the PRD Generator Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-1-prd/mcp-server and run npm install && npx tsc.
 ```
 
 #### Option B: Git clone (Terminal)
 
 ```bash
 git clone https://github.com/anmolgupta824/ai-native-pm.git
-cd ai-native-pm/modules/module-1-prd/teacher-mode/mcp-server
+cd ai-native-pm/modules/module-1-prd/mcp-server
 npm install
-npm run build
+npx tsc
 ```
 
 #### Option C: Download ZIP (No terminal needed)
 
 1. Go to [github.com/anmolgupta824/ai-native-pm](https://github.com/anmolgupta824/ai-native-pm)
-2. Click the green **"Code"** button → **"Download ZIP"**
-3. Unzip and navigate to `modules/module-1-prd/teacher-mode/mcp-server`
-4. Open Claude Code there and say: *"Run npm install && npm run build"*
+2. Click the green **"Code"** button > **"Download ZIP"**
+3. Unzip and navigate to `modules/module-1-prd/mcp-server`
+4. Open Claude Code there and say: *"Run npm install && npx tsc"*
 
 ### Step 2: Connect to Claude Code (~1 min)
 
 Open Claude Code in the module folder and paste:
 
 ```
-Add the PRD Teacher as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
+Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the mcp-server directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
 ### Step 3: Start Your First Lesson (~10 min)
 
-Open Claude Code and say:
+Open Claude Code in the `module-1-prd` directory and say:
 
 ```
 I want to learn how to write better PRDs with AI. Start me on Lesson 1.
 ```
 
-The Teacher Mode will guide you through 6 lessons covering context loading, Socratic questioning, PRD generation, validation, multi-perspective review, and edge case analysis.
+The Teaching Mode will guide you through 5 lessons:
 
-### Teacher Mode Commands
+| Lesson | What You'll Do | Duration |
+|--------|---------------|----------|
+| 1 | Pick a template, answer all questions, generate first draft | 20 min |
+| 2 | Socratic questioning, add alternative approaches | 15 min |
+| 3 | Automated scoring, fix gaps, add edge cases | 15 min |
+| 4 | Simulated stakeholder review from 9 perspectives | 15 min |
+| 5 | Final validation, compare journey, export | 10 min |
+
+### Teaching Mode Commands
 
 | What to say | What happens |
 |-------------|--------------|
-| "Start Lesson 1" | Begin the Welcome lesson |
+| "Start Lesson 1" | Begin building your PRD |
 | "Continue" | Get the next section of the current lesson |
-| "Start Lesson 4" | Jump to Generating & Validating PRDs |
-| "Resume my course" | Pick up where you left off after restarting |
-| "Explain what Socratic questioning is" | Get a PM-friendly explanation |
-| "Give me an exercise for Lesson 3" | Hands-on practice |
-| "Quiz me on Lesson 2" | Test your knowledge |
+| "Start Lesson 3" | Jump to Validate & Improve |
 | "Show my progress" | See completed lessons with section-level detail |
 
 ---
@@ -107,7 +111,7 @@ npx tsc
 ### Step 2: Connect to Claude Code (~1 min)
 
 ```
-Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
+Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the mcp-server directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
 ### Step 3: Start Using It
@@ -115,7 +119,7 @@ Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in
 Try these prompts in Claude Code:
 
 ```
-@product-strategy.md @user-research.md
+@references/product-strategy.md @references/user-research.md
 I need to write a PRD for a new notifications center. Ask me questions first.
 ```
 
@@ -129,19 +133,34 @@ Validate this PRD and tell me what's missing.
 ```
 
 ```
-Review this PRD from an engineering perspective. Then from a design perspective.
+Review this PRD from a backend engineering perspective, then from design.
+```
+
+```
+I want to use my company's custom PRD format. Here are my sections: [list them]
 ```
 
 ### Available PRD Tools
 
 | Tool | What it does |
 |------|-------------|
-| `generate_prd` | Generate a complete PRD from context |
-| `validate_prd` | Score and grade a PRD for completeness |
+| `list_templates` | See all templates (Feature Launch, API Integration, Redesign, PRFAQ) |
+| `get_questions` | Get a template's questionnaire |
+| `generate_prd` | Generate a PRD from a template + answers |
+| `generate_prd_custom` | Generate with your own custom section headings |
+| `validate_prd` | Score and grade (pass full PRD text) |
+| `validate_prd_file` | Score from a file path |
 | `suggest_edge_cases` | Surface edge cases for a feature |
-| `get_template` | Get a PRD template (feature-launch, api-integration, redesign) |
-| `list_templates` | See all available templates |
-| `review_prd` | Get feedback from Engineer, Designer, and QA perspectives |
+| `review_prd` | Feedback from 9 perspectives: backend_eng, frontend_eng, designer, qa, finance, legal, compliance, pm, marketing |
+
+### Resources
+
+| Folder | What's inside |
+|--------|--------------|
+| `examples/` | 6 example PRDs (2 per template type) |
+| `templates/` | 4 PRD templates (feature-launch, api-integration, redesign, prfaq) |
+| `references/` | 3 dummy reference docs for @-mention practice |
+| `output/` | Auto-saved PRD drafts |
 
 ---
 
@@ -151,8 +170,8 @@ Review this PRD from an engineering perspective. Then from a design perspective.
 |------|------|------|
 | **Teacher** | Download & install | 2 min |
 | **Teacher** | Connect to Claude Code | 1 min |
-| **Teacher** | Lesson 1 | 10 min |
-| **Teacher** | Full course (6 lessons) | 2-3 hrs |
+| **Teacher** | Lesson 1 | 15 min |
+| **Teacher** | Full course (5 lessons) | ~75 min |
 | **Usage** | Download, build, connect | 5 min |
 
 ---
@@ -161,9 +180,9 @@ Review this PRD from an engineering perspective. Then from a design perspective.
 
 Your progress is automatically saved. When you come back:
 
-1. **Open Claude Code** in the same project folder
-2. **Say:** `Resume my PRD course`
-3. The Teacher will tell you exactly where you left off
+1. **Open Claude Code** in the `module-1-prd` directory
+2. **Say anything** — Claude will detect your saved progress and offer to resume
+3. Your PRD drafts are in `output/` — they persist between sessions
 
 > **Note:** The MCP server config persists — you don't need to re-add it each time.
 
@@ -174,7 +193,7 @@ Your progress is automatically saved. When you come back:
 **Server not connecting after restart?**
 Re-add it:
 ```
-Reconnect the PRD Teacher server. The server file is at ./dist/index.js in the teacher-mode/mcp-server directory. Add it to my Claude Code MCP config and restart.
+Reconnect the PRD Generator server. The server file is at ./dist/index.js in the mcp-server directory. Add it to my Claude Code MCP config and restart.
 ```
 
 **Build failed?**
@@ -182,7 +201,7 @@ Make sure you're in the correct directory and have Node.js 18+:
 ```bash
 node --version  # Should be 18+
 npm install
-npm run build   # or npx tsc for usage mode
+npx tsc
 ```
 
 **PRD feels incomplete?**

@@ -3,14 +3,15 @@
   "currentSection": 0,
   "currentSectionName": "",
   "completedLessons": [],
+  "referenceProduct": null,
+  "projectIdea": null,
   "startedAt": null,
   "lastSessionAt": null,
   "totalSections": {
-    "1": 7,
-    "2": 6,
-    "3": 6,
-    "4": 7,
-    "5": 6,
-    "6": 6
+    "1": 6,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "5": 4
   }
 }

@@ -8,6 +8,7 @@ import {
   ListResourcesRequestSchema,
   ReadResourceRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import * as fs from "fs";
 
 // ── PRD Templates ──────────────────────────────────────────────
 
@@ -100,6 +101,37 @@ const PRD_TEMPLATES: Record<string, PRDTemplate> = {
       "What's the success criteria? When do you know the redesign worked?",
       "Who needs to approve the new design?",
       "What's the biggest risk with this redesign?",
+    ],
+  },
+  prfaq: {
+    name: "PRFAQ (Press Release / FAQ)",
+    description:
+      "Amazon-style working backwards document — start with the press release, then fill in the details",
+    sections: [
+      "Press Release — Headline",
+      "Press Release — Subheadline",
+      "Press Release — Body",
+      "Customer Problem",
+      "Solution",
+      "Customer Quote",
+      "How to Get Started",
+      "Executive Quote",
+      "FAQ — Customer",
+      "FAQ — Internal",
+      "Success Metrics",
+      "Open Questions",
+    ],
+    questions: [
+      "What is the product or feature? Write a one-sentence headline as if announcing it publicly.",
+      "Who is the target customer? What key benefit does this deliver in one sentence?",
+      "What customer problem does this solve? Why is it painful today?",
+      "How does the product/feature solve this problem? Describe the core experience.",
+      "What would a delighted customer say about this? (write a realistic quote)",
+      "How does a customer get started? What are the first 3 steps?",
+      "What does success look like? List 2-3 measurable outcomes.",
+      "What are the top 3 questions a customer would ask? (FAQ)",
+      "What are the top 3 questions your leadership team would ask? (internal FAQ)",
+      "What's the biggest risk or open question that could derail this?",
     ],
   },
 };
@@ -231,6 +263,43 @@ function generatePRD(data: PRDAnswers): string {
   return prd;
 }
 
+// ── Custom PRD Generation ─────────────────────────────────────
+
+function generateCustomPRD(
+  productName: string,
+  sections: string[],
+  answers?: Record<string, string>
+): string {
+  const now = new Date().toISOString().split("T")[0];
+
+  let prd = `# PRD: ${productName}\n\n`;
+  prd += `**Template:** Custom Format\n`;
+  prd += `**Created:** ${now}\n`;
+  prd += `**Status:** Draft\n`;
+  prd += `**Author:** [Your Name]\n\n`;
+  prd += `---\n\n`;
+
+  for (const section of sections) {
+    prd += `## ${section}\n\n`;
+    const content = answers?.[section];
+    if (content) {
+      prd += `${content}\n\n`;
+    } else {
+      prd += `*[TODO: Fill in this section]*\n\n`;
+    }
+  }
+
+  prd += `---\n\n`;
+  prd += `## Pre-Ship Checklist\n\n`;
+  prd += `- [ ] All sections reviewed and complete\n`;
+  prd += `- [ ] Stakeholder sign-off obtained\n`;
+  prd += `- [ ] Success metrics finalized\n`;
+  prd += `- [ ] Edge cases documented\n`;
+  prd += `- [ ] Launch date confirmed\n`;
+
+  return prd;
+}
+
 // ── MCP Server ─────────────────────────────────────────────────
 
 const server = new Server(
@@ -304,16 +373,33 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "validate_prd",
       description:
-        "Validate a PRD for completeness. Returns a score, missing sections, and improvement suggestions. Pass the full PRD text.",
+        "Validate a PRD for completeness. Returns a score (A/B/C/D grade), missing sections, and improvement suggestions. IMPORTANT: Pass the FULL TEXT of your PRD (not a file path). Read the file first, then pass its contents here.",
       inputSchema: {
         type: "object" as const,
         properties: {
           prdContent: {
             type: "string",
-            description: "The full PRD content to validate",
+            description:
+              "The full PRD content to validate. Must be the actual PRD text, not a file path. Read the PRD file first, then pass its text content here.",
           },
         },
         required: ["prdContent"],
+      },
+    },
+    {
+      name: "validate_prd_file",
+      description:
+        "Convenience wrapper: Reads a PRD from a file path and validates it. Returns a score (A/B/C/D grade), missing sections, and improvement suggestions. Use this when the PRD is saved as a file.",
+      inputSchema: {
+        type: "object" as const,
+        properties: {
+          filePath: {
+            type: "string",
+            description:
+              "Absolute path to the PRD file (e.g., '/Users/you/project/output/prd-draft.md')",
+          },
+        },
+        required: ["filePath"],
       },
     },
     {
@@ -337,21 +423,59 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
+      name: "generate_prd_custom",
+      description:
+        "Generate a PRD using a custom format with user-defined section headings instead of a predefined template. Use this when the user wants their own company format or a structure that doesn't match the built-in templates.",
+      inputSchema: {
+        type: "object" as const,
+        properties: {
+          productName: {
+            type: "string",
+            description: "Name of the product or feature",
+          },
+          sections: {
+            type: "array",
+            items: { type: "string" },
+            description:
+              'Array of custom section headings in order (e.g., ["Executive Summary", "Problem Space", "Solution Design", "Go-to-Market"])',
+          },
+          answers: {
+            type: "object",
+            description:
+              "Map of section heading to content for that section. Use the exact section heading strings from the sections array as keys.",
+            additionalProperties: { type: "string" },
+          },
+        },
+        required: ["productName", "sections"],
+      },
+    },
+    {
       name: "review_prd",
       description:
-        "Review a PRD from the perspective of an Engineering Lead, Design Lead, or QA Lead. Each reviewer analyzes the PRD through their professional lens and provides strengths, concerns, and actionable suggestions. Use perspective 'all' to get reviews from all three perspectives at once.",
+        "Review a PRD from a specific stakeholder perspective. 9 reviewers available: backend_eng (APIs, DB, services), frontend_eng (UI, state, performance), designer (UX, accessibility), qa (testability, edge cases), finance (ROI, costs), legal (privacy, compliance, IP), compliance (regulatory, SOC2, audit), pm (strategy, scope, prioritization), marketing (positioning, launch comms). Use 'all' for a combined review from all 9.",
       inputSchema: {
         type: "object" as const,
         properties: {
           prd_content: {
             type: "string",
-            description: "The full PRD content to review",
+            description: "The full PRD content to review (paste the entire PRD text, not a file path)",
           },
           perspective: {
             type: "string",
-            enum: ["engineer", "designer", "qa", "all"],
+            enum: [
+              "backend_eng",
+              "frontend_eng",
+              "designer",
+              "qa",
+              "finance",
+              "legal",
+              "compliance",
+              "pm",
+              "marketing",
+              "all",
+            ],
             description:
-              "Which reviewer perspective: 'engineer' (technical feasibility, scalability), 'designer' (UX, accessibility, consistency), 'qa' (testability, acceptance criteria, regression risk), or 'all' for a combined multi-perspective review",
+              "Which reviewer perspective to use, or 'all' for a combined multi-perspective review from all 9 reviewers",
           },
         },
         required: ["prd_content", "perspective"],
@@ -504,6 +628,92 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       };
     }
 
+    case "validate_prd_file": {
+      const filePath = args?.filePath as string;
+      try {
+        const fileContent = fs.readFileSync(filePath, "utf-8");
+        const fileValidation = validatePRD(fileContent);
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                {
+                  filePath,
+                  score: fileValidation.score,
+                  grade:
+                    fileValidation.score >= 90
+                      ? "A - Excellent"
+                      : fileValidation.score >= 80
+                        ? "B - Good"
+                        : fileValidation.score >= 60
+                          ? "C - Needs Work"
+                          : "D - Incomplete",
+                  isComplete: fileValidation.isComplete,
+                  missing: fileValidation.missing,
+                  suggestions: fileValidation.suggestions,
+                  message: fileValidation.isComplete
+                    ? "This PRD is solid! Review the suggestions below for polish."
+                    : "This PRD needs more work before it's ready to share. Focus on the missing sections.",
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
+      } catch (err) {
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: `Error reading file: ${err instanceof Error ? err.message : String(err)}. Make sure the file path is absolute and the file exists.`,
+            },
+          ],
+          isError: true,
+        };
+      }
+    }
+
+    case "generate_prd_custom": {
+      const customPrd = generateCustomPRD(
+        args?.productName as string,
+        args?.sections as string[],
+        args?.answers as Record<string, string> | undefined
+      );
+      const customValidation = validatePRD(customPrd);
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                prd: customPrd,
+                validation: {
+                  score: customValidation.score,
+                  isComplete: customValidation.isComplete,
+                  missing: customValidation.missing,
+                  suggestions: customValidation.suggestions,
+                },
+                nextSteps: customValidation.isComplete
+                  ? [
+                      "Review the PRD with your team",
+                      "Share with engineering for feasibility check",
+                      "Get stakeholder sign-off",
+                    ]
+                  : [
+                      `Address missing sections: ${customValidation.missing.join(", ")}`,
+                      ...customValidation.suggestions,
+                    ],
+              },
+              null,
+              2
+            ),
+          },
+        ],
+      };
+    }
+
     case "suggest_edge_cases": {
       const edgeCases = getEdgeCases(
         args?.template as string,
@@ -533,7 +743,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const perspective = args?.perspective as string;
 
       if (perspective === "all") {
-        const reviews = ["engineer", "designer", "qa"].map((p) =>
+        const reviews = Object.keys(REVIEWER_PERSONAS).map((p) =>
           reviewPRD(prdContent, p)
         );
 
@@ -647,47 +857,91 @@ interface ReviewerPersona {
 }
 
 const REVIEWER_PERSONAS: Record<string, ReviewerPersona> = {
-  engineer: {
-    perspective: "engineer",
-    role: "Engineering Lead",
+  backend_eng: {
+    perspective: "backend_eng",
+    role: "Backend Engineer",
     focusAreas: [
-      "Technical feasibility",
       "API design",
+      "Database schema",
+      "Service architecture",
+      "Caching strategy",
       "Scalability",
-      "Edge cases",
-      "Dependencies",
-      "Performance",
+      "Data consistency",
     ],
     critiqueFramework: {
-      feasibility: [
-        "Is this technically achievable with the current stack?",
-        "Are there hidden technical complexities not addressed?",
-        "What infrastructure changes would be needed?",
+      apiDesign: [
+        "Are API endpoints well-defined with clear request/response schemas?",
+        "Is the API versioning strategy defined?",
+        "Are there missing endpoints needed for the feature?",
+      ],
+      database: [
+        "Is the data model normalized appropriately?",
+        "What indexes are needed for query performance?",
+        "How does this affect database migration for existing data?",
+      ],
+      services: [
+        "Which microservices are affected or need to be created?",
+        "How are inter-service dependencies managed?",
+        "What happens if a downstream service is unavailable?",
+      ],
+      caching: [
+        "What caching strategy is appropriate (Redis, in-memory, CDN)?",
+        "How are cache invalidation scenarios handled?",
+        "What's the cache-miss penalty at peak load?",
       ],
       scalability: [
         "How does this perform at 10x current load?",
         "Are there database query concerns with growing data?",
         "Will this require horizontal or vertical scaling?",
       ],
-      dependencies: [
-        "What external services does this depend on?",
-        "Are there version compatibility risks?",
-        "What happens if a dependency goes down?",
-      ],
-      edgeCases: [
-        "What race conditions could occur?",
-        "How are concurrent modifications handled?",
-        "What about data migration for existing users?",
-      ],
       security: [
         "Are there authentication or authorization gaps?",
-        "Is sensitive data properly handled?",
+        "Is sensitive data properly encrypted at rest and in transit?",
         "Are inputs validated and sanitized?",
       ],
-      timeline: [
-        "Is the engineering estimate realistic?",
-        "What technical debt will this create?",
-        "Are there prerequisites that need to be built first?",
+    },
+  },
+  frontend_eng: {
+    perspective: "frontend_eng",
+    role: "Frontend Engineer",
+    focusAreas: [
+      "UI implementation",
+      "State management",
+      "Performance",
+      "Browser compatibility",
+      "Component architecture",
+      "Responsiveness",
+    ],
+    critiqueFramework: {
+      uiImplementation: [
+        "Are all UI states defined (loading, empty, error, success)?",
+        "What component library or design system components are reused?",
+        "Are there complex interactions that need detailed specs?",
+      ],
+      stateManagement: [
+        "How is client-side state managed for this feature?",
+        "Are there optimistic update scenarios?",
+        "How is state synchronized across tabs or sessions?",
+      ],
+      performance: [
+        "What's the expected bundle size impact?",
+        "Are there lazy-loading opportunities?",
+        "How is rendering performance on large lists or datasets?",
+      ],
+      browserCompat: [
+        "What browsers and versions need to be supported?",
+        "Are there CSS or JS features with limited browser support?",
+        "How does this work without JavaScript enabled?",
+      ],
+      accessibility: [
+        "Are keyboard navigation and focus management handled?",
+        "Do interactive elements have proper ARIA attributes?",
+        "Is the tab order logical and complete?",
+      ],
+      responsiveness: [
+        "How does the layout adapt from mobile to desktop?",
+        "Are touch targets at least 44x44px on mobile?",
+        "What's the experience on slow 3G connections?",
       ],
     },
   },
@@ -779,6 +1033,226 @@ const REVIEWER_PERSONAS: Record<string, ReviewerPersona> = {
       ],
     },
   },
+  finance: {
+    perspective: "finance",
+    role: "Finance Lead",
+    focusAreas: [
+      "ROI analysis",
+      "Cost modeling",
+      "Revenue impact",
+      "Budget allocation",
+      "Unit economics",
+      "Financial risk",
+    ],
+    critiqueFramework: {
+      roi: [
+        "What's the expected ROI and payback period?",
+        "How does the cost of building this compare to the revenue it generates?",
+        "Are there cheaper alternatives that deliver 80% of the value?",
+      ],
+      costModeling: [
+        "What are the infrastructure costs at projected scale?",
+        "Are there third-party licensing or API costs?",
+        "What's the ongoing maintenance cost vs. one-time build cost?",
+      ],
+      revenueImpact: [
+        "Does this directly drive revenue, reduce churn, or improve conversion?",
+        "What's the projected revenue impact over 6 and 12 months?",
+        "How does this affect average revenue per user (ARPU)?",
+      ],
+      budgetAllocation: [
+        "Is this the highest-value use of the engineering budget?",
+        "What's the opportunity cost of building this vs. something else?",
+        "Are there headcount or contractor budget implications?",
+      ],
+      unitEconomics: [
+        "How does this affect customer acquisition cost (CAC)?",
+        "What's the impact on lifetime value (LTV)?",
+        "Does this improve or worsen the LTV:CAC ratio?",
+      ],
+      financialRisk: [
+        "What if adoption is 50% lower than projected?",
+        "Are there contractual or SLA financial penalties to consider?",
+        "What's the sunk cost if this project is cancelled midway?",
+      ],
+    },
+  },
+  legal: {
+    perspective: "legal",
+    role: "Legal Counsel",
+    focusAreas: [
+      "Privacy compliance",
+      "Terms of service",
+      "Liability exposure",
+      "Intellectual property",
+      "Data governance",
+      "Contractual obligations",
+    ],
+    critiqueFramework: {
+      privacy: [
+        "Does this collect, store, or process personal data (PII)?",
+        "Is a privacy impact assessment required?",
+        "Are user consent mechanisms adequate under GDPR/CCPA?",
+      ],
+      termsOfService: [
+        "Does this require changes to the Terms of Service?",
+        "Are there new user agreements or disclosures needed?",
+        "How are users notified of changes to data handling?",
+      ],
+      liability: [
+        "What liability exposure does this feature create?",
+        "Are there indemnification clauses that need updating?",
+        "What happens if this feature causes data loss for a customer?",
+      ],
+      intellectualProperty: [
+        "Are there patent or IP concerns with the approach?",
+        "Does this use any open-source components with restrictive licenses?",
+        "Are there trademark considerations for naming?",
+      ],
+      dataGovernance: [
+        "Where is data stored geographically (data residency)?",
+        "What's the data retention and deletion policy?",
+        "How is data shared with or accessed by third parties?",
+      ],
+      contractualObligations: [
+        "Does this affect existing customer contracts or SLAs?",
+        "Are there vendor agreements that need to be reviewed?",
+        "What notification obligations exist for enterprise customers?",
+      ],
+    },
+  },
+  compliance: {
+    perspective: "compliance",
+    role: "Compliance Officer",
+    focusAreas: [
+      "Regulatory requirements",
+      "Audit readiness",
+      "SOC2 compliance",
+      "Data retention",
+      "Access controls",
+      "Change management",
+    ],
+    critiqueFramework: {
+      regulatory: [
+        "Which regulations apply (GDPR, CCPA, HIPAA, SOX)?",
+        "Are there industry-specific compliance requirements?",
+        "Does this trigger any new regulatory filing requirements?",
+      ],
+      auditReadiness: [
+        "Is this feature auditable (logging, traceability)?",
+        "Are there audit trail requirements for data changes?",
+        "Can we demonstrate compliance to auditors?",
+      ],
+      soc2: [
+        "How does this affect SOC2 Type II compliance?",
+        "Are there new security controls needed?",
+        "Does this change the scope of our security assessment?",
+      ],
+      dataRetention: [
+        "What are the data retention requirements?",
+        "How is data purged when retention periods expire?",
+        "Are there legal hold implications?",
+      ],
+      accessControls: [
+        "Are role-based access controls (RBAC) properly defined?",
+        "Is the principle of least privilege applied?",
+        "How are admin actions logged and monitored?",
+      ],
+      changeManagement: [
+        "Does this follow the change management process?",
+        "Is a rollback plan documented and tested?",
+        "Are change advisory board (CAB) approvals needed?",
+      ],
+    },
+  },
+  pm: {
+    perspective: "pm",
+    role: "Senior PM",
+    focusAreas: [
+      "Product strategy alignment",
+      "Scope management",
+      "Prioritization",
+      "Competitive analysis",
+      "Stakeholder alignment",
+      "Success definition",
+    ],
+    critiqueFramework: {
+      strategyAlignment: [
+        "How does this align with the product vision and roadmap?",
+        "Does this support the company's current strategic priorities?",
+        "What OKRs does this contribute to?",
+      ],
+      scopeManagement: [
+        "Is the scope clearly defined with explicit non-goals?",
+        "What's the MVP vs. full vision? Are they clearly separated?",
+        "Are there scope creep risks that need guardrails?",
+      ],
+      prioritization: [
+        "Why is this more important than other items on the backlog?",
+        "What's the impact vs. effort assessment?",
+        "What gets deprioritized to make room for this?",
+      ],
+      competitive: [
+        "How do competitors handle this? What can we learn?",
+        "Does this create or maintain competitive advantage?",
+        "Is there a risk of fast follower if we invest heavily?",
+      ],
+      stakeholderAlignment: [
+        "Are all key stakeholders aligned on the approach?",
+        "Who has veto power and have they signed off?",
+        "What cross-team dependencies need coordination?",
+      ],
+      successDefinition: [
+        "Are success metrics specific, measurable, and time-bound?",
+        "What does failure look like and how would you detect it?",
+        "What's the decision framework for continuing vs. killing this?",
+      ],
+    },
+  },
+  marketing: {
+    perspective: "marketing",
+    role: "Marketing Lead",
+    focusAreas: [
+      "Product positioning",
+      "Messaging and naming",
+      "Launch communications",
+      "Customer education",
+      "Market timing",
+      "Growth impact",
+    ],
+    critiqueFramework: {
+      positioning: [
+        "How is this positioned relative to competitors?",
+        "Does this reinforce or dilute the brand positioning?",
+        "What's the one-sentence value proposition for customers?",
+      ],
+      messaging: [
+        "Is the feature naming clear, memorable, and on-brand?",
+        "What messaging framework will be used for launch?",
+        "How will this be explained to non-technical users?",
+      ],
+      launchComms: [
+        "What channels will be used for launch (email, blog, social)?",
+        "Is a press release or analyst briefing appropriate?",
+        "What's the launch timeline relative to marketing campaigns?",
+      ],
+      customerEducation: [
+        "What documentation, tutorials, or videos are needed?",
+        "How will existing customers be notified and educated?",
+        "Are there customer webinars or training sessions planned?",
+      ],
+      marketTiming: [
+        "Is the launch timed with any industry events or cycles?",
+        "Are there competitor launches we need to be aware of?",
+        "Does seasonality affect adoption of this feature?",
+      ],
+      growthImpact: [
+        "How will this affect trial-to-paid conversion?",
+        "Can this feature be used for lead generation or demos?",
+        "What's the viral coefficient — does this encourage sharing?",
+      ],
+    },
+  },
 };
 
 interface ReviewResult {
@@ -798,7 +1272,7 @@ function reviewPRD(prdContent: string, perspective: string): ReviewResult {
       role: "Unknown",
       strengths: [],
       concerns: ["Unknown reviewer perspective"],
-      suggestions: ["Use 'engineer', 'designer', or 'qa'"],
+      suggestions: ["Use one of: backend_eng, frontend_eng, designer, qa, finance, legal, compliance, pm, marketing, or 'all'"],
       overallAssessment: "Invalid perspective",
     };
   }
@@ -814,22 +1288,67 @@ function reviewPRD(prdContent: string, perspective: string): ReviewResult {
   )) {
     // Check if the PRD addresses this category
     const categoryPatterns: Record<string, RegExp[]> = {
-      feasibility: [/technical|architecture|stack|infrastructure/i],
+      // Backend Engineer
+      apiDesign: [/api|endpoint|rest|graphql|request|response|schema/i],
+      database: [/database|db|sql|schema|index|query|migration/i],
+      services: [/microservice|service|downstream|upstream|dependency/i],
+      caching: [/cache|redis|cdn|invalidat|ttl|in.?memory/i],
       scalability: [/scale|performance|load|capacity|throughput/i],
-      dependencies: [/depend|external|third.?party|integration/i],
-      edgeCases: [/edge case|error|failure|fallback|boundary/i],
       security: [/security|auth|permission|encrypt|sensitive/i],
-      timeline: [/timeline|estimate|milestone|sprint|deadline/i],
+      // Frontend Engineer
+      uiImplementation: [/component|ui state|loading|empty state|error state/i],
+      stateManagement: [/state management|redux|context|optimistic|sync/i],
+      performance: [/bundle|lazy.?load|render|performance|speed/i],
+      browserCompat: [/browser|chrome|safari|firefox|compatib/i],
+      responsiveness: [/responsive|mobile|tablet|breakpoint|touch/i],
+      // Designer
       userExperience: [/user flow|interaction|experience|journey|usability/i],
       accessibility: [/accessib|wcag|screen reader|aria|a11y/i],
       consistency: [/consistent|pattern|design system|component/i],
       research: [/research|user test|interview|survey|validation/i],
+      edgeCases: [/edge case|error|failure|fallback|boundary/i],
       mobileCross: [/mobile|responsive|cross.?browser|device/i],
+      // QA
       acceptanceCriteria: [/acceptance|criteria|given|when|then|expected/i],
       testability: [/test|automat|coverage|scenario/i],
       regression: [/regression|backward|compatib|existing feature/i],
       dataIntegrity: [/data integrity|migration|consistency|rollback/i],
       environments: [/environment|browser|device|timezone|locale/i],
+      // Finance
+      roi: [/roi|return on investment|payback|cost.?benefit/i],
+      costModeling: [/cost|infrastructure cost|licensing|maintenance cost/i],
+      revenueImpact: [/revenue|arpu|conversion|churn|monetiz/i],
+      budgetAllocation: [/budget|headcount|resource|opportunity cost/i],
+      unitEconomics: [/cac|ltv|lifetime value|acquisition cost|unit econom/i],
+      financialRisk: [/financial risk|sunk cost|penalty|contractual/i],
+      // Legal
+      privacy: [/privacy|pii|personal data|gdpr|ccpa|consent/i],
+      termsOfService: [/terms of service|tos|user agreement|disclosure/i],
+      liability: [/liability|indemnif|damages|data loss/i],
+      intellectualProperty: [/patent|ip|intellectual property|trademark|license/i],
+      dataGovernance: [/data residency|retention|deletion|third.?party data/i],
+      contractualObligations: [/contract|sla|vendor|enterprise|notification/i],
+      // Compliance
+      regulatory: [/regulat|gdpr|ccpa|hipaa|sox|compliance/i],
+      auditReadiness: [/audit|trail|traceab|logging|evidence/i],
+      soc2: [/soc2|soc 2|security control|assessment/i],
+      dataRetention: [/retention|purge|legal hold|expir/i],
+      accessControls: [/rbac|role.?based|least privilege|access control/i],
+      changeManagement: [/change management|cab|rollback|change advisory/i],
+      // PM
+      strategyAlignment: [/vision|roadmap|strategy|okr|objective/i],
+      scopeManagement: [/scope|non.?goal|mvp|scope creep|guardrail/i],
+      prioritization: [/priorit|backlog|impact|effort|trade.?off/i],
+      competitive: [/competitor|competitive|market|differenti/i],
+      stakeholderAlignment: [/stakeholder|sign.?off|alignment|cross.?team/i],
+      successDefinition: [/success metric|kpi|measurable|time.?bound/i],
+      // Marketing
+      positioning: [/positioning|brand|value proposition|differentiat/i],
+      messaging: [/messaging|naming|copywriting|tagline/i],
+      launchComms: [/launch|announcement|press|blog|social media/i],
+      customerEducation: [/documentation|tutorial|video|webinar|training/i],
+      marketTiming: [/timing|seasonality|event|industry cycle/i],
+      growthImpact: [/trial|conversion|lead gen|viral|growth/i],
     };
 
     const patterns = categoryPatterns[category] || [];
@@ -856,13 +1375,18 @@ function reviewPRD(prdContent: string, perspective: string): ReviewResult {
   } else if (ratio >= 0.5) {
     overallAssessment = `Solid foundation, but several ${persona.role.toLowerCase()} concerns need attention before this is ready for implementation.`;
   } else {
-    overallAssessment = `This PRD needs significant work from a ${persona.role.toLowerCase()} perspective. Key areas are missing that would cause issues during ${
-      perspective === "engineer"
-        ? "development"
-        : perspective === "designer"
-          ? "design review"
-          : "testing"
-    }.`;
+    const phaseMap: Record<string, string> = {
+      backend_eng: "backend development",
+      frontend_eng: "frontend implementation",
+      designer: "design review",
+      qa: "testing",
+      finance: "budget approval",
+      legal: "legal review",
+      compliance: "compliance audit",
+      pm: "roadmap planning",
+      marketing: "launch planning",
+    };
+    overallAssessment = `This PRD needs significant work from a ${persona.role.toLowerCase()} perspective. Key areas are missing that would cause issues during ${phaseMap[perspective] || "review"}.`;
   }
 
   return {
@@ -913,6 +1437,15 @@ function getEdgeCases(template: string, description: string): string[] {
       "How do you handle the redesign in embedded/iframe contexts?",
       "What if A/B testing shows the old design performs better?",
       "How do you train customer support on the new design?",
+    ],
+    prfaq: [
+      "What if the press release promise doesn't match what engineering can deliver?",
+      "What if the customer quote feels aspirational but customers don't actually say that?",
+      "What if leadership FAQ reveals misalignment on strategy or priorities?",
+      "What if the 'getting started' flow has more friction than the PRFAQ implies?",
+      "What if the success metrics are lagging indicators that take months to measure?",
+      "What if a competitor launches a similar feature before you ship?",
+      "How do you handle the gap between the PRFAQ vision and the MVP reality?",
     ],
   };
 
