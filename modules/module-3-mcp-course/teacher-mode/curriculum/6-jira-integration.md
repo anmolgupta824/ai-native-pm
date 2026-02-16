@@ -59,14 +59,26 @@ Now comes the easy part. You've got your credentials -- give them to Claude and 
 **"Set up a Jira MCP server for me. Here are my credentials: [email], [API token], [Jira URL]"**
 
 Claude will automatically:
-1. Create the MCP server project (all the code, all the config)
+1. Copy the pre-built server template (tested and working code)
 2. Install the dependencies
 3. Compile everything
 4. Configure it so Claude can use it
 
-You don't need to write any code, run any commands, or edit any config files. Claude handles the entire setup.
+Notice there's no browser authorization step here. Unlike Google Drive and Sheets (which use OAuth and ask you to click "Allow" in a browser), Jira uses a simple API token. You already created it -- Claude just stores it securely and uses it directly. No browser popups, no extra clicks.
 
-If the tools don't appear right away, you may need to start a fresh Claude session (type `/exit`, then `claude`). MCP tools load at startup. Your progress is saved, so just say "continue the course" when you return. If you see a prompt saying "New MCP server found" with options, select **option 1: "Use this and all future MCP servers in this project"** -- this is a one-time security check.
+### If the Tools Don't Appear
+
+MCP servers load when Claude Code starts up. If Claude just built the server, it may need a fresh session to pick up the new tools. This is normal -- like installing an app and then opening it.
+
+If Claude says the tools aren't available yet:
+
+1. Your progress is saved automatically -- you won't lose your place
+2. Type `/exit` to close this Claude session
+3. Type `claude` in your terminal to start a fresh session
+4. **You may see a prompt saying "New MCP server found in .mcp.json: jira"** with three options. This is Claude Code asking you to trust the server. Select **option 1: "Use this and all future MCP servers in this project"** and press Enter. This is a one-time security check -- you won't see it again.
+5. Say "continue the course" and you'll pick up right where you left off, with the Jira tools now available
+
+This only happens once per integration. After the tools load, they stay available in every future session.
 
 When it's done, you'll have 5 Jira tools available:
 - **list_projects** -- See all your Jira projects
@@ -147,6 +159,15 @@ These workflows take 20+ minutes manually. With Claude, they take seconds.
 1. What three things do you need to connect Jira to Claude?
 2. Name two PM workflows that become faster with the Jira integration.
 3. When Claude sets up the integration, what does the student need to do? (Answer: just provide credentials)
+
+### Before You Go: Know Your Token
+
+Jira API tokens work differently from Google's OAuth tokens. They don't expire after 7 days -- once created, a Jira API token stays valid until you manually revoke it or your Atlassian admin disables it.
+
+Good to know:
+- **If you leave your company**, your Jira token stops working automatically (it's tied to your Atlassian account).
+- **If you want to revoke it**, go to **id.atlassian.com/manage-profile/security/api-tokens** and delete the "Claude MCP" token.
+- **No maintenance needed.** Unlike Google OAuth, you won't need to re-authorize periodically.
 
 ---
 

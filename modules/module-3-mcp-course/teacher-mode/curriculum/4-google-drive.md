@@ -168,6 +168,17 @@ These workflows save hours every week. The combination of reading, creating, and
 2. After you give Claude your Client ID and Client Secret, what does the student need to do? (Answer: just click "Allow" once in the browser)
 3. Name two PM workflows that Google Drive integration makes faster.
 
+### Before You Go: Keep Your Token Alive
+
+Your Google Cloud project is probably in "Testing" mode right now, which means your OAuth token expires after **7 days**. To make it permanent:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Navigate to **APIs & Services → OAuth consent screen**
+3. Click **"Publish App"** to switch from Testing to Production
+4. You do NOT need Google to review it — it's just for your own personal use
+
+Once published, your token refreshes automatically and never expires (unless you manually revoke it in your [Google Account permissions](https://myaccount.google.com/permissions)).
+
 ---
 
 *Previous: [Lesson 3: How MCP Works](3-how-mcp-works.md)*

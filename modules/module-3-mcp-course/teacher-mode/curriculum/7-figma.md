@@ -47,9 +47,27 @@ Tell Claude:
 
 **"Set up a Figma MCP server for me. My token is: [paste your token]"**
 
-Claude handles everything -- creates the server, installs dependencies, compiles, configures.
+Claude will automatically:
+1. Copy the pre-built server template (tested and working code)
+2. Install all dependencies
+3. Compile the server
+4. Configure it so Claude can use it
 
-If the tools don't appear right away, you may need to start a fresh Claude session (type `/exit`, then `claude`). MCP tools load at startup. Your progress is saved, so just say "continue the course" when you return. If you see a prompt saying "New MCP server found" with options, select **option 1: "Use this and all future MCP servers in this project"** -- this is a one-time security check.
+Like Jira, there's no browser authorization step. Figma uses a simple Personal Access Token -- Claude stores it and uses it directly. By now, this pattern should feel familiar: give Claude the credentials, let it build, start using the tools.
+
+### If the Tools Don't Appear
+
+MCP servers load when Claude Code starts up. If Claude just built the server, it may need a fresh session to pick up the new tools. This is normal -- like installing an app and then opening it.
+
+If Claude says the tools aren't available yet:
+
+1. Your progress is saved automatically -- you won't lose your place
+2. Type `/exit` to close this Claude session
+3. Type `claude` in your terminal to start a fresh session
+4. **You may see a prompt saying "New MCP server found in .mcp.json: figma"** with three options. This is Claude Code asking you to trust the server. Select **option 1: "Use this and all future MCP servers in this project"** and press Enter. This is a one-time security check -- you won't see it again.
+5. Say "continue the course" and you'll pick up right where you left off, with the Figma tools now available
+
+This only happens once per integration. After the tools load, they stay available in every future session.
 
 After setup, you'll have these tools:
 - **list_files** -- Browse your Figma files and projects
@@ -160,6 +178,20 @@ This is the real power of MCP -- connecting your tools so Claude can do multi-st
 1. How do you get a Figma personal access token?
 2. What can you do with the Figma integration that helps with PRD writing?
 3. What's the universal pattern for setting up any MCP integration? (Answer: get credentials, give to Claude, start using it)
+
+### Before You Go: Keep Your Tokens Alive
+
+Your Figma Personal Access Token has an expiration date. When you created it, you may have set it to 90 days. When it expires, the integration will stop working and you'll need to generate a new token in Figma Settings and update your MCP server configuration.
+
+**Quick reference for all your tokens:**
+
+| Integration | Token Type | Expires? | What to Do |
+|------------|-----------|----------|------------|
+| **Google Drive/Sheets** | OAuth token | 7 days in Testing mode | Publish app to Production (see Lesson 4) |
+| **Jira** | API token | Never (until revoked) | No maintenance needed |
+| **Figma** | Personal Access Token | Based on your setting (e.g., 90 days) | Generate a new token in Figma Settings |
+
+If any integration stops working unexpectedly, the first thing to check is whether the token has expired. Now you know exactly where to look for each one.
 
 ---
 

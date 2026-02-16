@@ -52,9 +52,33 @@ Or if you already have the Drive server from Lesson 4:
 
 **"Add Google Sheets capabilities to my existing Google MCP server."**
 
-Claude handles everything -- creating files, installing packages, compiling, configuring. You'll click "Allow" once in the browser if prompted.
+Claude will automatically:
+1. Copy the pre-built server template (tested and working code)
+2. Install all dependencies
+3. Compile the server
+4. Run the authorization script
 
-If the tools don't appear right away, you may need to start a fresh Claude session (type `/exit`, then `claude`). This is the same process as Lesson 4 -- MCP tools load at startup. Your progress is saved, so just say "continue the course" when you return. If you see a prompt saying "New MCP server found" with options, select **option 1: "Use this and all future MCP servers in this project"** -- this is a one-time security check.
+### The OAuth Step (Same as Lesson 4)
+
+If you already authorized Google in Lesson 4 using the same Google Cloud project, your existing credentials may already work -- Claude will skip this step automatically.
+
+If this is a fresh setup, **a browser window will open** asking you to sign in with Google and click "Allow." This is the same valet key concept from Lesson 4 -- you're granting Claude access to your Sheets data.
+
+**Important:** You must complete this step in your browser. Claude will show you a URL -- click it, sign in, and click "Allow." Once you do, the terminal will show "Token saved" and Claude will continue.
+
+### If the Tools Don't Appear
+
+MCP servers load when Claude Code starts up. If Claude just built the server, it may need a fresh session to pick up the new tools. This is normal -- like installing an app and then opening it.
+
+If Claude says the tools aren't available yet:
+
+1. Your progress is saved automatically -- you won't lose your place
+2. Type `/exit` to close this Claude session
+3. Type `claude` in your terminal to start a fresh session
+4. **You may see a prompt saying "New MCP server found in .mcp.json: google-sheets"** with three options. This is Claude Code asking you to trust the server. Select **option 1: "Use this and all future MCP servers in this project"** and press Enter. This is a one-time security check -- you won't see it again.
+5. Say "continue the course" and you'll pick up right where you left off, with the Google Sheets tools now available
+
+This only happens once per integration. After the tools load, they stay available in every future session.
 
 After setup, you'll have these tools:
 - **list_spreadsheets** -- Find your spreadsheets
@@ -124,6 +148,19 @@ The power here is that Claude understands context. You don't need to remember co
 1. If you already set up Google Drive in Lesson 4, what do you need to do differently for Sheets?
 2. Name a PM workflow where Sheets integration saves the most time.
 3. Do you need to know column names or cell references to use the integration? (Answer: no, just describe what you want)
+
+### Before You Go: Keep Your Token Alive
+
+If you set up Google Sheets using the same Google Cloud project as Lesson 4 (Google Drive), the same token tip applies: your project is probably in "Testing" mode, which means your OAuth token expires after **7 days**.
+
+If you already published your app to Production in Lesson 4, you're all set -- nothing more to do here. If you haven't:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Navigate to **APIs & Services > OAuth consent screen**
+3. Click **"Publish App"** to switch from Testing to Production
+4. You do NOT need Google to review it -- it's just for your own personal use
+
+Once published, your token refreshes automatically and never expires (unless you manually revoke it in your [Google Account permissions](https://myaccount.google.com/permissions)).
 
 ---
 
