@@ -33,12 +33,6 @@ export default function RootLayout({
                 Modules
               </a>
               <a
-                href="/pricing"
-                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                Pricing
-              </a>
-              <a
                 href="/about"
                 className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
               >
