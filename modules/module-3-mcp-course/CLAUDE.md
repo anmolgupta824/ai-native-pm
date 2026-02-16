@@ -259,8 +259,9 @@ Act as a helpful reference guide — find templates, explain patterns, adapt exa
    - The student should never write code, run terminal commands, or edit config files manually.
 5. **NEVER display API credentials in terminal commands or tool output.** When building MCP servers, store credentials in environment variables or config files — never pass them as inline Bash arguments where they appear in terminal output. Use `.env` files or the MCP config's `env` block. If a student pastes credentials in chat, acknowledge them but do NOT echo them back or display them in commands.
 6. **Build MCP servers in a standard location AND register them.**
-   - Create all servers in `~/mcp-servers/[tool-name]/` (e.g., `~/mcp-servers/google-drive/`).
+   - Create all servers in `~/mcp-servers/[tool-name]/` (e.g., `~/mcp-servers/google-drive/`). Use the EXACT names from Rule 10.
    - After building, ALWAYS add the server to the project's `.mcp.json` file. Read the existing `.mcp.json` first, then merge the new server entry — don't overwrite existing servers like `mcp-teacher`.
+   - **The .mcp.json `args` path MUST match the actual server directory.** For example, if the server is at `~/mcp-servers/google-drive/`, the args must be `["/Users/.../mcp-servers/google-drive/dist/index.js"]` — NOT `google-drive-server` or any other variant.
    - This registration is what makes the tools load automatically on next startup. Without it, the student will restart and the tools still won't appear.
 7. **NO code blocks in teaching.** Do not show TypeScript, JavaScript, or terminal commands to the student. Explain concepts in plain English with analogies. The student is a PM, not a developer.
 8. **The curriculum markdown files ARE the course content.** Read them and deliver section by section.
@@ -268,7 +269,11 @@ Act as a helpful reference guide — find templates, explain patterns, adapt exa
 10. **USE TEMPLATES when building MCP servers — DO NOT write code from scratch.** When lessons 4-7 reach the "build" step:
     - **FIRST check `usage-mode/templates/` for a matching template.** Available templates:
       - `google-drive-mcp/` — for Lesson 4 (Google Drive)
-    - **If a template exists, COPY the entire template directory** to `~/mcp-servers/[tool-name]/`. Example: copy `usage-mode/templates/google-drive-mcp/` contents to `~/mcp-servers/google-drive/`.
+    - **If a template exists, COPY the entire template directory** to the EXACT path below. Use these EXACT directory names — do NOT vary them:
+      - Google Drive: `~/mcp-servers/google-drive/` (NOT `google-drive-server` or `google-drive-mcp`)
+      - Jira: `~/mcp-servers/jira/`
+      - Google Sheets: `~/mcp-servers/google-sheets/`
+      - Figma: `~/mcp-servers/figma/`
     - **After copying, run `npm install && npm run build`** in the server directory to install dependencies and compile.
     - **Then follow Rule 3** (run auth script, register in .mcp.json, tell student to restart).
     - **NEVER write MCP server code from scratch.** The templates contain tested, working code. Writing code from scratch leads to bugs (missing tool handlers, wrong OAuth scopes, broken file reading).
