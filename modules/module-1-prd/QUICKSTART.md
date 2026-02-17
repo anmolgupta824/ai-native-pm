@@ -58,6 +58,8 @@ Open Claude Code in the module folder and paste:
 Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the mcp-server directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
+> **First-time setup note:** When you first open Claude Code in this module, you'll see a prompt: *"New MCP server found in .mcp.json: prd-generator"* with options to trust it. Pick **option 1** ("Use this and all future MCP servers in this project"). This is a one-time security check — you won't see it again.
+
 ### Step 3: Start Your First Lesson (~10 min)
 
 Open Claude Code in the `module-1-prd` directory and say:
@@ -113,6 +115,8 @@ npx tsc
 ```
 Add the PRD Generator as an MCP server. The server file is at ./dist/index.js in the mcp-server directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
+
+> **First-time setup note:** When you first open Claude Code in this module, you'll see a prompt: *"New MCP server found in .mcp.json: prd-generator"* with options to trust it. Pick **option 1** ("Use this and all future MCP servers in this project"). This is a one-time security check — you won't see it again.
 
 ### Step 3: Start Using It
 

@@ -62,6 +62,7 @@ Show:
 
 ```
 👋 Welcome to Module 3: MCP Integrations Course!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 This module has two modes:
 

@@ -40,6 +40,7 @@ His course is developer/freelancer-focused. Key topics:
 | MCP Integrations | Brief mention | ✅ Module 3 (7 lessons) | **We go deeper** — our advantage |
 | PRD Generation | ❌ | ✅ Module 1 | Unique to us |
 | Rollout Planning | ❌ | ✅ Module 2 | Unique to us |
+| Product Strategy | ❌ | 🔜 Module 5 (planned) | **Unique to us — senior PM magnet** |
 | Image Generation | ❌ | ✅ Module 4 | Unique to us |
 | Sub-agents | ✅ | ❌ | **Paid module idea** |
 | Hooks & Automation | ✅ | ❌ | **Paid module idea** |
@@ -75,7 +76,36 @@ His course is developer/freelancer-focused. Key topics:
 - Example: Planning a product launch with plan mode
 - **Why free:** Quick lesson, makes students more effective
 
-### 4. Community Templates Library (new free resource)
+### 4. Product Strategy Course (new free module — Module 5)
+- **Teaching Mode:** Guided course to create a complete Product Strategy document
+  - Lesson 1: Define vision, mission, and strategic pillars
+  - Lesson 2: Market analysis — TAM/SAM/SOM, competitor mapping, positioning
+  - Lesson 3: User segmentation, personas, and Jobs-to-be-Done
+  - Lesson 4: Prioritization frameworks (RICE, ICE, MoSCoW) with your real backlog
+  - Lesson 5: Roadmap creation — now/next/later, OKR alignment
+  - Lesson 6: Strategy review — pressure-test from leadership, board, and investor perspectives
+  - **End goal:** A polished, validated Product Strategy doc ready to share with leadership
+- **Usage Mode:** Quick access to strategy tools
+  - Generate strategy docs from templates (B2B SaaS, Marketplace, Platform, Consumer)
+  - Validate existing strategy docs for completeness and gaps
+  - Brainstorm new market opportunities with AI-powered ideation
+  - Run competitive analysis (SWOT, Porter's Five Forces)
+  - Prioritize features/initiatives with scoring frameworks
+  - Stakeholder review from leadership, board, investor, eng-lead perspectives
+- **MCP tools to build:**
+  - `list_strategy_templates` — Browse strategy templates
+  - `get_strategy_questions` — Guided questionnaire per template type
+  - `generate_strategy` — Generate full strategy doc from answers
+  - `validate_strategy` — Score strategy doc for completeness
+  - `competitive_analysis` — SWOT / Porter's analysis
+  - `prioritize_backlog` — Score initiatives with RICE/ICE/MoSCoW
+  - `brainstorm_opportunities` — AI-powered market opportunity ideation
+  - `review_strategy` — Feedback from leadership, board, investor, eng-lead personas
+- **Why free:** Complements Module 1 (PRD = tactical, Strategy = strategic), attracts senior PMs
+- **Effort:** Medium-high (new MCP server + 6-lesson curriculum)
+- **Impact:** Very high — strategy is the #1 PM skill gap, fills a major course gap
+
+### 5. Community Templates Library (new free resource)
 - CLAUDE.md templates for different PM workflows
 - Prompt templates for common PM tasks
 - Shared by students, curated by us
@@ -172,14 +202,15 @@ His course is developer/freelancer-focused. Key topics:
 
 | Priority | Idea | Free/Paid | Effort | Impact |
 |----------|------|-----------|--------|--------|
-| 1 | CLAUDE.md mastery (extend Module 0) | Free | Low | High — improves all modules |
-| 2 | Context management tips (extend Module 0) | Free | Low | High — students need this |
-| 3 | Module 5: Hooks & Automation | Paid $29 | Medium | High — unique, practical |
-| 4 | Module 7: Custom Skills for PMs | Paid $39 | Medium | Very high — daily use |
-| 5 | Module 6: Sub-Agents | Paid $29 | Medium | Medium — power users |
-| 6 | PM Toolkit Bundle | Paid $99 | High | High — premium offering |
-| 7 | Module 8: Email Manager | Paid $29 | High | Medium — niche |
-| 8 | Module 9: Chrome/Web Research | Paid $39 | High | Medium — advanced |
+| 1 | Product Strategy Course (Module 5) | Free | Medium-high | Very high — attracts senior PMs, fills #1 skill gap |
+| 2 | CLAUDE.md mastery (extend Module 0) | Free | Low | High — improves all modules |
+| 3 | Context management tips (extend Module 0) | Free | Low | High — students need this |
+| 4 | Module 6: Hooks & Automation | Paid $29 | Medium | High — unique, practical |
+| 5 | Module 8: Custom Skills for PMs | Paid $39 | Medium | Very high — daily use |
+| 6 | Module 7: Sub-Agents | Paid $29 | Medium | Medium — power users |
+| 7 | PM Toolkit Bundle | Paid $99 | High | High — premium offering |
+| 8 | Module 9: Email Manager | Paid $29 | High | Medium — niche |
+| 9 | Module 10: Chrome/Web Research | Paid $39 | High | Medium — advanced |
 
 ---
 

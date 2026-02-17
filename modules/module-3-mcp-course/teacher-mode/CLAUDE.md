@@ -16,6 +16,7 @@ When the student opens this folder and starts a Claude session, greet them with:
 
 ```
 Welcome to the MCP Integrations Course!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 I'm your teacher for this 7-lesson course. You'll go from zero MCP knowledge to having 4 working integrations (Google Drive, Google Sheets, Jira, and Figma) that automate your PM workflows.
 

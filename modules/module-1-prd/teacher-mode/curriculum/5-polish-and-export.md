@@ -72,3 +72,6 @@ Congratulations — you've completed Module 1: PRD Generator.
 - **Module 4: Image Generation** — Create product mockups and diagrams with AI
 
 Your PRD is saved at `output/prd-final.md`. You can re-run any lesson to iterate further, or start a fresh PRD anytime using the tools in usage mode.
+
+---
+Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89

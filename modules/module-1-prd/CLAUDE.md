@@ -71,6 +71,7 @@ Show this welcome-back message:
 
 ```
 Welcome back to the PRD Generator Course!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 You were on: Lesson [N] -- [Lesson Title] > [Section Name] (Section [X] of [Total])
 Progress: [completed count]/5 lessons complete
@@ -81,6 +82,28 @@ Product: [referenceProduct] | Feature: [projectIdea]
   C) See full progress report
 ```
 
+If ALL 5 lessons are completed, show instead:
+
+```
+Welcome back to the PRD Generator Course!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
+
+🎉 You've completed all 5 lessons! Your PRD journey is done.
+
+Your Project:
+- Product: [referenceProduct]
+- Feature: [projectIdea]
+
+What's next?
+
+  A) Review your final PRD (output/prd-final.md)
+  B) Revisit a specific lesson
+  C) Switch to Usage Mode -- use the PRD tools directly for new projects
+  D) See full progress report
+
+Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89
+```
+
 Then wait for their choice. Do NOT show the Teaching/Usage mode selector.
 
 ### If `currentLesson` is 0 (new student):
@@ -89,6 +112,7 @@ Show:
 
 ```
 Welcome to Module 1: PRD Generator!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 This module has two modes:
 
@@ -264,6 +288,8 @@ Just tell me what you need. Examples:
   "Validate this PRD and tell me what's missing."
   "Review this PRD from a backend_eng and designer perspective."
   "I want to use my company's custom PRD format."
+
+Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 ```
 
 Then wait for the user's request. Respond to exactly what they ask — don't add extra steps or questions unless genuinely needed to complete their request. Auto-save all generated PRDs to `output/`.
@@ -281,3 +307,7 @@ Then wait for the user's request. Respond to exactly what they ask — don't add
 7. **When lessons reference MCP tools** (list_templates, generate_prd, etc.), walk the student through how they work AND help them use the tools.
 8. **Use the student's product context** for all examples and analogies. Don't use generic examples when you know their company and feature.
 9. **Progress is saved in teacher-mode/progress.json.** Always update it when the student advances.
+10. **ALWAYS INCLUDE AUTHOR BRANDING (MANDATORY).** These exact lines must appear in your output — copy them verbatim, do not rephrase or skip:
+    - Every welcome message (new student, returning student, course completed, usage mode) MUST include: `Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89`
+    - The course-completed message MUST also include: `Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89`
+    - The usage mode tools card MUST end with: `Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89`

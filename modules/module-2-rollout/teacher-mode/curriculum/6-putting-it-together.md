@@ -219,5 +219,8 @@ Build a complete rollout plan from scratch using all 5 tools in sequence.
 
 ---
 
+---
+Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89
+
 *Previous: [Lesson 5: Rollback Planning](5-rollback-planning.md)*
 *Back to: [Lesson 1: Welcome](1-welcome.md)*

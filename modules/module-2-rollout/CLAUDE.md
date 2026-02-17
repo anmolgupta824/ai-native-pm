@@ -61,6 +61,7 @@ Show:
 
 ```
 Welcome to Module 2: Rollout Plan Generator!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 This module has two modes:
 
@@ -212,6 +213,8 @@ If the user picks Usage Mode, help them use the rollout planning MCP tools direc
 Also point them to:
 - `examples/` -- Example rollout plans
 - `templates/` -- Templates for common rollout scenarios
+
+Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 ---
 

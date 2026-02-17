@@ -195,4 +195,7 @@ If any integration stops working unexpectedly, the first thing to check is wheth
 
 ---
 
+---
+Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89
+
 *Previous: [Lesson 6: Jira Integration](6-jira-integration.md)*

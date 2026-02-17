@@ -251,4 +251,7 @@ Create a coordinated set of visuals for a product launch or campaign.
 
 ---
 
+---
+Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89
+
 *Previous: [Lesson 5: Social Media & Marketing Assets](5-social-media-assets.md)*

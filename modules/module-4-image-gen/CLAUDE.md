@@ -61,6 +61,7 @@ Show:
 
 ```
 Welcome to Module 4: AI Image Generation!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 This module has two modes:
 
@@ -213,6 +214,8 @@ If the user picks Usage Mode, help them use the Image Generator MCP tools direct
 Also point them to:
 - `examples/` -- Example image generation outputs
 - `templates/` -- Prompt templates for common PM use cases
+
+Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 ---
 
