@@ -233,6 +233,9 @@ export default function Module2GetStarted() {
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
                   <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will update your config and restart.</p>
                 </div>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-3">
+                  <p className="text-sm text-amber-800"><span className="font-semibold">First-time note:</span> You&apos;ll see a prompt &quot;New MCP server found in .mcp.json&quot; — pick <strong>option 1</strong> to trust it. This is a one-time security check.</p>
+                </div>
               </div>
 
               {/* Step 3: Start Using */}
@@ -241,17 +244,11 @@ export default function Module2GetStarted() {
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
                   <h2 className="text-lg font-bold text-gray-900">Start Using It</h2>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">Try these prompts in Claude Code:</p>
-                <div className="space-y-3">
-                  {[
-                    '@prd-notifications.md @architecture.md\nI need a rollout plan for the notifications feature. Assess the risks first.',
-                    'Map the stakeholders for our payments redesign. Our org has separate backend and frontend teams, a shared QA team, and Sales is pushing for a Q2 deadline.',
-                    'Generate a 6-week timeline for the search feature rollout. We have 4 engineers and the backend API blocks the frontend integration.',
-                    'Build a rollback plan for our feature flag deployment of the new dashboard.',
-                  ].map((prompt) => (
-                    <div key={prompt} className="bg-gray-100 rounded-lg p-3 font-mono text-sm text-gray-700 whitespace-pre-line">{prompt}</div>
-                  ))}
+                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the <code className="text-xs bg-gray-200 px-1 py-0.5 rounded">module-2-rollout</code> directory and type:</p>
+                <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700 mb-4">
+                  Usage mode
                 </div>
+                <p className="text-sm text-gray-600 mb-4">You&apos;ll see all available tools and can start right away.</p>
               </div>
 
               {/* Available Tools */}
@@ -259,7 +256,7 @@ export default function Module2GetStarted() {
                 <h2 className="text-lg font-bold text-gray-900 mb-4">Available Rollout Tools</h2>
                 <div className="space-y-2">
                   {[
-                    { tool: 'create_rollout_plan', desc: 'Generate a complete rollout plan from PRD and context' },
+                    { tool: 'create_rollout_plan', desc: 'Generate a complete rollout plan with phased deployment' },
                     { tool: 'assess_risks', desc: 'Structured risk matrix with likelihood, impact, and mitigations' },
                     { tool: 'map_stakeholders', desc: 'Stakeholder map with RACI and conflict detection' },
                     { tool: 'generate_timeline', desc: 'Dependency-aware timeline with milestones and buffers' },
@@ -269,6 +266,27 @@ export default function Module2GetStarted() {
                       <code className="text-xs bg-gray-200 px-2 py-1 rounded font-mono text-brand-700 flex-shrink-0">{t.tool}</code>
                       <p className="text-sm text-gray-600">{t.desc}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Already have a rollout plan? */}
+              <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+                <h3 className="text-sm font-bold text-green-800 mb-2">Already have a rollout plan?</h3>
+                <p className="text-sm text-green-700">Drag &amp; drop it into Claude Code, or point to a file. You can assess risks, map stakeholders, or build a rollback plan for it.</p>
+              </div>
+
+              {/* Example Prompts */}
+              <div className="border-l-4 border-brand-500 pl-6">
+                <h2 className="text-lg font-bold text-gray-900 mb-4">Example Prompts</h2>
+                <div className="space-y-3">
+                  {[
+                    'Create a rollout plan for [your feature]. We have 4 engineers and a Q2 deadline.',
+                    '@prd-notifications.md @architecture.md\nAssess the risks for our notifications feature rollout.',
+                    'Map the stakeholders for our payments redesign. Our org has separate backend and frontend teams, a shared QA team, and Sales is pushing for a Q2 deadline.',
+                    'Build a rollback plan for our feature flag deployment of the new dashboard.',
+                  ].map((prompt) => (
+                    <div key={prompt} className="bg-gray-100 rounded-lg p-3 font-mono text-sm text-gray-700 whitespace-pre-line">{prompt}</div>
                   ))}
                 </div>
               </div>

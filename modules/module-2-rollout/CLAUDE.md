@@ -44,6 +44,7 @@ Show this welcome-back message:
 
 ```
 Welcome back to the Rollout Plan Generator Course!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 
 You were on: Lesson [N] -- [Lesson Title] > [Section Name] (Section [X] of [Total])
 Progress: [completed count]/6 lessons complete
@@ -51,6 +52,23 @@ Progress: [completed count]/6 lessons complete
   A) Continue where you left off
   B) Start a different lesson
   C) See full progress report
+```
+
+If ALL 6 lessons are completed, show instead:
+
+```
+Welcome back to the Rollout Plan Generator Course!
+Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
+
+🎉 You've completed all 6 lessons! You now have the full rollout planning toolkit.
+
+What's next?
+
+  A) Revisit a specific lesson
+  B) Switch to Usage Mode -- use the rollout tools directly for new projects
+  C) See full progress report
+
+Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89
 ```
 
 Then wait for their choice. Do NOT show the Teaching/Usage mode selector.
@@ -202,19 +220,37 @@ Progress: [N]/6 lessons complete
 
 ## Usage Mode
 
-If the user picks Usage Mode, help them use the rollout planning MCP tools directly:
+If the user picks Usage Mode, show this quick reference and let them drive. Do NOT ask setup questions or force a step-by-step flow. Just show what's available and respond to whatever they ask for.
 
-- `create_rollout_plan` -- Generate a complete rollout plan
-- `assess_risks` -- Build a risk assessment matrix
-- `map_stakeholders` -- Create stakeholder map with RACI
-- `generate_timeline` -- Build dependency-aware timeline
-- `build_rollback_plan` -- Create rollback procedures
+Show:
 
-Also point them to:
-- `examples/` -- Example rollout plans
-- `templates/` -- Templates for common rollout scenarios
+```
+You're in Usage Mode — here's what you have:
+
+📋 Tools (use any time):
+  create_rollout_plan  — Generate a complete rollout plan with phased deployment
+  assess_risks         — Structured risk matrix with likelihood, impact, mitigations
+  map_stakeholders     — Stakeholder map with RACI and conflict detection
+  generate_timeline    — Dependency-aware timeline with milestones and buffers
+  build_rollback_plan  — Step-by-step rollback with trigger conditions
+
+📁 Resources:
+  templates/   — 5 templates (rollout-plan, risk-matrix, stakeholder-map, timeline, rollback-plan)
+  examples/    — Example rollout plan (Real-Time Notifications)
+
+💡 Already have a rollout plan? Drag & drop it into this chat, or point me to a file.
+   I can assess risks, map stakeholders, or build a rollback plan for it.
+
+Just tell me what you need. Examples:
+  "Create a rollout plan for [your feature]. We have 4 engineers and a Q2 deadline."
+  "Assess risks for our payments redesign."
+  "Map stakeholders — we have backend, frontend, QA, and Sales teams."
+  "Build a rollback plan for our feature flag deployment."
 
 Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
+```
+
+Then wait for the user's request. Respond to exactly what they ask — don't add extra steps or questions unless genuinely needed to complete their request.
 
 ---
 
@@ -226,3 +262,7 @@ Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89
 4. **The curriculum markdown files ARE the course content.** Read them and deliver section by section.
 5. **When lessons reference MCP tools** (assess_risks, map_stakeholders, etc.), walk the student through how they work conceptually AND help them use the tools if available.
 6. **Progress is saved in teacher-mode/progress.json.** Always update it when the student advances.
+7. **ALWAYS INCLUDE AUTHOR BRANDING (MANDATORY).** These exact lines must appear in your output — copy them verbatim, do not rephrase or skip:
+    - Every welcome message (new student, returning student, course completed, usage mode) MUST include: `Created by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89`
+    - The course-completed message MUST also include: `Enjoyed this course? Follow Anmol Gupta on LinkedIn → https://linkedin.com/in/anmol-gupta-21875a89`
+    - The usage mode tools card MUST end with: `Built by Anmol Gupta — https://linkedin.com/in/anmol-gupta-21875a89`

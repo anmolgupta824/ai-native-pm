@@ -58,9 +58,11 @@ Open Claude Code in the module folder and paste:
 Add the Rollout Teacher as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
+> **First-time setup note:** When you first open Claude Code in this module, you'll see a prompt: *"New MCP server found in .mcp.json"* with options to trust it. Pick **option 1** ("Use this and all future MCP servers in this project"). This is a one-time security check — you won't see it again.
+
 ### Step 3: Start Your First Lesson (~10 min)
 
-Open Claude Code and say:
+Open Claude Code in the `module-2-rollout` directory and say:
 
 ```
 I want to learn how to build better rollout plans. Start me on Lesson 1.
@@ -110,13 +112,48 @@ npm run build
 Add the Rollout Plan Generator as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
 
+> **First-time setup note:** When you first open Claude Code in this module, you'll see a prompt: *"New MCP server found in .mcp.json"* with options to trust it. Pick **option 1** ("Use this and all future MCP servers in this project"). This is a one-time security check — you won't see it again.
+
 ### Step 3: Start Using It
 
-Try these prompts in Claude Code:
+Open Claude Code in the `module-2-rollout` directory and type:
+
+```
+Usage mode
+```
+
+You'll see all available tools and can start right away — just tell Claude what you need.
+
+Here's what you have:
+
+#### Tools
+
+| Tool | What it does |
+|------|-------------|
+| `create_rollout_plan` | Generate a complete rollout plan with phased deployment |
+| `assess_risks` | Structured risk matrix with likelihood, impact, mitigations |
+| `map_stakeholders` | Stakeholder map with RACI and conflict detection |
+| `generate_timeline` | Dependency-aware timeline with milestones and buffers |
+| `build_rollback_plan` | Step-by-step rollback with trigger conditions |
+
+#### Resources
+
+| Folder | What's inside |
+|--------|--------------|
+| `templates/` | 5 templates (rollout-plan, risk-matrix, stakeholder-map, timeline, rollback-plan) |
+| `examples/` | Example rollout plan (Real-Time Notifications) |
+
+> **Already have a rollout plan?** Drag & drop it into Claude Code, or point to a file. You can assess risks, map stakeholders, or build a rollback plan for it.
+
+#### Example Prompts
+
+```
+Create a rollout plan for [your feature]. We have 4 engineers and a Q2 deadline.
+```
 
 ```
 @prd-notifications.md @architecture.md
-I need a rollout plan for the notifications feature. Assess the risks first.
+Assess the risks for our notifications feature rollout.
 ```
 
 ```
@@ -124,22 +161,8 @@ Map the stakeholders for our payments redesign. Our org has separate backend and
 ```
 
 ```
-Generate a 6-week timeline for the search feature rollout. We have 4 engineers and the backend API blocks the frontend integration.
-```
-
-```
 Build a rollback plan for our feature flag deployment of the new dashboard.
 ```
-
-### Available Rollout Tools
-
-| Tool | What it does |
-|------|-------------|
-| `create_rollout_plan` | Generate a complete rollout plan from context |
-| `assess_risks` | Structured risk matrix with mitigations |
-| `map_stakeholders` | Stakeholder map with RACI and conflict detection |
-| `generate_timeline` | Dependency-aware timeline with milestones |
-| `build_rollback_plan` | Step-by-step rollback with triggers |
 
 ---
 
