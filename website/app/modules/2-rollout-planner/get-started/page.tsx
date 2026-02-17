@@ -112,8 +112,8 @@ export default function Module2GetStarted() {
                 <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
                   cd ai-native-pm/modules/module-2-rollout &amp;&amp; claude
                 </div>
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                  <p className="text-sm text-green-800"><span className="font-semibold">No extra setup needed.</span> The CLAUDE.md file in this folder automatically configures Claude as your interactive teacher — no MCP server or config required.</p>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-amber-800"><span className="font-semibold">First-time note:</span> You&apos;ll see a prompt &quot;New MCP server found in .mcp.json&quot; — pick <strong>option 1</strong> to trust it. This is a one-time security check.</p>
                 </div>
               </div>
 

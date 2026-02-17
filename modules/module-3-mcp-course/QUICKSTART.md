@@ -62,6 +62,8 @@ Add the MCP Teacher as an MCP server. The server file is at ./dist/index.js in t
 
 > **One prompt, fully configured.** Claude will find the path, update your config, and restart.
 
+> **First-time setup note:** When you first open Claude Code in this module, you'll see a prompt: *"New MCP server found in .mcp.json"* with options to trust it. Pick **option 1** ("Use this and all future MCP servers in this project"). This is a one-time security check — you won't see it again.
+
 ### Step 3: Start Your First Lesson (~10 min)
 
 Open Claude Code and say:
@@ -140,6 +142,8 @@ Then reload: `source ~/.zshrc`
 ```
 Add the Jira MCP server. The server file is at ./dist/index.js in the current directory. Add it to my Claude Code MCP config with the command "node" and the full path to dist/index.js. Then restart to pick up the new server.
 ```
+
+> **First-time setup note:** When you first open Claude Code in this module, you'll see a prompt: *"New MCP server found in .mcp.json"* with options to trust it. Pick **option 1** ("Use this and all future MCP servers in this project"). This is a one-time security check — you won't see it again.
 
 ### Step 4: Start Using It
 
