@@ -769,13 +769,13 @@ export default function Module1PRDGenerator() {
             </a>
 
             <a
-              href="/modules/2-rollout-planner"
+              href="/modules/2-image-gen"
               className="flex-1 flex items-center justify-end gap-4 p-5 rounded-xl border border-gray-200 hover:border-brand-200 hover:bg-brand-50/30 transition-all group text-right"
             >
               <div>
                 <span className="text-xs text-gray-400 uppercase tracking-wider">Next</span>
                 <p className="text-sm font-semibold text-gray-900 group-hover:text-brand-700 transition-colors">
-                  Module 2 — Rollout Planner
+                  Module 2 — AI Image Generation
                 </p>
               </div>
               <svg className="w-5 h-5 text-gray-400 group-hover:text-brand-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

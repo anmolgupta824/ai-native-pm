@@ -37,19 +37,19 @@ const modules = [
   },
   {
     number: 2,
-    title: 'Rollout Plan Generator',
+    title: 'AI Image Generation',
     description:
-      'Plan your next launch in 1 hour, not 1 week. Automated risk assessment, stakeholder mapping, and timelines.',
+      'Generate product mockups, presentation visuals, and social media assets in minutes with DALL-E.',
     price: 'Free',
-    tag: 'Trust Builder',
+    tag: 'Visual Assets',
     features: [
-      'Launch plan wizard',
-      'Automated risk matrix',
-      'Stakeholder mapper',
-      'Timeline with dependencies',
-      'Rollback plan templates',
+      'Generate images via DALL-E API',
+      'Product mockups & wireframes',
+      'Presentation & pitch visuals',
+      'Social media asset packs',
+      'Prompt engineering for PMs',
     ],
-    href: '/modules/2-rollout-planner',
+    href: '/modules/2-image-gen',
   },
   {
     number: 3,
@@ -66,22 +66,6 @@ const modules = [
       'Production-ready Jira template',
     ],
     href: '/modules/3-mcp-automation',
-  },
-  {
-    number: 4,
-    title: 'AI Image Generation',
-    description:
-      'Generate product mockups, presentation visuals, and social media assets in minutes with DALL-E.',
-    price: 'Free',
-    tag: 'Visual Assets',
-    features: [
-      'Generate images via DALL-E API',
-      'Product mockups & wireframes',
-      'Presentation & pitch visuals',
-      'Social media asset packs',
-      'Prompt engineering for PMs',
-    ],
-    href: '/modules/4-image-gen',
   },
 ]
 
@@ -116,7 +100,7 @@ export default function Home() {
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Five Modules. Immediate Impact.
+              Four Modules. Immediate Impact.
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
               Each module gives you a working AI workflow you can use on your

@@ -6,45 +6,22 @@ const tiers = [
   {
     name: 'Free',
     price: '$0',
-    description: 'Start building AI workflows today',
+    description: 'Everything you need — no signup required',
     features: [
       'Module 0: Claude Code Basics',
       'Module 1: PRD Generator',
-      'Module 2: Rollout Plan Generator',
+      'Module 2: AI Image Generation',
       'Module 3: MCP Integrations Course (7 lessons)',
-      'QUICKSTART guides',
-      'Community access',
+      'QUICKSTART guides for every module',
+      'Teaching Mode + Usage Mode in each module',
     ],
     cta: 'Get Started — No Signup',
     href: 'https://github.com/anmolgupta824/ai-native-pm',
-    highlighted: false,
-  },
-  {
-    name: 'Pro',
-    price: '$29',
-    description: 'Advanced projects + premium content',
-    features: [
-      'Everything in Free',
-      'Module 4: Vibe Coding Projects ($29)',
-      '3 progressive project templates',
-      'Deploy to production URL',
-      'All future module updates',
-      'Priority support',
-    ],
-    cta: 'Get Pro',
-    href: '#',
     highlighted: true,
   },
 ]
 
-const individualModules = [
-  {
-    name: 'Vibe Coding Projects',
-    price: '$29',
-    description: 'Ship your first prototype this weekend',
-    roi: 'Career development',
-  },
-]
+const individualModules: { name: string; price: string; description: string; roi: string }[] = []
 
 export default function PricingTable() {
   const [hoursPerWeek, setHoursPerWeek] = useState(5)

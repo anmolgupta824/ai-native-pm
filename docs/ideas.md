@@ -42,10 +42,10 @@ His course is developer/freelancer-focused. Key topics:
 | Rollout Planning | ❌ | ✅ Module 2 | Unique to us |
 | Product Strategy | ❌ | 🔜 Module 5 (planned) | **Unique to us — senior PM magnet** |
 | Image Generation | ❌ | ✅ Module 4 | Unique to us |
-| Sub-agents | ✅ | ❌ | **Paid module idea** |
+| Sub-agents | ✅ | ❌ | **Free — part of Claude Code Mastery (Module 0)** |
 | Hooks & Automation | ✅ | ❌ | **Paid module idea** |
-| Context Management | ✅ | ❌ | **Free add to Module 0** |
-| Plan Mode | ✅ | ❌ | **Free add to Module 0** |
+| Context Management | ✅ | ❌ | **Free — part of Claude Code Mastery (Module 0)** |
+| Plan Mode | ✅ | ❌ | **Free — part of Claude Code Mastery (Module 0)** |
 | Deployment/Hosting | ✅ Modal | ❌ | Less relevant for PMs |
 | Skills (reusable) | ✅ | ❌ | **Paid module idea** |
 | Selling AI services | ✅ Maker School | ❌ | Different audience |
@@ -57,26 +57,30 @@ His course is developer/freelancer-focused. Key topics:
 
 ## Ideas for FREE Modules/Extensions
 
-### 1. CLAUDE.md Mastery for PMs (extend Module 0)
-- How to write a good CLAUDE.md for PM workflows
-- Templates: CLAUDE.md for PRD projects, sprint planning, research
-- "Project brain" concept explained for non-coders
-- **Why free:** Low effort, high value, attracts students to paid content
+### 1. Claude Code Mastery for PMs (extend Module 0)
+- **CLAUDE.md / Project Brain:**
+  - How to write a good CLAUDE.md for PM workflows
+  - Templates: CLAUDE.md for PRD projects, sprint planning, research
+  - "Project brain" concept explained for non-coders
+- **Context Management:**
+  - How to avoid "context rot" in long sessions
+  - When to start fresh vs. continue
+  - Structuring prompts for better output
+  - Token conservation strategies
+- **Plan Mode for PMs:**
+  - Using plan mode for complex PM tasks
+  - When to use plan mode vs. regular mode
+  - Example: Planning a product launch with plan mode
+- **Sub-agents & parallel workflows:**
+  - Research 5 competitors simultaneously
+  - Generate PRD + rollout plan + stakeholder email in parallel
+  - Sprint planning: one agent analyzes velocity, another drafts stories
+  - Multi-market launch: agents handle different regions simultaneously
+- **Why free:** All four topics are Claude Code features (not MCP servers) — better as education than paid tools. Essential knowledge that makes all other modules work better
+- **Effort:** Low-medium (no MCP server needed, just lessons + exercises)
+- **Impact:** Very high — improves every student's experience across all modules
 
-### 2. Context Management Tips (extend Module 0)
-- How to avoid "context rot" in long sessions
-- When to start fresh vs. continue
-- Structuring prompts for better output
-- Token conservation strategies
-- **Why free:** Essential knowledge, makes all other modules work better
-
-### 3. Plan Mode for PMs (extend Module 0)
-- Using plan mode for complex PM tasks
-- When to use plan mode vs. regular mode
-- Example: Planning a product launch with plan mode
-- **Why free:** Quick lesson, makes students more effective
-
-### 4. Product Strategy Course (new free module — Module 5)
+### 2. Product Strategy Course (new free module — Module 5)
 - **Teaching Mode:** Guided course to create a complete Product Strategy document
   - Lesson 1: Define vision, mission, and strategic pillars
   - Lesson 2: Market analysis — TAM/SAM/SOM, competitor mapping, positioning
@@ -105,7 +109,7 @@ His course is developer/freelancer-focused. Key topics:
 - **Effort:** Medium-high (new MCP server + 6-lesson curriculum)
 - **Impact:** Very high — strategy is the #1 PM skill gap, fills a major course gap
 
-### 5. Community Templates Library (new free resource)
+### 3. Community Templates Library (new free resource)
 - CLAUDE.md templates for different PM workflows
 - Prompt templates for common PM tasks
 - Shared by students, curated by us
@@ -125,17 +129,7 @@ His course is developer/freelancer-focused. Key topics:
 - **Why paid:** Advanced, high value, saves recurring time
 - **Effort:** Medium (need to build hook templates)
 
-### 6. Module 6: Sub-Agents & Parallel Workflows ($29-39)
-- **What:** Teach PMs to spin up multiple Claude instances for parallel work
-- **PM use cases:**
-  - Research 5 competitors simultaneously
-  - Generate PRD + rollout plan + stakeholder email in parallel
-  - Sprint planning: one agent analyzes velocity, another drafts stories
-  - Multi-market launch: agents handle different regions simultaneously
-- **Why paid:** Power-user feature, massive time savings
-- **Effort:** Medium
-
-### 7. Module 7: Custom Skills for PMs ($29-39)
+### 6. Module 6: Custom Skills for PMs ($29-39)
 - **What:** Create reusable "skills" (saved workflows) for common PM tasks
 - **PM use cases:**
   - "/standup" — auto-generates daily standup from Jira + Sheets
@@ -145,7 +139,7 @@ His course is developer/freelancer-focused. Key topics:
 - **Why paid:** Huge time-saver, very sticky (once set up, used daily)
 - **Effort:** Medium-high (need to build skill templates)
 
-### 8. Module 8: AI Email Manager for PMs ($19-29)
+### 7. Module 7: AI Email Manager for PMs ($19-29)
 - **What:** Use Claude + MCP to triage, draft, and manage email
 - **PM use cases:**
   - Auto-categorize emails (stakeholder updates, bug reports, feature requests)
@@ -155,7 +149,7 @@ His course is developer/freelancer-focused. Key topics:
 - **Why paid:** High demand, daily use case
 - **Effort:** High (need Gmail MCP server)
 
-### 9. Module 9: Chrome DevTools + Web Research ($29-39)
+### 8. Module 8: Chrome DevTools + Web Research ($29-39)
 - **What:** Use Claude with browser automation for PM research
 - **PM use cases:**
   - Scrape competitor pricing pages automatically
@@ -165,7 +159,7 @@ His course is developer/freelancer-focused. Key topics:
 - **Why paid:** Unique capability, hard to learn alone
 - **Effort:** High (Chrome MCP setup is complex)
 
-### 10. PM Toolkit Bundle ($79-99)
+### 9. PM Toolkit Bundle ($79-99)
 - **What:** Bundle of custom MCP servers pre-built for PM workflows
 - **Includes:**
   - Jira + Sheets sprint dashboard
@@ -182,7 +176,7 @@ His course is developer/freelancer-focused. Key topics:
 
 ### Option A: Module-by-Module
 - Modules 0-4: FREE (current state)
-- Modules 5-9: $29-39 each
+- Modules 5-8: $29-39 each
 - PM Toolkit Bundle: $79-99
 - **Total addressable revenue per student: ~$250**
 
@@ -203,14 +197,12 @@ His course is developer/freelancer-focused. Key topics:
 | Priority | Idea | Free/Paid | Effort | Impact |
 |----------|------|-----------|--------|--------|
 | 1 | Product Strategy Course (Module 5) | Free | Medium-high | Very high — attracts senior PMs, fills #1 skill gap |
-| 2 | CLAUDE.md mastery (extend Module 0) | Free | Low | High — improves all modules |
-| 3 | Context management tips (extend Module 0) | Free | Low | High — students need this |
-| 4 | Module 6: Hooks & Automation | Paid $29 | Medium | High — unique, practical |
-| 5 | Module 8: Custom Skills for PMs | Paid $39 | Medium | Very high — daily use |
-| 6 | Module 7: Sub-Agents | Paid $29 | Medium | Medium — power users |
-| 7 | PM Toolkit Bundle | Paid $99 | High | High — premium offering |
-| 8 | Module 9: Email Manager | Paid $29 | High | Medium — niche |
-| 9 | Module 10: Chrome/Web Research | Paid $39 | High | Medium — advanced |
+| 2 | Claude Code Mastery (CLAUDE.md, context, plan mode, sub-agents) | Free | Low-medium | Very high — improves all modules |
+| 3 | Module 5: Hooks & Automation | Paid $29 | Medium | High — unique, practical |
+| 4 | Module 6: Custom Skills for PMs | Paid $39 | Medium | Very high — daily use |
+| 5 | PM Toolkit Bundle | Paid $99 | High | High — premium offering |
+| 6 | Module 7: Email Manager | Paid $29 | High | Medium — niche |
+| 7 | Module 8: Chrome/Web Research | Paid $39 | High | Medium — advanced |
 
 ---
 
@@ -227,7 +219,7 @@ His course is developer/freelancer-focused. Key topics:
 
 **His advantage over us:**
 1. Deployment & hosting (not relevant for PMs)
-2. Sub-agents & advanced features (we should add this)
+2. Sub-agents & advanced features (now covered in Claude Code Mastery — Module 0)
 3. Business/monetization angle (different audience)
 4. 268K subscribers (massive reach)
 

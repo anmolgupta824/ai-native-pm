@@ -10,12 +10,12 @@ export default function Module4GetStarted() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-brand-50 to-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          <a href="/modules/4-image-gen" className="inline-flex items-center gap-2 text-sm text-brand-600 hover:text-brand-700 mb-6">
+          <a href="/modules/2-image-gen" className="inline-flex items-center gap-2 text-sm text-brand-600 hover:text-brand-700 mb-6">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-            Back to Module 4
+            Back to Module 2
           </a>
           <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-brand-100 text-brand-700">Module 4</span>
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-brand-100 text-brand-700">Module 2</span>
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700">Free</span>
             <span className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-600">2 hours</span>
           </div>
@@ -357,9 +357,9 @@ export default function Module4GetStarted() {
 
           {/* Next */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/modules/4-image-gen" className="flex-1 border border-gray-200 rounded-xl p-5 hover:bg-gray-50 transition-colors text-center">
+            <a href="/modules/2-image-gen" className="flex-1 border border-gray-200 rounded-xl p-5 hover:bg-gray-50 transition-colors text-center">
               <p className="text-xs text-gray-400 mb-1">Read the full course overview</p>
-              <p className="text-sm font-semibold text-gray-900">Module 4: AI Image Generation</p>
+              <p className="text-sm font-semibold text-gray-900">Module 2: AI Image Generation</p>
             </a>
             <a href="/modules" className="flex-1 border border-gray-200 rounded-xl p-5 hover:bg-gray-50 transition-colors text-center">
               <p className="text-xs text-gray-400 mb-1">Browse all modules</p>

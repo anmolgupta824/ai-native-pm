@@ -9,7 +9,7 @@ export default function Module4ImageGen() {
           {/* Pill badges */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="text-xs font-semibold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1.5 rounded-full">
-              Module 4
+              Module 2
             </span>
             <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-green-100 text-green-700">
               Free
@@ -43,7 +43,7 @@ export default function Module4ImageGen() {
 
           <div className="flex flex-wrap items-center gap-3 mt-8">
             <a
-              href="/modules/4-image-gen/get-started"
+              href="/modules/2-image-gen/get-started"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700 transition-colors shadow-md"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -743,7 +743,7 @@ export default function Module4ImageGen() {
         <div className="container-max px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col sm:flex-row justify-between items-stretch gap-4">
             <a
-              href="/modules/3-mcp-automation"
+              href="/modules/1-prd-generator"
               className="flex-1 flex items-center gap-4 p-5 rounded-xl border border-gray-200 hover:border-brand-200 hover:bg-brand-50/30 transition-all group"
             >
               <svg className="w-5 h-5 text-gray-400 group-hover:text-brand-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -752,19 +752,19 @@ export default function Module4ImageGen() {
               <div>
                 <span className="text-xs text-gray-400 uppercase tracking-wider">Previous</span>
                 <p className="text-sm font-semibold text-gray-900 group-hover:text-brand-700 transition-colors">
-                  Module 3 — MCP Integrations
+                  Module 1 — PRD Generator
                 </p>
               </div>
             </a>
 
             <a
-              href="/modules"
+              href="/modules/3-mcp-automation"
               className="flex-1 flex items-center justify-end gap-4 p-5 rounded-xl border border-gray-200 hover:border-brand-200 hover:bg-brand-50/30 transition-all group text-right"
             >
               <div>
-                <span className="text-xs text-gray-400 uppercase tracking-wider">All Modules</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wider">Next</span>
                 <p className="text-sm font-semibold text-gray-900 group-hover:text-brand-700 transition-colors">
-                  View All Modules
+                  Module 3 — MCP Integrations
                 </p>
               </div>
               <svg className="w-5 h-5 text-gray-400 group-hover:text-brand-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

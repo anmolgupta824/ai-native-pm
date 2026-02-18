@@ -206,19 +206,12 @@ export default function Module3Page() {
       {/* Navigation */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between gap-4">
-          <a href="/modules/2-rollout-planner" className="flex items-center gap-3 border border-gray-200 rounded-xl px-5 py-4 hover:bg-gray-50 transition-colors group">
+          <a href="/modules/2-image-gen" className="flex items-center gap-3 border border-gray-200 rounded-xl px-5 py-4 hover:bg-gray-50 transition-colors group">
             <svg className="w-5 h-5 text-gray-400 group-hover:text-brand-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             <div>
               <p className="text-xs text-gray-400">Previous</p>
-              <p className="text-sm font-semibold text-gray-900">Module 2: Rollout Planner</p>
+              <p className="text-sm font-semibold text-gray-900">Module 2: AI Image Generation</p>
             </div>
-          </a>
-          <a href="/modules/4-vibe-coding" className="flex items-center gap-3 border border-gray-200 rounded-xl px-5 py-4 hover:bg-gray-50 transition-colors group text-right sm:ml-auto">
-            <div>
-              <p className="text-xs text-gray-400">Next</p>
-              <p className="text-sm font-semibold text-gray-900">Module 4: Vibe Coding</p>
-            </div>
-            <svg className="w-5 h-5 text-gray-400 group-hover:text-brand-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </a>
         </div>
       </section>
