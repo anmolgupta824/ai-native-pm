@@ -48,7 +48,7 @@ pm-ai-brand/
 | Repo | Visibility | What's in it |
 |---|---|---|
 | `pm-ai-brand-project` | **Private** | Everything — website, all modules, marketing, docs. Primary working repo. |
-| `ai-native-pm` | **Public** | All modules (0-3) + README. Open-source for students. |
+| `ai-native-pm` | **Public** | Modules (0-3) + README + LICENSE only. Uses orphan `public` branch. |
 
 ### Remotes
 
@@ -60,23 +60,28 @@ public  → ai-native-pm (public)           ← free modules only
 ### Day-to-Day Workflow
 
 ```bash
-# Website changes, paid module, marketing, docs → push to private only
+# All changes → push to private repo (everything lives here)
 git add -A && git commit -m "your message"
 git push                          # → private repo → Vercel auto-deploys if website/ changed
 
-# Module changes (0-4) → push to BOTH repos
-git add -A && git commit -m "your message"
-git push                          # → private repo
-git push public main              # → public repo
+# When modules change → sync to public repo
+git checkout public               # switch to orphan public branch
+git checkout main -- modules/     # pull latest modules from main
+git add -A && git commit -m "Sync modules"
+git push public public:main       # → public repo (replaces its main)
+git checkout main                 # back to working branch
 ```
 
 ### What goes where
 
-| Change type | `git push` (private) | `git push public main` |
+| Change type | `git push` (private) | `git push public public:main` |
 |---|---|---|
-| Website code | ✅ → Vercel auto-deploys | ✅ |
-| Modules (0-4) | ✅ | ✅ |
-| Marketing, docs, progress | ✅ | ✅ |
+| Website code | ✅ → Vercel auto-deploys | ❌ Not included |
+| Modules (0-3) | ✅ | ✅ |
+| Marketing, docs, progress | ✅ | ❌ Not included |
+
+### Public branch (`public`)
+The public repo uses a separate orphan branch called `public` that contains **only** modules, README, and LICENSE. No website, marketing, or internal files are exposed.
 
 ### Vercel Deployment
 

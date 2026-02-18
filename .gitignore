@@ -25,9 +25,6 @@ Thumbs.db
 *.swp
 *.swo
 
-# Parked modules (not part of the current offering)
-future-modules/
-
 # Test folders (not part of the shipped product)
 /test/
 claude-pm-test/
