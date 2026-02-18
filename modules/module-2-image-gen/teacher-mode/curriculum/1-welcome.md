@@ -62,26 +62,40 @@ Go to **platform.openai.com** and sign up (or log in if you have one).
 ### Step 2: Generate an API Key
 Go to **platform.openai.com/api-keys** and click "Create new secret key". Copy it -- it starts with "sk-".
 
-### Step 3: Set It as an Environment Variable
+### Step 3: Save Your Key in the Terminal
 
-**Mac/Linux (Terminal):**
+1. If Claude Code is running, type `/exit` to leave it temporarily
+2. In the same terminal window, paste this command (replace `sk-your-key-here` with the real key you copied):
+
 ```
 export OPENAI_API_KEY="sk-your-key-here"
 ```
 
-To make it permanent, add that line to your `~/.zshrc` or `~/.bashrc` file.
+3. Press **Enter**. **Nothing will appear — that is normal.** It worked silently.
 
-**Windows (PowerShell):**
+4. To save it permanently (so it survives when you close the terminal), paste this:
+
 ```
-$env:OPENAI_API_KEY = "sk-your-key-here"
+echo 'export OPENAI_API_KEY="sk-your-key-here"' >> ~/.zshrc
 ```
 
-### Step 4: Verify
-In your terminal, run:
+Replace `sk-your-key-here` with your real key again. Press **Enter**.
+
+**What did that do?** The first command told your current terminal your key. The second saved it to a settings file your Mac reads every time you open a new terminal — you only need to do this once.
+
+### Step 4: Verify It Worked
+
+Paste this in your terminal:
 ```
 echo $OPENAI_API_KEY
 ```
-It should print your key.
+
+**If you see your key printed** — you are all set. Type `claude` to restart Claude Code.
+
+**If you see nothing:**
+- Make sure you ran the commands in the same terminal window
+- Check that you included the quotes around your key
+- Try closing the terminal completely, opening a new one, and running `echo $OPENAI_API_KEY` again (this tests if the permanent save worked)
 
 ### Billing
 Add a payment method at platform.openai.com/account/billing. Start with a $5-10 limit -- that is enough for hundreds of images.
