@@ -1,0 +1,19 @@
+{
+  "name": "image-gen-teacher-mode",
+  "version": "1.0.0",
+  "description": "MCP Teacher Mode server for the AI Image Generation course — teaches PMs how to create visuals with DALL-E",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}

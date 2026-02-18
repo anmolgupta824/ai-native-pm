@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(/teacher-mode/progress.json)",
+      "Edit(/output/**)"
+    ]
+  }
+}

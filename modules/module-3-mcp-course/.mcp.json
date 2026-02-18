@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcp-teacher": {
+      "command": "node",
+      "args": ["/Users/anmolgupta/Documents/Claude/pm-ai-brand/modules/module-3-mcp-course/dist/index.js"]
+    }
+  }
+}

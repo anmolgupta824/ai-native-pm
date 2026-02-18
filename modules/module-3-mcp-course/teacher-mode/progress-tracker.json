@@ -1,0 +1,14 @@
+{
+  "lessons": {
+    "1": { "title": "Welcome to MCP", "status": "not_started", "started_at": null, "completed_at": null },
+    "2": { "title": "REST APIs for PMs", "status": "not_started", "started_at": null, "completed_at": null },
+    "3": { "title": "How MCP Works", "status": "not_started", "started_at": null, "completed_at": null },
+    "4": { "title": "Build a Jira Integration", "status": "not_started", "started_at": null, "completed_at": null },
+    "5": { "title": "Connect to Google Drive", "status": "not_started", "started_at": null, "completed_at": null },
+    "6": { "title": "Connect to Google Sheets", "status": "not_started", "started_at": null, "completed_at": null },
+    "7": { "title": "Build an MCP Server for Any API", "status": "not_started", "started_at": null, "completed_at": null },
+    "8": { "title": "Figma Integration", "status": "not_started", "started_at": null, "completed_at": null }
+  },
+  "total_lessons": 8,
+  "completed_lessons": 0
+}
