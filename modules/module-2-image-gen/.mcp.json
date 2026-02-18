@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "image-gen-teacher": {
+      "command": "bash",
+      "args": ["-lc", "node teacher-mode/mcp-server/dist/index.js"]
+    }
+  }
+}

@@ -79,6 +79,9 @@ Go to **platform.openai.com/api-keys** and click "Create new secret key". Copy i
 ### Step 3: Save Your Key in the Terminal
 
 1. If Claude Code is running, type \`/exit\` to leave it temporarily
+
+**Mac / Linux:**
+
 2. In the same terminal window, paste this command (replace \`sk-your-key-here\` with the real key you copied):
 
 \`\`\`
@@ -87,21 +90,56 @@ export OPENAI_API_KEY="sk-your-key-here"
 
 3. Press **Enter**. **Nothing will appear — that is normal.** It worked silently.
 
-4. To save it permanently (so it survives when you close the terminal), paste this:
+4. To save it permanently (so it survives when you close the terminal), first check which shell you are using:
 
+\`\`\`
+echo $SHELL
+\`\`\`
+
+If it says \`/bin/zsh\`, paste this:
 \`\`\`
 echo 'export OPENAI_API_KEY="sk-your-key-here"' >> ~/.zshrc
 \`\`\`
 
+If it says \`/bin/bash\`, paste this instead:
+\`\`\`
+echo 'export OPENAI_API_KEY="sk-your-key-here"' >> ~/.bash_profile
+\`\`\`
+
 Replace \`sk-your-key-here\` with your real key again. Press **Enter**.
 
-**What did that do?** The first command told your current terminal your key. The second saved it to a settings file your Mac reads every time you open a new terminal — you only need to do this once.
+**Windows (PowerShell):**
+
+2. In the same terminal window, paste this command (replace \`sk-your-key-here\` with the real key you copied):
+
+\`\`\`
+$env:OPENAI_API_KEY = "sk-your-key-here"
+\`\`\`
+
+3. Press **Enter**.
+
+4. To save it permanently, paste this:
+
+\`\`\`
+[System.Environment]::SetEnvironmentVariable("OPENAI_API_KEY", "sk-your-key-here", "User")
+\`\`\`
+
+Replace \`sk-your-key-here\` with your real key again. Press **Enter**.
+
+**What did that do?** The first command told your current terminal your key. The second saved it permanently so every new terminal session has it — you only need to do this once.
 
 ### Step 4: Verify It Worked
 
 Paste this in your terminal:
+
+**Mac / Linux:**
 \`\`\`
 echo $OPENAI_API_KEY
+\`\`\`
+
+**Windows (PowerShell):**
+\`\`\`
+echo $env:OPENAI_API_KEY
 \`\`\`
 
 **If you see your key printed** — you are all set. Type \`claude\` to restart Claude Code.
@@ -109,9 +147,9 @@ echo $OPENAI_API_KEY
 **If you see nothing:**
 - Make sure you ran the commands in the same terminal window
 - Check that you included the quotes around your key
-- Try closing the terminal completely, opening a new one, and running \`echo $OPENAI_API_KEY\` again (this tests if the permanent save worked)
+- Try closing the terminal completely, opening a new one, and running the echo command again (this tests if the permanent save worked)
 
-### Billing
+### Step 5: Add Billing
 Add a payment method at platform.openai.com/account/billing. Start with a $5-10 limit — that is enough for hundreds of images.`,
       teacherNotes: "This is the hardest setup step for non-technical students. Go slowly. If they already have an API key, help them verify it works (skip to Step 4). The most common issue is running export in one terminal and Claude Code in a different one — remind them: same terminal window. If they see nothing after echo, walk them through it step by step.",
       checkQuestion: "Run echo $OPENAI_API_KEY in your terminal — does it print your key? If yes, type claude to get back into Claude Code and we will continue. If not, tell me what you see and I will help.",

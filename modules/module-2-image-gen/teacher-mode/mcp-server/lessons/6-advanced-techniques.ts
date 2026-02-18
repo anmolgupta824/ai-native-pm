@@ -8,7 +8,7 @@ const lesson: LessonContent = {
     "Master the variation and iteration workflow for faster results",
     "Learn to use asset packs for coordinated visual campaigns",
     "Build a reusable prompt library for your recurring visual needs",
-    "Combine image generation with other modules (PRD, Rollout Plans)",
+    "Combine image generation with other modules (PRD Generator, MCP Automation)",
   ],
   sections: [
     {
@@ -177,32 +177,25 @@ Image generation becomes even more powerful when combined with other modules.
 
 **Result:** PRDs with visual context that align stakeholders faster.
 
-### With Module 2: Rollout Plan Generator
+### With Module 3: MCP Automation
 
-1. Create your rollout plan using Module 2
-2. Generate launch announcement graphics for each phase
-3. Create before/after visuals showing the expected impact
-4. Build a social campaign asset pack for the launch
+1. Build custom MCP integrations using Module 3
+2. Pull data from Jira, analytics, or internal tools into your prompts
+3. Auto-generate weekly report graphics from dashboard data
+4. Create visual summaries of sprint reviews using live data
 
-**Result:** Rollout plans with ready-to-use launch visuals.
-
-### With Module 3: MCP Integrations
-
-If you have built custom MCP servers (Module 3), you can:
-- Pull data from Jira or analytics tools to inform your visuals
-- Auto-generate weekly report graphics from dashboard data
-- Create visual summaries of sprint reviews
+**Result:** Automated visual workflows powered by real-time data.
 
 ### The Full PM Visual Workflow
 
 \`\`\`
 Feature Idea
     ↓
-PRD (Module 1) + Mockups (Module 4)
+PRD (Module 1) + Mockups (Module 2)
     ↓
-Rollout Plan (Module 2) + Launch Graphics (Module 4)
+Launch Graphics (Module 2) + Data Dashboards (Module 3)
     ↓
-Social Campaign (Module 4 Asset Pack)
+Social Campaign (Module 2 Asset Pack)
     ↓
 Ship & Measure
 \`\`\`
@@ -301,12 +294,12 @@ Thank you for completing this course. Now go generate some visuals.`,
         question: "How does image generation combine with Module 1 (PRD Generator)?",
         options: [
           "They cannot be used together",
-          "Generate the PRD first with Module 1, then create mockups with Module 4 for the Design Considerations section",
-          "Module 4 replaces Module 1",
-          "You must complete Module 4 before starting Module 1",
+          "Generate the PRD first with Module 1, then create mockups with Module 2 for the Design Considerations section",
+          "Module 2 replaces Module 1",
+          "You must complete Module 2 before starting Module 1",
         ],
         correctIndex: 1,
-        explanation: "The ideal workflow is: generate your PRD with Module 1's Socratic questioning, then at the Design Considerations section, create mockups with Module 4. This gives you PRDs with visual context that align stakeholders faster.",
+        explanation: "The ideal workflow is: generate your PRD with Module 1's Socratic questioning, then at the Design Considerations section, create mockups with Module 2. This gives you PRDs with visual context that align stakeholders faster.",
       },
     ],
   },
