@@ -9,9 +9,8 @@ A practical upskilling program that teaches Product Managers to use Claude Code 
 ### Free
 - **Module 0: Claude Code Basics** - Get comfortable with Claude Code
 - **Module 1: PRD Generator** - Generate production-ready PRDs in 30 minutes
-- **Module 2: Rollout Plan Generator** - Plan your next launch in 1 hour, not 1 week
+- **Module 2: AI Image Generation** - Create product mockups, presentations, and social assets
 - **Module 3: MCP Integrations Course** - Automate Google Workspace workflows
-- **Module 4: AI Image Generation** - Create product mockups, presentations, and social assets
 
 ## Quick Start
 
@@ -27,9 +26,8 @@ pm-ai-brand/
 ├── modules/
 │   ├── module-0-claude-basics/
 │   ├── module-1-prd/
-│   ├── module-2-rollout/
-│   ├── module-3-mcp-course/
-│   └── module-4-image-gen/
+│   ├── module-2-image-gen/
+│   └── module-3-mcp-course/
 ├── marketing/        # Brand voice, LinkedIn, email content
 ├── docs/             # Build log and dev notes
 ├── PROGRESS.md       # Project progress tracker
@@ -50,7 +48,7 @@ pm-ai-brand/
 | Repo | Visibility | What's in it |
 |---|---|---|
 | `pm-ai-brand-project` | **Private** | Everything — website, all modules, marketing, docs. Primary working repo. |
-| `ai-native-pm` | **Public** | All modules (0-4) + README. Open-source for students. |
+| `ai-native-pm` | **Public** | All modules (0-3) + README. Open-source for students. |
 
 ### Remotes
 

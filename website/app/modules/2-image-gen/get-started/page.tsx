@@ -94,7 +94,7 @@ export default function Module4GetStarted() {
                   <h3 className="text-sm font-bold text-brand-800 mb-2">Option A: Ask Claude to do it (Easiest)</h3>
                   <p className="text-sm text-brand-700 mb-3">Open Claude Code in the folder where you want the course, and paste:</p>
                   <div className="bg-white rounded-lg p-4 font-mono text-sm text-gray-700 border border-brand-200">
-                    Download the AI Image Generation Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-4-image-gen/teacher-mode/mcp-server and run npm install &amp;&amp; npm run build.
+                    Download the AI Image Generation Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-image-gen/teacher-mode/mcp-server and run npm install &amp;&amp; npm run build.
                   </div>
                   <p className="text-xs text-brand-600 mt-2">Claude will clone, install, and build everything for you.</p>
                 </div>
@@ -103,7 +103,7 @@ export default function Module4GetStarted() {
                   <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
                   <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
                     git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
-                    cd ai-native-pm/modules/module-4-image-gen/teacher-mode/mcp-server<br />
+                    cd ai-native-pm/modules/module-2-image-gen/teacher-mode/mcp-server<br />
                     npm install<br />
                     npm run build
                   </div>
@@ -114,7 +114,7 @@ export default function Module4GetStarted() {
                   <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
                     <li>Go to <a href="https://github.com/anmolgupta824/ai-native-pm" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline">github.com/anmolgupta824/ai-native-pm</a></li>
                     <li>Click the green <strong>&quot;Code&quot;</strong> button &rarr; <strong>&quot;Download ZIP&quot;</strong></li>
-                    <li>Unzip and navigate to <code className="bg-gray-200 px-1 rounded text-xs">modules/module-4-image-gen/teacher-mode/mcp-server</code></li>
+                    <li>Unzip and navigate to <code className="bg-gray-200 px-1 rounded text-xs">modules/module-2-image-gen/teacher-mode/mcp-server</code></li>
                     <li>Open Claude Code there and say: <em>&quot;Run npm install &amp;&amp; npm run build&quot;</em></li>
                   </ol>
                 </div>
@@ -224,7 +224,7 @@ export default function Module4GetStarted() {
                   <h3 className="text-sm font-bold text-brand-800 mb-2">Option A: Ask Claude to do it (Easiest)</h3>
                   <p className="text-sm text-brand-700 mb-3">Open Claude Code and paste:</p>
                   <div className="bg-white rounded-lg p-4 font-mono text-sm text-gray-700 border border-brand-200">
-                    Download the AI Image Generation tools. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-4-image-gen/mcp-server and run npm install &amp;&amp; npx tsc.
+                    Download the AI Image Generation tools. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-image-gen/mcp-server and run npm install &amp;&amp; npx tsc.
                   </div>
                 </div>
 
@@ -232,7 +232,7 @@ export default function Module4GetStarted() {
                   <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
                   <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
                     git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
-                    cd ai-native-pm/modules/module-4-image-gen/mcp-server<br />
+                    cd ai-native-pm/modules/module-2-image-gen/mcp-server<br />
                     npm install<br />
                     npx tsc
                   </div>

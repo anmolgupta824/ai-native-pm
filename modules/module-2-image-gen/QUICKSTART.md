@@ -50,14 +50,14 @@ Pick one of three options:
 Open Claude Code and paste:
 
 ```
-Download the AI Image Generation Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-4-image-gen/teacher-mode/mcp-server and run npm install && npm run build.
+Download the AI Image Generation Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-image-gen/teacher-mode/mcp-server and run npm install && npm run build.
 ```
 
 #### Option B: Git clone (Terminal)
 
 ```bash
 git clone https://github.com/anmolgupta824/ai-native-pm.git
-cd ai-native-pm/modules/module-4-image-gen/teacher-mode/mcp-server
+cd ai-native-pm/modules/module-2-image-gen/teacher-mode/mcp-server
 npm install
 npm run build
 ```
@@ -66,7 +66,7 @@ npm run build
 
 1. Go to [github.com/anmolgupta824/ai-native-pm](https://github.com/anmolgupta824/ai-native-pm)
 2. Click the green **"Code"** button → **"Download ZIP"**
-3. Unzip and navigate to `modules/module-4-image-gen/teacher-mode/mcp-server`
+3. Unzip and navigate to `modules/module-2-image-gen/teacher-mode/mcp-server`
 4. Open Claude Code there and say: *"Run npm install && npm run build"*
 
 ### Step 2: Connect to Claude Code (~1 min)
@@ -111,14 +111,14 @@ Already know how to prompt? Skip the lessons and start generating images immedia
 #### Option A: Ask Claude (Easiest)
 
 ```
-Download the AI Image Generator tools. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-4-image-gen/mcp-server and run npm install && npx tsc.
+Download the AI Image Generator tools. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-image-gen/mcp-server and run npm install && npx tsc.
 ```
 
 #### Option B: Git clone
 
 ```bash
 git clone https://github.com/anmolgupta824/ai-native-pm.git
-cd ai-native-pm/modules/module-4-image-gen/mcp-server
+cd ai-native-pm/modules/module-2-image-gen/mcp-server
 npm install
 npx tsc
 ```

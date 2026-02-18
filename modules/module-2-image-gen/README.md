@@ -1,4 +1,4 @@
-# Module 4: AI Image Generation for PMs
+# Module 2: AI Image Generation for PMs
 
 **Generate product visuals, mockups, and marketing assets in minutes with DALL-E.**
 
@@ -46,7 +46,7 @@ Teacher Mode tools: `start_lesson`, `continue_lesson`, `resume_course`, `explain
 ## Project Structure
 
 ```
-module-4-image-gen/
+module-2-image-gen/
 ├── mcp-server/              # Usage Mode — 6 production tools
 │   ├── src/
 │   │   └── index.ts

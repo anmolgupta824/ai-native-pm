@@ -50,7 +50,7 @@ export default function Module4ImageGen() {
               Get Started
             </a>
             <a
-              href="https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-4-image-gen"
+              href="https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-2-image-gen"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-50 transition-colors"
@@ -715,7 +715,7 @@ export default function Module4ImageGen() {
             </p>
 
             <a
-              href="https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-4-image-gen"
+              href="https://github.com/anmolgupta824/ai-native-pm/tree/main/modules/module-2-image-gen"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-700 transition-colors text-sm mb-8"
@@ -730,7 +730,7 @@ export default function Module4ImageGen() {
               <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">Terminal</p>
               <p className="font-mono text-sm text-gray-700">
                 git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
-                cd ai-native-pm/modules/module-4-image-gen<br />
+                cd ai-native-pm/modules/module-2-image-gen<br />
                 npm install && npm run build
               </p>
             </div>
