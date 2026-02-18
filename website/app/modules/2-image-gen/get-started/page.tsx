@@ -94,18 +94,15 @@ export default function Module4GetStarted() {
                   <h3 className="text-sm font-bold text-brand-800 mb-2">Option A: Ask Claude to do it (Easiest)</h3>
                   <p className="text-sm text-brand-700 mb-3">Open Claude Code in the folder where you want the course, and paste:</p>
                   <div className="bg-white rounded-lg p-4 font-mono text-sm text-gray-700 border border-brand-200">
-                    Download the AI Image Generation Course. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-image-gen/teacher-mode/mcp-server and run npm install &amp;&amp; npm run build.
+                    Download the AI Image Generation Course. Clone https://github.com/anmolgupta824/ai-native-pm.git
                   </div>
-                  <p className="text-xs text-brand-600 mt-2">Claude will clone, install, and build everything for you.</p>
+                  <p className="text-xs text-brand-600 mt-2">Claude will clone the repo for you.</p>
                 </div>
 
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
                   <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
                   <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
-                    git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
-                    cd ai-native-pm/modules/module-2-image-gen/teacher-mode/mcp-server<br />
-                    npm install<br />
-                    npm run build
+                    git clone https://github.com/anmolgupta824/ai-native-pm.git
                   </div>
                 </div>
 
@@ -114,25 +111,24 @@ export default function Module4GetStarted() {
                   <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
                     <li>Go to <a href="https://github.com/anmolgupta824/ai-native-pm" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline">github.com/anmolgupta824/ai-native-pm</a></li>
                     <li>Click the green <strong>&quot;Code&quot;</strong> button &rarr; <strong>&quot;Download ZIP&quot;</strong></li>
-                    <li>Unzip and navigate to <code className="bg-gray-200 px-1 rounded text-xs">modules/module-2-image-gen/teacher-mode/mcp-server</code></li>
-                    <li>Open Claude Code there and say: <em>&quot;Run npm install &amp;&amp; npm run build&quot;</em></li>
+                    <li>Unzip the downloaded file</li>
                   </ol>
                 </div>
               </div>
 
-              {/* Step 2: Connect */}
+              {/* Step 2: Open Claude Code */}
               <div className="border-l-4 border-brand-500 pl-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
-                  <h2 className="text-lg font-bold text-gray-900">Connect to Claude Code</h2>
+                  <h2 className="text-lg font-bold text-gray-900">Open Claude Code</h2>
                   <span className="text-xs text-gray-400">1 min</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder and paste this single prompt:</p>
+                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder:</p>
                 <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
-                  Add the Image Generation Teacher as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my project-level Claude Code MCP config (.mcp.json) with the command &quot;node&quot; and the full path to dist/index.js. Do not restart.
+                  cd ai-native-pm/modules/module-2-image-gen &amp;&amp; claude
                 </div>
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                  <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will find the path and update your .mcp.json config. The server will be picked up automatically on your next Claude Code session — no restart needed.</p>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-amber-800"><span className="font-semibold">First-time note:</span> You&apos;ll see a prompt &quot;New MCP server found in .mcp.json: image-gen-teacher-mode&quot; — pick <strong>option 1</strong> (&quot;Use this and all future MCP servers in this project&quot;). This is a one-time security check.</p>
                 </div>
               </div>
 
@@ -143,9 +139,9 @@ export default function Module4GetStarted() {
                   <h2 className="text-lg font-bold text-gray-900">Start Your First Lesson</h2>
                   <span className="text-xs text-gray-400">10 min</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code and say:</p>
+                <p className="text-sm text-gray-600 mb-3">Once Claude Code is open, just say:</p>
                 <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
-                  I want to learn how to generate images with AI. Start me on Lesson 1.
+                  Start the course
                 </div>
                 <p className="text-sm text-gray-600 mt-4 mb-3">The Teacher Mode will:</p>
                 <div className="space-y-2">
@@ -215,8 +211,8 @@ export default function Module4GetStarted() {
               <div className="border-l-4 border-brand-500 pl-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">1</span>
-                  <h2 className="text-lg font-bold text-gray-900">Download &amp; Build</h2>
-                  <span className="text-xs text-gray-400">3 min</span>
+                  <h2 className="text-lg font-bold text-gray-900">Download</h2>
+                  <span className="text-xs text-gray-400">2 min</span>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">Pick one of three options — they all do the same thing:</p>
 
@@ -224,34 +220,40 @@ export default function Module4GetStarted() {
                   <h3 className="text-sm font-bold text-brand-800 mb-2">Option A: Ask Claude to do it (Easiest)</h3>
                   <p className="text-sm text-brand-700 mb-3">Open Claude Code and paste:</p>
                   <div className="bg-white rounded-lg p-4 font-mono text-sm text-gray-700 border border-brand-200">
-                    Download the AI Image Generation tools. Clone https://github.com/anmolgupta824/ai-native-pm.git, then go into modules/module-2-image-gen/mcp-server and run npm install &amp;&amp; npx tsc.
+                    Download the AI Image Generation tools. Clone https://github.com/anmolgupta824/ai-native-pm.git
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
+                  <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
+                  <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
+                    git clone https://github.com/anmolgupta824/ai-native-pm.git
                   </div>
                 </div>
 
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-                  <h3 className="text-sm font-bold text-gray-800 mb-2">Option B: Git clone (Terminal)</h3>
-                  <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm text-gray-700">
-                    git clone https://github.com/anmolgupta824/ai-native-pm.git<br />
-                    cd ai-native-pm/modules/module-2-image-gen/mcp-server<br />
-                    npm install<br />
-                    npx tsc
-                  </div>
+                  <h3 className="text-sm font-bold text-gray-800 mb-2">Option C: Download ZIP (No terminal needed)</h3>
+                  <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
+                    <li>Go to <a href="https://github.com/anmolgupta824/ai-native-pm" target="_blank" rel="noopener noreferrer" className="text-brand-600 underline">github.com/anmolgupta824/ai-native-pm</a></li>
+                    <li>Click the green <strong>&quot;Code&quot;</strong> button &rarr; <strong>&quot;Download ZIP&quot;</strong></li>
+                    <li>Unzip the downloaded file</li>
+                  </ol>
                 </div>
               </div>
 
-              {/* Step 2: Connect */}
+              {/* Step 2: Open Claude Code */}
               <div className="border-l-4 border-brand-500 pl-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">2</span>
-                  <h2 className="text-lg font-bold text-gray-900">Connect to Claude Code</h2>
+                  <h2 className="text-lg font-bold text-gray-900">Open Claude Code</h2>
                   <span className="text-xs text-gray-400">1 min</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder and paste this single prompt:</p>
+                <p className="text-sm text-gray-600 mb-3">Open Claude Code in the module folder:</p>
                 <div className="bg-brand-50 border border-brand-100 rounded-lg p-4 font-mono text-sm text-brand-800">
-                  Add the Image Generator as an MCP server. The server file is at ./dist/index.js in the current directory. Add it to my project-level Claude Code MCP config (.mcp.json) with the command &quot;node&quot; and the full path to dist/index.js. Do not restart.
+                  cd ai-native-pm/modules/module-2-image-gen &amp;&amp; claude
                 </div>
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                  <p className="text-sm text-green-800"><span className="font-semibold">One prompt, fully configured.</span> Claude will find the path and update your .mcp.json config. The server will be picked up automatically on your next Claude Code session — no restart needed.</p>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-amber-800"><span className="font-semibold">First-time note:</span> You&apos;ll see a prompt &quot;New MCP server found in .mcp.json: image-gen-teacher-mode&quot; — pick <strong>option 1</strong> (&quot;Use this and all future MCP servers in this project&quot;). This is a one-time security check.</p>
                 </div>
               </div>
 
@@ -261,7 +263,7 @@ export default function Module4GetStarted() {
                   <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-sm font-bold">3</span>
                   <h2 className="text-lg font-bold text-gray-900">Start Using It</h2>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">Try these prompts in Claude Code:</p>
+                <p className="text-sm text-gray-600 mb-3">Once Claude Code is open, type <code className="text-xs bg-gray-200 px-1.5 py-0.5 rounded">Usage mode</code> and try these prompts:</p>
                 <div className="space-y-3">
                   {[
                     'Generate a mockup of a notifications dashboard with a bell icon dropdown, unread indicators, and blue (#2563EB) color scheme.',
@@ -309,11 +311,10 @@ export default function Module4GetStarted() {
             <h2 className="text-lg font-bold text-gray-900 mb-4">Troubleshooting</h2>
             <div className="space-y-3">
               {[
-                { problem: '"OPENAI_API_KEY not set"', fix: 'Set your API key: export OPENAI_API_KEY="sk-..." in your terminal. Get a key at platform.openai.com/api-keys.' },
-                { problem: '"MCP server not found"', fix: 'Make sure the path in your config points to the correct dist/index.js file. Run npm run build if dist/ is missing.' },
-                { problem: '"Cannot find module"', fix: 'Run npm install in the server directory.' },
                 { problem: '"command not found: claude"', fix: 'Claude Code isn\'t installed. Go to Module 0 to install it.' },
+                { problem: '"OPENAI_API_KEY not set"', fix: 'Set your API key: export OPENAI_API_KEY="sk-..." in your terminal. Get a key at platform.openai.com/api-keys.' },
                 ...(mode === 'teacher' ? [
+                  { problem: 'Claude doesn\'t seem to know the curriculum', fix: 'Make sure you opened Claude Code inside the modules/module-2-image-gen folder. The CLAUDE.md file must be in your working directory.' },
                   { problem: 'Lessons feel too fast', fix: 'Use the explain_concept tool to dive deeper into any topic. Ask Claude to explain in more detail.' },
                   { problem: 'Exercises cost too much', fix: 'Set generateImages: false to preview prompts without generating. Only generate the ones you want (~$0.04 each).' },
                 ] : [
@@ -336,13 +337,13 @@ export default function Module4GetStarted() {
               {(mode === 'teacher'
                 ? [
                     { step: 'Download', time: '2 min' },
-                    { step: 'API Key', time: '3 min' },
+                    { step: 'Open', time: '1 min' },
                     { step: 'Lesson 1', time: '10 min' },
                     { step: 'Full Course', time: '2 hrs' },
                   ]
                 : [
-                    { step: 'Download', time: '3 min' },
-                    { step: 'API Key', time: '3 min' },
+                    { step: 'Download', time: '2 min' },
+                    { step: 'Open', time: '1 min' },
                     { step: 'First Image', time: '5 min' },
                     { step: 'Asset Pack', time: '10 min' },
                   ]

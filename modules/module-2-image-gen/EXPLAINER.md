@@ -1,4 +1,4 @@
-# Module 4: AI Image Generation for Product Managers
+# Module 2: AI Image Generation for Product Managers
 
 **Time:** 2–3 hours (full course) | **Prerequisites:** Claude Code installed, OpenAI API key | **Cost:** Free
 
@@ -243,7 +243,7 @@ Previously, this would have been: 1) no visuals at all, 2) a Figma request with 
 Now that you can generate visuals on demand:
 
 - **Combine with Module 1** — Add generated mockups directly into your PRDs
-- **Combine with Module 2** — Create launch visuals as part of your rollout plan
+- **Combine with Module 3** — Use MCP automation to pull live data into your visual workflows
 - **Build a visual library** — Generate and organize reusable assets for your product
 - **Share with your team** — Use generated visuals as "visual briefs" for your design team
 

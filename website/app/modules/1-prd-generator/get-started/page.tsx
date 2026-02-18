@@ -356,9 +356,9 @@ export default function Module1GetStarted() {
               <p className="text-xs text-gray-400 mb-1">Read the full course overview</p>
               <p className="text-sm font-semibold text-gray-900">Module 1: PRD Generator</p>
             </a>
-            <a href="/modules/2-rollout-planner" className="flex-1 border border-gray-200 rounded-xl p-5 hover:bg-gray-50 transition-colors text-center">
+            <a href="/modules/2-image-gen" className="flex-1 border border-gray-200 rounded-xl p-5 hover:bg-gray-50 transition-colors text-center">
               <p className="text-xs text-gray-400 mb-1">Next module</p>
-              <p className="text-sm font-semibold text-gray-900">Module 2: Rollout Planner</p>
+              <p className="text-sm font-semibold text-gray-900">Module 2: AI Image Generation</p>
             </a>
           </div>
         </div>
