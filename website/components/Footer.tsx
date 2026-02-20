@@ -33,10 +33,24 @@ export default function Footer() {
           </a>
           <a
             href="https://anmolgupta774089.substack.com"
-            onClick={() => track('external_link', { destination: 'newsletter', page: 'footer' })}
+            onClick={() => track('external_link', { destination: 'substack', page: 'footer' })}
             className="text-sm text-gray-500 hover:text-gray-700"
           >
-            Newsletter
+            Substack
+          </a>
+          <a
+            href="https://medium.com/@anmolgupta824"
+            onClick={() => track('external_link', { destination: 'medium', page: 'footer' })}
+            className="text-sm text-gray-500 hover:text-gray-700"
+          >
+            Medium
+          </a>
+          <a
+            href="https://instagram.com/theainativepm"
+            onClick={() => track('external_link', { destination: 'instagram', page: 'footer' })}
+            className="text-sm text-gray-500 hover:text-gray-700"
+          >
+            Instagram
           </a>
         </div>
       </div>
