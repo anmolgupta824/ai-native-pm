@@ -1,0 +1,44 @@
+name: Track Repository Traffic
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch traffic data
+        env:
+          GH_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
+        run: |
+          CLONES=$(gh api /repos/${{ github.repository }}/traffic/clones)
+          VIEWS=$(gh api /repos/${{ github.repository }}/traffic/views)
+          TODAY=$(date -u +%Y-%m-%d)
+          mkdir -p traffic-data
+          echo "{\"date\": \"$TODAY\", \"clones\": $CLONES, \"views\": $VIEWS}" > "traffic-data/snapshot-$TODAY.json"
+          TOTAL_CLONES=$(echo "$CLONES" | jq '.count')
+          UNIQUE_CLONES=$(echo "$CLONES" | jq '.uniques')
+          TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
+          UNIQUE_VIEWS=$(echo "$VIEWS" | jq '.uniques')
+          echo "## Traffic Report — $TODAY" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Total | Unique |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Clones (14d) | $TOTAL_CLONES | $UNIQUE_CLONES |" >> $GITHUB_STEP_SUMMARY
+          echo "| Views (14d) | $TOTAL_VIEWS | $UNIQUE_VIEWS |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit traffic data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add traffic-data/
+          git diff --staged --quiet || git commit -m "Traffic snapshot: $(date -u +%Y-%m-%d)"
+          git push
