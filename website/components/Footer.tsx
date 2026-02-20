@@ -32,7 +32,7 @@ export default function Footer() {
             LinkedIn
           </a>
           <a
-            href="https://substack.com"
+            href="https://anmolgupta774089.substack.com"
             onClick={() => track('external_link', { destination: 'newsletter', page: 'footer' })}
             className="text-sm text-gray-500 hover:text-gray-700"
           >

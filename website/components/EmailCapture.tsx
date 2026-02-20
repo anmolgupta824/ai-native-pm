@@ -11,7 +11,7 @@ export default function EmailCapture() {
     e.preventDefault()
     // Redirect to Substack signup with email pre-filled
     track('email_subscribe', { page: 'global' })
-    const substackUrl = `https://ainativepm.substack.com/subscribe?email=${encodeURIComponent(email)}`
+    const substackUrl = `https://anmolgupta774089.substack.com/subscribe?email=${encodeURIComponent(email)}`
     window.open(substackUrl, '_blank')
     setSubmitted(true)
   }
