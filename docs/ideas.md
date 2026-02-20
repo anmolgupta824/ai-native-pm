@@ -1,86 +1,211 @@
-# Ideas: Course Extension & Monetization
+# Ideas: Strategy & Product Roadmap
 
-*Created: Feb 17, 2026*
-*Source: Nick Saraev's "Claude Code Full Course 4 Hours: Build & Sell (2026)" + own brainstorming*
+*Created: Feb 17, 2026 | Updated: Feb 21, 2026*
+*Source: Nick Saraev's "Claude Code Full Course 4 Hours: Build & Sell (2026)" + brainstorming sessions*
 *Video: https://www.youtube.com/watch?v=QoQBzR1NIqI*
 
-> **Status: PARKED.** Revisit after all modules (0-4) are tested, launched, and we have initial traction from promotion. Focus now: finish testing → ship → promote → get feedback → then expand.
+> **Strategy: Audience first. Monetize later.**
+> Everything free (gated behind free newsletter signup). OpenClaw model — give away genuinely useful tools, build reputation, become the go-to PM in the AI-native space. Money follows: consulting, job offers, speaking, partnerships, SaaS product later.
+>
+> No one pays for courses. PMs pay for tools that save time. But right now, we give even the tools away free to build audience. The subscriber list is the real asset.
 
 ---
 
-## What Nick Saraev Covers (4hr course, 85K views in 3 days)
+## The Big Picture
 
-His course is developer/freelancer-focused. Key topics:
-1. **Setup & Basics** — Installing Claude Code, interface walkthrough, IDE setup
-2. **CLAUDE.md (Project Brain)** — Steering AI with persistent context files
-3. **Building Web Apps** — Replicating website designs, UI components
-4. **Advanced Features** — .claude directory, sub-agents, hidden features
-5. **Plan Mode & Skip Permissions** — Operational modes for complex tasks
-6. **Context Management** — Avoiding "context rot", structuring prompts
-7. **Slash Commands & Hooks** — Automation scripts that fire before/after tool calls
-8. **MCP Tools** — Understanding Model Context Protocol
-9. **Skills** — Creating reusable Claude Code skill files
-10. **Deployment** — Using Modal to deploy to live URLs
-11. **Lead Scraper Project** — Building a scraping tool + turning it into an API
-12. **Monetization** — Selling AI automation services, Maker School (his paid program)
+```
+PM finds you on LinkedIn / Google / word of mouth
+    → Signs up for free newsletter (Substack)
+    → Gets access to PM Career Toolkit (private repo)
+    → Uses it, loves it, tells other PMs
+    → They share "sign up to get this free toolkit"
+    → More subscribers → bigger audience → credibility → opportunities
+```
 
-### His monetization angle:
-- Build AI automation tools → sell to businesses as a freelancer/agency
-- "Maker School" — $$$$ paid community (90-day framework to first paying customer)
-- Lead gen as a service, rapid prototyping for clients, internal tooling for companies
+**What we give away:** Claude Code Mastery course, PM Career Toolkit (Interview Simulator + Resume Kit), templates, skills
+**What we gate:** Everything requires free Substack/email signup (captures emails = moat)
+**What we monetize later:** Consulting, coaching, sponsored content, premium community, hosted SaaS products
 
 ---
 
-## Gap Analysis: What We Cover vs. What He Covers
+## What to Build Next (Priority Order)
 
-| Topic | Nick Saraev (Dev audience) | Our Course (PM audience) | Opportunity |
-|-------|--------------------------|-------------------------|-------------|
-| Setup & Basics | ✅ Module 0 | ✅ Module 0 | Already covered |
-| CLAUDE.md | ✅ Deep dive | ❌ Not covered | **FREE module idea** |
-| MCP Integrations | Brief mention | ✅ Module 3 (7 lessons) | **We go deeper** — our advantage |
-| PRD Generation | ❌ | ✅ Module 1 | Unique to us |
-| Rollout Planning | ❌ | ✅ Module 2 | Unique to us |
-| Product Strategy | ❌ | 🔜 Module 5 (planned) | **Unique to us — senior PM magnet** |
-| Image Generation | ❌ | ✅ Module 4 | Unique to us |
-| Sub-agents | ✅ | ❌ | **Free — part of Claude Code Mastery (Module 0)** |
-| Hooks & Automation | ✅ | ❌ | **Paid module idea** |
-| Context Management | ✅ | ❌ | **Free — part of Claude Code Mastery (Module 0)** |
-| Plan Mode | ✅ | ❌ | **Free — part of Claude Code Mastery (Module 0)** |
-| Deployment/Hosting | ✅ Modal | ❌ | Less relevant for PMs |
-| Skills (reusable) | ✅ | ❌ | **Paid module idea** |
-| Selling AI services | ✅ Maker School | ❌ | Different audience |
-| Chrome DevTools MCP | Mentioned | ❌ | **Interesting for PMs** |
-| Email Manager | Project demo | ❌ | **Paid module idea** |
-| Bookkeeping Automation | Project demo | ❌ | Less relevant for PMs |
+| Priority | Idea | Free/Gated | Effort | Impact |
+|----------|------|------------|--------|--------|
+| **0** | **PM Career Toolkit** (Interview Sim + Resume Kit) | **Free (gated behind newsletter)** | **Medium-high** | **Very high — viral, builds audience, tangible value** |
+| 1 | Claude Code Mastery (2-3 hrs, extend Module 0) | Free (public) | Medium | Very high — improves all modules, foundational |
+| 2 | Product Strategy Course (Module 5) | Free (public) | Medium-high | High — attracts senior PMs |
+| 3 | Community Templates Library | Free (public) | Low | Medium — engagement, community building |
 
 ---
 
-## Ideas for FREE Modules/Extensions
+## Priority 0: PM Career Toolkit (FREE, gated)
 
-### 1. Claude Code Mastery for PMs (extend Module 0)
-- **CLAUDE.md / Project Brain:**
-  - How to write a good CLAUDE.md for PM workflows
-  - Templates: CLAUDE.md for PRD projects, sprint planning, research
-  - "Project brain" concept explained for non-coders
-- **Context Management:**
-  - How to avoid "context rot" in long sessions
-  - When to start fresh vs. continue
-  - Structuring prompts for better output
-  - Token conservation strategies
-- **Plan Mode for PMs:**
-  - Using plan mode for complex PM tasks
-  - When to use plan mode vs. regular mode
-  - Example: Planning a product launch with plan mode
-- **Sub-agents & parallel workflows:**
-  - Research 5 competitors simultaneously
-  - Generate PRD + rollout plan + stakeholder email in parallel
-  - Sprint planning: one agent analyzes velocity, another drafts stories
-  - Multi-market launch: agents handle different regions simultaneously
-- **Why free:** All four topics are Claude Code features (not MCP servers) — better as education than paid tools. Essential knowledge that makes all other modules work better
-- **Effort:** Low-medium (no MCP server needed, just lessons + exercises)
-- **Impact:** Very high — improves every student's experience across all modules
+> **Status:** Brainstormed. Ready to build.
+> **Delivery:** Private GitHub repo or zip download. Access via free Substack signup.
+> **Question bank:** https://docs.google.com/spreadsheets/d/1rz10oEeLx-eGnilahKczYPhGfCUzIEKL-xRnjoQ-SX4/edit?gid=1024620532#gid=1024620532
 
-### 2. Product Strategy Course (new free module — Module 5)
+The PM Career Toolkit is a Claude Code package that PMs download, run with their own Claude token, and get a complete job search companion. Two modules:
+
+### Module A: PM Interview Simulator
+
+AI-powered mock interview practice. Users pick company, round type, duration, and level. Claude conducts the interview with realistic follow-ups, pacing awareness, and generates a detailed scorecard.
+
+**How it works:**
+- PM downloads the package, `cd`s into the folder, types `claude`
+- CLAUDE.md turns Claude into a PM interviewer
+- PM picks: Company (Google, Meta, Amazon, Stripe, etc.) + Round type + Duration (15/30/45 min) + Level (PM/Senior/Director)
+- Claude asks questions, does realistic follow-ups, tracks pacing
+- At the end: detailed scorecard with ratings + specific feedback + "what a better answer looks like"
+
+**Package structure:**
+```
+pm-interview-simulator/
+  CLAUDE.md              ← The brain (interviewer persona, scoring rules, pacing logic)
+  questions/
+    product-sense.md     ← 20+ questions with follow-up trees
+    execution.md         ← Metric drop scenarios
+    strategy.md          ← Market entry, compete, build vs buy
+    behavioral.md        ← Tell me about a time...
+    analytical.md        ← Metrics & estimation
+    rca.md               ← Root cause analysis
+    ai-ml.md             ← AI product questions
+    technical.md         ← System design, API design, eng tradeoffs
+  companies/
+    google.md            ← Google interviewer style + expectations
+    meta.md
+    amazon.md
+    stripe.md
+    generic.md
+  rubrics/
+    scoring.md           ← What makes a Hire vs No Hire
+    level-calibration.md ← PM vs Senior PM vs Director expectations
+  README.md              ← Setup: cd here, type 'claude', start practicing
+```
+
+**8 round types supported:**
+
+| Round | What Happens | Example |
+|-------|-------------|---------|
+| Product Sense | Design a product for X | "Design a parking app for a university campus" |
+| Execution | Metric dropped, diagnose and fix | "YouTube watch time dropped 10% WoW" |
+| Strategy | Enter new market, compete, build vs buy | "Should Spotify enter podcast advertising?" |
+| Behavioral | Tell me about a time... | "A decision you made with incomplete data" |
+| Analytical / Metrics | Define success metrics, estimation | "How would you measure success for IG Stories?" |
+| Technical / API | System design, tradeoffs | "Design the API for ride-sharing matching" |
+| RCA | Something broke, figure out why | "Uber rides dropped 15% in NYC this morning" |
+| AI/ML Product | Build an AI feature, data tradeoffs | "Add AI recommendations to Notion" |
+
+**What makes it feel real (not a ChatGPT wrapper):**
+- Follow-up pressure ("Why that metric?" "Reprioritize with 2 engineers and 4 weeks")
+- Pacing feedback ("You've spent 8 min on problem definition, move to solutions")
+- Company-specific style (Google = frameworks, Amazon = customer obsession, Meta = scale)
+- Level calibration (PM vs Senior PM vs Director expectations)
+- Detailed scorecard (not just "good job" — specific 1-10 ratings per dimension)
+
+**Scorecard dimensions:**
+- Framework & Structure
+- User Empathy
+- Prioritization & Tradeoffs
+- Metrics & Success Criteria
+- Edge Cases & Risks
+- Communication Clarity
+- Depth vs Breadth
+- Overall: Strong Hire / Hire / Lean Hire / Lean No Hire / No Hire
+- 3 specific things to improve with examples
+
+**Scope:** Text-only for now. Voice/video = explore later (would need to be a hosted web app, brings back API cost problem).
+
+**Key advantage:** Zero cost for us. PM uses their own Claude Pro/Max subscription. No server, no infrastructure, no maintenance.
+
+### Module B: PM Resume & Application Kit
+
+AI-powered resume building, tailoring, and application management. Same model — Claude Code package, runs locally.
+
+**Features:**
+- Build resume from scratch (guided Q&A about experience)
+- Generate 3-4 resume variations (strategy-focused, technical, execution, leadership)
+- JD tailoring — paste a job description, Claude rewrites resume to match keywords
+- Cover letter generation — reads resume + JD, generates tailored letter
+- ATS optimization — keyword matching, formatting for applicant tracking systems
+- PM achievement rewriter — turns "managed a project" into "drove 40% revenue increase by..."
+- Company research brief — generates a 1-pager about the company before interviews
+- Application tracker — generates CSV/Excel file (user uploads to Google Sheets themselves)
+
+**Package structure:**
+```
+pm-resume-kit/
+  CLAUDE.md              ← Brain (resume rules, ATS optimization, formatting standards)
+  my-profile/
+    experience.md        ← User fills once (work history, skills, achievements)
+    education.md
+    projects.md
+  templates/
+    resume-classic.md    ← Clean, traditional format
+    resume-modern.md     ← Startup-friendly
+    resume-technical.md  ← PM-meets-technical emphasis
+    cover-letter.md      ← Cover letter template
+  output/                ← Generated files go here
+  README.md
+```
+
+**Why this works without integrations:**
+- All local files — no Jira, no Google API, no OAuth
+- User fills in experience.md once, then pastes JDs as needed
+- Output is markdown files they can copy into any format
+- Application tracker is a CSV they open in Excel/Google Sheets
+
+**Privacy angle (actually a selling point):** Your entire career history stays on YOUR machine. Never uploaded to random resume-builder websites.
+
+### Why the Career Toolkit is Priority 0
+
+1. **Wider audience** — every PM preparing for jobs, not just Claude Code learners
+2. **Tangible value** — saves $150-300/hr vs human mock interviewers + career coaches
+3. **Viral potential** — PMs obsessively share interview prep resources
+4. **Zero cost** — they use their own Claude token
+5. **Credibility** — "Built by a senior PM at Careem/ex-Visa who's done 50+ interviews"
+6. **LinkedIn story** — "I built a PM career toolkit and gave it away for free" = viral post
+7. **Subscriber magnet** — gated behind free newsletter = grows email list
+
+### Key Decisions Still Open
+
+1. **Question bank format** — Need to export/structure the Google Sheet questions into markdown files tagged by round type, company, difficulty, and level
+2. **Video/audio later?** — Text-only works for Claude Code package. If we want voice/video, it becomes a hosted web app (brings back API cost problem). Park for later.
+3. **One repo or two?** — Interview Simulator and Resume Kit could be separate repos or one combined "PM Career Toolkit" repo. Leaning toward one combined repo for simplicity.
+
+---
+
+## Priority 1: Claude Code Mastery (FREE, extend Module 0)
+
+> **Status:** 2 lessons written (Lesson 5: CLAUDE.md, Lesson 6: Context Management). 2 more to go.
+
+Expand Module 0 from 20 min basics → add Part 2: Mastery (2-3 hours). Covers everything a PM needs to become a Claude Code power user.
+
+**Module 0 Structure:**
+- **Part 1: Basics** (20 min) — existing content (install, terminal, first conversation, @-mentions)
+- **Part 2: Mastery** (2-3 hours) — new content:
+
+**Mastery Topics:**
+
+| Lesson | Topic | Duration | Description |
+|--------|-------|----------|-------------|
+| 5 | CLAUDE.md / Project Brain | 15 min | How to write a CLAUDE.md for PM workflows, templates for different PM roles | ✅ WRITTEN |
+| 6 | Context Management | 15 min | Avoiding context rot, one task per session, CRAFT framework, prompt structuring | ✅ WRITTEN |
+| 7 | Plan Mode for PMs | 15 min | When to use plan mode, complex PM task planning, product launch example |
+| 8 | Sub-agents & Parallel Workflows | 15 min | Research 5 competitors simultaneously, generate docs in parallel |
+| 9 | Skills (Slash Commands) | 20 min | Create reusable /prd, /standup, /retro, /competitor commands |
+| 10 | Hooks & Automation | 20 min | Auto-format PRDs, auto-save outputs, notification hooks |
+| 11 | Advanced Prompting Patterns | 20 min | Socratic method, chain-of-thought, before-you-write pattern |
+| 12 | Building Your PM Workspace | 30 min | End-to-end: set up a complete PM workspace from scratch |
+
+**Why all free:** These are Claude Code features, not proprietary tools. Better as education that builds credibility. Makes every other module work better for students.
+
+**Why skills & hooks moved from paid to free:** No one would pay $29-39 for a lesson. But teaching them for free builds massive goodwill and positions you as the expert.
+
+---
+
+## Priority 2: Product Strategy Course (FREE, Module 5)
+
 - **Teaching Mode:** Guided course to create a complete Product Strategy document
   - Lesson 1: Define vision, mission, and strategic pillars
   - Lesson 2: Market analysis — TAM/SAM/SOM, competitor mapping, positioning
@@ -88,121 +213,55 @@ His course is developer/freelancer-focused. Key topics:
   - Lesson 4: Prioritization frameworks (RICE, ICE, MoSCoW) with your real backlog
   - Lesson 5: Roadmap creation — now/next/later, OKR alignment
   - Lesson 6: Strategy review — pressure-test from leadership, board, and investor perspectives
-  - **End goal:** A polished, validated Product Strategy doc ready to share with leadership
-- **Usage Mode:** Quick access to strategy tools
-  - Generate strategy docs from templates (B2B SaaS, Marketplace, Platform, Consumer)
-  - Validate existing strategy docs for completeness and gaps
-  - Brainstorm new market opportunities with AI-powered ideation
-  - Run competitive analysis (SWOT, Porter's Five Forces)
-  - Prioritize features/initiatives with scoring frameworks
-  - Stakeholder review from leadership, board, investor, eng-lead perspectives
-- **MCP tools to build:**
-  - `list_strategy_templates` — Browse strategy templates
-  - `get_strategy_questions` — Guided questionnaire per template type
-  - `generate_strategy` — Generate full strategy doc from answers
-  - `validate_strategy` — Score strategy doc for completeness
-  - `competitive_analysis` — SWOT / Porter's analysis
-  - `prioritize_backlog` — Score initiatives with RICE/ICE/MoSCoW
-  - `brainstorm_opportunities` — AI-powered market opportunity ideation
-  - `review_strategy` — Feedback from leadership, board, investor, eng-lead personas
-- **Why free:** Complements Module 1 (PRD = tactical, Strategy = strategic), attracts senior PMs
+- **Usage Mode:** Quick access to strategy tools (generate docs, validate, brainstorm, competitive analysis)
+- **MCP tools:** list_strategy_templates, get_strategy_questions, generate_strategy, validate_strategy, competitive_analysis, prioritize_backlog, brainstorm_opportunities, review_strategy
+- **Why free:** Attracts senior PMs, complements Module 1 (PRD = tactical, Strategy = strategic)
 - **Effort:** Medium-high (new MCP server + 6-lesson curriculum)
-- **Impact:** Very high — strategy is the #1 PM skill gap, fills a major course gap
 
-### 3. Community Templates Library (new free resource)
+---
+
+## Priority 3: Community Templates Library (FREE)
+
 - CLAUDE.md templates for different PM workflows
 - Prompt templates for common PM tasks
 - Shared by students, curated by us
 - **Why free:** Builds community, keeps students engaged
+- **Effort:** Low
 
 ---
 
-## Ideas for PAID Modules
+## Future Ideas (Explore Later)
 
-### 5. Module 5: Claude Code Hooks & Automation ($29-39)
-- **What:** Teach PMs to set up automation hooks (scripts that fire before/after Claude actions)
-- **PM use cases:**
-  - Auto-format PRDs to company template after generation
-  - Auto-save outputs to Google Drive after every session
-  - Pre-load context from Jira before starting work
-  - Notification hooks (Slack message when PRD is done)
-- **Why paid:** Advanced, high value, saves recurring time
-- **Effort:** Medium (need to build hook templates)
+These are parked for when we have audience + bandwidth:
 
-### 6. Module 6: Custom Skills for PMs ($29-39)
-- **What:** Create reusable "skills" (saved workflows) for common PM tasks
-- **PM use cases:**
-  - "/standup" — auto-generates daily standup from Jira + Sheets
-  - "/prd" — launches PRD workflow with company template
-  - "/retro" — pulls sprint data and generates retro doc
-  - "/competitor" — runs competitive analysis workflow
-- **Why paid:** Huge time-saver, very sticky (once set up, used daily)
-- **Effort:** Medium-high (need to build skill templates)
-
-### 7. Module 7: AI Email Manager for PMs ($19-29)
-- **What:** Use Claude + MCP to triage, draft, and manage email
-- **PM use cases:**
-  - Auto-categorize emails (stakeholder updates, bug reports, feature requests)
-  - Draft responses to common PM emails
-  - Weekly email digest: summarize all stakeholder emails
-  - Extract action items from email threads
-- **Why paid:** High demand, daily use case
-- **Effort:** High (need Gmail MCP server)
-
-### 8. Module 8: Chrome DevTools + Web Research ($29-39)
-- **What:** Use Claude with browser automation for PM research
-- **PM use cases:**
-  - Scrape competitor pricing pages automatically
-  - Monitor competitor feature releases
-  - Extract user reviews from app stores
-  - Auto-fill forms and testing tools
-- **Why paid:** Unique capability, hard to learn alone
-- **Effort:** High (Chrome MCP setup is complex)
-
-### 9. PM Toolkit Bundle ($79-99)
-- **What:** Bundle of custom MCP servers pre-built for PM workflows
-- **Includes:**
-  - Jira + Sheets sprint dashboard
-  - Automated weekly status report generator
-  - Competitive intelligence collector
-  - Stakeholder communication templates
-  - Cross-tool workflows (Jira → Sheets → Drive → Slack)
-- **Why paid:** Premium, saves weeks of setup
-- **Effort:** Very high (but high margin)
+| Idea | What It Is | Notes |
+|------|-----------|-------|
+| AI Email Manager | Claude + MCP to triage, draft, manage email | Needs Gmail MCP, high effort |
+| Chrome DevTools + Web Research | Browser automation for PM research (competitor scraping, review extraction) | Chrome MCP, complex setup |
+| Hosted Interview Simulator (with audio/video) | Web app version with voice interviews via browser Speech APIs | Brings back API cost problem, needs infrastructure, but high moat if done right |
+| PM Maker School / Community | Paid community + coaching + templates | Only makes sense at 5000+ subscribers |
+| Consulting/Coaching | 1:1 PM coaching on AI tools | Monetize at 1000+ followers |
 
 ---
 
-## Pricing Strategy Ideas
+## Monetization Strategy
 
-### Option A: Module-by-Module
-- Modules 0-4: FREE (current state)
-- Modules 5-8: $29-39 each
-- PM Toolkit Bundle: $79-99
-- **Total addressable revenue per student: ~$250**
+### Phase 1: NOW (0-1000 subscribers)
+- **Everything free.** Build audience. OpenClaw model.
+- Free newsletter, free course, free Career Toolkit (gated behind signup)
+- LinkedIn content driving traffic
+- Goal: become known as "the AI-Native PM" in the PM community
 
-### Option B: Free + Premium Tier
-- Free: Modules 0-4 (forever free)
-- Premium ($49/month or $99 one-time): Access to Modules 5-9 + Templates + Community
-- **Recurring revenue potential**
+### Phase 2: LATER (1000+ subscribers)
+- Consulting/coaching ($150-300/hr)
+- Sponsored content / partnerships
+- Premium community or Slack group
 
-### Option C: Free Course + Paid Templates/Tools
-- All modules free (maximum reach)
-- Sell pre-built MCP server bundles, CLAUDE.md templates, skill files
-- **Marketplace model**
-
----
-
-## What to Build Next (Priority Order)
-
-| Priority | Idea | Free/Paid | Effort | Impact |
-|----------|------|-----------|--------|--------|
-| 1 | Product Strategy Course (Module 5) | Free | Medium-high | Very high — attracts senior PMs, fills #1 skill gap |
-| 2 | Claude Code Mastery (CLAUDE.md, context, plan mode, sub-agents) | Free | Low-medium | Very high — improves all modules |
-| 3 | Module 5: Hooks & Automation | Paid $29 | Medium | High — unique, practical |
-| 4 | Module 6: Custom Skills for PMs | Paid $39 | Medium | Very high — daily use |
-| 5 | PM Toolkit Bundle | Paid $99 | High | High — premium offering |
-| 6 | Module 7: Email Manager | Paid $29 | High | Medium — niche |
-| 7 | Module 8: Chrome/Web Research | Paid $39 | High | Medium — advanced |
+### Phase 3: SCALE (5000+ subscribers)
+- Hosted SaaS products (Interview Simulator with audio/video)
+- Enterprise training for PM teams
+- Speaking engagements, workshops
+- Partnership with companies (Anthropic, Atlassian, etc.)
 
 ---
 
@@ -212,24 +271,42 @@ His course is developer/freelancer-focused. Key topics:
 **Our course:** PM audience → "Be 10x more productive at your PM job"
 
 **Our unique advantages:**
-1. PM-specific workflows (PRDs, rollout plans, sprint management)
+1. PM-specific workflows (PRDs, rollout plans, sprint management, interviews)
 2. Deeper MCP integrations (7-lesson course vs. brief mention)
 3. Non-coder friendly (no terminal fear, no code shown)
 4. Tool-specific (Google Workspace, Jira, Figma — PM daily tools)
+5. Free tools with real value (not just education)
 
 **His advantage over us:**
-1. Deployment & hosting (not relevant for PMs)
-2. Sub-agents & advanced features (now covered in Claude Code Mastery — Module 0)
+1. 268K subscribers (massive reach)
+2. Deployment & hosting (not relevant for PMs)
 3. Business/monetization angle (different audience)
-4. 268K subscribers (massive reach)
+
+---
+
+## What Nick Saraev Covers (reference)
+
+His 4hr course is developer/freelancer-focused:
+1. Setup & Basics
+2. CLAUDE.md (Project Brain)
+3. Building Web Apps
+4. Advanced Features (.claude directory, sub-agents)
+5. Plan Mode & Skip Permissions
+6. Context Management
+7. Slash Commands & Hooks
+8. MCP Tools
+9. Skills
+10. Deployment (Modal)
+11. Lead Scraper Project
+12. Monetization (Maker School)
 
 ---
 
 ## Notes to Revisit
 
-- [ ] Watch the full video when rested — lots of implementation details
+- [ ] Export/structure the Google Sheet question bank into markdown files for Interview Simulator
+- [ ] Watch Nick Saraev's full video for implementation details
 - [ ] Check his "Maker School" pricing/model for inspiration
 - [ ] Look at comments section for what people are asking for
-- [ ] Consider a "PM Maker School" equivalent — community + templates + coaching
-- [ ] Nick uses Modal for deployment — explore if relevant for PM toolkit hosting
+- [ ] Consider voice/audio interview simulator as a future hosted product
 - [ ] His tools/affiliates: Instantly, Anymailfinder, Apify, n8n, Rize — some relevant for PM automation
