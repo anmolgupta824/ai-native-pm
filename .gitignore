@@ -28,3 +28,4 @@ Thumbs.db
 # Test folders (not part of the shipped product)
 /test/
 claude-pm-test/
+.github/
