@@ -29,7 +29,7 @@ That's the real value.
 
 ---
 
-**CTA Button:** Try It Yourself (Free) → https://ai-native-pm.vercel.app/modules
+**CTA Button:** Try It Yourself (Free) → https://theainativepm.com/modules
 
 ---
 

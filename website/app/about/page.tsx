@@ -1,3 +1,7 @@
+'use client'
+
+import { track } from '@vercel/analytics'
+
 export default function AboutPage() {
   return (
     <>
@@ -25,6 +29,7 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/anmol-gupta-21875a89/"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track('external_link', { destination: 'linkedin', page: 'about' })}
                 className="inline-flex items-center gap-2 text-sm font-medium text-white bg-[#0A66C2] hover:bg-[#004182] px-5 py-2.5 rounded-lg transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -34,6 +39,7 @@ export default function AboutPage() {
               </a>
               <a
                 href="/modules/0-claude-basics"
+                onClick={() => track('cta_click', { button: 'start_learning', page: 'about', destination: '/modules/0-claude-basics' })}
                 className="inline-flex items-center gap-2 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 px-5 py-2.5 rounded-lg transition-colors"
               >
                 Start Learning Free
@@ -236,6 +242,7 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/anmol-gupta-21875a89/"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track('external_link', { destination: 'linkedin', page: 'about' })}
                 className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white bg-[#0A66C2] hover:bg-[#004182] px-6 py-3 rounded-lg transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -245,6 +252,7 @@ export default function AboutPage() {
               </a>
               <a
                 href="/modules/0-claude-basics"
+                onClick={() => track('cta_click', { button: 'start_learning', page: 'about', destination: '/modules/0-claude-basics' })}
                 className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 px-6 py-3 rounded-lg transition-colors"
               >
                 Start Learning Free

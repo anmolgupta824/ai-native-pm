@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 
 export default function Module1GetStarted() {
   const [mode, setMode] = useState<'teacher' | 'usage'>('teacher')
@@ -34,7 +35,7 @@ export default function Module1GetStarted() {
         <div className="max-w-3xl mx-auto">
           <div className="flex rounded-xl border border-gray-200 overflow-hidden">
             <button
-              onClick={() => setMode('teacher')}
+              onClick={() => { setMode('teacher'); track('mode_select', { module: 'module-1', mode: 'teacher' }) }}
               className={`flex-1 py-4 px-4 text-center transition-colors ${
                 mode === 'teacher'
                   ? 'bg-brand-600 text-white'
@@ -45,7 +46,7 @@ export default function Module1GetStarted() {
               <p className={`text-xs mt-1 ${mode === 'teacher' ? 'text-brand-100' : 'text-gray-400'}`}>Learn with interactive lessons</p>
             </button>
             <button
-              onClick={() => setMode('usage')}
+              onClick={() => { setMode('usage'); track('mode_select', { module: 'module-1', mode: 'usage' }) }}
               className={`flex-1 py-4 px-4 text-center transition-colors ${
                 mode === 'usage'
                   ? 'bg-brand-600 text-white'

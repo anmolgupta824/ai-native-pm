@@ -11,7 +11,7 @@
   PM at Careem (Uber) | Ex-Visa | 7+ yrs Payments
   Start free below
   ```
-- **Link:** ai-native-pm.vercel.app (or use Linktree if you want multiple links)
+- **Link:** theainativepm.com (or use Linktree if you want multiple links)
 - **Profile photo:** Professional headshot of Anmol (same as LinkedIn)
 - **Account type:** Creator account (enables analytics and CTA buttons)
 - **Category:** Education
@@ -36,7 +36,7 @@ Pin the first 3 posts in this order:
 ## Link in Bio Options
 
 **Option A: Direct link**
-- ai-native-pm.vercel.app/modules/0-claude-basics
+- theainativepm.com/modules/0-claude-basics
 - Simplest. Points to Module 0 directly.
 
 **Option B: Linktree (free)**

@@ -97,7 +97,7 @@ Anmol
 
 ---
 
-**CTA Button:** Try the PRD Generator → https://ai-native-pm.vercel.app/modules
+**CTA Button:** Try the PRD Generator → https://theainativepm.com/modules
 
 ---
 

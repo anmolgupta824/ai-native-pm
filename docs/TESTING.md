@@ -1,6 +1,6 @@
 # Testing Tracker
 
-*Last updated: Feb 17, 2026*
+*Last updated: Feb 19, 2026*
 
 ---
 
@@ -35,10 +35,65 @@
 ### Docs ✅
 - [x] QUICKSTART.md updated (tools table, MCP trust notice, "Usage mode" prompt)
 - [x] Website get-started page synced (5 lessons, correct tools, usage mode flow)
+- [x] "Next module" link points to Module 2: AI Image Generation
 
 ---
 
-## Module 3: MCP Course — PARTIALLY TESTED
+## Module 2: AI Image Generation — ✅ FULLY TESTED
+
+### Teaching Mode ✅
+| Lesson | Topic | Status |
+|--------|-------|--------|
+| 1 | Welcome & DALL-E intro, API key setup | ✅ Tested |
+| 2 | Prompt fundamentals & engineering | ✅ Tested |
+| 3 | Product mockups | ✅ Tested |
+| 4 | Presentation visuals | ✅ Tested |
+| 5 | Social media assets | ✅ Tested |
+| 6 | Advanced techniques & cross-module workflows | ✅ Tested |
+
+### Usage Mode ✅
+- [x] `generate_image` — saves locally, auto-opens in Preview, shows DALL-E URL + local path
+- [x] `generate_variations` — multiple images saved, each with DALL-E URL + local path
+- [x] `create_asset_pack` — coordinated assets saved, each with DALL-E URL + local path
+- [x] `review_prompt` — scores prompts without generating
+- [x] `refine_prompt` — improves prompts with suggestions
+- [x] `explain_concept` — explains image gen concepts
+- [x] Response format: plain text summary (visible) + JSON metadata (collapses)
+- [x] `generateImages: false` — text-only output works correctly
+
+### Image Display ✅
+- [x] Images save to `generated-images/` directory
+- [x] Auto-open in macOS Preview via `exec("open")`
+- [x] Clickable DALL-E CDN URL in response
+- [x] Local file path shown in response
+- [x] JSON metadata collapses behind `+N lines` in terminal
+- [x] No MCP ImageContent blocks (removed — didn't render, exceeded 25K token limit)
+
+### Module References ✅
+- [x] All "Module 4" references updated to "Module 2"
+- [x] All "Rollout Plan Generator" references removed
+- [x] Cross-module section in Lesson 6 references Module 3: MCP Automation
+- [x] Workflow diagram uses correct module numbers
+- [x] Quiz questions use correct module numbers
+
+### Setup & Config ✅
+- [x] `.mcp.json` auto-detected by Claude Code (no manual MCP config needed)
+- [x] MCP trust prompt works on first launch
+- [x] Website get-started page simplified: clone → `cd && claude` → start
+- [x] Website deployed to Vercel with updated content
+
+### Branding ✅
+- [x] Welcome message shows "Created by Anmol Gupta" with LinkedIn URL
+- [x] CLAUDE.md updated: Module 2 (not Module 4)
+- [x] EXPLAINER.md updated: Module 2 (not Module 4)
+
+### Auto-Save Progress ✅
+- [x] `.claude/settings.json` with `Edit(/teacher-mode/progress.json)` permission
+- [x] No user prompts for progress.json writes
+
+---
+
+## Module 3: MCP Course — ⚠️ PARTIALLY TESTED
 
 ### Teaching Mode — Lessons 1-4 tested, 5-7 remaining
 | Lesson | Topic | Status |
@@ -69,50 +124,23 @@
 
 ---
 
-## Module 2: Rollout Planner — ❌ NOT TESTED
+## Rollout Planner — MOVED TO future-modules/
 
-### Teaching Mode
-- [ ] All lessons need testing (lesson count TBD)
-
-### Usage Mode
-- [ ] Not tested
-
-### Branding
-- [ ] Branding templates added to CLAUDE.md (not tested)
-- [ ] Rule #10 not yet added
-
-### Auto-Save Progress
-- [ ] `.claude/settings.json` present with correct `Edit()` format (not tested)
+Not actively tested. Moved from Module 2 to `future-modules/module-rollout/` during module renumbering.
 
 ---
 
-## Module 4: Image Generation — ❌ NOT TESTED
+## Cross-Module Fixes Applied
 
-### Teaching Mode
-- [ ] All lessons need testing (lesson count TBD)
-
-### Usage Mode
-- [ ] Not tested
-
-### Branding
-- [ ] Branding templates added to CLAUDE.md (not tested)
-- [ ] Rule #10 not yet added
-
-### Auto-Save Progress
-- [ ] `.claude/settings.json` present with correct `Edit()` format (not tested)
-
----
-
-## Cross-Module Fixes Applied (This Session)
-
-| Fix | M1 | M2 | M3 | M4 |
-|-----|----|----|----|----|
-| Branding in CLAUDE.md | ✅ | ✅ | ✅ | ✅ |
-| Auto-save settings.json (Edit format) | ✅ | ✅ | ✅ | ✅ |
-| Rule #10 mandatory branding | ✅ | ❌ | ❌ | ❌ |
-| QUICKSTART.md updated | ✅ | ❌ | ❌ | ❌ |
-| Website get-started synced | ✅ | ❌ | ❌ | ❌ |
-| MCP trust notice in docs | ✅ | ❌ | ❌ | ❌ |
+| Fix | M1 | M2 | M3 |
+|-----|----|----|-----|
+| Branding in CLAUDE.md | ✅ | ✅ | ✅ |
+| Auto-save settings.json (Edit format) | ✅ | ✅ | ✅ |
+| Rule #10 mandatory branding | ✅ | ✅ | ❌ |
+| QUICKSTART.md updated | ✅ | ✅ | ❌ |
+| Website get-started synced | ✅ | ✅ | ❌ |
+| MCP trust notice in docs | ✅ | ✅ | ❌ |
+| .mcp.json for auto-trust | N/A | ✅ | ❌ |
 
 ---
 
@@ -128,3 +156,9 @@
 | Haiku model skipped branding | No enforcement rule | Added Rule #10 as mandatory instruction |
 | Branding missing from some touchpoints | Only in new student welcome | Added to returning, completed, usage mode |
 | MCP trust prompt surprised users | Expected first-launch behavior | Added notice to QUICKSTART.md |
+| Images showed `[Image]` placeholder | MCP ImageContent doesn't render in Claude Code | Save to file + auto-open + DALL-E URL |
+| Base64 images exceeded token limit | DALL-E PNGs are 1-4MB, MCP limit is 25K tokens | Switched to URL format, download to file |
+| Stale "Module 4" references in Lesson 6 | Module renumbered from 4 → 2 but lesson not updated | Updated all refs in .ts, .md, CLAUDE.md, EXPLAINER.md |
+| "Rollout Plan" references in cross-module | Rollout Plan moved to future-modules | Replaced with Module 3: MCP Automation |
+| Get-started page had manual npm/build steps | Students just need `cd && claude` | Simplified to 3-step: clone, open Claude Code, start |
+| Module 1 "Next module" link pointed to Rollout | Old link to `/modules/2-rollout-planner` | Fixed to `/modules/2-image-gen` |

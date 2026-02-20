@@ -11,7 +11,7 @@ Two modules are live and free:
 - Module 0: Claude Code Basics (15-min setup)
 - Module 1: PRD Generator (45-min PRDs with 4 core techniques)
 
-Module 2 (Rollout Plan Generator) is in progress.
+Module 2 (AI Image Generation) is live.
 
 After that, I want to build what you actually need.
 
@@ -35,6 +35,6 @@ Not "what sounds cool." What actually drains your time?
 
 ---
 
-**First Comment:** "Current free modules if you haven't tried them: ai-native-pm.vercel.app/modules -- I read every comment and DM. Tell me what's burning your time and I'll prioritize accordingly."
+**First Comment:** "Current free modules if you haven't tried them: theainativepm.com/modules -- I read every comment and DM. Tell me what's burning your time and I'll prioritize accordingly."
 **Hashtags:** #ProductManagement #AI #PMTools #BuildInPublic #Poll
 **Carousel:** No

@@ -1,3 +1,6 @@
+'use client'
+
+import { track } from '@vercel/analytics'
 import ModuleCard from '@/components/ModuleCard'
 import EmailCapture from '@/components/EmailCapture'
 
@@ -162,6 +165,7 @@ export default function ModulesPage() {
                       </ul>
                       <a
                         href={mod.href}
+                        onClick={() => track('module_card_click', { module: `module-${mod.number}`, page: 'modules' })}
                         className={`mt-6 block text-center text-sm font-semibold py-2.5 rounded-lg transition-colors ${
                           mod.price === 'Free'
                             ? 'bg-brand-600 text-white hover:bg-brand-700'

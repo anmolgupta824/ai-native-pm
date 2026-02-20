@@ -4,7 +4,7 @@
 **SEO Keywords:** product manager AI tools, PM AI workflow, Claude Code for PMs
 **Tags:** Product Management, Artificial Intelligence, Productivity, Claude Code, PM Tools
 **Read time:** 7 minutes
-**CTA Target:** Module 0 → ai-native-pm.vercel.app
+**CTA Target:** Module 0 → theainativepm.com
 
 ---
 
@@ -104,11 +104,11 @@ I built all of these workflows into a free course because I got tired of explain
 
 Module 0 takes about 20 minutes. It gets Claude Code installed and running on your machine with a real project folder. No coding. No prior terminal experience. Five commands.
 
-From there, you can move into Module 1 (the PRD Generator I described above) and Module 2 (Rollout Plan Generator) -- both free.
+From there, you can move into Module 1 (the PRD Generator I described above) and Module 2 (AI Image Generation) -- both free.
 
 If you are a PM who has been experimenting with AI chat tools and wondering why the productivity gains feel marginal, the answer is probably not the model. It is the interface. Work tools beat chat tools for actual work.
 
-Try it: [ai-native-pm.vercel.app](https://ai-native-pm.vercel.app)
+Try it: [theainativepm.com](https://theainativepm.com)
 
 ---
 

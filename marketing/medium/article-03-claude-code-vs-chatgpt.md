@@ -4,7 +4,7 @@
 **SEO Keywords:** Claude Code vs ChatGPT, AI for product managers, Claude Code review
 **Tags:** Product Management, Claude Code, ChatGPT, AI Tools, Productivity
 **Read time:** 7 minutes
-**CTA Target:** Module 0 → ai-native-pm.vercel.app
+**CTA Target:** Module 0 → theainativepm.com
 
 ---
 
@@ -114,7 +114,7 @@ The learning curve for Claude Code is about 20 minutes. You need to install Node
 
 I built a free module that walks through this setup step by step, with no assumptions about your technical background. It takes 20 minutes, and by the end you will have Claude Code running on a real project folder on your machine.
 
-Start here: [ai-native-pm.vercel.app](https://ai-native-pm.vercel.app)
+Start here: [theainativepm.com](https://theainativepm.com)
 
 The best way to understand the difference between a chat tool and a work tool is to use a work tool on real work. Try it on a document you need to write this week. That is when the comparison becomes obvious.
 

@@ -5,7 +5,7 @@
 
 ## Image
 
-Screenshot of the ai-native-pm.vercel.app/modules/1-prd-generator page in a browser. The screenshot shows the hero section with the Module 1 badge, "Free" badge, and "45 - 60 min" badge. The title "Write a Production-Ready PRD with AI" is visible in large text. Below, the subtitle "AI is most valuable when it helps you think better, not when it does all the thinking for you" is shown. The "Get Started" button and "Download from GitHub" button are visible. The Module 0 prerequisite banner ("New to Claude Code? Start with Module 0") is visible at the top. The browser tab shows the page title. Screenshot is clean, full-width, desktop view. If possible, add a thin brand-blue border for visual framing.
+Screenshot of the theainativepm.com/modules/1-prd-generator page in a browser. The screenshot shows the hero section with the Module 1 badge, "Free" badge, and "45 - 60 min" badge. The title "Write a Production-Ready PRD with AI" is visible in large text. Below, the subtitle "AI is most valuable when it helps you think better, not when it does all the thinking for you" is shown. The "Get Started" button and "Download from GitHub" button are visible. The Module 0 prerequisite banner ("New to Claude Code? Start with Module 0") is visible at the top. The browser tab shows the page title. Screenshot is clean, full-width, desktop view. If possible, add a thin brand-blue border for visual framing.
 
 ## Caption
 

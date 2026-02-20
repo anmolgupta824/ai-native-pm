@@ -40,6 +40,6 @@ Link in comments. Start with Module 0 if you haven't installed Claude Code yet.
 
 ---
 
-**First Comment:** "Here's the link: ai-native-pm.vercel.app/modules/1-prd-generator -- Start with Module 0 (free, 15 min) if you need to set up Claude Code first. DM me if you get stuck."
+**First Comment:** "Here's the link: theainativepm.com/modules/1-prd-generator -- Start with Module 0 (free, 15 min) if you need to set up Claude Code first. DM me if you get stuck."
 **Hashtags:** #ProductManagement #AI #PRD #PMTools #BuildInPublic
 **Carousel:** No

@@ -1,11 +1,13 @@
-# LinkedIn Post: Module 0 Launch -- Free 20-Minute Claude Code Course for PMs
+# LinkedIn Post: Day 1 Launch — Module 0 (READY TO POST)
 
-**Week:** 3 | **Day:** Friday | **Type:** Launch announcement
-**Goal:** Drive traffic to Module 0. First real CTA with a link. Position as zero-barrier entry point.
+**Type:** Launch announcement + personal intro
+**Goal:** First-ever post. Introduce yourself AND launch Module 0 in one shot.
 
 ---
 
-I built a free 20-minute course that teaches PMs to use Claude Code.
+I've been a PM for 7 years. Payments at Visa. Fintech at Careem (Uber's Middle East arm).
+
+And I just built a free 20-minute course that teaches PMs to use Claude Code.
 
 It's live now.
 
@@ -42,5 +44,6 @@ Link in comments. Go build something.
 ---
 
 **First Comment:** Here's the course: theainativepm.com/modules/0-claude-basics -- Free, 20 minutes, no signup. Let me know what you build with it.
+**Second Comment (optional):** I also wrote the full breakdown of my AI stack as a PM on Medium: [paste Medium link after publishing]
 **Hashtags:** #ProductManagement #AI #ClaudeCode #FreeCourse #PMSkills
 **Carousel:** No

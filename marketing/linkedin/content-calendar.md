@@ -102,7 +102,7 @@ See `content-index-by-module.md` for full mapping of all content to Module 0 vs 
 
 ## Future Module Content Ideas (Post Week 6)
 
-### Module 2 (Rollout Plans) — 5 posts
+### Module 2 (AI Image Generation) — 5 posts
 1. Launch: "Free launch planning tool" (carousel)
 2. Story: "My launch failed because..." (lessons learned)
 3. Comparison: "Traditional vs AI-assisted planning" (side-by-side)
@@ -117,7 +117,7 @@ See `content-index-by-module.md` for full mapping of all content to Module 0 vs 
 5. Case study: Automated status reporting
 6. Launch announcement
 
-### Module 4 (Vibe Coding) — 6 posts
+### Module 4 (Vibe Coding) — future
 1. Time-lapse: "Building a dashboard in 90 minutes"
 2. Debate: "Should PMs learn to code?"
 3. Demo: "Here's the tool I built this weekend"

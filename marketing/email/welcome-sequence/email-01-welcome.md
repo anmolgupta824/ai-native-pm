@@ -25,4 +25,4 @@ Anmol
 
 ---
 
-**CTA Button:** Start Module 0 (Free) → https://ai-native-pm.vercel.app/modules
+**CTA Button:** Start Module 0 (Free) → https://theainativepm.com/modules

@@ -45,6 +45,6 @@ Try it. Link to the free course in comments.
 
 ---
 
-**First Comment:** Learn how to set this up from scratch (free, 20 min): ai-native-pm.vercel.app/modules/0-claude-basics -- Covers install, terminal basics, and @-mentions.
+**First Comment:** Learn how to set this up from scratch (free, 20 min): theainativepm.com/modules/0-claude-basics -- Covers install, terminal basics, and @-mentions.
 **Hashtags:** #ProductManagement #AI #ClaudeCode #Productivity #PMTips
 **Carousel:** No

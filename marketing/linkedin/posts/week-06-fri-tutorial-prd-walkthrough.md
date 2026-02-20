@@ -51,6 +51,6 @@ Want to try this exact workflow? Free module in comments.
 
 ---
 
-**First Comment:** "Free module with this exact 6-step workflow: ai-native-pm.vercel.app/modules/1-prd-generator -- Two paths: Teacher Mode (learn the techniques, 2-3 hrs) or Usage Mode (start generating PRDs immediately). Both free, no signup."
+**First Comment:** "Free module with this exact 6-step workflow: theainativepm.com/modules/1-prd-generator -- Two paths: Teacher Mode (learn the techniques, 2-3 hrs) or Usage Mode (start generating PRDs immediately). Both free, no signup."
 **Hashtags:** #ProductManagement #AI #ClaudeCode #PRD #PMWorkflow
 **Carousel:** No

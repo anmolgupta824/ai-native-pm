@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 
 export default function EmailCapture() {
   const [email, setEmail] = useState('')
@@ -9,6 +10,7 @@ export default function EmailCapture() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Redirect to Substack signup with email pre-filled
+    track('email_subscribe', { page: 'global' })
     const substackUrl = `https://ainativepm.substack.com/subscribe?email=${encodeURIComponent(email)}`
     window.open(substackUrl, '_blank')
     setSubmitted(true)

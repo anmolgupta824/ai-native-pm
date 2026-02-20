@@ -46,6 +46,6 @@ Comment "PRD" if you want the link when it's live.
 
 ---
 
-**First Comment:** This is Module 1 of The AI-Native PM. Dropping next week. If you haven't tried Module 0 yet (free, 20 min setup): ai-native-pm.vercel.app/modules/0-claude-basics
+**First Comment:** This is Module 1 of The AI-Native PM. Dropping next week. If you haven't tried Module 0 yet (free, 20 min setup): theainativepm.com/modules/0-claude-basics
 **Hashtags:** #ProductManagement #PRD #AI #Productivity #ClaudeCode
 **Carousel:** No

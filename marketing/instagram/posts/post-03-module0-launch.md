@@ -5,7 +5,7 @@
 
 ## Image
 
-Screenshot of the ai-native-pm.vercel.app/modules/0-claude-basics page in a browser. The screenshot shows the hero section with the Module 0 badge, "Free" badge, and "20 min" badge. The title "Your First 20 Minutes with Claude Code" is visible in large text with the gradient blue styling. Below, the "Get Started" button and "Download from GitHub" button are visible. The browser tab shows the page title. The screenshot is clean, full-width, and shows the page as it appears on desktop. If possible, include a thin brand-blue border around the screenshot for visual framing.
+Screenshot of the theainativepm.com/modules/0-claude-basics page in a browser. The screenshot shows the hero section with the Module 0 badge, "Free" badge, and "20 min" badge. The title "Your First 20 Minutes with Claude Code" is visible in large text with the gradient blue styling. Below, the "Get Started" button and "Download from GitHub" button are visible. The browser tab shows the page title. The screenshot is clean, full-width, and shows the page as it appears on desktop. If possible, include a thin brand-blue border around the screenshot for visual framing.
 
 ## Caption
 

@@ -17,7 +17,7 @@ Use this checklist before posting any content on any channel.
 - [ ] Not generic AI influencer tone
 
 ## CTA & Links
-- [ ] CTA links to specific module page on ai-native-pm.vercel.app (not homepage)
+- [ ] CTA links to specific module page on theainativepm.com (not homepage)
 - [ ] LinkedIn posts: link goes in **first comment**, not post body
 - [ ] Instagram posts: CTA says "link in bio"
 - [ ] Medium articles: inline links to module pages

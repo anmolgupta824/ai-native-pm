@@ -1,5 +1,7 @@
 'use client'
 
+import { track } from '@vercel/analytics'
+
 export default function Hero() {
   return (
     <section className="section-padding">
@@ -23,6 +25,7 @@ export default function Hero() {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="/modules/0-claude-basics"
+            onClick={() => track('cta_click', { button: 'hero_start_course', page: 'landing', destination: '/modules/0-claude-basics' })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-all shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -30,6 +33,7 @@ export default function Hero() {
           </a>
           <a
             href="/modules"
+            onClick={() => track('cta_click', { button: 'hero_view_modules', page: 'landing', destination: '/modules' })}
             className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 border border-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all"
           >
             View All Modules

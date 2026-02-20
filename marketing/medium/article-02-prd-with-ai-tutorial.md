@@ -4,7 +4,7 @@
 **SEO Keywords:** PRD template, product requirements document AI, how to write a PRD with AI
 **Tags:** Product Management, PRD, Artificial Intelligence, Product Requirements, Tutorial
 **Read time:** 9 minutes
-**CTA Target:** Module 1 → ai-native-pm.vercel.app
+**CTA Target:** Module 1 → theainativepm.com
 
 ---
 
@@ -176,7 +176,7 @@ I packaged this entire workflow into a free, hands-on module. It is not a course
 
 The PRD Generator gives you the four techniques described above, plus templates, validation scoring, and the multi-perspective review framework. Module 0 (Claude Code setup) takes 20 minutes. Module 1 (the PRD Generator) takes another 30 minutes to install and run through your first document.
 
-Start here: [ai-native-pm.vercel.app](https://ai-native-pm.vercel.app)
+Start here: [theainativepm.com](https://theainativepm.com)
 
 The best way to evaluate this is to try it on a real PRD you need to write this week. Not a toy example -- a real feature your team is building. That is when you will feel the difference.
 

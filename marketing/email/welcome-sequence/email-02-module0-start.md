@@ -26,7 +26,7 @@ No one's asking you to become a developer. You're still doing product work. You'
 
 ---
 
-**CTA Button:** Complete Module 0 → https://ai-native-pm.vercel.app/modules
+**CTA Button:** Complete Module 0 → https://theainativepm.com/modules
 
 ---
 

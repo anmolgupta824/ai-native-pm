@@ -41,6 +41,6 @@ Which of these are you guilty of? Be honest.
 
 ---
 
-**First Comment:** "The free tool that fixes all 5: ai-native-pm.vercel.app/modules/1-prd-generator -- No signup. Works with Claude Code. Carousel has the full breakdown with before/after examples."
+**First Comment:** "The free tool that fixes all 5: theainativepm.com/modules/1-prd-generator -- No signup. Works with Claude Code. Carousel has the full breakdown with before/after examples."
 **Hashtags:** #ProductManagement #PRD #AI #PMTips #ProductStrategy
 **Carousel:** Yes (see carousel-scripts/5-prd-mistakes.md)

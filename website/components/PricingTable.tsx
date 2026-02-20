@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 
 const tiers = [
   {
@@ -84,6 +85,7 @@ export default function PricingTable() {
 
             <a
               href={tier.href}
+              onClick={() => track('github_click', { page: 'pricing', context: 'cta' })}
               className={`mt-8 block text-center text-sm font-semibold py-3 rounded-xl transition-colors ${
                 tier.highlighted
                   ? 'bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-600/25'

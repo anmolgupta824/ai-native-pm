@@ -1,3 +1,7 @@
+'use client'
+
+import { track } from '@vercel/analytics'
+
 interface ModuleCardProps {
   number: number
   title: string
@@ -75,6 +79,7 @@ export default function ModuleCard({
 
       <a
         href={href}
+        onClick={() => track('module_card_click', { module: `module-${number}`, page: 'landing' })}
         className={`block text-center text-sm font-semibold py-2.5 rounded-lg transition-colors ${
           price === 'Free'
             ? 'bg-brand-600 text-white hover:bg-brand-700'

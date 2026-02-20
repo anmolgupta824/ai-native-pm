@@ -29,7 +29,7 @@ The module takes 30-45 minutes. The PRD you walk away with is one you can actual
 
 ---
 
-**CTA Button:** Start the PRD Generator (Free) → https://ai-native-pm.vercel.app/modules
+**CTA Button:** Start the PRD Generator (Free) → https://theainativepm.com/modules
 
 ---
 
