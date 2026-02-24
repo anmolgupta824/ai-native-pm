@@ -102,7 +102,7 @@ Overall:     [######....] 65%
 ### Blockers:
 None currently
 
-### Module 0B Rewrite & Testing (Feb 24):
+### Module 0B Rewrite, Testing & Repo Organization (Feb 24):
 - Rewrote all 8 Module 0B lessons from theory-based to hands-on (30% concept / 70% exercises)
 - Created teaching CLAUDE.md (teacher brain) for Module 0B
 - Extracted 4 skill files: standup, prd, retro, status (from inline code blocks to actual files)
@@ -111,9 +111,20 @@ None currently
 - Fixed Plan Mode lesson: /plan command breaks teacher session — now simulates conversationally
 - Fixed Lesson 7 to reference /prd skill for Socratic exercise
 - Added Skills+Hooks cross-references in Lesson 6
+- **Separated Module 0 and 0B into dedicated folders:**
+  - Module 0 (`module-0-claude-basics/`): Basics only (EXPLAINER, QUICKSTART, README)
+  - Module 0B (`module-0b-claude-mastery/`): Mastery + all 8 lessons, CLAUDE.md, skills, prompts
+- **Created Module 0B get-started page** (`/modules/0b-claude-mastery/get-started/`)
+  - 3 download options: Claude clone, git clone, download ZIP
+  - Step-by-step setup instructions
+  - Preview of all 8 lessons
+  - FAQ and support info
+- Updated Module 0 README to clarify Part 1 structure and link to Part 2
 - Tested: Teacher mode delivers lessons section-by-section ✅
 - Tested: Plan mode lesson works without /plan command ✅
 - Tested: Skills files referenced correctly from lessons ✅
+- Website deployed with all 19 pages including new get-started page ✅
+- GitHub links now resolve correctly to `module-0b-claude-mastery/` ✅
 
 ### Next Steps:
 1. Deploy Module 3 website updates to Vercel
