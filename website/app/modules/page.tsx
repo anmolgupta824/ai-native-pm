@@ -25,6 +25,27 @@ const modules = [
     promise: 'Get up and running with Claude Code in 20 minutes',
   },
   {
+    number: '0B',
+    title: 'Claude Code Mastery',
+    description:
+      'Go from basics to power user. Build a complete AI-powered PM workspace with CLAUDE.md, Skills, Hooks, sub-agents, and advanced prompting patterns — all in 2-3 hours.',
+    price: 'Free',
+    tag: 'Power User',
+    features: [
+      'CLAUDE.md — give Claude persistent memory',
+      'Context management & avoiding context rot',
+      'Plan Mode for complex PM tasks',
+      'Sub-agents — do 5 things at once',
+      'Skills — reusable /prd, /standup, /retro commands',
+      'Hooks — auto-format, protect files, notifications',
+      '8 advanced prompting patterns',
+      'Capstone: build your complete PM workspace',
+    ],
+    href: '/modules/0b-claude-mastery',
+    timeline: 'Available now',
+    promise: 'Go from Claude Code basics to power user in 2-3 hours',
+  },
+  {
     number: 1,
     title: 'PRD Generator',
     description:

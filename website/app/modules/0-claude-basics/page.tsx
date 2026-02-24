@@ -435,9 +435,9 @@ senior PMs typically include but juniors forget.`}
             </p>
           </div>
 
-          {/* Next module card */}
+          {/* Next module card — Module 0B */}
           <a
-            href="/modules/1-prd-generator"
+            href="/modules/0b-claude-mastery"
             className="group block rounded-2xl border border-gray-200 hover:border-brand-200 hover:shadow-lg transition-all p-6"
           >
             <div className="flex items-center justify-between">
@@ -446,10 +446,10 @@ senior PMs typically include but juniors forget.`}
                   Next Up
                 </p>
                 <p className="text-lg font-bold text-gray-900 group-hover:text-brand-700 transition-colors">
-                  Module 1: PRD Generator
+                  Module 0B: Claude Code Mastery
                 </p>
                 <p className="text-sm text-gray-500 mt-1">
-                  Generate your first production-ready PRD in 30 minutes.
+                  Go from basics to power user — CLAUDE.md, Skills, Hooks, sub-agents & more. 2-3 hours.
                 </p>
               </div>
               <div className="flex-shrink-0 ml-4">
@@ -459,6 +459,24 @@ senior PMs typically include but juniors forget.`}
                   </svg>
                 </div>
               </div>
+            </div>
+          </a>
+
+          {/* Or jump to Module 1 */}
+          <a
+            href="/modules/1-prd-generator"
+            className="group block rounded-xl border border-dashed border-gray-200 hover:border-brand-200 transition-all p-4 mt-3"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-gray-400 mb-0.5">Or Jump To</p>
+                <p className="text-sm font-semibold text-gray-700 group-hover:text-brand-600 transition-colors">
+                  Module 1: PRD Generator
+                </p>
+              </div>
+              <svg className="w-4 h-4 text-gray-300 group-hover:text-brand-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
             </div>
           </a>
 
