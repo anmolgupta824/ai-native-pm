@@ -2,68 +2,68 @@
 
 const lessons = [
   {
-    number: 5,
+    number: 1,
     title: 'CLAUDE.md — Your Project Brain',
     time: '15 min',
     description:
       'Give Claude persistent memory. Write a CLAUDE.md that makes every session feel like Claude has been on your team for 6 months. Includes templates for Sprint PMs, Strategy PMs, and Research PMs.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-5-CLAUDE-MD.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-1-CLAUDE-MD.md',
   },
   {
-    number: 6,
+    number: 2,
     title: 'Context Management',
     time: '15 min',
     description:
       'Avoid context rot — the #1 reason Claude outputs get worse over time. Learn the one-task-per-session rule, CRAFT framework, and prompt structuring for better outputs.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-6-CONTEXT-MANAGEMENT.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-2-CONTEXT-MANAGEMENT.md',
   },
   {
-    number: 7,
+    number: 3,
     title: 'Plan Mode — Think Before You Act',
     time: '15 min',
     description:
       'Make Claude plan before executing on complex tasks. Learn Plan + Critique, Plan + Options, and Plan + Scope Check patterns for PM workflows.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-7-PLAN-MODE.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-3-PLAN-MODE.md',
   },
   {
-    number: 8,
+    number: 4,
     title: 'Sub-agents — Do 5 Things at Once',
     time: '15 min',
     description:
       'Run parallel research, multi-stakeholder communications, and competitive analysis simultaneously. Each sub-agent gets clean context — no cross-contamination.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-8-SUB-AGENTS.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-4-SUB-AGENTS.md',
   },
   {
-    number: 9,
+    number: 5,
     title: 'Skills — Reusable Slash Commands',
     time: '20 min',
     description:
       'Build /prd, /standup, /status, /retro, /competitor and 5 more PM slash commands. Type one word, get a full workflow.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-9-SKILLS.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-5-SKILLS.md',
   },
   {
-    number: 10,
+    number: 6,
     title: 'Hooks — Automate the Boring Stuff',
     time: '20 min',
     description:
       'Set up automatic rules: auto-format docs, protect sensitive files, desktop notifications when Claude finishes, quality checks before output.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-10-HOOKS.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-6-HOOKS.md',
   },
   {
-    number: 11,
+    number: 7,
     title: 'Advanced Prompting Patterns',
     time: '20 min',
     description:
       '8 patterns that separate okay output from great output: CRAFT, Socratic Method, Role Stacking, Chain of Thought, Constraint Escalation, Anti-Patterns, Iterative Refinement, and Comparative Analysis.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-11-ADVANCED-PROMPTING.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-7-ADVANCED-PROMPTING.md',
   },
   {
-    number: 12,
+    number: 8,
     title: 'Building Your PM Workspace',
     time: '30 min',
     description:
       'Capstone project: wire everything together into a daily PM command center. CLAUDE.md + Skills + Hooks + templates + folder structure — all ready to go.',
-    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0-claude-basics/LESSON-12-PM-WORKSPACE.md',
+    href: 'https://github.com/anmolgupta824/ai-native-pm/blob/main/modules/module-0b-claude-mastery/LESSON-8-PM-WORKSPACE.md',
   },
 ]
 
@@ -205,7 +205,7 @@ export default function Module0BMasteryPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">What you&apos;ll build</h2>
           <p className="text-gray-600 leading-relaxed mb-8">
-            By the end of Lesson 12, you&apos;ll have a complete PM workspace that looks like this:
+            By the end of Lesson 8, you&apos;ll have a complete PM workspace that looks like this:
           </p>
 
           <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm text-gray-300 overflow-x-auto">
@@ -254,7 +254,7 @@ export default function Module0BMasteryPage() {
           <div className="bg-gradient-to-br from-brand-50 to-white border border-brand-100 rounded-2xl p-8 mb-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Ready to level up?</h2>
             <p className="text-gray-600 max-w-lg mx-auto text-sm leading-relaxed mb-6">
-              Start with Lesson 5 (CLAUDE.md) and work through to Lesson 12. By the end, you&apos;ll have
+              Start with Lesson 1 (CLAUDE.md) and work through to Lesson 8. By the end, you&apos;ll have
               a complete AI-powered PM workspace that saves you hours every week.
             </p>
             <a
@@ -264,7 +264,7 @@ export default function Module0BMasteryPage() {
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700 transition-colors shadow-md"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-              Start Lesson 5: CLAUDE.md
+              Start Lesson 1: CLAUDE.md
             </a>
           </div>
 

@@ -1,18 +1,19 @@
 # PM AI Upskilling Program - Progress Tracker
-Last Updated: 2026-02-15
+Last Updated: 2026-02-24
 
-## Overall Progress: 62%
+## Overall Progress: 65%
 
 ```
 Website:     [#########.] 95%  (Deployed: Yes)
 Module 0:    [##########] 100% (Launched: Yes)
+Module 0B:   [##########] 100% (Rewritten: Yes, Tested: Yes)
 Module 1:    [#########.] 90%  (Launched: Yes)
 Module 2:    [###.......] 30%  (Launched: No)
 Module 3:    [#########.] 90%  (Built: Yes, MCP Course — Free)
 Module 4:    [#.........] 10%  (Launched: No)
 Marketing:   [###.......] 30%  (Posts: 0/10)
 --------------------------------------------
-Overall:     [######....] 62%
+Overall:     [######....] 65%
 ```
 
 ## Current Week: Week 1 (Feb 14-15, 2026)
@@ -101,6 +102,19 @@ Overall:     [######....] 62%
 ### Blockers:
 None currently
 
+### Module 0B Rewrite & Testing (Feb 24):
+- Rewrote all 8 Module 0B lessons from theory-based to hands-on (30% concept / 70% exercises)
+- Created teaching CLAUDE.md (teacher brain) for Module 0B
+- Extracted 4 skill files: standup, prd, retro, status (from inline code blocks to actual files)
+- Created prompts/ directory for student CRAFT prompts
+- Fixed terminal forking across all 8 lessons (removed cd/new session instructions)
+- Fixed Plan Mode lesson: /plan command breaks teacher session — now simulates conversationally
+- Fixed Lesson 7 to reference /prd skill for Socratic exercise
+- Added Skills+Hooks cross-references in Lesson 6
+- Tested: Teacher mode delivers lessons section-by-section ✅
+- Tested: Plan mode lesson works without /plan command ✅
+- Tested: Skills files referenced correctly from lessons ✅
+
 ### Next Steps:
 1. Deploy Module 3 website updates to Vercel
 2. Git commit Module 3 to public repo
@@ -129,6 +143,7 @@ None currently
 - [x] Module 0 created (Feb 15, 2026)
 - [x] Website explainer pages for all modules (Feb 15, 2026)
 - [x] Module 3 MCP Integrations Course built (Feb 15, 2026) - 8 lessons, Teacher Mode + Jira template
+- [x] Module 0B rewritten & tested (Feb 24, 2026) - 8 hands-on lessons, teaching CLAUDE.md, 4 skill files, plan mode fix
 - [ ] Deploy Module 3 to Vercel (next session)
 - [ ] First beta tester (Target: Week 2)
 - [ ] Module 2 MCP server complete (Target: Week 3-4)

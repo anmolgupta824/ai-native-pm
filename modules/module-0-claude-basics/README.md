@@ -42,14 +42,14 @@ Go from "I can use Claude Code" to "Claude Code is my PM command center." Covers
 
 | # | Lesson | Time | What You'll Learn |
 |---|--------|------|-------------------|
-| 5 | [CLAUDE.md — Your Project Brain](./LESSON-5-CLAUDE-MD.md) | 15 min | Give Claude persistent memory with templates for Sprint PMs, Strategy PMs, and Research PMs |
-| 6 | [Context Management](./LESSON-6-CONTEXT-MANAGEMENT.md) | 15 min | Avoid context rot, the CRAFT framework, one-task-per-session rule |
-| 7 | [Plan Mode — Think Before You Act](./LESSON-7-PLAN-MODE.md) | 15 min | Make Claude plan before executing, Plan + Critique, Plan + Options patterns |
-| 8 | [Sub-agents — Do 5 Things at Once](./LESSON-8-SUB-AGENTS.md) | 15 min | Run parallel research, multi-stakeholder comms, competitive analysis |
-| 9 | [Skills — Reusable Slash Commands](./LESSON-9-SKILLS.md) | 20 min | Build /prd, /standup, /status, /retro, and 6 more PM slash commands |
-| 10 | [Hooks — Automate the Boring Stuff](./LESSON-10-HOOKS.md) | 20 min | Auto-format docs, protect files, desktop notifications, quality checks |
-| 11 | [Advanced Prompting Patterns](./LESSON-11-ADVANCED-PROMPTING.md) | 20 min | 8 patterns: CRAFT, Socratic, Role Stacking, Chain of Thought, and more |
-| 12 | [Building Your PM Workspace](./LESSON-12-PM-WORKSPACE.md) | 30 min | Capstone: wire everything together into a daily PM command center |
+| 1 | [CLAUDE.md — Your Project Brain](./LESSON-1-CLAUDE-MD.md) | 15 min | Give Claude persistent memory with templates for Sprint PMs, Strategy PMs, and Research PMs |
+| 2 | [Context Management](./LESSON-2-CONTEXT-MANAGEMENT.md) | 15 min | Avoid context rot, the CRAFT framework, one-task-per-session rule |
+| 3 | [Plan Mode — Think Before You Act](./LESSON-3-PLAN-MODE.md) | 15 min | Make Claude plan before executing, Plan + Critique, Plan + Options patterns |
+| 4 | [Sub-agents — Do 5 Things at Once](./LESSON-4-SUB-AGENTS.md) | 15 min | Run parallel research, multi-stakeholder comms, competitive analysis |
+| 5 | [Skills — Reusable Slash Commands](./LESSON-5-SKILLS.md) | 20 min | Build /prd, /standup, /status, /retro, and 6 more PM slash commands |
+| 6 | [Hooks — Automate the Boring Stuff](./LESSON-6-HOOKS.md) | 20 min | Auto-format docs, protect files, desktop notifications, quality checks |
+| 7 | [Advanced Prompting Patterns](./LESSON-7-ADVANCED-PROMPTING.md) | 20 min | 8 patterns: CRAFT, Socratic, Role Stacking, Chain of Thought, and more |
+| 8 | [Building Your PM Workspace](./LESSON-8-PM-WORKSPACE.md) | 30 min | Capstone: wire everything together into a daily PM command center |
 
 ### Prerequisites
 
