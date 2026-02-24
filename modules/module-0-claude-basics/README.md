@@ -1,15 +1,15 @@
-# Module 0: Claude Code for PMs
+# Module 0: Claude Code Basics
 
-**From zero to power user.**
+**From zero to ready for power user mode.**
 
-## Part 1: Basics (20 minutes)
+## Part 1: Getting Started (20 minutes)
 
 A lightweight introduction for Product Managers who have never used Claude Code. By the end, you'll have Claude Code installed, understand how it works, and be ready to start generating real PM outputs.
 
 ### Who This Is For
 
 - PMs who have heard about AI coding tools but never tried one
-- Anyone who wants a guided intro before diving into the PRD Generator (Module 1)
+- Anyone who wants a guided intro before diving into Module 1 (PRD Generator) or Module 0B (Mastery)
 - People who learn better with a walkthrough than a docs page
 
 ### What You'll Learn
@@ -28,40 +28,24 @@ A lightweight introduction for Product Managers who have never used Claude Code.
 
 ---
 
-## Part 2: Mastery (2-3 hours)
+## Part 2: Claude Code Mastery
 
-Go from "I can use Claude Code" to "Claude Code is my PM command center." Covers everything a PM needs to become a power user.
+Ready to become a power user? Check out **[Module 0B: Claude Code Mastery](../module-0b-claude-mastery/)**
 
-### Who This Is For
+- **2-3 hours | 8 hands-on lessons**
+- Build /prd, /standup, /status commands
+- Learn Plan Mode, Sub-agents, Hooks, Advanced Prompting
+- Create a complete PM workspace with CLAUDE.md, Skills, and Automation
 
-- PMs who completed Part 1 (or already know the basics)
-- PMs who want to 10x their productivity with Claude Code
-- Anyone who wants to build a complete AI-powered PM workspace
-
-### Lessons
-
-| # | Lesson | Time | What You'll Learn |
-|---|--------|------|-------------------|
-| 1 | [CLAUDE.md — Your Project Brain](./LESSON-1-CLAUDE-MD.md) | 15 min | Give Claude persistent memory with templates for Sprint PMs, Strategy PMs, and Research PMs |
-| 2 | [Context Management](./LESSON-2-CONTEXT-MANAGEMENT.md) | 15 min | Avoid context rot, the CRAFT framework, one-task-per-session rule |
-| 3 | [Plan Mode — Think Before You Act](./LESSON-3-PLAN-MODE.md) | 15 min | Make Claude plan before executing, Plan + Critique, Plan + Options patterns |
-| 4 | [Sub-agents — Do 5 Things at Once](./LESSON-4-SUB-AGENTS.md) | 15 min | Run parallel research, multi-stakeholder comms, competitive analysis |
-| 5 | [Skills — Reusable Slash Commands](./LESSON-5-SKILLS.md) | 20 min | Build /prd, /standup, /status, /retro, and 6 more PM slash commands |
-| 6 | [Hooks — Automate the Boring Stuff](./LESSON-6-HOOKS.md) | 20 min | Auto-format docs, protect files, desktop notifications, quality checks |
-| 7 | [Advanced Prompting Patterns](./LESSON-7-ADVANCED-PROMPTING.md) | 20 min | 8 patterns: CRAFT, Socratic, Role Stacking, Chain of Thought, and more |
-| 8 | [Building Your PM Workspace](./LESSON-8-PM-WORKSPACE.md) | 30 min | Capstone: wire everything together into a daily PM command center |
-
-### Prerequisites
-
-- Complete Part 1 (or have Claude Code installed and working)
-- A Claude Pro or Max subscription
+👉 [Start Module 0B →](../module-0b-claude-mastery/)
 
 ---
 
-## What's Next?
+## Next Steps
 
-Once you've built your PM workspace, explore the advanced modules:
+After completing Part 1, explore the advanced modules:
 
-- [Module 1: PRD Generator](../module-1-prd/) — Generate production-ready PRDs with a custom MCP server (Free)
-- [Module 2: Image Generation](../module-2-image-gen/) — Create product mockups and diagrams with AI
-- [Module 3: MCP Automation](../module-3-mcp-course/) — Build custom MCP tools for your PM workflows
+- **[Module 0B: Claude Code Mastery](../module-0b-claude-mastery/)** — Power user skills (2-3 hours, FREE)
+- **[Module 1: PRD Generator](../module-1-prd/)** — Generate production-ready PRDs with a custom MCP server (FREE)
+- **[Module 2: Image Generation](../module-2-image-gen/)** — Create product mockups and diagrams with AI
+- **[Module 3: MCP Automation](../module-3-mcp-course/)** — Build custom MCP servers for your PM workflows (FREE)
