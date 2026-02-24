@@ -3,7 +3,7 @@
 import { track } from '@vercel/analytics'
 
 interface ModuleCardProps {
-  number: number
+  number: number | string
   title: string
   description: string
   price: string

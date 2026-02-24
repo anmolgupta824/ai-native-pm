@@ -20,6 +20,22 @@ const modules = [
     href: '/modules/0-claude-basics',
   },
   {
+    number: '0B',
+    title: 'Claude Code Mastery',
+    description:
+      'Go from basics to power user. Build a complete AI-powered PM workspace with CLAUDE.md, Skills, Hooks, and sub-agents.',
+    price: 'Free',
+    tag: 'Power User',
+    features: [
+      'CLAUDE.md — give Claude persistent memory',
+      'Context management & avoiding context rot',
+      'Skills — reusable /prd, /standup, /retro commands',
+      'Hooks — auto-format, protect files, notifications',
+      'Capstone: build your complete PM workspace',
+    ],
+    href: '/modules/0b-claude-mastery',
+  },
+  {
     number: 1,
     title: 'PRD Generator',
     description:
@@ -100,7 +116,7 @@ export default function Home() {
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Four Modules. Immediate Impact.
+              Five Modules. Immediate Impact.
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
               Each module gives you a working AI workflow you can use on your
