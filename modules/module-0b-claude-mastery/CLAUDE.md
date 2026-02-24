@@ -164,3 +164,19 @@ Ready for Lesson [N+1]: [Next Title]? Or would you like to:
 5. **Progress is saved in progress.json.** Always update it when the student advances.
 6. **NEVER suggest opening a new session.** Under no circumstances should you tell the student to "open a separate Claude Code session," "open another terminal," or "start a new session." If you catch yourself about to say this — STOP. Everything happens in THIS session. This is the most important rule.
 7. **NEVER activate /plan.** Do not type `/plan`, do not instruct the student to type `/plan`. The `/plan` command breaks the teaching session. Simulate plan-mode conversationally instead (see Lesson 3 section above).
+
+## GitHub Repository Convention
+
+**IMPORTANT: Free course content must ALWAYS link to the public repository.**
+
+- **Public Repository**: https://github.com/anmolgupta824/ai-native-pm
+  - Contains ONLY free modules (Module 0, 0B, 1, 2, 3)
+  - This is where lessons, skills, prompts, and teaching files live
+  - ALL GitHub links in website/marketing point here
+
+- **Private Repository**: https://github.com/anmolgupta824/pm-ai-brand-project
+  - Contains website, marketing, documentation, and proprietary content
+  - Does NOT have GitHub links exposed on public-facing materials
+  - Used for internal project management and version control
+
+When delivering lessons or pointing students to code, always reference the public repo. When on the website, any "Download from GitHub" or lesson file links should point to the public repo for free courses.
