@@ -38,6 +38,10 @@ ai-native-pm/
 
 For more PM learning resources, career tools, and updates — visit [theainativepm.com](https://theainativepm.com) and subscribe.
 
+---
+
+If this helped you, give it a ⭐ — it helps other PMs find these modules.
+
 ## License
 
 MIT — see [LICENSE](LICENSE)
