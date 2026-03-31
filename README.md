@@ -36,9 +36,81 @@ ai-native-pm/
 
 ## Tech Stack
 
-- **Website:** Next.js 14, Tailwind CSS → [theainativepm.com](https://theainativepm.com)
+- **Website:** Next.js 14, Tailwind CSS
 - **Modules:** TypeScript MCP servers
+- **Hosting:** Vercel → [theainativepm.com](https://theainativepm.com)
 - **Newsletter:** Substack
+
+## Git & Deployment
+
+### Repos
+
+| Repo | Visibility | What's in it |
+|---|---|---|
+| `pm-ai-brand-project` | **Private** | Everything — website, all modules, marketing, docs. Primary working repo. |
+| `ai-native-pm` | **Public** | Modules (0-3) + README + LICENSE only. Uses orphan `public` branch. |
+
+### Remotes
+
+```
+origin  → pm-ai-brand-project (private)   ← default push target
+public  → ai-native-pm (public)           ← free modules only
+```
+
+### Day-to-Day Workflow
+
+```bash
+# All changes → push to private repo (everything lives here)
+git add -A && git commit -m "your message"
+git push                          # → private repo (version control only, no auto-deploy)
+
+# When modules change → sync to public repo
+git checkout public               # switch to orphan public branch
+git checkout main -- modules/     # pull latest modules from main
+git add -A && git commit -m "Sync modules"
+git push public public:main       # → public repo (replaces its main)
+git checkout main                 # back to working branch
+```
+
+### What goes where
+
+| Change type | `git push` (private) | `git push public public:main` |
+|---|---|---|
+| Website code | ✅ (deploy separately via `npx vercel --prod`) | ❌ Not included |
+| Modules (0-3) | ✅ | ✅ |
+| Marketing, docs, progress | ✅ | ❌ Not included |
+
+### Public branch (`public`)
+The public repo uses a separate orphan branch called `public` that contains **only** modules, README, and LICENSE. No website, marketing, or internal files are exposed.
+
+### Vercel Deployment
+
+| Domain | Environment | Command |
+|--------|-------------|---------|
+| `theainativepm.com` | **Production** | `npx vercel --prod` |
+| Unique preview URL | **Staging/Preview** | `npx vercel` |
+
+```bash
+# Deploy to production (theainativepm.com)
+cd website
+npx vercel --prod
+
+# Deploy to staging (generates a unique preview URL like xxx.vercel.app)
+cd website
+npx vercel
+
+# Typical workflow:
+# 1. Make changes
+# 2. Test locally:  npm run dev
+# 3. Deploy to staging:  npx vercel        → check preview URL
+# 4. If looks good:  npx vercel --prod     → live on theainativepm.com
+```
+
+**Notes:**
+- Vercel CLI must be installed: `npm i -g vercel`
+- Root directory is set to `website/` in Vercel project settings
+- `git push` is for version control only — it does NOT auto-deploy
+- `ai-native-pm.vercel.app` also points to production (can't be changed on Hobby plan)
 
 ## License
 
