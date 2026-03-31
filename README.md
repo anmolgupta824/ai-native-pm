@@ -34,11 +34,9 @@ ai-native-pm/
 └── README.md
 ```
 
-## Tech Stack
+## Want More?
 
-- **Website:** Next.js 14, Tailwind CSS → [theainativepm.com](https://theainativepm.com)
-- **Modules:** TypeScript MCP servers
-- **Newsletter:** Substack
+For more PM learning resources, career tools, and updates — visit [theainativepm.com](https://theainativepm.com) and subscribe.
 
 ## License
 
