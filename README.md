@@ -8,7 +8,6 @@ A practical upskilling program that teaches Product Managers to use Claude Code 
 
 ### Free
 - **Module 0: Claude Code Basics** - Get comfortable with Claude Code
-- **Module 0B: Claude Code Mastery** - Level up with CLAUDE.md, multi-file projects, and advanced workflows
 - **Module 1: PRD Generator** - Generate production-ready PRDs in 30 minutes
 - **Module 2: AI Image Generation** - Create product mockups, presentations, and social assets
 - **Module 3: MCP Integrations Course** - Automate Google Workspace workflows
@@ -22,16 +21,17 @@ A practical upskilling program that teaches Product Managers to use Claude Code 
 ## Project Structure
 
 ```
-ai-native-pm/
+pm-ai-brand/
+├── website/          # Next.js 14 + Tailwind site → theainativepm.com
 ├── modules/
-│   ├── module-0-claude-basics/       # Getting started with Claude Code
-│   ├── module-0b-claude-mastery/     # Advanced Claude Code techniques
-│   ├── module-1-prd/                 # PRD Generator (MCP server)
-│   ├── module-2-image-gen/           # AI Image Generation
-│   └── module-3-mcp-course/         # MCP Integrations
-├── traffic-data/                     # Public analytics snapshots
-├── LICENSE                           # MIT
-└── README.md
+│   ├── module-0-claude-basics/
+│   ├── module-1-prd/
+│   ├── module-2-image-gen/
+│   └── module-3-mcp-course/
+├── marketing/        # Brand voice, LinkedIn, email content
+├── docs/             # Build log and dev notes
+├── PROGRESS.md       # Project progress tracker
+└── .tracker-state.json
 ```
 
 ## Tech Stack
@@ -114,4 +114,4 @@ npx vercel
 
 ## License
 
-MIT — see [LICENSE](LICENSE)
+MIT
