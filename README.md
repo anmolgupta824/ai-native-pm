@@ -1,8 +1,26 @@
-# The AI-Native PM
+<p align="center">
+  <h1 align="center">The AI-Native PM</h1>
+  <p align="center">
+    A practical upskilling program that teaches Product Managers to use Claude Code through hands-on modules they can use immediately on their projects.
+  </p>
+</p>
 
-**Build AI-powered PM workflows in 30 minutes.**
+<p align="center">
+  <a href="https://github.com/anmolgupta824/ai-native-pm/stargazers"><img src="https://img.shields.io/github/stars/anmolgupta824/ai-native-pm?style=for-the-badge&color=yellow" alt="Stars"></a>
+  <a href="https://github.com/anmolgupta824/ai-native-pm/network/members"><img src="https://img.shields.io/github/forks/anmolgupta824/ai-native-pm?style=for-the-badge" alt="Forks"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/anmolgupta824/ai-native-pm/issues"><img src="https://img.shields.io/github/issues/anmolgupta824/ai-native-pm?style=for-the-badge" alt="Issues"></a>
+</p>
 
-A practical upskilling program that teaches Product Managers to use Claude Code through hands-on modules they can use immediately on their projects.
+<p align="center">
+  <b>Build AI-powered PM workflows in 30 minutes.</b>
+  <br/>
+  <i>Free. Open source. 4 modules. Ships with Claude Code course for PMs.</i>
+  <br/><br/>
+  <a href="https://github.com/anmolgupta824/ai-native-pm/stargazers"><img src="https://img.shields.io/badge/Like%20this%3F-Give%20it%20a%20%E2%AD%90-yellow?style=for-the-badge" alt="Star this repo"></a>
+</p>
+
+---
 
 ## Modules
 
